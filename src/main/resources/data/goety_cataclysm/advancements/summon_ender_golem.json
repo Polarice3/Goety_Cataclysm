@@ -1,0 +1,39 @@
+{
+  "parent": "goety_cataclysm:root",
+  "display": {
+    "icon": {
+      "item": "cataclysm:void_stone"
+    },
+    "title": {
+      "translate": "advancements.goety_cataclysm.summon_ender_golem.title"
+    },
+    "description": {
+      "translate": "advancements.goety_cataclysm.summon_ender_golem.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "summoned_golem": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "goety_cataclysm:ender_golem"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:summoned_entity"
+    }
+  },
+  "requirements": [
+    [
+      "summoned_golem"
+    ]
+  ]
+}

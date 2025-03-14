@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_tamed",
+  "activation_item": {
+    "item": "cataclysm:dying_ember"
+  },
+  "craftType": "expert_nether",
+  "entity_to_convert": {
+    "tag": "goety:blazes",
+    "display_name": "entity.minecraft.blaze"
+  },
+  "entity_to_convert_into": "goety_cataclysm:ignited_berserker",
+  "soulCost": 5,
+  "duration": 10,
+  "research": "bygone",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_sword"
+    },
+    {
+      "item": "minecraft:netherite_sword"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    },
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

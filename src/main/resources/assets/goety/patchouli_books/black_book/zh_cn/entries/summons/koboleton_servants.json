@@ -1,0 +1,24 @@
+{
+  "name": "Koboleton Servant",
+  "icon": "cataclysm:koboleton_bone",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Servants of the Ancient Remnant, called forth from their Cursed Pyramid to serve under your command, their disarming abilities useful only towards beings like you."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:koboleton_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_koboleton_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Koboletons can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+    }
+  ]
+}

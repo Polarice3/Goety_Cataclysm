@@ -1,0 +1,33 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:animation_core"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:ancient_metal_ingot"
+    },
+    {
+      "item": "cataclysm:khopesh"
+    },
+    {
+      "item": "cataclysm:koboleton_bone"
+    },
+    {
+      "item": "cataclysm:koboleton_bone"
+    },
+    {
+      "item": "cataclysm:koboleton_bone"
+    },
+    {
+      "item": "cataclysm:koboleton_bone"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:desert_raid_focus"
+  }
+}

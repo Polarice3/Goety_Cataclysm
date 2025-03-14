@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:stone_bricks",
+    "cataclysm:stone_pillar",
+    "cataclysm:chiseled_stone_brick_pillar",
+    "cataclysm:stone_tiles"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "asa",
+    "sds",
+    "asa"
+  ],
+  "key":
+  {
+    "s":
+    {
+      "tag": "forge:obsidian"
+    },
+    "d":
+    {
+      "item": "cataclysm:void_crystal"
+    },
+    "a":
+    {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:void_mold_block",
+    "count": 4
+  }
+}

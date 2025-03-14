@@ -1,0 +1,39 @@
+{
+  "parent": "goety_cataclysm:root",
+  "display": {
+    "icon": {
+      "item": "cataclysm:monstrous_helm"
+    },
+    "title": {
+      "translate": "advancements.goety_cataclysm.summon_netherite_monstrosity.title"
+    },
+    "description": {
+      "translate": "advancements.goety_cataclysm.summon_netherite_monstrosity.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "summoned_golem": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "goety_cataclysm:netherite_monstrosity"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:summoned_entity"
+    }
+  },
+  "requirements": [
+    [
+      "summoned_golem"
+    ]
+  ]
+}

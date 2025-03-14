@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "goety_cataclysm:item/focus/cursed_cairn_spell"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:teeth_focus"
+  },
+  "craftType": "magic",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:ancient_metal_block"
+    },
+    {
+      "tag": "forge:sandstone"
+    },
+    {
+      "item": "cataclysm:ancient_metal_block"
+    },
+    {
+      "tag": "forge:sandstone"
+    },
+    {
+      "tag": "forge:sandstone"
+    },
+    {
+      "tag": "forge:sandstone"
+    },
+    {
+      "tag": "forge:sandstone"
+    },
+    {
+      "tag": "forge:sandstone"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:desert_crush_focus"
+  }
+}

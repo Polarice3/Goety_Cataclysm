@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:lavaball_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:ignitium_ingot"
+    },
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:extinct_flame_focus"
+  }
+}

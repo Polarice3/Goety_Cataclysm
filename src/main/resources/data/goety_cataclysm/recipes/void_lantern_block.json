@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "efe",
+    "fif",
+    "efe"
+  ],
+  "key":
+  {
+    "e":
+    {
+      "item": "cataclysm:void_jaw"
+    },
+    "f":
+    {
+      "tag": "forge:dusts/glowstone"
+    },
+    "i":
+    {
+      "tag": "forge:obsidian"
+    }
+  },
+  "result":
+  {
+    "item": "cataclysm:void_lantern_block",
+    "count": 1
+  }
+}

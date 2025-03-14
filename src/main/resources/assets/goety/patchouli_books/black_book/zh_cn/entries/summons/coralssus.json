@@ -1,0 +1,26 @@
+{
+  "name": "珊瑚巨像",
+  "icon": "minecraft:horn_coral_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "一个来自沉没之城的强大怪物，但你仍然设法复现了那些渊灵为它赋予生命的办法"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coralssus",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coralssus",
+      "text": "手持活力核心右键中心的珊瑚即可激活"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "构成其中的珊瑚只能是火珊瑚、鹿角珊瑚、管珊瑚中的其中一种（每块珊瑚的变种必须是完全相同的），你只能使用与之类型对应的珊瑚喂食并治疗你的珊瑚巨像，它也会在召唤者穿戴深渊长袍时缓慢自愈"
+    }
+  ]
+}

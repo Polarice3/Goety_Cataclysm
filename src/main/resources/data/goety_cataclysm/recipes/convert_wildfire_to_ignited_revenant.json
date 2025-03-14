@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_tamed",
+  "activation_item": {
+    "item": "cataclysm:burning_ashes"
+  },
+  "craftType": "expert_nether",
+  "entity_to_convert": {
+    "tag": "goety_cataclysm:wildfires",
+    "display_name": "entity.goety.wildfire"
+  },
+  "entity_to_convert_into": "goety_cataclysm:ignited_revenant",
+  "soulCost": 5,
+  "duration": 10,
+  "research": "bygone",
+  "ingredients": [
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "tag": "forge:bones"
+    },
+    {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

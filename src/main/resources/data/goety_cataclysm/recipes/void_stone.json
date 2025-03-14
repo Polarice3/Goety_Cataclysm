@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "eee",
+    "eie",
+    "eee"
+  ],
+  "key":
+  {
+    "e":
+    {
+      "item": "cataclysm:void_jaw"
+    },
+    "i":
+    {
+      "tag": "forge:obsidian"
+    }
+  },
+  "result":
+  {
+    "item": "cataclysm:void_stone",
+    "count": 1
+  }
+}

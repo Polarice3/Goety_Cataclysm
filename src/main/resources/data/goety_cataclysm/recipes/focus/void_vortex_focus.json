@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:wind_core"
+  },
+  "craftType": "magic",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:obsidian_explosion_trap_bricks"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "cataclysm:obsidian_explosion_trap_bricks"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "cataclysm:obsidian_explosion_trap_bricks"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "cataclysm:obsidian_explosion_trap_bricks"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:void_vortex_focus"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "cataclysm:cursium_helmet"
+    },
+    "title": {
+      "translate": "advancements.goety_cataclysm.root.title"
+    },
+    "description": {
+      "translate": "advancements.goety_cataclysm.root.description"
+    },
+    "background": "cataclysm:textures/block/polished_obsidian.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden" : false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

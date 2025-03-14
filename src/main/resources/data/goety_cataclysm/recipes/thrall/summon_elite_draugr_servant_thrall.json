@@ -1,0 +1,31 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "tag": "forge:tools/crossbows"
+  },
+  "craftType": "necroturgy",
+  "entity_to_summon": "goety_cataclysm:elite_draugr_servant",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "tag": "forge:bones"
+    },
+    {
+      "tag": "forge:leather"
+    },
+    {
+      "item": "cataclysm:black_steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

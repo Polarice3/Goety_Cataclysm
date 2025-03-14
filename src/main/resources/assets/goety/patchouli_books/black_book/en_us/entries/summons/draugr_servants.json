@@ -1,0 +1,55 @@
+{
+  "name": "Draugr Servants",
+  "icon": "cataclysm:draugr_head",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cursed jailers of Maledictus, so devoted to guard its prison, yet will do nothing, not even retaliate, when its sole prisoner escapes and wreak havoc."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These Draugrs are either corpses of warriors animated and cursed in a similar fashion, or called and beguiled from the prison of Maledictus itself, using their heads as the receptacle to summon and bind their kind to your service."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:elite_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_elite_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:royal_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_royal_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:aptrgangr",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_aptrgangr_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "All Draugr types can be healed by either donning a Necro Cape, or feeding them bones or rotten flesh."
+    }
+  ]
+}

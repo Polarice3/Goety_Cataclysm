@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:magma_bomb_focus"
+  },
+  "craftType": "expert_nether",
+  "soulCost": 5,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:lava_power_cell"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    },
+    {
+      "item": "cataclysm:lava_power_cell"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    },
+    {
+      "item": "cataclysm:lava_power_cell"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    },
+    {
+      "item": "cataclysm:lava_power_cell"
+    },
+    {
+      "tag": "forge:rods/blaze"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:flare_bomb_focus"
+  }
+}

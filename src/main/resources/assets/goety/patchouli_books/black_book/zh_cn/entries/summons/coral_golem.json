@@ -1,0 +1,26 @@
+{
+  "name": "珊瑚傀儡",
+  "icon": "minecraft:copper_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这些珊瑚巨像的傀儡化仿品可能战斗力稍弱，但尽管如此，它依旧是一个强大的仆从"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coral_golem",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coral_golem",
+      "text": "手持活力核心右键中心的铜块即可激活"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "构成其中的珊瑚可以是任意类型的，你也可以喂食珊瑚来治疗你的珊瑚傀儡，它也会在召唤者穿戴深渊长袍时缓慢自愈"
+    }
+  ]
+}

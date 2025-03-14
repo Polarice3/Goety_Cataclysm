@@ -1,0 +1,6 @@
+{
+  "name": "Abyss",
+  "description": "More power over the tides and waves.",
+  "icon": "goety_cataclysm:abyssal_beam_focus",
+  "parent": "goety:cataclysm/focuses"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "魂尸们",
+  "icon": "cataclysm:draugr_head",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "因咒翼灵骸力量的诅咒而被永久囚禁其中的魂尸们，却是如此专注于守卫苦寒监牢，尽管他们的看守之物早已脱困..."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这些魂尸要么是战士的尸体，要么是遭受了与咒灵翼骸一样的诅咒并被流放在苦寒监牢，你可以用它们的头作为启动仪式的媒介，召唤并迫使它们为你服务"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:elite_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_elite_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:royal_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_royal_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:aptrgangr",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_aptrgangr_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "每种魂尸都可以在被喂食腐肉或骨头、或是召唤者穿戴死灵长袍的情况下恢复血量"
+    }
+  ]
+}

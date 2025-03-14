@@ -1,0 +1,27 @@
+{
+  "name": "下界合金巨兽",
+  "icon": "cataclysm:monstrous_helm",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "尽管你已经能够派出强如红石巨兽的最强仆从，但也许，凭借灵魂锻造厂中的力量，你可以复现它那由下界合金锻成的远亲"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:netherite_monstrosity",
+      "scale": 0.75
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity",
+      "text": "使用炼狱锻锤右键中心的强化红石块即可激活"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "除了镶金黑石外，构成其中的其它黑石都可以使用别的黑石变种替代，不管红石巨兽的条目是怎样的内容，下界合金巨兽的战斗力都远超于红石巨兽，使用熔岩桶、熔岩动力电池、下界合金块可以治疗你的下界合金巨兽，而下界合金巨兽和红石巨兽共享一个召唤上限"
+    }
+  ]
+}

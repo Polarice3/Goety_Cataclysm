@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:obsidian",
+    "cataclysm:obsidian_bricks",
+    "cataclysm:polished_obsidian",
+    "cataclysm:chiseled_obsidian_bricks"
+  ]
+}
