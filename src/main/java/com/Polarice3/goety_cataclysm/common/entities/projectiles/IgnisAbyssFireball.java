@@ -3,8 +3,8 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.Polarice3.goety_cataclysm.util.GCMobUtil;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.core.BlockPos;
@@ -91,7 +91,7 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
                             livingEntity = living;
                         }
                         if (livingEntity != null) {
-                            if (GCMobUtil.projectilePredicate(this).test(livingEntity)){
+                            if (MobUtil.ownedPredicate(this).test(livingEntity)){
                                 list.add(livingEntity);
                             }
                         }

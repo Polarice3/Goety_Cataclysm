@@ -8,7 +8,7 @@ import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.FlareBomb;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,7 +39,7 @@ public class FlareBombSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.MONSTROSITYGROWL.get();
+        return CataclysmSounds.MONSTROSITYGROWL.get();
     }
 
     @Override
@@ -76,6 +76,6 @@ public class FlareBombSpell extends Spell {
             worldIn.addFreshEntity(lava);
         }
 
-        worldIn.playSound(null, caster, ModSounds.MONSTROSITYSHOOT.get(), this.getSoundSource(), 3.0F, 0.75F);
+        worldIn.playSound(null, caster, CataclysmSounds.MONSTROSITYSHOOT.get(), this.getSoundSource(), 3.0F, 0.75F);
     }
 }

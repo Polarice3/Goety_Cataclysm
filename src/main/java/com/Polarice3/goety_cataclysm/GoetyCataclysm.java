@@ -17,6 +17,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.Ignited
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.GCSpawnEggs;
 import com.Polarice3.goety_cataclysm.compat.GCModCompat;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GCCreativeTab;
 import com.mojang.logging.LogUtils;
@@ -58,8 +59,12 @@ public class GoetyCataclysm {
         modEventBus.addListener(this::setupEntityAttributeCreation);
 
         getOrCreateDirectory(FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm"), "goety_cataclysm");
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GCSpellConfig.SPEC, "goety_cataclysm/goety_cataclysm-spells.toml");
         GCSpellConfig.loadConfig(GCSpellConfig.SPEC, FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm/goety_cataclysm-spells.toml").toString());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GCMobsConfig.SPEC, "goety_cataclysm/goety_cataclysm-mobs.toml");
+        GCMobsConfig.loadConfig(GCMobsConfig.SPEC, FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm/goety_cataclysm-mobs.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
         GCItems.init();

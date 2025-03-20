@@ -4,7 +4,6 @@ import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.Polarice3.goety_cataclysm.util.GCMobUtil;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -172,7 +171,7 @@ public class AbyssMark extends Entity {
                             livingEntity = living;
                         }
                         if (livingEntity != null) {
-                            if (GCMobUtil.projectilePredicate(this).test(livingEntity)){
+                            if (MobUtil.ownedPredicate(this).test(livingEntity)){
                                 this.finalTarget = livingEntity;
                                 this.targetId = livingEntity.getUUID();
                             }

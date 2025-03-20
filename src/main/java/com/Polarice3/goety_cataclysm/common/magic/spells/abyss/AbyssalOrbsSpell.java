@@ -7,7 +7,7 @@ import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssOrb;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,7 +39,7 @@ public class AbyssalOrbsSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.LEVIATHAN_IDLE.get();
+        return CataclysmSounds.LEVIATHAN_IDLE.get();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AbyssalOrbsSpell extends Spell {
                 this.shootAbyssOrb(caster, motion.x, motion.y, motion.z, potency, radius);
             }
         }
-        worldIn.playSound(null, caster, ModSounds.LEVIATHAN_STUN_ROAR.get(), this.getSoundSource(), 2.0F, 0.8F);
+        worldIn.playSound(null, caster, CataclysmSounds.LEVIATHAN_STUN_ROAR.get(), this.getSoundSource(), 2.0F, 0.8F);
     }
 
     public void shootAbyssOrb(LivingEntity caster, double xMotion, double yMotion, double zMotion, int potency, float radius) {

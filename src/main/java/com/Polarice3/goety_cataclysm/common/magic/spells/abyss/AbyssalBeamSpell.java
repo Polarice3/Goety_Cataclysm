@@ -5,10 +5,10 @@ import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.config.SpellConfig;
-import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssMark;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +37,7 @@ public class AbyssalBeamSpell extends Spell {
     }
 
     public SoundEvent CastingSound() {
-        return ModSounds.TRIDENT_STORM_PRE.get();
+        return GoetySounds.TRIDENT_STORM_PRE.get();
     }
 
     public int defaultSpellCooldown() {

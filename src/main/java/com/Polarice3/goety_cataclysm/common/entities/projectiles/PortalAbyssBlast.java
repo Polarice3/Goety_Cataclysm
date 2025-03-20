@@ -2,12 +2,12 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.Polarice3.goety_cataclysm.util.GCDamageSource;
 import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
 import com.github.L_Ender.cataclysm.client.tool.ControlledAnimation;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -137,7 +137,7 @@ public class PortalAbyssBlast extends Entity {
         }
 
         if (this.tickCount == 20){
-            this.level().playSound(null, this, ModSounds.PORTAL_ABYSS_BLAST.get(), SoundSource.HOSTILE, 0.5f, 1.0f);
+            this.level().playSound(null, this, CataclysmSounds.PORTAL_ABYSS_BLAST.get(), SoundSource.HOSTILE, 0.5f, 1.0f);
         }
 
         if (this.caster != null && !this.caster.isAlive()) {

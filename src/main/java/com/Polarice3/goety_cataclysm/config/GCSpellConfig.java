@@ -82,9 +82,13 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> VoidVortexCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> VoidVortexRadius;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> AptygangrLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> CoralssusLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> CoralGolemLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> EnderGolemLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedBerserkerLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedRevenantLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> KobolediatorLimit;
 
     static {
         BUILDER.push("Spells");
@@ -233,12 +237,20 @@ public class GCSpellConfig {
                     .defineInRange("voidVortexRadius", 2.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
         BUILDER.push("Servant Limits");
+        AptygangrLimit = BUILDER.comment("Number of Aptrgangr Servants that an individual player can have in total, Default: 2")
+                .defineInRange("aptygangrLimit", 2, 1, Integer.MAX_VALUE);
         CoralssusLimit = BUILDER.comment("Number of Coralssus Servants that an individual player can have in total, Default: 2")
                 .defineInRange("coralssusLimit", 2, 1, Integer.MAX_VALUE);
         CoralGolemLimit = BUILDER.comment("Number of Coral Golem Servants that an individual player can have in total, Default: 4")
                 .defineInRange("coralGolemLimit", 4, 1, Integer.MAX_VALUE);
         EnderGolemLimit = BUILDER.comment("Total number of Ender Golems an individual player can have, Default: 2")
                 .defineInRange("enderGolemLimit", 2, 0, Integer.MAX_VALUE);
+        IgnitedBerserkerLimit = BUILDER.comment("Total number of Ignited Berserkers an individual player can have, Default: 2")
+                .defineInRange("ignitedBerserkerLimit", 2, 0, Integer.MAX_VALUE);
+        IgnitedRevenantLimit = BUILDER.comment("Total number of Ignited Revenant an individual player can have, Default: 2")
+                .defineInRange("ignitedRevenantLimit", 2, 0, Integer.MAX_VALUE);
+        KobolediatorLimit = BUILDER.comment("Total number of Kobolediators an individual player can have, Default: 2")
+                .defineInRange("kobolediatorLimit", 2, 0, Integer.MAX_VALUE);
         BUILDER.pop();
         BUILDER.pop();
         SPEC = BUILDER.build();

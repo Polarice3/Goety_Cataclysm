@@ -8,6 +8,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummo
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
@@ -16,7 +17,6 @@ import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.GroundPathNavigatorWide;
 import com.github.L_Ender.cataclysm.entity.etc.path.SemiAquaticPathNavigator;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -112,7 +112,7 @@ public class CoralssusServant extends InternalAnimationSummon {
 
             public void start() {
                 super.start();
-                CoralssusServant.this.playSound(ModSounds.CORALSSUS_ROAR.get(), 1.0F, 1.0F + CoralssusServant.this.getRandom().nextFloat() * 0.1F);
+                CoralssusServant.this.playSound(CataclysmSounds.CORALSSUS_ROAR.get(), 1.0F, 1.0F + CoralssusServant.this.getRandom().nextFloat() * 0.1F);
             }
         });
         this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, 2, 2, 0, 60, 60) {
@@ -508,15 +508,15 @@ public class CoralssusServant extends InternalAnimationSummon {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.CORALSSUS_HURT.get();
+        return CataclysmSounds.CORALSSUS_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.CORALSSUS_DEATH.get();
+        return CataclysmSounds.CORALSSUS_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.CORALSSUS_AMBIENT.get();
+        return CataclysmSounds.CORALSSUS_AMBIENT.get();
     }
 
     private boolean canInFluidType(FluidType type) {
@@ -653,10 +653,10 @@ public class CoralssusServant extends InternalAnimationSummon {
 
                 if (this.matchingCoralBlock(itemstack)) {
                     this.heal(this.getMaxHealth() / 4.0F);
-                    this.playSound(ModSounds.CORALSSUS_AMBIENT.get(), 1.0F, 1.5F);
+                    this.playSound(CataclysmSounds.CORALSSUS_AMBIENT.get(), 1.0F, 1.5F);
                 } else if (this.matchingBasicCoral(itemstack) || this.matchingFanCoral(itemstack)) {
                     this.heal((this.getMaxHealth() / 4.0F) / 8.0F);
-                    this.playSound(ModSounds.CORALSSUS_AMBIENT.get(), 1.0F, 1.5F);
+                    this.playSound(CataclysmSounds.CORALSSUS_AMBIENT.get(), 1.0F, 1.5F);
                 }
 
                 if (this.level() instanceof ServerLevel serverLevel) {

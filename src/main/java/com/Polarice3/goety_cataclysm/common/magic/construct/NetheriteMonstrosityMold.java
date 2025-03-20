@@ -311,7 +311,7 @@ public class NetheriteMonstrosityMold implements IMold {
 
             new BlockPos(1, 0, 1),
             new BlockPos(1, 0, -1),
-            new BlockPos(-1, 0, -1),
+            new BlockPos(-1, 0, 1),
             new BlockPos(-1, 0, -1),
 
             new BlockPos(1, 0, 2),

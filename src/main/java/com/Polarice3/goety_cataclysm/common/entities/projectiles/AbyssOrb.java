@@ -6,7 +6,6 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.Polarice3.goety_cataclysm.util.GCMobUtil;
 import com.github.L_Ender.cataclysm.client.particle.LightTrailParticle;
 import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
 import com.github.L_Ender.cataclysm.init.ModEffect;
@@ -245,7 +244,7 @@ public class AbyssOrb extends Projectile {
                             livingEntity = living;
                         }
                         if (livingEntity != null) {
-                            if (GCMobUtil.projectilePredicate(this).test(livingEntity)){
+                            if (MobUtil.ownedPredicate(this).test(livingEntity)){
                                 list.add(livingEntity);
                             }
                         }

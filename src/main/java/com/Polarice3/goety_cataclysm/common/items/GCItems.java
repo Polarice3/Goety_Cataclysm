@@ -2,6 +2,8 @@ package com.Polarice3.goety_cataclysm.common.items;
 
 import com.Polarice3.Goety.common.items.magic.MagicFocus;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
+import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedHelm;
+import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedSoul;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalBeamSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalMinesSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalOrbsSpell;
@@ -53,4 +55,9 @@ public class GCItems {
 
     ///Wind
     public static final RegistryObject<Item> SANDSTORM_FOCUS = ITEMS.register("sandstorm_focus", () -> new MagicFocus(new SandstormSpell()));
+
+    //Items
+    public static final RegistryObject<Item> IGNITED_HELM = ITEMS.register("ignited_helm", IgnitedHelm::new);
+    public static final RegistryObject<Item> IGNITED_SOUL = ITEMS.register("ignited_soul", IgnitedSoul::new);
+
 }

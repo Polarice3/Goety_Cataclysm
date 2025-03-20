@@ -5,12 +5,12 @@ import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.common.magic.SummonSpell;
-import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.*;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.EliteDraugrServant;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -42,7 +42,7 @@ public class EliteDraugrSpell extends SummonSpell {
     }
 
     public SoundEvent CastingSound() {
-        return ModSounds.PREPARE_SUMMON.get();
+        return GoetySounds.PREPARE_SUMMON.get();
     }
 
     @Override
@@ -83,7 +83,7 @@ public class EliteDraugrSpell extends SummonSpell {
             for (int i = 0; i < caster.level().random.nextInt(35) + 10; ++i) {
                 worldIn.sendParticles(ParticleTypes.POOF, caster.getX(), caster.getEyeY(), caster.getZ(), 1, 0.0F, 0.0F, 0.0F, 0);
             }
-            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), ModSounds.SUMMON_SPELL.get(), this.getSoundSource(), 1.0F, 1.0F);
+            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.SUMMON_SPELL.get(), this.getSoundSource(), 1.0F, 1.0F);
         }
     }
 

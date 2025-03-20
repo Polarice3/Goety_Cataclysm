@@ -5,12 +5,12 @@ import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -202,7 +202,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
             }
 
             if ((this.getAnimation() == ANIMATION_ATTACK1 || this.getAnimation() == ANIMATION_ATTACK2) && this.getAnimationTick() == 13) {
-                this.playSound(ModSounds.GOLEMATTACK.get(), 1.0F, 1.0F);
+                this.playSound(CataclysmSounds.GOLEMATTACK.get(), 1.0F, 1.0F);
                 if (target != null && target.isAlive() && this.distanceTo(target) < 4.75F) {
                     target.hurt(this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this), (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float)this.random.nextInt(4));
                     target.knockback(1.25, this.getX() - target.getX(), this.getZ() - target.getZ());
@@ -337,7 +337,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
         super.onDeathAIUpdate();
         this.setDeltaMovement(0.0, this.getDeltaMovement().y, 0.0);
         if (this.deathTime == 40) {
-            this.playSound(ModSounds.MONSTROSITYLAND.get(), 1.0F, 1.0F);
+            this.playSound(CataclysmSounds.MONSTROSITYLAND.get(), 1.0F, 1.0F);
         }
 
     }
@@ -356,11 +356,11 @@ public class EnderGolemServant extends LLibraryBossSummon {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.GOLEMHURT.get();
+        return CataclysmSounds.GOLEMHURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.GOLEMDEATH.get();
+        return CataclysmSounds.GOLEMDEATH.get();
     }
 
     protected BodyRotationControl createBodyControl() {

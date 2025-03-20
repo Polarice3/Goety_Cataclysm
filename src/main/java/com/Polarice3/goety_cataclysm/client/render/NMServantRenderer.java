@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, NMServantModel> {
-    private static final ResourceLocation NETHER_MONSTROSITY_TEXTURES = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity.png");
+    private static final ResourceLocation ORIGINAL = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity.png");
 
     public NMServantRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new NMServantModel(renderManagerIn.bakeLayer(CMModelLayers.NETHERITE_MONSTROSITY_MODEL)), 2.5F);
@@ -27,9 +27,10 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
         this.addLayer(new Netherite_Monstrosity_Layer2(this));
         this.addLayer(new Netherite_Monstrosity_Flare(this));
     }
+
     @Override
     public ResourceLocation getTextureLocation(NetheriteMonstrosityServant entity) {
-        return NETHER_MONSTROSITY_TEXTURES;
+        return ORIGINAL;
     }
 
     public boolean shouldRender(NetheriteMonstrosityServant livingEntityIn, Frustum camera, double camX, double camY, double camZ) {
@@ -47,7 +48,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
 
     @Override
     protected void scale(NetheriteMonstrosityServant entitylivingbaseIn, PoseStack matrixStackIn, float partialTickTime) {
-        matrixStackIn.scale(1F, 1F, 1F);
+        matrixStackIn.scale(1.0F, 1.0F, 1.0F);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
     }
 
     static class Netherite_Monstrosity_Layer2 extends RenderLayer<NetheriteMonstrosityServant, NMServantModel> {
-        private static final ResourceLocation NETHERITE_MONSTRISITY_LAYER_TEXTURES  = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity_layer2.png");
+        private static final ResourceLocation NETHERITE_MONSTROSITY_LAYER_TEXTURES = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity_layer2.png");
 
         public Netherite_Monstrosity_Layer2(NMServantRenderer renderIn) {
             super(renderIn);
@@ -81,7 +82,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
 
         @Override
         public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, NetheriteMonstrosityServant entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-            RenderType eyes = CMRenderTypes.CMEyes(NETHERITE_MONSTRISITY_LAYER_TEXTURES);
+            RenderType eyes = CMRenderTypes.CMEyes(NETHERITE_MONSTROSITY_LAYER_TEXTURES);
             VertexConsumer VertexConsumer = bufferIn.getBuffer(eyes);
 
             float strength = 0.5F + Mth.clamp(((float) Math.cos((entity.LayerTicks + partialTicks) * 0.1F)) - 0.25F, -0.25F, 0.5F);
@@ -98,7 +99,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
     }
 
     static class Netherite_Monstrosity_Flare extends RenderLayer<NetheriteMonstrosityServant, NMServantModel> {
-        private static final ResourceLocation NETHERITE_MONSTRISITY_OUTER = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity_flare_outer.png");
+        private static final ResourceLocation NETHERITE_MONSTROSITY_OUTER = new ResourceLocation(Cataclysm.MODID,"textures/entity/monstrosity/netherite_monstrosity_flare_outer.png");
 
         public Netherite_Monstrosity_Flare(NMServantRenderer renderIn) {
             super(renderIn);
@@ -106,7 +107,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
 
         @Override
         public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, NetheriteMonstrosityServant entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-            RenderType eyes2 = CMRenderTypes.CMEyes(NETHERITE_MONSTRISITY_OUTER);
+            RenderType eyes2 = CMRenderTypes.CMEyes(NETHERITE_MONSTROSITY_OUTER);
             VertexConsumer VertexConsumer2 = bufferIn.getBuffer(eyes2);
             this.getParentModel().renderToBuffer(matrixStackIn, VertexConsumer2, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0.4F);
         }

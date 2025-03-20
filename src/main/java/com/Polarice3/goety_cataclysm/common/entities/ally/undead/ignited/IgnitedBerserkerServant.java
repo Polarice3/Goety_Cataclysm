@@ -6,10 +6,14 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummo
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
+import com.Polarice3.goety_cataclysm.common.items.GCItems;
+import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedSoul;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +30,7 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -149,6 +154,11 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
         return MobType.UNDEAD;
     }
 
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.IgnitedBerserkerLimit.get();
+    }
+
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
     }
@@ -226,6 +236,15 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
     }
 
     public void die(DamageSource p_21014_) {
+        if (this.getTrueOwner() != null && GCMobsConfig.IgnitedBerserkerSoul.get()) {
+            ItemStack itemStack = new ItemStack(GCItems.IGNITED_SOUL.get());
+            IgnitedSoul.setOwnerName(this.getTrueOwner(), itemStack);
+            IgnitedSoul.setSummon(this, itemStack);
+            ItemEntity itemEntity = this.spawnAtLocation(itemStack);
+            if (itemEntity != null) {
+                itemEntity.setExtendedLifetime();
+            }
+        }
         super.die(p_21014_);
         this.setAttackState(0);
     }
@@ -258,11 +277,11 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
 
         if(this.getAttackState() == 1) {
             if (this.attackTicks == 17) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 4.35f,dis * 4.35f,45,1.25F,60);
             }
             if (this.attackTicks == 35) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 3.6f,dis * 3.6f,200,1.25F,0);
             }
         }
@@ -287,19 +306,19 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
                 this.push(f1 * 0.45, 0, f2 * 0.45);
             }
             if (this.attackTicks == 13) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 4.5f,dis * 4.5f,50,1,0);
             }
             if (this.attackTicks == 20) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 3.5f,dis * 3.5f,60,1,0);
             }
             if (this.attackTicks == 25) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 4.5f,dis * 4.5f,60,1,0);
             }
             if (this.attackTicks == 30) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 3.25f,dis * 3.25f,60,1,0);
             }
         }
@@ -308,19 +327,19 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
                 this.push(f1 * 0.45, 0, f2 * 0.45);
             }
             if (this.attackTicks == 17) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 4.5f,dis * 4.5f,40,1,0);
             }
             if (this.attackTicks == 25) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 3.25f,dis * 3.25f,55,1,0);
             }
             if (this.attackTicks == 28) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 5f,dis * 5f,60,1,0);
             }
             if (this.attackTicks == 35) {
-                this.playSound(ModSounds.SWING.get(), 1F, 1.2f);
+                this.playSound(CataclysmSounds.SWING.get(), 1F, 1.2f);
                 AreaAttack(dis * 3.5f,dis * 3.5f,40,1,0);
             }
         }
@@ -405,15 +424,15 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
     }
 
     protected @NotNull SoundEvent getAmbientSound() {
-        return ModSounds.REVENANT_IDLE.get();
+        return CataclysmSounds.REVENANT_IDLE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.REVENANT_HURT.get();
+        return CataclysmSounds.REVENANT_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.REVENANT_DEATH.get();
+        return CataclysmSounds.REVENANT_DEATH.get();
     }
 
     @Override
@@ -438,7 +457,7 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
                     if (!pPlayer.getAbilities().instabuild) {
                         itemstack.shrink(1);
                     }
-                    this.playSound(ModSounds.REVENANT_IDLE.get(), 1.0F, 1.25F);
+                    this.playSound(CataclysmSounds.REVENANT_IDLE.get(), 1.0F, 1.25F);
                     float healAmount = 1.0F;
                     if (itemstack.is(Tags.Items.BONES)){
                         healAmount = 2.0F;

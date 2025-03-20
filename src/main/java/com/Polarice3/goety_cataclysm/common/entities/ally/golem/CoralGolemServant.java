@@ -4,6 +4,7 @@ import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonAnimationGoal1;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
@@ -13,7 +14,6 @@ import com.github.L_Ender.cataclysm.entity.etc.ISemiAquatic;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.GroundPathNavigatorWide;
 import com.github.L_Ender.cataclysm.entity.etc.path.SemiAquaticPathNavigator;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
 import net.minecraft.core.BlockPos;
@@ -284,11 +284,11 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.CORAL_GOLEM_HURT.get();
+        return CataclysmSounds.CORAL_GOLEM_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.CORAL_GOLEM_DEATH.get();
+        return CataclysmSounds.CORAL_GOLEM_DEATH.get();
     }
 
     private boolean canInFluidType(FluidType type) {

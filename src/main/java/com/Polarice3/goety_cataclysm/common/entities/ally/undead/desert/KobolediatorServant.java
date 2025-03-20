@@ -9,6 +9,8 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
@@ -17,7 +19,6 @@ import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -161,6 +162,11 @@ public class KobolediatorServant extends InternalAnimationSummon {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.KobolediatorLimit.get();
     }
 
     public ItemEntity spawnAtLocation(ItemStack stack) {
@@ -390,17 +396,17 @@ public class KobolediatorServant extends InternalAnimationSummon {
         if(this.getAttackState() == 4) {
             if (this.attackTicks == 18) {
                 AreaAttack(9.0f,6.0F,270,1,0);
-                this.playSound(ModSounds.STRONGSWING.get(), 1F, 1.0f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1F, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.05f, 0, 10);
             }
             if (this.attackTicks == 36) {
                 AreaAttack(9.0f,6.0F,270,1,0);
-                this.playSound(ModSounds.STRONGSWING.get(), 1F, 1.0f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1F, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.05f, 0, 10);
             }
             if (this.attackTicks == 65) {
                 AreaAttack(10.0f,6.0F,45,1.25F,120);
-                this.playSound(ModSounds.REMNANT_STOMP.get(), 1F, 1.0f);
+                this.playSound(CataclysmSounds.REMNANT_STOMP.get(), 1F, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.1f, 0, 20);
                 Makeparticle(0.5f, 9.0f, 1.8f);
             }
@@ -436,7 +442,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
         if(this.getAttackState() == 7) {
             if (this.attackTicks == 5) {
                 AreaAttack(9.0f,6.0F,200,1.25F,120);
-                this.playSound(ModSounds.STRONGSWING.get(), 1F, 1.0f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1F, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.05f, 0, 10);
             }
         }
@@ -499,7 +505,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
         double vecZ = Math.sin(theta);
         float f = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
         float f1 = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
-        this.level().playSound((Player)null, this.getX() + distance * vecX + f * math, this.getY(), this.getZ() + distance * vecZ + f1 * math, ModSounds.REMNANT_STOMP.get(), this.getSoundSource(), 0.6f, 1.0f);
+        this.level().playSound((Player)null, this.getX() + distance * vecX + f * math, this.getY(), this.getZ() + distance * vecZ + f1 * math, CataclysmSounds.REMNANT_STOMP.get(), this.getSoundSource(), 0.6f, 1.0f);
     }
 
     private void AreaAttack(float range, float height, float arc, float damage, int shieldbreakticks) {
@@ -621,15 +627,15 @@ public class KobolediatorServant extends InternalAnimationSummon {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.KOBOLEDIATOR_HURT.get();
+        return CataclysmSounds.KOBOLEDIATOR_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.KOBOLEDIATOR_DEATH.get();
+        return CataclysmSounds.KOBOLEDIATOR_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return this.isSleep() ? super.getAmbientSound() : ModSounds.KOBOLEDIATOR_AMBIENT.get();
+        return this.isSleep() ? super.getAmbientSound() : CataclysmSounds.KOBOLEDIATOR_AMBIENT.get();
     }
 
     @Override

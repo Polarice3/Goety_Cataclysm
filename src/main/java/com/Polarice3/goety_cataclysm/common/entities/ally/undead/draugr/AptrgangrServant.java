@@ -10,6 +10,8 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.blocks.PointedIcicleBlock;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.config.CMConfig;
@@ -19,7 +21,6 @@ import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Axe_Blade_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.core.BlockPos;
@@ -200,6 +201,11 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     }
 
     @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.AptygangrLimit.get();
+    }
+
+    @Override
     public int xpReward() {
         return 35;
     }
@@ -334,14 +340,14 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         super.aiStep();
         if(this.getAttackState() == 1) {
             if (this.attackTicks == 15) {
-                this.playSound(ModSounds.STRONGSWING.get(), 1.0F, 0.7f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.06f, 0, 20);
                 AreaAttack(5.75f, 5.75f, 120, 1, 120,true);
             }
         }
         if(this.getAttackState() == 2) {
             if (this.attackTicks == 11) {
-                this.playSound(ModSounds.STRONGSWING.get(), 1.0F, 0.7f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
             }
             if (this.attackTicks == 15) {
                 AreaAttack(6.5f, 6.5f, 60, 1, 120,false);
@@ -396,7 +402,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
 
         if(this.getAttackState() == 5) {
             if (this.attackTicks == 4) {
-                this.playSound(ModSounds.STRONGSWING.get(), 1.0F, 0.7f);
+                this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.06f, 0, 20);
                 UpperAreaAttack(6.5f, 6.5f, 60, 1, 120,true);
             }
@@ -647,15 +653,15 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.APTRGANGR_HURT.get();
+        return CataclysmSounds.APTRGANGR_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.APTRGANGR_DEATH.get();
+        return CataclysmSounds.APTRGANGR_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.APTRGANGR_IDLE.get();
+        return CataclysmSounds.APTRGANGR_IDLE.get();
     }
 
     @Override

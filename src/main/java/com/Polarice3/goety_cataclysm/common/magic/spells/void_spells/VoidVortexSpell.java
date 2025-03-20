@@ -4,10 +4,10 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.VoidVortex;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -41,7 +41,7 @@ public class VoidVortexSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.VOID_PREPARE_SPELL.get();
+        return GoetySounds.VOID_PREPARE_SPELL.get();
     }
 
     @Override

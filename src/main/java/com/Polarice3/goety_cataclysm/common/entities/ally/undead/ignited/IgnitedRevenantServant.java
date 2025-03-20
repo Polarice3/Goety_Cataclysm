@@ -5,13 +5,18 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
+import com.Polarice3.goety_cataclysm.common.items.GCItems;
+import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedHelm;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Ashen_Breath_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Blazing_Bone_Entity;
 import com.github.L_Ender.cataclysm.init.ModEntities;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -34,6 +39,7 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -109,6 +115,11 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
 
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.IgnitedRevenantLimit.get();
     }
 
     @Override
@@ -244,15 +255,15 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.REVENANT_IDLE.get();
+        return CataclysmSounds.REVENANT_IDLE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.REVENANT_HURT.get();
+        return CataclysmSounds.REVENANT_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.REVENANT_DEATH.get();
+        return CataclysmSounds.REVENANT_DEATH.get();
     }
 
     @Override
@@ -278,7 +289,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
                     if (!pPlayer.getAbilities().instabuild) {
                         itemstack.shrink(1);
                     }
-                    this.playSound(ModSounds.REVENANT_IDLE.get(), 1.0F, 1.25F);
+                    this.playSound(CataclysmSounds.REVENANT_IDLE.get(), 1.0F, 1.25F);
                     float healAmount = 1.0F;
                     if (itemstack.is(Tags.Items.BONES)){
                         healAmount = 2.0F;
@@ -297,10 +308,32 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
                     }
                     pPlayer.swing(pHand);
                     return InteractionResult.SUCCESS;
+                } else if (this.getShieldDurability() > 0 && itemstack.is(Items.NETHERITE_SCRAP)){
+                    if (!pPlayer.getAbilities().instabuild) {
+                        itemstack.shrink(1);
+                    }
+                    this.playSound(GoetySounds.WILDFIRE_SHIELD_REGEN.get(), 1.0F, 0.5F);
+                    this.setShieldDurability(this.getShieldDurability() - 1);
+                    pPlayer.swing(pHand);
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
         return super.mobInteract(pPlayer, pHand);
+    }
+
+    public void die(DamageSource pCause) {
+        if (this.getTrueOwner() != null && GCMobsConfig.IgnitedRevenantHelm.get()) {
+            ItemStack itemStack = new ItemStack(GCItems.IGNITED_HELM.get());
+            IgnitedHelm.setOwnerName(this.getTrueOwner(), itemStack);
+            IgnitedHelm.setSummon(this, itemStack);
+            ItemEntity itemEntity = this.spawnAtLocation(itemStack);
+            if (itemEntity != null) {
+                itemEntity.setExtendedLifetime();
+            }
+        }
+
+        super.die(pCause);
     }
 
     @Override
@@ -364,8 +397,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             }
 
             if (IgnitedRevenantServant.this.getAnimationTick() == 21) {
-                IgnitedRevenantServant.this.playSound(ModSounds.REVENANT_BREATH.get(), 1.0f, 1.0f);
-
+                IgnitedRevenantServant.this.playSound(CataclysmSounds.REVENANT_BREATH.get(), 1.0f, 1.0f);
             }
 
             Vec3 mouthPos = new Vec3(0, 2.3, 0);

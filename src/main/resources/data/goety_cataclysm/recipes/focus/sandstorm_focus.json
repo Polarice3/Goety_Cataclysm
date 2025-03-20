@@ -9,22 +9,7 @@
   "duration": 10,
   "ingredients": [
     {
-      "item": "cataclysm:ancient_metal_ingot"
-    },
-    {
-      "tag": "forge:sand"
-    },
-    {
-      "item": "cataclysm:ancient_metal_ingot"
-    },
-    {
-      "tag": "forge:sand"
-    },
-    {
-      "item": "cataclysm:ancient_metal_ingot"
-    },
-    {
-      "tag": "forge:sand"
+      "item": "cataclysm:sandstorm_in_a_bottle"
     },
     {
       "item": "cataclysm:ancient_metal_ingot"

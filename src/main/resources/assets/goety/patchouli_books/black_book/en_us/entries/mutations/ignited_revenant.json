@@ -19,7 +19,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The revenant can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
+      "text": "The revenant can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape. If their shields are broken, giving them a Netherite Scrap will restore them."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_helm",
+      "text": "When extinguished, these fiery revenants will drop their helms which can possess a Wildfire to return from the dead."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_helm": 4
+  }
 }

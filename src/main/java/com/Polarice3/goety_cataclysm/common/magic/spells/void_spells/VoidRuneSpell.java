@@ -5,9 +5,9 @@ import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.config.SpellConfig;
-import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import com.github.L_Ender.cataclysm.entity.projectile.Void_Rune_Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -41,7 +41,7 @@ public class VoidRuneSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.VOID_PREPARE_SPELL.get();
+        return GoetySounds.VOID_PREPARE_SPELL.get();
     }
 
     @Override

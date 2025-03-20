@@ -20,6 +20,14 @@
     {
       "type": "patchouli:text",
       "text": "The berserker can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_soul",
+      "text": "When extinguished, these fiery revenants will drop their burning cores which can possess a Blaze to return from the dead."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_soul": 4
+  }
 }

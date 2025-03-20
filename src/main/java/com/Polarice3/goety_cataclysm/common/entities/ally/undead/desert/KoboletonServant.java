@@ -5,9 +5,10 @@ import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon2;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
@@ -43,7 +44,6 @@ import java.util.EnumSet;
 
 public class KoboletonServant extends AnimationSummon2 {
     public static final Animation COBOLETON_ATTACK = Animation.create(19);
-
     public float angryProgress;
     public float prevangryProgress;
 
@@ -90,6 +90,11 @@ public class KoboletonServant extends AnimationSummon2 {
         return MobType.UNDEAD;
     }
 
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.KoboletonLimit.get();
+    }
+
     protected int decreaseAirSupply(int air) {
         return air;
     }
@@ -104,19 +109,19 @@ public class KoboletonServant extends AnimationSummon2 {
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.KOBOLETON_AMBIENT.get();
+        return CataclysmSounds.KOBOLETON_AMBIENT.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.KOBOLETON_HURT.get();
+        return CataclysmSounds.KOBOLETON_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.KOBOLETON_DEATH.get();
+        return CataclysmSounds.KOBOLETON_DEATH.get();
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(ModSounds.KOBOLETON_STEP.get(), 0.15F, 0.6F);
+        this.playSound(CataclysmSounds.KOBOLETON_STEP.get(), 0.15F, 0.6F);
     }
 
     protected void populateDefaultEquipmentSlots(RandomSource p_219154_, DifficultyInstance p_219155_) {

@@ -3,7 +3,8 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
-import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -60,10 +61,15 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
         this.goalSelector.addGoal(0, new ReloadedGoal(this, 1, 0, 20, 20.0F));
         this.goalSelector.addGoal(0, new CrossBowShootGoal(this, 0, 4, 0, 23, 15, 12.0F));
         this.goalSelector.addGoal(1, new CrossBowReloadGoal(this, 0, 1, 1, 30, 15, 12.0F));
+        this.goalSelector.addGoal(2, new WanderGoal<>(this, 1.0, 80));
         this.goalSelector.addGoal(4, new Elite_DraugrAttackGoal(this, 1.0, 12.0F, true));
-        this.goalSelector.addGoal(5, new WanderGoal<>(this, 1.0, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+    }
+
+    @Override
+    public void followGoal() {
+        this.goalSelector.addGoal(3, new FollowOwnerGoal<>(this, 1.0, 10.0F, 2.0F));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -78,6 +84,11 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.EliteDraugrLimit.get();
     }
 
     public AnimationState getAnimationState(String input) {
@@ -182,15 +193,15 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.DRAUGR_HURT.get();
+        return CataclysmSounds.DRAUGR_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.DRAUGR_DEATH.get();
+        return CataclysmSounds.DRAUGR_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.DRAUGR_IDLE.get();
+        return CataclysmSounds.DRAUGR_IDLE.get();
     }
 
     public boolean isChargingCrossbow() {
@@ -331,7 +342,7 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
             super.stop();
             LivingEntity livingentity = this.mob.getTarget();
             if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
-                this.mob.setTarget((LivingEntity)null);
+                this.mob.setTarget(null);
             }
 
             this.mob.setAggressive(false);

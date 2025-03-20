@@ -65,5 +65,7 @@
   "item.goety_cataclysm.netherite_monstrosity_spawn_egg": "下界合金巨兽仆从刷怪蛋",
   "item.goety_cataclysm.royal_draugr_servant_spawn_egg": "皇家魂尸刷怪蛋",
 
-  "itemGroup.goety_cataclysm": "诡厄灾变"
+  "itemGroup.goety_cataclysm": "诡厄灾变",
+  "item.goety_cataclysm.ignited_helm": "Ignited Helm",
+  "item.goety_cataclysm.ignited_soul": "Ignited Soul"
 }

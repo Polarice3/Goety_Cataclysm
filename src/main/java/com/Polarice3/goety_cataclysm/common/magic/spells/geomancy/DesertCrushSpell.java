@@ -7,8 +7,8 @@ import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.projectile.Ancient_Desert_Stele_Entity;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +37,7 @@ public class DesertCrushSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.WADJET_AMBIENT.get();
+        return CataclysmSounds.WADJET_AMBIENT.get();
     }
 
     @Override

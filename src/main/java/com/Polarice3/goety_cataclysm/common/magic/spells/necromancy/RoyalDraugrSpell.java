@@ -6,13 +6,13 @@ import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.common.magic.SummonSpell;
-import com.Polarice3.Goety.init.ModSounds;
 import com.Polarice3.Goety.utils.*;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.RoyalDraugrServant;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.GoetySounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -75,7 +75,7 @@ public class RoyalDraugrSpell extends SummonSpell {
 
     @Override
     public SoundEvent loopSound(LivingEntity caster) {
-        return ModSounds.VANGUARD_SPELL.get();
+        return GoetySounds.VANGUARD_SPELL.get();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class RoyalDraugrSpell extends SummonSpell {
             for (int i = 0; i < caster.level().random.nextInt(35) + 10; ++i) {
                 worldIn.sendParticles(ParticleTypes.POOF, caster.getX(), caster.getEyeY(), caster.getZ(), 1, 0.0F, 0.0F, 0.0F, 0);
             }
-            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), ModSounds.VANGUARD_SUMMON.get(), this.getSoundSource(), 1.0F, 1.0F);
+            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.VANGUARD_SUMMON.get(), this.getSoundSource(), 1.0F, 1.0F);
         }
     }
 
@@ -135,7 +135,7 @@ public class RoyalDraugrSpell extends SummonSpell {
                         ColorUtil colorUtil = new ColorUtil(0xa7fc3e);
                         ServerParticleUtil.windShockwaveParticle(worldIn, colorUtil, 0.1F, 0.1F, 0.05F, -1, summonedentity.position());
                         worldIn.sendParticles(ModParticleTypes.LICH.get(), summonedentity.getX(), summonedentity.getY(), summonedentity.getZ(), 1, 0, 0, 0, 0.0F);
-                        worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), ModSounds.SOUL_EXPLODE.get(), this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
+                        worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.SOUL_EXPLODE.get(), this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
                         worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
                     }
                     this.summonAdvancement(caster, summonedentity);
@@ -170,7 +170,7 @@ public class RoyalDraugrSpell extends SummonSpell {
                 }
             }
             this.SummonDown(caster);
-            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), ModSounds.VANGUARD_SUMMON.get(), this.getSoundSource(), 1.0F, 1.0F);
+            worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.VANGUARD_SUMMON.get(), this.getSoundSource(), 1.0F, 1.0F);
         }
     }
 }

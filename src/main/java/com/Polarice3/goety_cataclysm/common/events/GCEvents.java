@@ -23,7 +23,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -34,27 +33,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 @Mod.EventBusSubscriber(modid = GoetyCataclysm.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GCEvents {
-
-    @SubscribeEvent
-    public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
-        Entity entity = event.getEntity();
-        Level world = event.getLevel();
-        /*if (entity instanceof Lava_Bomb_Entity original && original.getOwner() instanceof Netherite_Monstrosity_Entity monstrosity) {
-            MagmaBomb magmaBomb = new MagmaBomb(monstrosity, world);
-            magmaBomb.moveTo(original.position());
-            Vec3 vec3 = original.getDeltaMovement();
-            magmaBomb.setDeltaMovement(original.getDeltaMovement());
-            double d0 = vec3.horizontalDistance();
-            magmaBomb.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
-            magmaBomb.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
-            magmaBomb.yRotO = magmaBomb.getYRot();
-            magmaBomb.xRotO = magmaBomb.getXRot();
-            if (world.addFreshEntity(magmaBomb)) {
-                original.discard();
-                event.setCanceled(true);
-            }
-        }*/
-    }
 
     @SubscribeEvent
     public static void worldLoad(LevelEvent.Load event) {
@@ -91,6 +69,7 @@ public class GCEvents {
             if (blockState.is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get())){
                 if (new NetheriteMonstrosityMold().spawnServant(event.getEntity(), event.getItemStack(), event.getLevel(), event.getPos())){
                     event.getItemStack().shrink(1);
+                    event.getEntity().swing(event.getHand());
                     event.setCanceled(true);
                 }
             }

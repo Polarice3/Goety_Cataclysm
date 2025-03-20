@@ -7,7 +7,7 @@ import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.Sandstorm;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -30,7 +30,7 @@ public class SandstormSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.REMNANT_ROAR.get();
+        return CataclysmSounds.REMNANT_ROAR.get();
     }
 
     @Override

@@ -25,6 +25,9 @@
   "entity.goety_cataclysm.netherite_monstrosity": "Netherite Monstrosity",
   "entity.goety_cataclysm.royal_draugr_servant": "Royal Draugr Servant",
 
+  "item.goety_cataclysm.ignited_helm": "Ignited Helm",
+  "item.goety_cataclysm.ignited_soul": "Ignited Soul",
+
   "item.goety_cataclysm.abyssal_mine_focus": "Abyssal Mine Focus",
   "item.goety_cataclysm.abyssal_mine_focus.info": "Summons Abyss Mines around caster or valid target that will explode and gives Abyssal Fear effect.",
   "item.goety_cataclysm.abyssal_beam_focus": "Abyssal Beam Focus",

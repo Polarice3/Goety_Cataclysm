@@ -3,8 +3,9 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.etc.IShieldEntity;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -71,6 +72,11 @@ public class RoyalDraugrServant extends Summoned implements IShieldEntity {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.RoyalDraugrLimit.get();
     }
 
     @Override
@@ -268,15 +274,15 @@ public class RoyalDraugrServant extends Summoned implements IShieldEntity {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.DRAUGR_HURT.get();
+        return CataclysmSounds.DRAUGR_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.DRAUGR_DEATH.get();
+        return CataclysmSounds.DRAUGR_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.DRAUGR_IDLE.get();
+        return CataclysmSounds.DRAUGR_IDLE.get();
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {

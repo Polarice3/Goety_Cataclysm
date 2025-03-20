@@ -8,7 +8,7 @@ import com.Polarice3.Goety.utils.BlockFinder;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssMine;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.github.L_Ender.cataclysm.init.ModSounds;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -44,7 +44,7 @@ public class AbyssalMinesSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return ModSounds.LEVIATHAN_IDLE.get();
+        return CataclysmSounds.LEVIATHAN_IDLE.get();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class AbyssalMinesSpell extends Spell {
             }
             this.spawnMines(caster, randomNearbyX, randomNearbyY, randomNearbyZ, f, j, radius);
         }
-        worldIn.playSound(null, caster, ModSounds.LEVIATHAN_STUN_ROAR.get(), this.getSoundSource(), 2.0F, 0.8F);
+        worldIn.playSound(null, caster, CataclysmSounds.LEVIATHAN_STUN_ROAR.get(), this.getSoundSource(), 2.0F, 0.8F);
     }
 
     private void spawnMines(LivingEntity caster, double x, double y, double z, float rotation, int delay, double radius) {
