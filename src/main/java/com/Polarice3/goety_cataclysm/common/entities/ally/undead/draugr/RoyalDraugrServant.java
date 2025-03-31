@@ -41,6 +41,7 @@ import net.minecraftforge.common.ToolActions;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class RoyalDraugrServant extends Summoned implements IShieldEntity {
     public AnimationState idleAnimationState = new AnimationState();
@@ -72,6 +73,11 @@ public class RoyalDraugrServant extends Summoned implements IShieldEntity {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof RoyalDraugrServant;
     }
 
     @Override

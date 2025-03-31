@@ -64,6 +64,7 @@ import net.minecraftforge.common.Tags;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class AptrgangrServant extends InternalAnimationSummon implements IHoldEntity {
     public AnimationState idleAnimationState = new AnimationState();
@@ -198,6 +199,11 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         }
 
         return itementity;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof AptrgangrServant;
     }
 
     @Override

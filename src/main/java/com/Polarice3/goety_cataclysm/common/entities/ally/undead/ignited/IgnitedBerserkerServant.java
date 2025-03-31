@@ -43,6 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class IgnitedBerserkerServant extends InternalAnimationSummon {
     public AnimationState idleAnimationState = new AnimationState();
@@ -152,6 +153,11 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof IgnitedBerserkerServant;
     }
 
     @Override

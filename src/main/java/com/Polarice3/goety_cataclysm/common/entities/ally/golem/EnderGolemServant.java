@@ -5,6 +5,7 @@ import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
@@ -54,6 +55,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class EnderGolemServant extends LLibraryBossSummon {
     private static final EntityDataAccessor<Boolean> IS_AWAKEN = SynchedEntityData.defineId(EnderGolemServant.class, EntityDataSerializers.BOOLEAN);
@@ -158,6 +160,16 @@ public class EnderGolemServant extends LLibraryBossSummon {
 
     public boolean getIsAwaken() {
         return this.entityData.get(IS_AWAKEN);
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof EnderGolemServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.EnderGolemLimit.get();
     }
 
     @Nullable

@@ -1,0 +1,24 @@
+{
+  "name": "Koboleton Servant",
+  "icon": "cataclysm:koboleton_bone",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "古代の残党の召使いであり、呪われたピラミッドから召喚されてあなたの指揮下で働きます。彼らの武装解除能力はあなたのような存在に対してのみ有効です。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:koboleton_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_koboleton_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "爬虫類の骸骨は骨を与えることで回復することができ、また、飼い主がネクロケープを着ると受動的に回復することができます。"
+    }
+  ]
+}

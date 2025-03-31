@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": [
+        {
+            "item": "cataclysm:black_steel_block"
+        }
+    ],
+    "result": "cataclysm:black_steel_wall",
+    "count": 1
+}

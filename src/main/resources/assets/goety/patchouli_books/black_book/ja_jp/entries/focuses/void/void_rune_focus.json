@@ -1,0 +1,15 @@
+{
+  "name": "Void Rune Focus",
+  "icon": "goety_cataclysm:void_rune_focus",
+  "category": "goety:cataclysm/focuses/void",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "単純に虚無のルーンを使用することもできますが、単純にそれを呪文に変えたほうがずっと良いと考えました。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/void_rune_focus"
+    }
+  ]
+}

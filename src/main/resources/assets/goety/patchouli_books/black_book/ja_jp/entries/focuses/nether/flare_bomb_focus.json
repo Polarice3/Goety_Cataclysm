@@ -1,0 +1,18 @@
+{
+  "name": "Flare Bomb Focus",
+  "icon": "goety_cataclysm:flare_bomb_focus",
+  "category": "goety:cataclysm/focuses/nether",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "この呪文は地獄の機械の照明弾を再現したもので、衝撃で爆発するだけでなく、地面から炎の刃の波を噴出させます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/flare_bomb_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:flare_bomb_focus": 1
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Draugr Servants",
+  "icon": "cataclysm:draugr_head",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "マレディクタスの呪われた看守たちは、牢獄を守ることに献身的であるにもかかわらず、唯一の囚人が逃げ出し大混乱を引き起こしても、何もせず、報復さえもしない。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "これらのドラウグルは、同じように生き返り呪われた戦士の死体か、マレディクタスの牢獄から召喚され、誘惑されたものであり、その頭を容器として使い、同類を召喚し、あなたに従わせるために使われます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:elite_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_elite_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:royal_draugr_servant",
+      "scale": 0.75
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_royal_draugr_servant_thrall"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:aptrgangr",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_aptrgangr_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "すべてのドラウグルの種類は、ネクロケープを着るか、骨や腐った肉を与えることで治癒できます。"
+    }
+  ]
+}

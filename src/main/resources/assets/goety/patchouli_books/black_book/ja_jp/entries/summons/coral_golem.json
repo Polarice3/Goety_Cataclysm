@@ -1,0 +1,26 @@
+{
+  "name": "Coral Golem",
+  "icon": "minecraft:copper_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "サンゴの怪物のやや力は劣り、より機械的な親戚であるこれらのゴーレムは、それでも手元にあると強力な召使いです。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coral_golem",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coral_golem",
+      "text": "アニメーション コアのある中央の銅ブロックを右クリックします。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "サンゴはどんな種類でも構いません。サンゴを右クリックすると回復できます。"
+    }
+  ]
+}

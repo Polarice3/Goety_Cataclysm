@@ -89,6 +89,7 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedBerserkerLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedRevenantLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> KobolediatorLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> WadjetLimit;
 
     static {
         BUILDER.push("Spells");
@@ -251,6 +252,8 @@ public class GCSpellConfig {
                 .defineInRange("ignitedRevenantLimit", 2, 0, Integer.MAX_VALUE);
         KobolediatorLimit = BUILDER.comment("Total number of Kobolediators an individual player can have, Default: 2")
                 .defineInRange("kobolediatorLimit", 2, 0, Integer.MAX_VALUE);
+        WadjetLimit = BUILDER.comment("Total number of Wadjets an individual player can have, Default: 2")
+                .defineInRange("wadjetLimit", 2, 0, Integer.MAX_VALUE);
         BUILDER.pop();
         BUILDER.pop();
         SPEC = BUILDER.build();

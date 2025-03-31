@@ -40,6 +40,9 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> KOBOLEDIATOR_SPAWN_EGG = ITEMS.register("kobolediator_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.KOBOLEDIATOR, 0xb98a3c, 0xffe69a, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> WADJET_SPAWN_EGG = ITEMS.register("wadjet_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.WADJET, 0x8c8873, 0xbfa05c, egg()));
+
     public static final RegistryObject<ServantSpawnEggItem> DRAUGR_SERVANT_SPAWN_EGG = ITEMS.register("draugr_servant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.DRAUGR_SERVANT, 0x2e2a27, 0x56eccc, egg()));
 

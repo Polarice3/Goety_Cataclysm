@@ -1,0 +1,18 @@
+{
+  "name": "Desert Crush Focus",
+  "icon": "goety_cataclysm:desert_crush_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "術者の周囲に古代の砂漠の石碑を召喚し、その石碑を落としてその下の味方以外のターゲットにダメージを与えます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/desert_crush_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:desert_crush_focus": 1
+  }
+}

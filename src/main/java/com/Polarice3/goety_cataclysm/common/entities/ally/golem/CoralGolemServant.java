@@ -4,6 +4,7 @@ import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonAnimationGoal1;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
@@ -57,6 +58,7 @@ import net.minecraftforge.fluids.FluidType;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
     private static final EntityDataAccessor<Boolean> GOLEMSWIM = SynchedEntityData.defineId(CoralGolemServant.class, EntityDataSerializers.BOOLEAN);
@@ -128,6 +130,16 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
     @Override
     public int xpReward() {
         return 15;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof CoralGolemServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.CoralGolemLimit.get();
     }
 
     boolean wantsToSwim() {

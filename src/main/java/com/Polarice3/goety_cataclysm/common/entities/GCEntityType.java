@@ -7,6 +7,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServan
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KobolediatorServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.WadjetServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.AptrgangrServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.DraugrServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.EliteDraugrServant;
@@ -65,6 +66,11 @@ public class GCEntityType {
     public static final RegistryObject<EntityType<KobolediatorServant>> KOBOLEDIATOR = register("kobolediator",
             EntityType.Builder.of(KobolediatorServant::new, MobCategory.MONSTER)
                     .sized(2.4F, 4.4F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<WadjetServant>> WADJET = register("wadjet",
+            EntityType.Builder.of(WadjetServant::new, MobCategory.MONSTER)
+                    .sized(0.85F, 3.4F)
                     .clientTrackingRange(8));
 
     public static final RegistryObject<EntityType<DraugrServant>> DRAUGR_SERVANT = register("draugr_servant",

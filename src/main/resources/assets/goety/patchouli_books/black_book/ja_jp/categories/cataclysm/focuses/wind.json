@@ -1,0 +1,6 @@
+{
+  "name": "Wind",
+  "description": "風からの更なる力",
+  "icon": "goety_cataclysm:sandstorm_focus",
+  "parent": "goety:cataclysm/focuses"
+}

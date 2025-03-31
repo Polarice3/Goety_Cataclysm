@@ -1,0 +1,27 @@
+{
+  "name": "Netherite Monstrosity",
+  "icon": "cataclysm:monstrous_helm",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "レッドストーンの怪物は、あなたが出撃できる最も強力なサーバントの 1 つですが、おそらく、§4インファーナルフォージ§rの力を使えば、そのネザライト版を複製できるでしょう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:netherite_monstrosity",
+      "scale": 0.75
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity",
+      "text": "中央の強化レッドストーン ブロックを§4インファーナルフォージ§rで右クリックします。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ブラックストーンは、型の代わりに金メッキのブラックストーン以外の変種で代用できます。レッドストーンの怪物の項目に書かれていることにもかかわらず、この怪物変種のパワーは、その対応物を上回っています。ネザライト ブロック、溶岩バケツ、溶岩パワー セルで右クリックするか、ソウル ファイアの上に置くことで修復できます。怪物は、レッドストーン対応物と同じ召喚上限を共有します。"
+    }
+  ]
+}

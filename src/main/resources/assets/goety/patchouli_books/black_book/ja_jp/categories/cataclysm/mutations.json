@@ -1,0 +1,7 @@
+{
+  "name": "Mutations",
+  "description": "ある生き物を別の生き物に変化させる。",
+  "icon": "cataclysm:burning_ashes",
+  "parent": "goety:cataclysm",
+  "sortnum": 4
+}

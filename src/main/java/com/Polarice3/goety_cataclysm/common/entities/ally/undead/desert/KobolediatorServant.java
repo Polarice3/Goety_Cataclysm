@@ -59,6 +59,7 @@ import net.minecraftforge.common.Tags;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class KobolediatorServant extends InternalAnimationSummon {
     public AnimationState idleAnimationState = new AnimationState();
@@ -162,6 +163,11 @@ public class KobolediatorServant extends InternalAnimationSummon {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof KobolediatorServant;
     }
 
     @Override
@@ -667,7 +673,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
     public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {
         ItemStack itemstack = pPlayer.getItemInHand(p_230254_2_);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if (itemstack.is(Tags.Items.BONES) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }

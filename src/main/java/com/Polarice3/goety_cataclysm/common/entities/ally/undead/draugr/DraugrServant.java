@@ -28,6 +28,7 @@ import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class DraugrServant extends Summoned {
     public AnimationState idleAnimationState = new AnimationState();
@@ -55,6 +56,11 @@ public class DraugrServant extends Summoned {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof DraugrServant;
     }
 
     @Override

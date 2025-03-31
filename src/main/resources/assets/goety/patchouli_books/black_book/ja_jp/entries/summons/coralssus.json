@@ -1,0 +1,26 @@
+{
+  "name": "Coralssus",
+  "icon": "minecraft:horn_coral_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "沈んだ都市から来た強力な生物。おそらく、あなたが複製に成功した手段によってディープリングによって命を与えられたのでしょう。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coralssus",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coralssus",
+      "text": "アニメーション コアを使用して、中央のサンゴを右クリックします。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "火、角、チューブ コーラル ブロックのみが、すべてのコーラル ブロックが同じタイプである Coralssus を作成できます。それらのタイプのサンゴで右クリックすると、それらを修復できます。"
+    }
+  ]
+}

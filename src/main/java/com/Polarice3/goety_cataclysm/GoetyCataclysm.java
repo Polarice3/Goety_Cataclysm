@@ -8,6 +8,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServan
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KobolediatorServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.WadjetServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.AptrgangrServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.DraugrServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.EliteDraugrServant;
@@ -109,6 +110,7 @@ public class GoetyCataclysm {
         event.put(GCEntityType.IGNITED_BERSERKER.get(), IgnitedBerserkerServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLETON_SERVANT.get(), KoboletonServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLEDIATOR.get(), KobolediatorServant.setCustomAttributes().build());
+        event.put(GCEntityType.WADJET.get(), WadjetServant.setCustomAttributes().build());
         event.put(GCEntityType.DRAUGR_SERVANT.get(), DraugrServant.setCustomAttributes().build());
         event.put(GCEntityType.ROYAL_DRAUGR_SERVANT.get(), RoyalDraugrServant.setCustomAttributes().build());
         event.put(GCEntityType.ELITE_DRAUGR_SERVANT.get(), EliteDraugrServant.setCustomAttributes().build());

@@ -1,0 +1,18 @@
+{
+  "name": "Cursed Grave Focus",
+  "icon": "goety_cataclysm:cursed_grave_focus",
+  "category": "goety:cataclysm/focuses/necromancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "勇敢な戦士の死体は、多くの寒くて氷の多いバイオームで見つかります。死霊術を使えば、マレディクタスが看守にかける呪いと同じような方法で、これらの死体を蘇らせることができます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/cursed_grave_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:cursed_grave_focus": 1
+  }
+}

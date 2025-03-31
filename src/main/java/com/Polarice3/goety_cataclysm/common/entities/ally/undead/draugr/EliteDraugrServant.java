@@ -41,6 +41,7 @@ import net.minecraftforge.common.Tags;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class EliteDraugrServant extends InternalAnimationSummon implements CrossbowAttackMob {
     private static final EntityDataAccessor<Boolean> IS_CHARGING_CROSSBOW = SynchedEntityData.defineId(EliteDraugrServant.class, EntityDataSerializers.BOOLEAN);
@@ -84,6 +85,11 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof EliteDraugrServant;
     }
 
     @Override

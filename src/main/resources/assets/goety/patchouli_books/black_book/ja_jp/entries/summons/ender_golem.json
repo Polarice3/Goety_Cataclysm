@@ -1,0 +1,40 @@
+{
+  "name": "Ender Golem",
+  "icon": "goety_cataclysm:void_mold_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_warred_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "強力なレッドストーン ゴーレムのバリエーションですが、レッドストーンで作られているのではなく、このゴーレムはエンドの虚空そのものを利用しています。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ender_golem",
+      "scale": 0.75
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem",
+      "text": "アニメーション コアを使用して、中央のエンドストーンを右クリックします。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "黒曜石は黒曜石レンガで代用できます。その結果得られるゴーレムは鉄のゴーレムよりもはるかに優れており、より強力であるだけでなく、杖や杖を使って追従、徘徊、定位置に留まるよう命令できます。それらは、虚空石または虚空ルーンで右クリックして修復できます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_mold_block",
+      "text": "ボイドクリスタルと黒曜石は強力な鋳型を作成するために使用されます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_stone",
+      "recipe2": "goety_cataclysm:void_crystal"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_lantern_block"
+    }
+  ]
+}

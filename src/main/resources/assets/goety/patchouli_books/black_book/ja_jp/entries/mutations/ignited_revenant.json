@@ -1,0 +1,33 @@
+{
+  "name": "Ignited Revenant",
+  "icon": "cataclysm:burning_ashes",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_bygone_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "炎に包まれた亡霊に遭遇するのは驚きです。火で死者を蘇らせることができるなんて、誰が知っていたでしょうか? 炎と死霊術に関する知識を活かして、あなたは自分の亡霊を飼う方法を見つけました。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_wildfire_to_ignited_revenant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ignited_revenant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "霊魂は骨、ブレイズロッド、ブレイズパウダーを与えることで回復でき、また、所有者がネクロケープを身に着けている場合は受動的に回復できます。シールドが破壊された場合は、ネザライトスクラップを与えると回復します。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_helm",
+      "text": "消滅すると、これらの炎の亡霊は、死から蘇るために野火を宿すことができる兜を落とします。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_helm": 4
+  }
+}

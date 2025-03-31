@@ -66,6 +66,10 @@
   "item.goety_cataclysm.royal_draugr_servant_spawn_egg": "皇家魂尸刷怪蛋",
 
   "itemGroup.goety_cataclysm": "诡厄灾变",
-  "item.goety_cataclysm.ignited_helm": "Ignited Helm",
-  "item.goety_cataclysm.ignited_soul": "Ignited Soul"
+  "item.goety_cataclysm.ignited_helm": "炽燃头盔",
+  "item.goety_cataclysm.ignited_soul": "炽燃残魂",
+  "advancements.goety_cataclysm.convert_wadjet.title": "尼罗河的诅咒！",
+  "advancements.goety_cataclysm.convert_wadjet.description": "将一只骸龙仆从转化成瓦吉特",
+  "entity.goety_cataclysm.wadjet": "瓦吉特",
+  "item.goety_cataclysm.wadjet_spawn_egg": "瓦吉特仆从刷怪蛋"
 }

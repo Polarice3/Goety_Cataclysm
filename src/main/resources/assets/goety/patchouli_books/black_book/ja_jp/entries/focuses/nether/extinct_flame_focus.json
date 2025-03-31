@@ -1,0 +1,18 @@
+{
+  "name": "Extinct Flame Focus",
+  "icon": "goety_cataclysm:extinct_flame_focus",
+  "category": "goety:cataclysm/focuses/nether",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "イグニスの力そのものを利用して火の玉を召喚し、しばらくすると近くの敵を追いかけて激しい爆発で吹き飛ばします。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/extinct_flame_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:extinct_flame_focus": 1
+  }
+}

@@ -53,6 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class IgnitedRevenantServant extends LLibraryBossSummon {
     private static final EntityDataAccessor<Boolean> ANGER = SynchedEntityData.defineId(IgnitedRevenantServant.class, EntityDataSerializers.BOOLEAN);
@@ -115,6 +116,11 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
 
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof IgnitedRevenantServant;
     }
 
     @Override

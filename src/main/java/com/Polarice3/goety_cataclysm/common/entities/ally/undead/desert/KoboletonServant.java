@@ -41,6 +41,7 @@ import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class KoboletonServant extends AnimationSummon2 {
     public static final Animation COBOLETON_ATTACK = Animation.create(19);
@@ -88,6 +89,11 @@ public class KoboletonServant extends AnimationSummon2 {
 
     public MobType getMobType() {
         return MobType.UNDEAD;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof KoboletonServant;
     }
 
     @Override
@@ -212,7 +218,7 @@ public class KoboletonServant extends AnimationSummon2 {
     public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {
         ItemStack itemstack = pPlayer.getItemInHand(p_230254_2_);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if (itemstack.is(Tags.Items.BONES) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
@@ -240,7 +246,6 @@ public class KoboletonServant extends AnimationSummon2 {
             this.mob = p_25552_;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
         }
-
 
         protected double getAttackReachSqr(LivingEntity p_25556_) {
             return (double)(this.mob.getBbWidth() * 2.5F * this.mob.getBbWidth() * 2.5F + p_25556_.getBbWidth());

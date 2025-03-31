@@ -1,0 +1,18 @@
+{
+  "name": "Sandstorm Focus",
+  "icon": "goety_cataclysm:sandstorm_focus",
+  "category": "goety:cataclysm/focuses/wind",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "この呪文は、単純なサイクロンを発射するのではなく、術者の周囲を周回する複数の砂のサイクロンを召喚し、それに巻き込まれた味方以外のターゲットにダメージを与えます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sandstorm_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sandstorm_focus": 1
+  }
+}

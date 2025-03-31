@@ -8,6 +8,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummo
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
@@ -64,6 +65,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 
 public class CoralssusServant extends InternalAnimationSummon {
     private static final EntityDataAccessor<Integer> MOISTNESS = SynchedEntityData.defineId(CoralssusServant.class, EntityDataSerializers.INT);
@@ -219,6 +221,16 @@ public class CoralssusServant extends InternalAnimationSummon {
     public boolean isSponge() {
         String s = ChatFormatting.stripFormatting(this.getName().getString());
         return s != null && s.toLowerCase().contains("squarepants") && this.getVariant() == Variant.HORN;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof CoralssusServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.CoralssusLimit.get();
     }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_29678_, DifficultyInstance p_29679_, MobSpawnType p_29680_, @Nullable SpawnGroupData p_29681_, @Nullable CompoundTag p_29682_) {

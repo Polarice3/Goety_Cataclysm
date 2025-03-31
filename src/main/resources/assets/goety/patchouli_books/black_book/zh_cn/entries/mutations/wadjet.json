@@ -1,0 +1,24 @@
+{
+  "name": "瓦吉特",
+  "icon": "cataclysm:ancient_spear",
+  "category": "goety:cataclysm/mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "在简单转化一只骸龙后，你成功召唤出了屈尊于你麾下并听从你指挥的瓦吉特仆从"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_koboleton_to_wadjet_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:wadjet",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "喂食骨头可以治疗瓦吉特，当它的主人穿戴死灵长袍时，她也会被动且缓慢地恢复血量"
+    }
+  ]
+}

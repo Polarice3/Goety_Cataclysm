@@ -1,0 +1,24 @@
+{
+  "name": "Kobolediator",
+  "icon": "cataclysm:kobolediator_skull",
+  "category": "goety:cataclysm/mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "簡単な爬虫類の骸骨を通じて、強力な古の重戦士の骸を復活させ、自分の支配下に置けるようになりました。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_koboleton_to_kobolediator_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:kobolediator",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "アンデッドの剣闘士は骨を与えることで治癒することができ、また、所有者がネクロケープを身に着けている場合は受動的に治癒することができます。"
+    }
+  ]
+}

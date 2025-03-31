@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,5 +26,9 @@ public class GCDataGenerator {
                 )));
         generator.addProvider(event.includeServer(), new GCBlockStateProvider(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new GCItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper()));
+        DatapackBuiltinEntriesProvider datapackProvider = new GCRegisteryDataProvider(generator.getPackOutput(), provider);
+        CompletableFuture<HolderLookup.Provider> lookupProvider = datapackProvider.getRegistryProvider();
+        generator.addProvider(event.includeServer(), datapackProvider);
+        generator.addProvider(event.includeServer(), new GCEntityTypeTagsProvider(generator.getPackOutput(), lookupProvider, event.getExistingFileHelper()));
     }
 }

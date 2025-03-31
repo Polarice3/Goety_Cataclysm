@@ -1,0 +1,33 @@
+{
+  "name": "Ignited Berserker",
+  "icon": "cataclysm:dying_ember",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_bygone_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "古代の狂戦士の魂が火の精霊に憑依しても、驚くべきことに大惨事には至りませんでした。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_blazes_to_ignited_berserker"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ignited_berserker",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "戦魂は、骨、ブレイズロッド、ブレイズパウダーを与えることで回復することができ、所有者がネクロケープを着用している場合は受動的に回復することができます。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_soul",
+      "text": "消滅すると、これらの炎の亡霊は燃える核を落とし、その核は死から蘇るための炎を持ちます。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_soul": 4
+  }
+}

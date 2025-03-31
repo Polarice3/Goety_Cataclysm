@@ -1,6 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally;
 
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.utils.MobUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -139,7 +140,7 @@ public class AnimationSummon extends Summoned {
         List<LivingEntity> nearbyEntities = this.getEntityLivingBaseNearby((double)x, (double)y, (double)z, (double)radius);
 
         for (LivingEntity nearbyEntity : nearbyEntities) {
-            if (nearbyEntity.isPickable() && !nearbyEntity.noPhysics) {
+            if (nearbyEntity.isPickable() && !nearbyEntity.noPhysics && !MobUtil.areAllies(this, nearbyEntity)) {
                 double angle = (this.getAngleBetweenEntities(this, nearbyEntity) + 90.0) * Math.PI / 180.0;
                 nearbyEntity.setDeltaMovement(-0.1 * Math.cos(angle), nearbyEntity.getDeltaMovement().y, -0.1 * Math.sin(angle));
             }

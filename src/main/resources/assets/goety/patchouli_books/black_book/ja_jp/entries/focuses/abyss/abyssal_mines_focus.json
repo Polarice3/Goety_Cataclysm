@@ -1,0 +1,18 @@
+{
+  "name": "Abyssal Mine Focus",
+  "icon": "goety_cataclysm:abyssal_mine_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "これらの幽玄な紫色の地雷は、酸の雲を残しませんが、数が多いだけでなく、爆発した犠牲者に深淵の恐怖を与えます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/abyssal_mine_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:abyssal_mine_focus": 1
+  }
+}

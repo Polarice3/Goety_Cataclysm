@@ -7,7 +7,6 @@ import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.common.magic.SummonSpell;
 import com.Polarice3.Goety.utils.*;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.EliteDraugrServant;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -76,7 +75,7 @@ public class EliteDraugrSpell extends SummonSpell {
     public void commonResult(ServerLevel worldIn, LivingEntity caster){
         if (isShifting(caster)) {
             for (Entity entity : worldIn.getAllEntities()) {
-                if (entity instanceof KoboletonServant) {
+                if (entity instanceof EliteDraugrServant) {
                     this.teleportServants(caster, entity);
                 }
             }

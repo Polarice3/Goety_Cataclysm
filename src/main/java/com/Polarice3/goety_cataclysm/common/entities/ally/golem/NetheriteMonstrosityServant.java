@@ -1183,7 +1183,7 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
     }
 
     public boolean shouldGoBerserk() {
-        return this.getHealth() <= (this.getMaxHealth() / 3.0F);
+        return this.getHealth() <= (this.getMaxHealth() * 0.4F);
     }
 
     @Override
