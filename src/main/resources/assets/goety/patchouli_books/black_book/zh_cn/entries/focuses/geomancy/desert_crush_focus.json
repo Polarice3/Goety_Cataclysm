@@ -1,11 +1,11 @@
 {
-  "name": "Desert Crush Focus",
+  "name": "沙漠朽碎聚晶",
   "icon": "goety_cataclysm:desert_crush_focus",
   "category": "goety:cataclysm/focuses/geomancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Summons Ancient Desert Steles around the caster, that will then drop and damage any non-allied targets below them."
+      "text": "在施法者周围召唤沙漠方尖碑，它们会向下掉落并砸伤非友方目标"
     },
     {
       "type": "goety:ritual",

@@ -1,6 +1,6 @@
 {
-  "name": "Focuses",
-  "description": "More cataclysmic spells to cast!",
+  "name": "聚晶",
+  "description": "更多有关灾变的聚晶法术",
   "icon": "goety_cataclysm:flare_bomb_focus",
   "parent": "goety:cataclysm",
   "sortnum": 2

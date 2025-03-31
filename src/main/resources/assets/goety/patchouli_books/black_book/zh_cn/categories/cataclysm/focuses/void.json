@@ -1,6 +1,6 @@
 {
-  "name": "Void",
-  "description": "More power over the voids.",
+  "name": "虚空",
+  "description": "更多融入虚空的力量",
   "icon": "goety_cataclysm:void_vortex_focus",
   "parent": "goety:cataclysm/focuses"
 }

@@ -1,12 +1,12 @@
 {
-  "name": "Ignited Berserker",
+  "name": "炽燃狂魂",
   "icon": "cataclysm:dying_ember",
   "category": "goety:cataclysm/mutations",
   "advancement": "goety:goety/read_bygone_scroll",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Having a spirit of an ancient berserker possess a fire elemental surprisingly didn't end in disaster."
+      "text": "这一躁动的远古之火并没有因灾难而消散，这真令人感到惊喜"
     },
     {
       "type": "goety:ritual",
@@ -19,15 +19,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The berserker can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "goety_cataclysm:ignited_soul",
-      "text": "When extinguished, these fiery revenants will drop their burning cores which can possess a Blaze to return from the dead."
+      "text": "喂食骨头、烈焰粉、烈焰棒可以治疗你的炽燃狂魂，如果它的主人装备了死灵长袍，它也可以随时间推移缓慢恢复血量"
     }
-  ],
-  "extra_recipe_mappings": {
-    "goety_cataclysm:ignited_soul": 4
-  }
+  ]
 }

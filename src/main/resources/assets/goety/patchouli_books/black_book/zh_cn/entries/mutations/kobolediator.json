@@ -1,11 +1,11 @@
 {
-  "name": "Kobolediator",
+  "name": "骸龙斗士",
   "icon": "cataclysm:kobolediator_skull",
   "category": "goety:cataclysm/mutations",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Through a simple Koboleton, you've managed to revive a mighty Kobolediator and have it serve under your thumb."
+      "text": "简单地转化一只骸龙后，你成功复活了一只在你麾下服务的骸龙斗士"
     },
     {
       "type": "goety:ritual",
@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The undead gladiator can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+      "text": "喂食骨头可以治疗你的骸龙斗士，如果它的主人装备了死灵长袍，它也可以随时间推移缓慢恢复血量"
     }
   ]
 }

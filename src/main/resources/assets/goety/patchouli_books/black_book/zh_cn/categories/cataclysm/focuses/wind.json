@@ -1,6 +1,6 @@
 {
-  "name": "Wind",
-  "description": "More power over the winds.",
+  "name": "烈风",
+  "description": "更多唤风狂舞的力量",
   "icon": "goety_cataclysm:sandstorm_focus",
   "parent": "goety:cataclysm/focuses"
 }

@@ -1,6 +1,6 @@
 {
-  "name": "Abyss",
-  "description": "More power over the tides and waves.",
+  "name": "深渊",
+  "description": "在惊涛骇浪中篡握更多力量",
   "icon": "goety_cataclysm:abyssal_beam_focus",
   "parent": "goety:cataclysm/focuses"
 }

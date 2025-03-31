@@ -1,6 +1,6 @@
 {
-  "name": "Necromancy",
-  "description": "More power over the dead.",
+  "name": "死灵",
+  "description": "在死亡中唤起更多力量",
   "icon": "goety_cataclysm:desert_raid_focus",
   "parent": "goety:cataclysm/focuses"
 }

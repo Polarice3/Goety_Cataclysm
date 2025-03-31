@@ -1,6 +1,6 @@
 {
-  "name": "Summons",
-  "description": "More Servants for a Darker Wizard.",
+  "name": "召唤",
+  "description": "更多黑暗巫师的仆从",
   "icon": "cataclysm:draugr_head",
   "parent": "goety:cataclysm",
   "sortnum": 3

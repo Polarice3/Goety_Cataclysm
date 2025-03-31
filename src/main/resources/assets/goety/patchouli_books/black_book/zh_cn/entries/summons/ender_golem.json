@@ -1,12 +1,12 @@
 {
-  "name": "Ender Golem",
+  "name": "末影傀儡",
   "icon": "goety_cataclysm:void_mold_block",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_warred_scroll",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A variant of the mighty Redstone Golem, but rather than being made out of redstone, this golem utilizes the very void of the End."
+      "text": "这是红石傀儡的加强版，但它不含红石，而是改用末地的虚空石制作"
     },
     {
       "type": "patchouli:entity",
@@ -16,16 +16,16 @@
     {
       "type": "multiblock",
       "multiblock_id": "goety_cataclysm:ender_golem",
-      "text": "Right click the center Void Stone with an Animation Core."
+      "text": "手持活力核心右键中心的虚空石即可激活"
     },
     {
       "type": "patchouli:text",
-      "text": "The Obsidian can be substituted with Obsidian Bricks. The resulting Golem proves far superior to the Iron Golems as not only is it stronger, but it can be commanded to follow, wander or stay in position through a wand/staff. They can be repaired by right-clicking on them with Void Stone or Void Runes."
+      "text": "构成其中的黑曜石可以用黑曜石砖块代替，而由此制成的傀儡性能远超铁傀儡：不仅仅是更加强大，你还可以使用法杖或命令聚晶改变它的行为模式（跟随、巡逻或原地待命），你可以用虚空石治疗末影傀儡"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:void_mold_block",
-      "text": "Void Crystal and Obsidian are used to create a powerful mold."
+      "text": "虚空晶体和黑曜石可以用于制作虚空模具块"
     },
     {
       "type": "patchouli:crafting",

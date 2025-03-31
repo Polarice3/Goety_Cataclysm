@@ -1,11 +1,11 @@
 {
-  "name": "Cursed Tomb Focus",
+  "name": "咒陵聚晶",
   "icon": "goety_cataclysm:cursed_tomb_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Like regular Draugrs, but equipped with a shield that they occasionally used to block attacks."
+      "text": "比一般的再行魂尸多配备了一个盾牌，这块盾牌有时可以帮它抵挡住一些攻击"
     },
     {
       "type": "goety:ritual",

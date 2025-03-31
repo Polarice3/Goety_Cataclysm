@@ -1,11 +1,11 @@
 {
-  "name": "Cursed Grave Focus",
+  "name": "咒碑聚晶",
   "icon": "goety_cataclysm:cursed_grave_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Corpses of valiant warriors can be found in many cold and icy biomes. With necromancy, you're able to revive these corpses in a similar fashion to Maledictus' curse upon its jailers."
+      "text": "这些英勇战士的尸体常在雪原上发现，通过死灵巫术，你可以复活并驱役它们，就像咒灵翼骸的那个诅咒一样"
     },
     {
       "type": "goety:ritual",

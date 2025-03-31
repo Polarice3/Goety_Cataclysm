@@ -1,12 +1,12 @@
 {
-  "name": "Ignited Revenant",
+  "name": "炽燃遗魂",
   "icon": "cataclysm:burning_ashes",
   "category": "goety:cataclysm/mutations",
   "advancement": "goety:goety/read_bygone_scroll",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Encountering an Ignited Revenant has been a surprised. Who knew one can revive the dead through fire? With your knowledge on blazes and necromancy, you've figured out how to have your own revenant."
+      "text": "成功复活一只炽燃狂魂真是一个惊喜，此前谁知道用火可以复活死去的存在呢？而凭借你对火焰与巫术的了解，你对如何复活一只属于自己的炽燃遗魂又有了主意"
     },
     {
       "type": "goety:ritual",
@@ -19,15 +19,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The revenant can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "goety_cataclysm:ignited_soul",
-      "text": "When extinguished, these fiery revenants will drop their burning cores which can possess a Blaze to return from the dead."
+      "text": "喂食骨头、烈焰粉、烈焰棒可以治疗你的炽燃遗魂，如果它的主人装备了死灵长袍，它也可以随时间推移缓慢恢复血量"
     }
-  ],
-  "extra_recipe_mappings": {
-    "goety_cataclysm:ignited_soul": 4
-  }
+  ]
 }

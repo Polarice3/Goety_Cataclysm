@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Orb Focus",
+  "name": "深渊灵珠聚晶",
   "icon": "goety_cataclysm:abyssal_orb_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "These orbs of abyssal energies will seek out any nearby targets, or target if the spell is cast while looking at a valid entity, and explode upon them, granting them Abyssal Fear effect."
+      "text": "这些深渊灵珠会缓慢寻找并追踪附近的生物，或是直接瞄准施法期间你所指向的生物，它们会在命中生物后自爆并额外施加深渊恐惧效果"
     },
     {
       "type": "goety:ritual",

@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Beam Focus",
+  "name": "深渊迸射聚晶",
   "icon": "goety_cataclysm:abyssal_beam_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell replicates a Deepling Warlock's ability to call forth beams of abyssal energies through a portal."
+      "text": "这个法术复原了渊灵术士召唤深渊传送门以发射激光柱的能力"
     },
     {
       "type": "goety:ritual",

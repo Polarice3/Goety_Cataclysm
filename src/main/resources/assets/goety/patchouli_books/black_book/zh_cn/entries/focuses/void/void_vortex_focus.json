@@ -1,11 +1,11 @@
 {
-  "name": "Void Vortex Focus",
+  "name": "虚空漩涡聚晶",
   "icon": "goety_cataclysm:void_vortex_focus",
   "category": "goety:cataclysm/focuses/void",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell conjures forth a tornado made by the very void itself, sucking in nearby non-allied targets within itself, before exploding."
+      "text": "将虚空的力量凝结成一个漩涡，附近的非友方目标会被缓慢吸入其中，直至其最终爆炸"
     },
     {
       "type": "goety:ritual",

@@ -1,6 +1,6 @@
 {
-  "name": "Nether",
-  "description": "More power over the fiery pits of the Nether.",
+  "name": "下界",
+  "description": "在下界那不熄之火中获得更多力量",
   "icon": "goety_cataclysm:flare_bomb_focus",
   "parent": "goety:cataclysm/focuses"
 }

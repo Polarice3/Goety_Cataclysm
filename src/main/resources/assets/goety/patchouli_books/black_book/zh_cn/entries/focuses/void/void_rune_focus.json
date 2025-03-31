@@ -1,11 +1,11 @@
 {
-  "name": "Void Rune Focus",
+  "name": "虚空符文聚晶",
   "icon": "goety_cataclysm:void_rune_focus",
   "category": "goety:cataclysm/focuses/void",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "While one simply use a Void Rune, you figured it would be much better to simply turn it into a spell."
+      "text": "比起直接使用虚空核心，你觉得还是把它变成简单的法术再使用会更好"
     },
     {
       "type": "patchouli:crafting",

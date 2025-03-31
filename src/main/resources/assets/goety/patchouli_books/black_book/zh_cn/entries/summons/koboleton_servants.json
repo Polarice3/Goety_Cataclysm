@@ -1,11 +1,11 @@
 {
-  "name": "Koboleton Servant",
+  "name": "骸龙仆从",
   "icon": "cataclysm:koboleton_bone",
   "category": "goety:cataclysm/summons",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Servants of the Ancient Remnant, called forth from their Cursed Pyramid to serve under your command, their disarming abilities useful only towards beings like you."
+      "text": "原属于远古遗魂的仆从，但又被你在诅咒金字塔中召唤出来，遵从你的指挥，它们的缴械能力只对像你这样的玩家生效"
     },
     {
       "type": "patchouli:entity",
@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Koboletons can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+      "text": "喂食骨头可以治疗你的骸龙，如果它的主人装备了死灵长袍，它也可以随时间推移缓慢恢复血量"
     }
   ]
 }

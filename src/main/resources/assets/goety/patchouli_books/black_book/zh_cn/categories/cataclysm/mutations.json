@@ -1,6 +1,6 @@
 {
-  "name": "Mutations",
-  "description": "Transforming one creature into another.",
+  "name": "变异",
+  "description": "将一种生物转化为另一种生物",
   "icon": "cataclysm:burning_ashes",
   "parent": "goety:cataclysm",
   "sortnum": 4

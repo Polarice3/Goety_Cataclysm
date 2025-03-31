@@ -1,11 +1,11 @@
 {
-  "name": "Sandstorm Focus",
+  "name": "沙暴聚晶",
   "icon": "goety_cataclysm:sandstorm_focus",
   "category": "goety:cataclysm/focuses/wind",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Rather than shooting out a simple cyclone, the spell conjures multiple sandy cyclones that orbits around the caster, damaging any non-allied targets caught into them."
+      "text": "这个法术不再是和此前一样发射一个龙卷风，而是生成一个或多个以召唤者为中心环绕的大型沙尘暴，对蹭到的非友方目标造成伤害"
     },
     {
       "type": "goety:ritual",

@@ -1,6 +1,6 @@
 {
-  "name": "Geomancy",
-  "description": "More power over the earth.",
+  "name": "占卜",
+  "description": "更多源自这片大地的力量",
   "icon": "goety_cataclysm:desert_crush_focus",
   "parent": "goety:cataclysm/focuses"
 }

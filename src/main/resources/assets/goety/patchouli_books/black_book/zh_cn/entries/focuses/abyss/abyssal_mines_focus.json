@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Mine Focus",
+  "name": "深渊鱼雷聚晶",
   "icon": "goety_cataclysm:abyssal_mine_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "While they don't leave behind clouds of acids, these ethereal purple mines are not only more numerous but will also grant Abyssal Fear upon any victims it exploded on."
+      "text": "虽然这些鱼雷不会溅出酸液，但这些悬溺在空中的鱼雷不仅数量更多，还能让被炸到的目标获得深渊恐惧效果"
     },
     {
       "type": "goety:ritual",

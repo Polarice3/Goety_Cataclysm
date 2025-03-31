@@ -1,11 +1,11 @@
 {
-  "name": "Extinct Flame Focus",
+  "name": "焰迹聚晶",
   "icon": "goety_cataclysm:extinct_flame_focus",
   "category": "goety:cataclysm/focuses/nether",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tapping into the power of Ignis itself, you conjure forth fireballs that, after a short while, chase down nearby foes, blowing them up in a fiery explosion."
+      "text": "利用源自焰魔的力量，你可以凝结出焰魔同款的火球，火球生成后一段时间会自动寻找目标，随后在剧烈的爆炸中炸飞他们"
     },
     {
       "type": "goety:ritual",
