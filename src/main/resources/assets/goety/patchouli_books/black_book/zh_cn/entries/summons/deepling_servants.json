@@ -1,0 +1,84 @@
+{
+  "name": "渊灵们",
+  "icon": "cataclysm:lionfish",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "利维坦的有一群奇怪的追随者，它们长的很像末地的原住民，但这个种群不仅没有瞬移能力，反而还在水中茁壮成长着"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_deepling_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "最普通的渊灵，手持的珊瑚长矛既可以远程投掷，也可以用于近战，如果有需要的话，你可以直接给予它一根珊瑚长矛"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_angler_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_deepling_angler_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "挥舞钓竿并拴着一条蓑鲉的渊灵，你不禁好奇它们的纹理色与让敌人中毒的能力是怎么相互联系的"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用剪刀右键蓑鲉即可让它和渊灵垂钓者解绑，然后蓑鲉会转而将你视作主人并跟随你，失去蓑鲉的垂钓者如果处于水中且手上还有钓竿，那它会花费10分钟的时间再钓一条蓑鲉拴着，每次钓获蓑鲉都会消耗它钓鱼竿的耐久度"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_brute_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_brute"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "强大的渊灵，比一般的敌怪掌握更多技巧与力量，如果有需要的话，你可以直接给予它一根珊瑚钺"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_priest_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_priest"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "即便它已经在你的麾下行动，你也还是好奇那种耀眼的光芒是崇拜利维坦的狂热象征、还是紫水晶祭坛的动力源头，当然，如果有需要的话，你可以直接给予它一把仪式匕首"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_warlock_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_warlock"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "与它的祭司亲戚不同，它已经可以利用利维坦的力量，从地面上召唤喷涌的深渊激光束，不过它似乎对某些真菌和疣蛛不感兴趣，当然，如果有需要的话，你可以直接给予它一把仪式匕首"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "每种渊灵都可以用任意一种鱼治疗，或是在召唤者穿上深渊长袍后缓慢治疗"
+    }
+  ]
+}

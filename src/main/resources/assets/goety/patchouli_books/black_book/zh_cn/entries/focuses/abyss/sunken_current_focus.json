@@ -1,0 +1,18 @@
+{
+  "name": "渊没暗流聚晶",
+  "icon": "goety_cataclysm:sunken_current_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你为这块聚晶进行了升级，让它能够召唤出更高级、更强大的渊灵蛮兵仆从"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_current_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_current_focus": 1
+  }
+}

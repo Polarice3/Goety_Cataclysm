@@ -1,0 +1,18 @@
+{
+  "name": "渊没民官聚晶",
+  "icon": "goety_cataclysm:sunken_tribune_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这个法术可以从深渊深处召唤一位会施法的渊灵，但回应召唤的是祭司还是术士则完全随机"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_tribune_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_tribune_focus": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "渊没浪涌聚晶",
+  "icon": "goety_cataclysm:sunken_swell_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "拥有足以终结利维坦的能力后，你就可以让那些渊灵听从你的指挥与召唤了；召唤时有25%的概率改为生成渊灵垂钓者仆从"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_swell_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_swell_focus": 1
+  }
+}
