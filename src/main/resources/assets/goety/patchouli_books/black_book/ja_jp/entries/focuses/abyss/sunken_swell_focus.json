@@ -1,0 +1,18 @@
+{
+  "name": "深海のうねりのフォーカス",
+  "icon": "goety_cataclysm:sunken_swell_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "リヴァイアサンを倒すことで得られる権限により、リヴァイアサンの従者を召喚して指揮下に置くことができます。ディープリングの釣り人を召喚する確率は25%です。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_swell_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_swell_focus": 1
+  }
+}

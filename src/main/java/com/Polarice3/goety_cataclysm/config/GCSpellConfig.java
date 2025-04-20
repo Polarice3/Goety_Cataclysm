@@ -38,6 +38,24 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> DesertCrushCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> DesertCrushDamage;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingLimit;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingBruteCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingBruteDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingBruteCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingBruteSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingBruteLimit;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCasterCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCasterDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCasterCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCasterSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingCasterLimit;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> DraugrCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> DraugrDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> DraugrCoolDown;
@@ -148,6 +166,42 @@ public class GCSpellConfig {
                     .defineInRange("desertCrushCoolDown", 160, 0, Integer.MAX_VALUE);
             DesertCrushDamage = BUILDER.comment("Desert Crush Spell Damage, Default: 18.0")
                     .defineInRange("desertCrushDamage", 18.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Sunken Swell Spell");
+            DeeplingCost = BUILDER.comment("Sunken Swell Spell Cost, Default: 24")
+                    .defineInRange("deeplingCost", 24, 0, Integer.MAX_VALUE);
+            DeeplingDuration = BUILDER.comment("Time to cast Sunken Swell Spell, Default: 60")
+                    .defineInRange("deeplingTime", 60, 0, 72000);
+            DeeplingCoolDown = BUILDER.comment("Sunken Swell Spell Cooldown, Default: 100")
+                    .defineInRange("deeplingCoolDown", 100, 0, Integer.MAX_VALUE);
+            DeeplingSummonDown = BUILDER.comment("Sunken Swell Spell Summon Down, Default: 300")
+                    .defineInRange("deeplingSummonDown", 300, 0, 72000);
+            DeeplingLimit = BUILDER.comment("Number of Deepling Servants that can a player can have, Default: 32")
+                    .defineInRange("deeplingLimit", 32, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Sunken Current Spell");
+            DeeplingBruteCost = BUILDER.comment("Sunken Current Spell Cost, Default: 32")
+                    .defineInRange("deeplingBruteCost", 32, 0, Integer.MAX_VALUE);
+            DeeplingBruteDuration = BUILDER.comment("Time to cast Sunken Current Spell, Default: 20")
+                    .defineInRange("deeplingBruteTime", 20, 0, 72000);
+            DeeplingBruteCoolDown = BUILDER.comment("Sunken Current Spell Cooldown, Default: 600")
+                    .defineInRange("deeplingBruteCoolDown", 600, 0, Integer.MAX_VALUE);
+            DeeplingBruteSummonDown = BUILDER.comment("Sunken Current Spell Summon Down, Default: 150")
+                    .defineInRange("deeplingBruteSummonDown", 150, 0, 72000);
+            DeeplingBruteLimit = BUILDER.comment("Number of Deepling Brute Servants that can a player can have, Default: 8")
+                    .defineInRange("deeplingBruteLimit", 8, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Sunken Tribune Spell");
+            DeeplingCasterCost = BUILDER.comment("Sunken Tribune Spell Cost, Default: 24")
+                    .defineInRange("deeplingCasterCost", 24, 0, Integer.MAX_VALUE);
+            DeeplingCasterDuration = BUILDER.comment("Time to cast Sunken Tribune Spell, Default: 100")
+                    .defineInRange("deeplingCasterTime", 100, 0, 72000);
+            DeeplingCasterCoolDown = BUILDER.comment("Sunken Tribune Spell Cooldown, Default: 1200")
+                    .defineInRange("deeplingCasterCoolDown", 1200, 0, Integer.MAX_VALUE);
+            DeeplingCasterSummonDown = BUILDER.comment("Sunken Tribune Spell Summon Down, Default: 300")
+                    .defineInRange("deeplingCasterSummonDown", 300, 0, 72000);
+            DeeplingCasterLimit = BUILDER.comment("Number of Deepling Priest/Warlock Servants that can a player can have, Default: 4")
+                    .defineInRange("deeplingCasterLimit", 4, 1, Integer.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Cursed Grave Spell");
             DraugrCost = BUILDER.comment("Cursed Grave Spell Cost, Default: 24")

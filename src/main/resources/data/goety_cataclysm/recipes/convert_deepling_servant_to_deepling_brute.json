@@ -1,0 +1,26 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_tamed",
+  "activation_item": {
+    "item": "cataclysm:coral_bardiche"
+  },
+  "craftType": "deep",
+  "entity_to_convert": {
+    "tag": "goety_cataclysm:deepling_servants",
+    "display_name": "entity.goety_cataclysm.deepling_servant"
+  },
+  "entity_to_convert_into": "goety_cataclysm:deepling_brute_servant",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

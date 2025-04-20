@@ -1,0 +1,24 @@
+{
+  "name": "古の魔術槍士の骸",
+  "icon": "cataclysm:ancient_spear",
+  "category": "goety:cataclysm/mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "簡単な爬虫類の骸骨を通じて偉大な古の魔術槍士の骸を呼び出し、それをあなたの支配下に置けるようになりました。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_koboleton_to_wadjet_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:wadjet",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "アンデッドの魔法使いは骨を与えることで回復することができ、所有者がネクロのケープを身に着けている場合は、自動的に回復することができます。"
+    }
+  ]
+}

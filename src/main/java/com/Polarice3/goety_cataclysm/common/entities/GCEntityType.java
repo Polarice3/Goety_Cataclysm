@@ -1,6 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities;
 
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
+import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
@@ -37,6 +38,36 @@ public class GCEntityType {
                     .sized(3.0F, 5.75F)
                     .fireImmune()
                     .clientTrackingRange(4));
+
+    public static final RegistryObject<EntityType<DeeplingServant>> DEEPLING = register("deepling_servant",
+            EntityType.Builder.of(DeeplingServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.3F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<DeeplingBruteServant>> DEEPLING_BRUTE = register("deepling_brute_servant",
+            EntityType.Builder.of(DeeplingBruteServant::new, MobCategory.MONSTER)
+                    .sized(0.7F, 2.6F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<DeeplingAnglerServant>> DEEPLING_ANGLER = register("deepling_angler_servant",
+            EntityType.Builder.of(DeeplingAnglerServant::new, MobCategory.MONSTER)
+                    .sized(0.65F, 2.45F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<DeeplingPriestServant>> DEEPLING_PRIEST = register("deepling_priest_servant",
+            EntityType.Builder.of(DeeplingPriestServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.3F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<DeeplingWarlockServant>> DEEPLING_WARLOCK = register("deepling_warlock_servant",
+            EntityType.Builder.of(DeeplingWarlockServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.3F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<LionfishServant>> LIONFISH = register("lionfish",
+            EntityType.Builder.of(LionfishServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 0.55F)
+                    .clientTrackingRange(6));
 
     public static final RegistryObject<EntityType<CoralGolemServant>> CORAL_GOLEM = register("coral_golem",
             EntityType.Builder.of(CoralGolemServant::new, MobCategory.MONSTER)

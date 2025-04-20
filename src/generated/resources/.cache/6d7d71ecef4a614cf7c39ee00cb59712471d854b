@@ -1,4 +1,7 @@
-// 1.20.1	2025-03-12T12:45:34.2818457	Block States: goety_cataclysm
+// 1.20.1	2025-04-18T15:19:32.3886028	Block States: goety_cataclysm
+1a711de0f4fa98d3e985b9bc812966cce72bad6b assets/goety_cataclysm/blockstates/mechanized_iron_block.json
 5fd4267a2992ee7297fe193e899ad601f97897d3 assets/goety_cataclysm/blockstates/void_mold_block.json
+c16758f78c1709af9c4fff7e30fda5ce089680d4 assets/goety_cataclysm/models/block/mechanized_iron_block.json
 1f8147186c8a5d2b1445bfe4a7c71c31951d3bca assets/goety_cataclysm/models/block/void_mold_block.json
+ca1e1007988168a989b69db70ea3900aa9679127 assets/goety_cataclysm/models/item/mechanized_iron_block.json
 8b21e66b39367f3b2eaeebcdb262ae2130b5a05c assets/goety_cataclysm/models/item/void_mold_block.json

@@ -1,7 +1,6 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.golem;
 
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
@@ -216,7 +215,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
             if ((this.getAnimation() == ANIMATION_ATTACK1 || this.getAnimation() == ANIMATION_ATTACK2) && this.getAnimationTick() == 13) {
                 this.playSound(CataclysmSounds.GOLEMATTACK.get(), 1.0F, 1.0F);
                 if (target != null && target.isAlive() && this.distanceTo(target) < 4.75F) {
-                    target.hurt(this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this), (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float)this.random.nextInt(4));
+                    target.hurt(this.getMobAttack(), (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float)this.random.nextInt(4));
                     target.knockback(1.25, this.getX() - target.getX(), this.getZ() - target.getZ());
                 }
             }
@@ -272,7 +271,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(grow))) {
             if (!MobUtil.areAllies(this, entity)) {
-                entity.hurt(this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
+                entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
                 this.launch(entity, true);
             }
         }

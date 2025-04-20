@@ -1,6 +1,8 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.common.entities.ModEntityType;
+import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
@@ -15,6 +17,7 @@ import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -30,7 +33,6 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -246,10 +248,12 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
             ItemStack itemStack = new ItemStack(GCItems.IGNITED_SOUL.get());
             IgnitedSoul.setOwnerName(this.getTrueOwner(), itemStack);
             IgnitedSoul.setSummon(this, itemStack);
-            ItemEntity itemEntity = this.spawnAtLocation(itemStack);
-            if (itemEntity != null) {
-                itemEntity.setExtendedLifetime();
-            }
+            FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
+            flyingItem.setOwner(this.getTrueOwner());
+            flyingItem.setItem(itemStack);
+            flyingItem.setParticle(ParticleTypes.FLAME);
+            flyingItem.setSecondsCool(30);
+            this.level().addFreshEntity(flyingItem);
         }
         super.die(p_21014_);
         this.setAttackState(0);
@@ -295,7 +299,7 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
             if (this.tickCount % 4 == 0) {
                 for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(1.0D))) {
                     if (!MobUtil.areAllies(this, entity)) {
-                        boolean flag = entity.hurt(this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                        boolean flag = entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                         if (flag) {
                             double d0 = entity.getX() - this.getX();
                             double d1 = entity.getZ() - this.getZ();

@@ -10,12 +10,18 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingAnglerCatchTime;
+
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedRevenantHelm;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
 
     static {
         BUILDER.push("Servants");
+            BUILDER.push("Abyss Servants");
+            DeeplingAnglerCatchTime = BUILDER.comment("How long until a Deepling Angler Servant will catch another Lionfish if they don't have one already attached, Default: 12000")
+                    .defineInRange("deeplingAnglerCatchTime", 12000, 0, Integer.MAX_VALUE);
+            BUILDER.pop();
             BUILDER.push("Nether Servants");
             IgnitedRevenantHelm = BUILDER.comment("Whether owned Ignited Revenants drop Ignited Helms, Default: true")
                     .define("ignitedRevenantHelm", true);

@@ -1,6 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.golem;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonAnimationGoal1;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
@@ -9,7 +10,6 @@ import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
-import com.github.L_Ender.cataclysm.entity.Deepling.Coral_Golem_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.ISemiAquatic;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
@@ -267,8 +267,8 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
         this.playSound(SoundEvents.GENERIC_EXPLODE, 0.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
-            if (!this.isAlliedTo(entity) && !(entity instanceof Coral_Golem_Entity) && entity != this) {
-                entity.hurt(this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
+            if (!MobUtil.areAllies(this, entity) && entity != this) {
+                entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
                 this.launch(entity, true);
             }
         }

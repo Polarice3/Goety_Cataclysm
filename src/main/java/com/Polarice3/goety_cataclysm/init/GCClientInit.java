@@ -15,6 +15,12 @@ public class GCClientInit {
     public static void onRegisterRenders(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(GCEntityType.ENDER_GOLEM.get(), EnderGolemServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.NETHERITE_MONSTROSITY.get(), NMServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DEEPLING.get(), DeeplingServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DEEPLING_BRUTE.get(), DeeplingBruteServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DEEPLING_ANGLER.get(), DeeplingAnglerServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DEEPLING_PRIEST.get(), DeeplingPriestServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DEEPLING_WARLOCK.get(), DeeplingWarlockServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.LIONFISH.get(), LionfishServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.CORAL_GOLEM.get(), CoralGolemServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.CORALSSUS.get(), CoralssusServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.IGNITED_REVENANT.get(), IgnitedRevenantServantRenderer::new);

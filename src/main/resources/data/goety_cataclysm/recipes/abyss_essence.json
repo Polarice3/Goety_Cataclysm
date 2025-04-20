@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#O#",
+        "OEO",
+        "#O#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:crying_obsidian"
+        },
+        "O": {
+            "item": "minecraft:obsidian"
+        },
+        "E": {
+            "item": "goety_cataclysm:abyss_essence"
+        }
+    },
+    "result": {
+        "item": "goety_cataclysm:abyss_essence",
+        "count": 2
+    }
+}

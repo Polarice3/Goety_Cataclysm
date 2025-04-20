@@ -1,0 +1,84 @@
+{
+  "name": "ディープリングの従者",
+  "icon": "cataclysm:lionfish",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "リヴァイアサンの信奉者。エンドの住人に似ていますが、テレポートができず、水中で繁栄する奇妙な生き物です。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_deepling_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "普通のディープリング。サンゴの槍で遠距離攻撃することも、近接戦闘で使用することもできます。必要に応じてサンゴの槍を持たせることもできます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_angler_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_deepling_angler_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "釣り竿を使い、ミノカサゴを繋いでいるディープリング。その体色と敵を毒殺する能力は、この2つがどのような関係性を持つのかを想像させます。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "彼らのミノカサゴにハサミを使うと、ミノカサゴは解き放たれ、あなたに従うようになります。ミノカサゴがいなくなった場合、釣り人は水中にいて釣り竿を持っている限り、デフォルトで10分後に別のミノカサゴを釣り上げます。さらに釣り上げると竿の耐久度が徐々に減りますが、別のミノカサゴを与えることができます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_brute_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_brute"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "通常のディープリングよりも繊細さと強さを備えた強力なディープリング。必要に応じてサンゴの薙刀を付与できます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_priest_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_priest"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "たとえ彼らを指揮下に置いていたとしても、眩しい光を運ぶ者たちがリヴァイアサンを崇拝しているのか、それともアメジストの祭壇を動かす存在を崇拝しているのかは分からない。必要であれば、彼らに儀式の短剣を与えることもできる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:deepling_warlock_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_deepling_servant_to_deepling_warlock"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "祭司とは異なり、このディープリングはリヴァイアサンの力を利用して、地中から深淵のエネルギービームを召喚します。しかし、菌類や小さなイボだらけのクモ類には興味がありません。必要に応じて儀式の短剣を与えることができます。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "すべてのディープリング系は、深淵のローブを着用するか、魚を与えることで回復できます。"
+    }
+  ]
+}

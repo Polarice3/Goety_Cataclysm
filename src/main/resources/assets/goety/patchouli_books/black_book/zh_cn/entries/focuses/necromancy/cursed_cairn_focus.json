@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "这个法术会召唤使用弩箭设计敌人的精英魂尸仆从"
+      "text": "这个法术会召唤使用弩箭射击敌人的精英魂尸仆从"
     },
     {
       "type": "goety:ritual",

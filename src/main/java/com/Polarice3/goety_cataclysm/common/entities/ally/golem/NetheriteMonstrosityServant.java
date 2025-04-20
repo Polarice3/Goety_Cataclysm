@@ -7,7 +7,6 @@ import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.projectiles.Pyroclast;
 import com.Polarice3.Goety.utils.ItemHelper;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.IABossSummon;
@@ -770,8 +769,7 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
                 AABB attackRange = this.getBoundingBox().inflate(0.75D, 0.75D, 0.75D).expandTowards(xExpand, 0, zExpand);
                 for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, attackRange)) {
                     if (!MobUtil.areAllies(this, Lentity)) {
-                        DamageSource damagesource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                        boolean flag = Lentity.hurt(damagesource, (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
+                        boolean flag = Lentity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
                         if (flag) {
                             double theta = (this.yBodyRot) * (Math.PI / 180);
                             theta += Math.PI / 2;
@@ -975,9 +973,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         List<LivingEntity> hit = level().getEntitiesOfClass(LivingEntity.class, selection);
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
-                DamageSource damagesource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                boolean flag = entity.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(damagesource) && entity instanceof Player player  && shieldbreakticks > 0) {
+                boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player  && shieldbreakticks > 0) {
                     this.disableShield(player, shieldbreakticks);
                 }
 
@@ -1025,9 +1022,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         this.playSound(SoundEvents.GENERIC_EXPLODE, 1.5f, 1F + this.getRandom().nextFloat() * 0.1F);
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(area))) {
             if (!MobUtil.areAllies(this, entity)) {
-                DamageSource damagesource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                boolean flag = entity.hurt(damagesource, (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + Math.min(this.getAttributeValue(Attributes.ATTACK_DAMAGE), entity.getMaxHealth() * CMConfig.MonstrositysHpdamage)));
-                if (entity.isDamageSourceBlocked(damagesource) && entity instanceof Player player) {
+                boolean flag = entity.hurt(this.getMobAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + Math.min(this.getAttributeValue(Attributes.ATTACK_DAMAGE), entity.getMaxHealth() * CMConfig.MonstrositysHpdamage)));
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player) {
                     this.disableShield(player, 120);
                 }
 

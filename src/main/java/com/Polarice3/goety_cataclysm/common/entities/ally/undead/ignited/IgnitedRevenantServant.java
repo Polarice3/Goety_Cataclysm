@@ -1,6 +1,8 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.common.entities.ModEntityType;
+import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonMoveGoal;
@@ -18,6 +20,7 @@ import com.github.L_Ender.cataclysm.entity.projectile.Ashen_Breath_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Blazing_Bone_Entity;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -39,7 +42,6 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -245,7 +247,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
                 if(this.tickCount % (6 + this.getShieldDurability() * 2) == 0){
                     for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(1.25D))) {
                         if (!MobUtil.areAllies(this, entity)) {
-                            boolean flag = entity.hurt(this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                            boolean flag = entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                             if (flag) {
                                 double d0 = entity.getX() - this.getX();
                                 double d1 = entity.getZ() - this.getZ();
@@ -333,10 +335,12 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             ItemStack itemStack = new ItemStack(GCItems.IGNITED_HELM.get());
             IgnitedHelm.setOwnerName(this.getTrueOwner(), itemStack);
             IgnitedHelm.setSummon(this, itemStack);
-            ItemEntity itemEntity = this.spawnAtLocation(itemStack);
-            if (itemEntity != null) {
-                itemEntity.setExtendedLifetime();
-            }
+            FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
+            flyingItem.setOwner(this.getTrueOwner());
+            flyingItem.setItem(itemStack);
+            flyingItem.setParticle(ParticleTypes.FLAME);
+            flyingItem.setSecondsCool(30);
+            this.level().addFreshEntity(flyingItem);
         }
 
         super.die(pCause);

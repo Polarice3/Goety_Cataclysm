@@ -2,7 +2,6 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.utils.CuriosFinder;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon2;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
@@ -160,8 +159,7 @@ public class KoboletonServant extends AnimationSummon2 {
                     if (target != null) {
                         if (this.distanceTo(target) < this.getBbWidth() * 2.5F * this.getBbWidth() * 2.5F + target.getBbWidth()) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            DamageSource damageSource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                            target.hurt(damageSource, damage);
+                            target.hurt(this.getMobAttack(), damage);
 
                             ItemStack offhand = target.getOffhandItem();
                             ItemStack mainhand = target.getMainHandItem();

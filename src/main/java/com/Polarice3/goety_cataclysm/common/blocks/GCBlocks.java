@@ -24,6 +24,9 @@ public class GCBlocks {
         GCBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
+    public static final RegistryObject<Block> MECHANIZED_IRON_BLOCK = register("mechanized_iron_block", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
     public static final RegistryObject<Block> VOID_MOLD_BLOCK = register("void_mold_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.CRYING_OBSIDIAN)));
 

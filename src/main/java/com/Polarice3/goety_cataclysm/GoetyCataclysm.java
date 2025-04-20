@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm;
 
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
@@ -104,6 +105,12 @@ public class GoetyCataclysm {
     private void setupEntityAttributeCreation(final EntityAttributeCreationEvent event) {
         event.put(GCEntityType.ENDER_GOLEM.get(), EnderGolemServant.setCustomAttributes().build());
         event.put(GCEntityType.NETHERITE_MONSTROSITY.get(), NetheriteMonstrosityServant.setCustomAttributes().build());
+        event.put(GCEntityType.DEEPLING.get(), DeeplingServant.setCustomAttributes().build());
+        event.put(GCEntityType.DEEPLING_BRUTE.get(), DeeplingBruteServant.setCustomAttributes().build());
+        event.put(GCEntityType.DEEPLING_ANGLER.get(), DeeplingAnglerServant.setCustomAttributes().build());
+        event.put(GCEntityType.DEEPLING_PRIEST.get(), DeeplingPriestServant.setCustomAttributes().build());
+        event.put(GCEntityType.DEEPLING_WARLOCK.get(), DeeplingWarlockServant.setCustomAttributes().build());
+        event.put(GCEntityType.LIONFISH.get(), LionfishServant.setCustomAttributes().build());
         event.put(GCEntityType.CORAL_GOLEM.get(), CoralGolemServant.setCustomAttributes().build());
         event.put(GCEntityType.CORALSSUS.get(), CoralssusServant.setCustomAttributes().build());
         event.put(GCEntityType.IGNITED_REVENANT.get(), IgnitedRevenantServant.setCustomAttributes().build());

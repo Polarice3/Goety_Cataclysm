@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "iri",
+    "rir",
+    "iri"
+  ],
+  "key":
+  {
+    "r":
+    {
+      "tag": "forge:dusts/redstone"
+    },
+    "i":
+    {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:mechanized_iron_block",
+    "count": 1
+  }
+}

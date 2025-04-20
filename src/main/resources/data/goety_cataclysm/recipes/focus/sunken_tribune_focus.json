@@ -1,0 +1,24 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety_cataclysm:sunken_swell_focus"
+  },
+  "craftType": "deep",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:athame"
+    },
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    },
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:sunken_tribune_focus"
+  }
+}

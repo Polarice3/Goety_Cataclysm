@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:hunting_focus"
+  },
+  "craftType": "deep",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "tag": "forge:tools/fishing_rods"
+    },
+    {
+      "item": "cataclysm:coral_spear"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    },
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:sunken_swell_focus"
+  }
+}

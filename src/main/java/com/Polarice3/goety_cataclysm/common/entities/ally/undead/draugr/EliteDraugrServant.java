@@ -614,8 +614,7 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
             }
 
             if (this.entity.getAttackState() == 3 && target != null && this.entity.attackTicks == 11) {
-                DamageSource damagesource = this.entity.damageSources().mobAttack(this.entity);
-                target.hurt(damagesource, (float)this.entity.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                target.hurt(this.entity.getMobAttack(), (float)this.entity.getAttributeValue(Attributes.ATTACK_DAMAGE));
             }
 
         }

@@ -3,7 +3,6 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
@@ -430,8 +429,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
             if (this.tickCount % 4 == 0) {
                 for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5D))) {
                     if (!MobUtil.areAllies(this, Lentity)) {
-                        DamageSource damageSource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                        boolean flag = Lentity.hurt(damageSource, (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
+                        boolean flag = Lentity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
                         if (flag) {
                             if (Lentity.onGround()) {
                                 double d0 = Lentity.getX() - this.getX();
@@ -529,9 +527,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
             float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
-                    DamageSource damageSource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                    entityHit.hurt(damageSource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(damageSource) && entityHit instanceof Player player && shieldbreakticks > 0) {
+                    entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && entityHit instanceof Player player && shieldbreakticks > 0) {
                         disableShield(player, shieldbreakticks);
                     }
 
@@ -612,9 +609,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
         List<LivingEntity> hit = level().getEntitiesOfClass(LivingEntity.class, selection);
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
-                DamageSource damageSource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                boolean flag = entity.hurt(damageSource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(damageSource) && entity instanceof Player player  && shieldbreakticks > 0) {
+                boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player  && shieldbreakticks > 0) {
                     disableShield(player, shieldbreakticks);
                 }
 

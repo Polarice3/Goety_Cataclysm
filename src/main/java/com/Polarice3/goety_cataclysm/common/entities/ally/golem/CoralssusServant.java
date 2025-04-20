@@ -3,7 +3,6 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.golem;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
@@ -462,9 +461,8 @@ public class CoralssusServant extends InternalAnimationSummon {
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
             if (!MobUtil.areAllies(this, entity)) {
                 this.launch(entity, true);
-                DamageSource damagesource = this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
-                entity.hurt(damagesource, (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
-                if (entity.isDamageSourceBlocked(damagesource) && entity instanceof Player player) {
+                entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player) {
                     if (shieldbreakticks > 0) {
                         this.disableShield(player, shieldbreakticks);
                     }

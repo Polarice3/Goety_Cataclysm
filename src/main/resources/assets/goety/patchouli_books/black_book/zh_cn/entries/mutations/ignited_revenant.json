@@ -20,6 +20,14 @@
     {
       "type": "patchouli:text",
       "text": "喂食骨头、烈焰粉、烈焰棒可以治疗你的炽燃遗魂，如果它的主人装备了死灵长袍，它也可以随时间推移缓慢恢复血量"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_helm",
+      "text": "炽燃遗魂被消灭后会掉落它的头盔，只要把这顶头盔右键给予至你的野火仆从，就可以让炽燃遗魂如死灰复燃般复活"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_helm": 4
+  }
 }

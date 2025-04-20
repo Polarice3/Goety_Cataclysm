@@ -1,0 +1,18 @@
+{
+  "name": "深海の司教のフォーカス",
+  "icon": "goety_cataclysm:sunken_tribune_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "この呪文は、深淵からディープリングの魔法使いを召喚します。祭司か魔術師が召喚に応じるでしょう。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_tribune_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_tribune_focus": 1
+  }
+}

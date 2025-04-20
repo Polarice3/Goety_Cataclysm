@@ -1,12 +1,11 @@
 package com.Polarice3.goety_cataclysm.common.items;
 
+import com.Polarice3.Goety.common.items.ItemBase;
 import com.Polarice3.Goety.common.items.magic.MagicFocus;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedHelm;
 import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedSoul;
-import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalBeamSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalMinesSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.AbyssalOrbsSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.EliteDraugrSpell;
@@ -35,6 +34,9 @@ public class GCItems {
     public static final RegistryObject<Item> ABYSSAL_MINE_FOCUS = ITEMS.register("abyssal_mine_focus", () -> new MagicFocus(new AbyssalMinesSpell()));
     public static final RegistryObject<Item> ABYSSAL_BEAM_FOCUS = ITEMS.register("abyssal_beam_focus", () -> new MagicFocus(new AbyssalBeamSpell()));
     public static final RegistryObject<Item> ABYSSAL_ORB_FOCUS = ITEMS.register("abyssal_orb_focus", () -> new MagicFocus(new AbyssalOrbsSpell()));
+    public static final RegistryObject<Item> SUNKEN_SWELL_FOCUS = ITEMS.register("sunken_swell_focus", () -> new MagicFocus(new DeeplingSpell()));
+    public static final RegistryObject<Item> SUNKEN_CURRENT_FOCUS = ITEMS.register("sunken_current_focus", () -> new MagicFocus(new DeeplingBruteSpell()));
+    public static final RegistryObject<Item> SUNKEN_TRIBUNE_FOCUS = ITEMS.register("sunken_tribune_focus", () -> new MagicFocus(new DeeplingCasterSpell()));
 
     ///Geomancy
     public static final RegistryObject<Item> DESERT_CRUSH_FOCUS = ITEMS.register("desert_crush_focus", () -> new MagicFocus(new DesertCrushSpell()));
@@ -57,6 +59,7 @@ public class GCItems {
     public static final RegistryObject<Item> SANDSTORM_FOCUS = ITEMS.register("sandstorm_focus", () -> new MagicFocus(new SandstormSpell()));
 
     //Items
+    public static final RegistryObject<Item> ESSENCE_OF_THE_ABYSS = ITEMS.register("abyss_essence", ItemBase::new);
     public static final RegistryObject<Item> IGNITED_HELM = ITEMS.register("ignited_helm", IgnitedHelm::new);
     public static final RegistryObject<Item> IGNITED_SOUL = ITEMS.register("ignited_soul", IgnitedSoul::new);
 

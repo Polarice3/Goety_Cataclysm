@@ -22,6 +22,24 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> NETHERITE_MONSTROSITY_SPAWN_EGG = ITEMS.register("netherite_monstrosity_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.NETHERITE_MONSTROSITY, 0x3b393b, 0xe1a61d, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> DEEPLING_SERVANT_SPAWN_EGG = ITEMS.register("deepling_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DEEPLING, 0x0b141c, 0xbaedf4, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> DEEPLING_BRUTE_SERVANT_SPAWN_EGG = ITEMS.register("deepling_brute_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DEEPLING_BRUTE, 0x0b141c, 0x6500ff, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> DEEPLING_ANGLER_SERVANT_SPAWN_EGG = ITEMS.register("deepling_angler_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DEEPLING_ANGLER, 0x0b141c, 0x98d8e2, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> DEEPLING_PRIEST_SERVANT_SPAWN_EGG = ITEMS.register("deepling_priest_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DEEPLING_PRIEST, 0x0b141c, 0x820540, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> DEEPLING_WARLOCK_SERVANT_SPAWN_EGG = ITEMS.register("deepling_warlock_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DEEPLING_WARLOCK, 0x0b141c, 0xd66a98, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> LIONFISH_SERVANT_SPAWN_EGG = ITEMS.register("lionfish_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.LIONFISH, 0x98d8e2, 0x0b141c, egg()));
+
     public static final RegistryObject<ServantSpawnEggItem> CORAL_GOLEM_SPAWN_EGG = ITEMS.register("coral_golem_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.CORAL_GOLEM, 0x4c7dc4, 0xabad9e, egg()));
 

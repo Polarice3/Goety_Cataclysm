@@ -2,7 +2,9 @@ package com.Polarice3.goety_cataclysm.common.entities.ally;
 
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.ModDamageSource;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -121,6 +124,9 @@ public class AnimationSummon extends Summoned {
                 this.killDataAttackingPlayer = this.lastHurtByPlayer;
                 this.level().broadcastEntityEvent(this, (byte)3);
                 this.setPose(Pose.DYING);
+                if (!this.level().isClientSide && this.hasCustomName() && this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getTrueOwner() instanceof ServerPlayer) {
+                    this.getTrueOwner().sendSystemMessage(this.getCombatTracker().getDeathMessage());
+                }
             }
 
         }
@@ -202,5 +208,9 @@ public class AnimationSummon extends Summoned {
     @Override
     public boolean canUpdateMove() {
         return true;
+    }
+
+    public DamageSource getMobAttack(){
+        return this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
     }
 }

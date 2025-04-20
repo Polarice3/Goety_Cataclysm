@@ -1,8 +1,10 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally;
 
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.utils.ModDamageSource;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.IAnimatedEntity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,5 +56,9 @@ public class AnimationSummon2 extends Summoned implements IAnimatedEntity {
 
         this.currentAnimation = animation;
         this.setAnimationTick(0);
+    }
+
+    public DamageSource getMobAttack(){
+        return this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
     }
 }

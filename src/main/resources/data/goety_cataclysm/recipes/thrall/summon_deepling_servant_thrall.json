@@ -1,0 +1,22 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "cataclysm:coral_spear"
+  },
+  "craftType": "deep",
+  "entity_to_summon": "goety_cataclysm:deepling_servant",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "goety_cataclysm:abyss_essence"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}
