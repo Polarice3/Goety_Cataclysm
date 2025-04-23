@@ -140,7 +140,7 @@ public class NetheriteMonstrosityMold implements IMold {
             new BlockPos(-6, 0, -1)
     );
     private static final List<BlockPos> STONE_LOCATIONS = Stream.of(BOTTOM_STONE_LOCATIONS, ABOVE_STONE_LOCATIONS).flatMap(Collection::stream).toList();
-    private static final List<BlockPos> BOTTOM_GILDED_LOCATIONS = ImmutableList.of(
+    private static final List<BlockPos> BOTTOM_GOLD_LOCATIONS = ImmutableList.of(
             new BlockPos(0, -1, 1),
             new BlockPos(0, -1, -1),
             new BlockPos(0, -1, 5),
@@ -174,7 +174,7 @@ public class NetheriteMonstrosityMold implements IMold {
             new BlockPos(-5, -1, 2),
             new BlockPos(-5, -1, -2)
     );
-    private static final List<BlockPos> ABOVE_GILDED_LOCATIONS = ImmutableList.of(
+    private static final List<BlockPos> ABOVE_GOLD_LOCATIONS = ImmutableList.of(
             new BlockPos(0, 0, 6),
             new BlockPos(0, 0, -6),
 
@@ -198,7 +198,7 @@ public class NetheriteMonstrosityMold implements IMold {
             new BlockPos(-6, 0, 2),
             new BlockPos(-6, 0, -2)
     );
-    private static final List<BlockPos> GILDED_LOCATIONS = Stream.of(BOTTOM_GILDED_LOCATIONS, ABOVE_GILDED_LOCATIONS).flatMap(Collection::stream).toList();
+    private static final List<BlockPos> GOLD_LOCATIONS = Stream.of(BOTTOM_GOLD_LOCATIONS, ABOVE_GOLD_LOCATIONS).flatMap(Collection::stream).toList();
     private static final List<BlockPos> BOTTOM_SOUL_FIRE_LOCATIONS = ImmutableList.of(
             new BlockPos(0, -1, 6),
             new BlockPos(0, -1, -6),
@@ -300,29 +300,15 @@ public class NetheriteMonstrosityMold implements IMold {
     private static final List<BlockPos> SOUL_FIRE_LOCATIONS = Stream.of(BOTTOM_SOUL_FIRE_LOCATIONS, ABOVE_SOUL_FIRE_LOCATIONS).flatMap(Collection::stream).toList();
     private static final List<BlockPos> REDSTONE_LOCATIONS = ImmutableList.of(
             new BlockPos(0, 0, 1),
-            new BlockPos(0, 0, 2),
             new BlockPos(0, 0, -1),
-            new BlockPos(0, 0, -2),
 
             new BlockPos(1, 0, 0),
-            new BlockPos(2, 0, 0),
             new BlockPos(-1, 0, 0),
-            new BlockPos(-2, 0, 0),
 
             new BlockPos(1, 0, 1),
             new BlockPos(1, 0, -1),
             new BlockPos(-1, 0, 1),
-            new BlockPos(-1, 0, -1),
-
-            new BlockPos(1, 0, 2),
-            new BlockPos(1, 0, -2),
-            new BlockPos(-1, 0, 2),
-            new BlockPos(-1, 0, -2),
-
-            new BlockPos(2, 0, 1),
-            new BlockPos(2, 0, -1),
-            new BlockPos(-2, 0, 1),
-            new BlockPos(-2, 0, -1)
+            new BlockPos(-1, 0, -1)
     );
     private static final List<BlockPos> NETHER_BRICKS_LOCATIONS = ImmutableList.of(
             new BlockPos(0, 0, 3),
@@ -346,6 +332,22 @@ public class NetheriteMonstrosityMold implements IMold {
             new BlockPos(-2, 0, -2)
     );
     private static final List<BlockPos> NETHERITE_LOCATIONS = ImmutableList.of(
+            new BlockPos(0, 0, 2),
+            new BlockPos(0, 0, -2),
+            new BlockPos(2, 0, 0),
+            new BlockPos(-2, 0, 0),
+
+            new BlockPos(1, 0, 2),
+            new BlockPos(1, 0, -2),
+            new BlockPos(2, 0, 1),
+            new BlockPos(-2, 0, 1),
+
+            new BlockPos(-1, 0, 2),
+            new BlockPos(-1, 0, -2),
+            new BlockPos(2, 0, -1),
+            new BlockPos(-2, 0, -1)
+    );
+    private static final List<BlockPos> GILDED_BLACKSTONE_LOCATIONS = ImmutableList.of(
             new BlockPos(0, 0, 4),
             new BlockPos(0, 0, -4),
             new BlockPos(4, 0, 0),
@@ -440,11 +442,11 @@ public class NetheriteMonstrosityMold implements IMold {
         return invalid;
     }
 
-    private static List<BlockPos> checkGilds(Level level, BlockPos blockPos){
+    private static List<BlockPos> checkGold(Level level, BlockPos blockPos){
         List<BlockPos> invalid = new ArrayList<>();
-        for (BlockPos blockPos1 : GILDED_LOCATIONS){
+        for (BlockPos blockPos1 : GOLD_LOCATIONS){
             BlockPos blockPos2 = blockPos.offset(blockPos1);
-            if (!level.getBlockState(blockPos2).is(Blocks.GILDED_BLACKSTONE)){
+            if (!level.getBlockState(blockPos2).is(Tags.Blocks.STORAGE_BLOCKS_GOLD)){
                 invalid.add(blockPos1);
             }
         }
@@ -495,6 +497,17 @@ public class NetheriteMonstrosityMold implements IMold {
         return invalid;
     }
 
+    private static List<BlockPos> checkGilded(Level level, BlockPos blockPos){
+        List<BlockPos> invalid = new ArrayList<>();
+        for (BlockPos blockPos1 : GILDED_BLACKSTONE_LOCATIONS){
+            BlockPos blockPos2 = blockPos.offset(blockPos1);
+            if (!level.getBlockState(blockPos2).is(Blocks.GILDED_BLACKSTONE)){
+                invalid.add(blockPos1);
+            }
+        }
+        return invalid;
+    }
+
     private static List<BlockPos> checkLava(Level level, BlockPos blockPos){
         List<BlockPos> invalid = new ArrayList<>();
         for (BlockPos blockPos1 : LAVA_LOCATIONS){
@@ -511,7 +524,7 @@ public class NetheriteMonstrosityMold implements IMold {
 
     public static boolean checkBlocks(Level level, BlockPos blockPos){
         return checkStones(level, blockPos).isEmpty()
-                && checkGilds(level, blockPos).isEmpty()
+                && checkGold(level, blockPos).isEmpty()
                 && checkSoulFire(level, blockPos).isEmpty()
                 && checkRedstone(level, blockPos).isEmpty()
                 && checkNetherBricks(level, blockPos).isEmpty()
@@ -596,6 +609,13 @@ public class NetheriteMonstrosityMold implements IMold {
             for (BlockPos blockPos1 : NETHERITE_LOCATIONS) {
                 BlockPos blockPos2 = blockPos.offset(blockPos1);
                 if (level.getBlockState(blockPos2).is(Tags.Blocks.STORAGE_BLOCKS_NETHERITE)) {
+                    level.levelEvent(2001, blockPos2, Block.getId(level.getBlockState(blockPos2)));
+                    level.setBlockAndUpdate(blockPos2, Blocks.AIR.defaultBlockState());
+                }
+            }
+            for (BlockPos blockPos1 : GILDED_BLACKSTONE_LOCATIONS) {
+                BlockPos blockPos2 = blockPos.offset(blockPos1);
+                if (level.getBlockState(blockPos2).is(Blocks.GILDED_BLACKSTONE)) {
                     level.levelEvent(2001, blockPos2, Block.getId(level.getBlockState(blockPos2)));
                     level.setBlockAndUpdate(blockPos2, Blocks.AIR.defaultBlockState());
                 }

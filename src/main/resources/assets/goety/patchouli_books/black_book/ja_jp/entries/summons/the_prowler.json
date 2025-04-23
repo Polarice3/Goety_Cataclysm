@@ -1,0 +1,37 @@
+{
+  "name": "プラウラー",
+  "icon": "cataclysm:mech_eye",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "あまりにもハイテクすぎる機械生命体。今の道具では、完全に再現することは不可能なようです。幸いにも、ソウルエネルギーにより遥か昔に亡くなった者の力を借りて、この驚異的な機械生命体をあなたの支配下で再現することができる。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:the_prowler",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_prowler_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "鉄インゴットまたは鉄ブロックで右クリックすることで回復できます。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:mechanized_core",
+      "text": "これらの機械生命体は破壊されると、再構築すべき設計図や技術を含む複雑な回路を落とします。"
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:prowler",
+      "text": "中央の機械化された鉄ブロックを機械化されたコアで右クリックします。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:mechanized_core": 4
+  }
+}

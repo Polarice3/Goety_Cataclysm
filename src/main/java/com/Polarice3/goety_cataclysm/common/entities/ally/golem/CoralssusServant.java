@@ -517,6 +517,11 @@ public class CoralssusServant extends InternalAnimationSummon {
         p_289541_.accept(p_289537_, this.getX() + vec3.x, this.getY(0.75) + p_289537_.getMyRidingOffset() + 0.0, this.getZ() + vec3.z);
     }
 
+    @Nullable
+    public LivingEntity getControllingPassenger() {
+        return null;
+    }
+
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return CataclysmSounds.CORALSSUS_HURT.get();
     }

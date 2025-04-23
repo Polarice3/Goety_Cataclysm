@@ -1,0 +1,20 @@
+{
+  "name": "Watcher Servants",
+  "icon": "cataclysm:laser_gatling",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Watchers of the Ancient Factory, capable of shooting fiery lasers and ripping enemies with their metal jaws, now replicated through both arcane and technological means."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:watcher_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Watchers can be healed by right-clicking on them Iron Ingots."
+    }
+  ]
+}

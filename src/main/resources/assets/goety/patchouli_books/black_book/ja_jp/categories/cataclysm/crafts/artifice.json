@@ -1,0 +1,7 @@
+{
+  "name": "人工物",
+  "description": "ソウルエネルギーを活用すれば、機械を操作できます",
+  "icon": "goety_cataclysm:fabricator",
+  "parent": "goety:cataclysm/crafts",
+  "sortnum": 3
+}

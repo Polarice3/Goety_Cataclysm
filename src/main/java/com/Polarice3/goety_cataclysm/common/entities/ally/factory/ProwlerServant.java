@@ -1,21 +1,26 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.factory;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.DeathLaserBeam;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.WitherHomingMissile;
+import com.Polarice3.goety_cataclysm.common.items.GCItems;
+import com.Polarice3.goety_cataclysm.common.items.revive.MechanizedCore;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
-import com.github.L_Ender.cataclysm.entity.projectile.Death_Laser_Beam_Entity;
-import com.github.L_Ender.cataclysm.entity.projectile.Wither_Homing_Missile_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -67,7 +72,6 @@ public class ProwlerServant extends InternalAnimationSummon {
     public static final int LASER_COOLDOWN = 200;
     private int spin_cooldown = 0;
     private int laser_cooldown = 100;
-    private int timeWithoutTarget;
 
     public ProwlerServant(EntityType<? extends Summoned> entity, Level world) {
         super(entity, world);
@@ -78,17 +82,18 @@ public class ProwlerServant extends InternalAnimationSummon {
     }
 
     protected void registerGoals() {
+        super.registerGoals();
         this.goalSelector.addGoal(2, new InternalSummonMoveGoal(this, false, 1.0D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(5, new WanderGoal<>(this, 1.0D, 80));
 
-        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, 1, 1, 0, 60, 0));
+        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, STUNNED, STUNNED, 0, 60, 0));
 
         //laser
-        this.goalSelector.addGoal(1, new Lasershoot(this, 0, 2, 0, 90, 20, 8F, 20, 100F));
+        this.goalSelector.addGoal(1, new LaserShoot(this, 0, LASER, 0, 90, 20, 8F, 20, 100F));
         //spin
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,4,0,50,22,4.75F){
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,SPIN,0,50,22,4.75F){
             @Override
             public boolean canUse() {
                 return super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < 26 && ProwlerServant.this.spin_cooldown <= 0;
@@ -102,14 +107,14 @@ public class ProwlerServant extends InternalAnimationSummon {
         });
 
         //melee
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,5,0,50,38,5F){
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,MELEE,0,50,38,5F){
             @Override
             public boolean canUse() {
                 return super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < 20 ;
             }
         });
         //strong
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,6,0,55,45,6F){
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,STRONG,0,55,45,6F){
             @Override
             public boolean canUse() {
                 LivingEntity target = this.entity.getTarget();
@@ -117,7 +122,7 @@ public class ProwlerServant extends InternalAnimationSummon {
             }
         });
         //pierce
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,7,0,80,38,4.25F){
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this,0,PIERCE,0,80,38,4.25F){
             @Override
             public boolean canUse() {
                 LivingEntity target = this.entity.getTarget();
@@ -143,8 +148,8 @@ public class ProwlerServant extends InternalAnimationSummon {
 
     @Override
     public boolean hurt(DamageSource source, float damage) {
-        if (source.is(CMDamageTypes.EMP) && this.getAttackState() != 1) {
-            this.setAttackState(1);
+        if (source.is(CMDamageTypes.EMP) && this.getAttackState() != STUNNED) {
+            this.setAttackState(STUNNED);
         }
         double range = calculateRange(source);
         if (range > CMConfig.ProwlerLongRangelimit * CMConfig.ProwlerLongRangelimit) {
@@ -232,12 +237,32 @@ public class ProwlerServant extends InternalAnimationSummon {
     }
 
     public void die(DamageSource p_21014_) {
+        if (this.getTrueOwner() != null && GCMobsConfig.ProwlerCore.get()) {
+            ItemStack itemStack = new ItemStack(GCItems.MECHANIZED_CORE.get());
+            MechanizedCore.setOwnerName(this.getTrueOwner(), itemStack);
+            MechanizedCore.setSummon(this, itemStack);
+            FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
+            flyingItem.setOwner(this.getTrueOwner());
+            flyingItem.setItem(itemStack);
+            flyingItem.setParticle(ModParticleTypes.ELECTRIC.get());
+            flyingItem.setSecondsCool(30);
+            this.level().addFreshEntity(flyingItem);
+        }
         super.die(p_21014_);
-        this.setAttackState(3);
+        this.setAttackState(DEATH);
     }
 
     public int deathTimer() {
         return 40;
+    }
+
+    @Override
+    public void tryKill(Player player) {
+        if (this.killChance <= 0) {
+            this.warnKill(player);
+        } else {
+            super.tryKill(player);
+        }
     }
 
     public void tick() {
@@ -257,7 +282,7 @@ public class ProwlerServant extends InternalAnimationSummon {
     public void aiStep() {
         super.aiStep();
         LivingEntity target = this.getTarget();
-        if (this.getAttackState() == 2) {
+        if (this.getAttackState() == LASER) {
             if (this.attackTicks == 38) {
                 this.level().playSound((Player) null, this, CataclysmSounds.DEATH_LASER.get(), this.getSoundSource(), 1.0f, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 20, 0.2f, 0, 10);
@@ -265,14 +290,14 @@ public class ProwlerServant extends InternalAnimationSummon {
         }
 
 
-        if (this.getAttackState() == 1) {
+        if (this.getAttackState() == STUNNED) {
             if (this.level().isClientSide) {
                 for (int i = 0; i < 2; ++i) {
                     this.level().addParticle(ParticleTypes.LARGE_SMOKE, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
                 }
             }
         }
-        if (this.getAttackState() == 4) {
+        if (this.getAttackState() == SPIN) {
             if (this.attackTicks == 23 || this.attackTicks == 32) {
                 AreaAttack(6.0f, 6.0F, 180, 1.0F);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -282,7 +307,7 @@ public class ProwlerServant extends InternalAnimationSummon {
             }
         }
 
-        if (this.getAttackState() == 5) {
+        if (this.getAttackState() == MELEE) {
             if (this.attackTicks == 27){
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
@@ -293,28 +318,28 @@ public class ProwlerServant extends InternalAnimationSummon {
         }
         float f1 = (float) Math.cos(Math.toRadians(this.getYRot() + 90));
         float f2 = (float) Math.sin(Math.toRadians(this.getYRot() + 90));
-        if (this.getAttackState() == 6) {
+        if (this.getAttackState() == STRONG) {
             if (this.attackTicks == 18) {
                 this.push(f1 * 1.5, 0, f2 * 1.5);
             }
             if (this.attackTicks == 17){
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
-            if (this.attackTicks ==25) {
+            if (this.attackTicks == 25) {
                 AreaAttack(5.5f, 5.5f, 70, 1.5F);
 
             }
         }
-        if (this.getAttackState() == 7) {
+        if (this.getAttackState() == PIERCE) {
             if(target !=null) {
                 if (this.attackTicks == 12) {
-                    Missilelaunch(2.0f, 0.5F, target);
+                    MissileLaunch(2.0f, 0.5F, target);
                 }
                 if (this.attackTicks == 15) {
-                    Missilelaunch(2.3f, 0.5F, target);
+                    MissileLaunch(2.3f, 0.5F, target);
                 }
                 if (this.attackTicks == 18) {
-                    Missilelaunch(2.6f, 0.5F, target);
+                    MissileLaunch(2.6f, 0.5F, target);
                 }
             }
             if (this.attackTicks == 18) {
@@ -354,7 +379,7 @@ public class ProwlerServant extends InternalAnimationSummon {
     }
 
 
-    private void Missilelaunch(float y, float math, LivingEntity target) {
+    private void MissileLaunch(float y, float math, LivingEntity target) {
         if (!this.isSilent()) {
             this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.ROCKET_LAUNCH.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         }
@@ -366,16 +391,13 @@ public class ProwlerServant extends InternalAnimationSummon {
         double vecX = Math.cos(theta);
         double vecZ = Math.sin(theta);
 
-
         double d0 = this.getX() + 0.5f * vecX + f * math;
         double d1 = this.getY() + y;
         double d2 = this.getZ() + 0.5f * vecZ + f1 * math;
 
-
-
-        Wither_Homing_Missile_Entity laserBeam = new Wither_Homing_Missile_Entity(this.level(),this,target);
-        laserBeam.setPosRaw(d0, d1, d2);
-        this.level().addFreshEntity(laserBeam);
+        WitherHomingMissile missile = new WitherHomingMissile(this.level(),this,target);
+        missile.setPosRaw(d0, d1, d2);
+        this.level().addFreshEntity(missile);
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
@@ -414,10 +436,10 @@ public class ProwlerServant extends InternalAnimationSummon {
                 this.playSound(SoundEvents.IRON_GOLEM_REPAIR, 1.0F, f1);
 
                 if (itemstack.is(Tags.Items.STORAGE_BLOCKS_IRON)) {
-                    this.heal(this.getMaxHealth() / 2.0F);
+                    this.heal(45.0F);
                 }
                 if (itemstack.is(Tags.Items.INGOTS_IRON)) {
-                    this.heal(this.getMaxHealth() / 4.0F);
+                    this.heal(5.0F);
                 }
                 if (this.level() instanceof ServerLevel serverLevel) {
                     for (int i = 0; i < 7; ++i) {
@@ -433,12 +455,12 @@ public class ProwlerServant extends InternalAnimationSummon {
         return InteractionResult.PASS;
     }
 
-    static class Lasershoot extends InternalSummonAttackGoal {
+    static class LaserShoot extends InternalSummonAttackGoal {
         private final ProwlerServant entity;
         private final int attackshot;
         private final float random;
 
-        public Lasershoot(ProwlerServant entity, int getAttackState, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackrange, int attackshot, float random) {
+        public LaserShoot(ProwlerServant entity, int getAttackState, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackrange, int attackshot, float random) {
             super(entity, getAttackState, attackstate, attackendstate, attackMaxtick, attackseetick, attackrange);
             this.entity = entity;
             this.attackshot = attackshot;
@@ -448,7 +470,7 @@ public class ProwlerServant extends InternalAnimationSummon {
 
         @Override
         public boolean canUse() {
-            LivingEntity target = entity.getTarget();
+            LivingEntity target = this.entity.getTarget();
             return super.canUse() && target != null && this.entity.getRandom().nextFloat() * 100.0F < this.random && this.entity.getSensing().hasLineOfSight(target) && this.entity.laser_cooldown <= 0;
         }
 
@@ -462,11 +484,11 @@ public class ProwlerServant extends InternalAnimationSummon {
         public void tick() {
             LivingEntity target = this.entity.getTarget();
             super.tick();
-            if (this.entity.attackTicks == attackshot) {
-                Death_Laser_Beam_Entity DeathBeam = new Death_Laser_Beam_Entity(ModEntities.DEATH_LASER_BEAM.get(), this.entity.level(), this.entity, this.entity.getX(), this.entity.getY() + 1.8, this.entity.getZ(), (float) ((this.entity.yHeadRot + 90) * Math.PI / 180), (float) (-this.entity.getXRot() * Math.PI / 180), 28,(float) CMConfig.DeathLaserdamage,(float) CMConfig.DeathLaserHpdamage);
+            if (this.entity.attackTicks == this.attackshot) {
+                DeathLaserBeam DeathBeam = new DeathLaserBeam(GCEntityType.DEATH_LASER_BEAM.get(), this.entity.level(), this.entity, this.entity.getX(), this.entity.getY() + 1.8, this.entity.getZ(), (float) ((this.entity.yHeadRot + 90) * Math.PI / 180), (float) (-this.entity.getXRot() * Math.PI / 180), 28,(float) CMConfig.DeathLaserdamage,(float) CMConfig.DeathLaserHpdamage);
                 this.entity.level().addFreshEntity(DeathBeam);
             }
-            if (this.entity.attackTicks >= attackshot) {
+            if (this.entity.attackTicks >= this.attackshot) {
                 if (target != null) {
                     this.entity.getLookControl().setLookAt(target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ(), 2, 90);
                 }

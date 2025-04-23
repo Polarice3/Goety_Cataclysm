@@ -5,13 +5,18 @@
   "advancements.goety_cataclysm.convert_kobolediator.description": "Convert a Koboleton to a Kobolediator.",
   "advancements.goety_cataclysm.convert_wadjet.title": "Curse of the Nile!",
   "advancements.goety_cataclysm.convert_wadjet.description": "Convert a Koboleton to a Wadjet.",
+  "advancements.goety_cataclysm.craft_fabricator.title": "We Have Technology!",
+  "advancements.goety_cataclysm.craft_fabricator.description": "Craft a Mechanical Fabricator.",
   "advancements.goety_cataclysm.summon_coralssus.title": "When the Coral is Sus",
   "advancements.goety_cataclysm.summon_coralssus.description": "Summon a Coralssus with an Animation Core.",
   "advancements.goety_cataclysm.summon_ender_golem.title": "Endforged",
   "advancements.goety_cataclysm.summon_ender_golem.description": "Summon an Ender Golem with an Animation Core.",
   "advancements.goety_cataclysm.summon_netherite_monstrosity.title": "Playing with Firepower",
   "advancements.goety_cataclysm.summon_netherite_monstrosity.description": "Summon a Netherite Monstrosity with an Infernal Forge.",
+  "advancements.goety_cataclysm.summon_prowler.title": "On the Prowl",
+  "advancements.goety_cataclysm.summon_prowler.description": "Summon a Prowler.",
 
+  "block.goety_cataclysm.fabricator": "Mechanical Fabricator",
   "block.goety_cataclysm.mechanized_iron_block": "Mechanized Iron Block",
   "block.goety_cataclysm.void_mold_block": "Void Mold Block",
 
@@ -33,12 +38,17 @@
   "entity.goety_cataclysm.lionfish": "Lionfish",
   "entity.goety_cataclysm.netherite_monstrosity": "Netherite Monstrosity",
   "entity.goety_cataclysm.royal_draugr_servant": "Royal Draugr Servant",
+  "entity.goety_cataclysm.the_prowler": "The Prowler",
   "entity.goety_cataclysm.wadjet": "Wadjet",
+  "entity.goety_cataclysm.watcher_servant": "The Watcher",
 
   "item.goety_cataclysm.abyss_essence": "Essence of the Abyss",
 
+  "item.goety_cataclysm.arcane_spirit": "Arcane Spirit",
   "item.goety_cataclysm.ignited_helm": "Ignited Helm",
   "item.goety_cataclysm.ignited_soul": "Ignited Soul",
+  "item.goety_cataclysm.mechanized_core": "Mechanized Core",
+  "item.goety_cataclysm.warrior_spirit": "Warrior Spirit",
 
   "item.goety_cataclysm.abyssal_mine_focus": "Abyssal Mine Focus",
   "item.goety_cataclysm.abyssal_mine_focus.info": "Summons Abyss Mines around caster or valid target that will explode and gives Abyssal Fear effect.",
@@ -91,7 +101,9 @@
   "item.goety_cataclysm.lionfish_servant_spawn_egg": "Lionfish Servant Spawn Egg",
   "item.goety_cataclysm.netherite_monstrosity_spawn_egg": "Netherite Monstrosity Servant Spawn Egg",
   "item.goety_cataclysm.royal_draugr_servant_spawn_egg": "Royal Draugr Servant Spawn Egg",
+  "item.goety_cataclysm.prowler_servant_spawn_egg": "Prowler Servant Spawn Egg",
   "item.goety_cataclysm.wadjet_spawn_egg": "Wadjet Servant Spawn Egg",
+  "item.goety_cataclysm.watcher_servant_spawn_egg": "Watcher Servant Spawn Egg",
 
   "itemGroup.goety_cataclysm": "Goety Cataclysm"
 }

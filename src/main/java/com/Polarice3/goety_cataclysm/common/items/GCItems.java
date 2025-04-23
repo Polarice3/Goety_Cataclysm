@@ -3,8 +3,7 @@ package com.Polarice3.goety_cataclysm.common.items;
 import com.Polarice3.Goety.common.items.ItemBase;
 import com.Polarice3.Goety.common.items.magic.MagicFocus;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
-import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedHelm;
-import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedSoul;
+import com.Polarice3.goety_cataclysm.common.items.revive.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
@@ -62,5 +61,7 @@ public class GCItems {
     public static final RegistryObject<Item> ESSENCE_OF_THE_ABYSS = ITEMS.register("abyss_essence", ItemBase::new);
     public static final RegistryObject<Item> IGNITED_HELM = ITEMS.register("ignited_helm", IgnitedHelm::new);
     public static final RegistryObject<Item> IGNITED_SOUL = ITEMS.register("ignited_soul", IgnitedSoul::new);
-
+    public static final RegistryObject<Item> MECHANIZED_CORE = ITEMS.register("mechanized_core", MechanizedCore::new);
+    public static final RegistryObject<Item> WARRIOR_SPIRIT = ITEMS.register("warrior_spirit", WarriorSpirit::new);
+    public static final RegistryObject<Item> ARCANE_SPIRIT = ITEMS.register("arcane_spirit", ArcaneSpirit::new);
 }

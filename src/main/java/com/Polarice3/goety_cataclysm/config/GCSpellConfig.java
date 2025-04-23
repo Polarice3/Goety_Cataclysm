@@ -106,6 +106,8 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> EnderGolemLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedBerserkerLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedRevenantLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> WatcherLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ProwlerLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> KobolediatorLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> WadjetLimit;
 
@@ -304,6 +306,10 @@ public class GCSpellConfig {
                 .defineInRange("ignitedBerserkerLimit", 2, 0, Integer.MAX_VALUE);
         IgnitedRevenantLimit = BUILDER.comment("Total number of Ignited Revenant an individual player can have, Default: 2")
                 .defineInRange("ignitedRevenantLimit", 2, 0, Integer.MAX_VALUE);
+        WatcherLimit = BUILDER.comment("Total number of Watcher Servants an individual player can have, Default: 16")
+                .defineInRange("watcherLimit", 16, 0, Integer.MAX_VALUE);
+        ProwlerLimit = BUILDER.comment("Total number of Prowlers an individual player can have, Default: 2")
+                .defineInRange("prowlerLimit", 2, 0, Integer.MAX_VALUE);
         KobolediatorLimit = BUILDER.comment("Total number of Kobolediators an individual player can have, Default: 2")
                 .defineInRange("kobolediatorLimit", 2, 0, Integer.MAX_VALUE);
         WadjetLimit = BUILDER.comment("Total number of Wadjets an individual player can have, Default: 2")

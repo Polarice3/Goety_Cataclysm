@@ -1,0 +1,15 @@
+{
+  "name": "深淵のエッセンス",
+  "icon": "goety_cataclysm:abyss_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "リヴァイアサンが落とすアイテムです。巨大な獣に対する勝利を意味し、その臣民に対する権威を与えます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:abyss_essence"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ウォッチャーの従者",
+  "icon": "cataclysm:laser_gatling",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ウォッチャーは、燃え盛るレーザーを発射し、金属の顎で敵を引き裂く能力を持っています。現在は神秘的および技術的な手段の両方を通じて複製されています。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:watcher_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "鉄インゴットで右クリックすることで回復できます。"
+    }
+  ]
+}

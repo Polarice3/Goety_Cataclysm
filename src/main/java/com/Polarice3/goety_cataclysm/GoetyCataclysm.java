@@ -1,8 +1,11 @@
 package com.Polarice3.goety_cataclysm;
 
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
+import com.Polarice3.goety_cataclysm.common.blocks.entities.GCBlockEntities;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
+import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
@@ -54,6 +57,7 @@ public class GoetyCataclysm {
     public GoetyCataclysm() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        GCBlockEntities.BLOCK_ENTITY.register(modEventBus);
         GCEntityType.ENTITY_TYPE.register(modEventBus);
         GCCreativeTab.CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -115,6 +119,8 @@ public class GoetyCataclysm {
         event.put(GCEntityType.CORALSSUS.get(), CoralssusServant.setCustomAttributes().build());
         event.put(GCEntityType.IGNITED_REVENANT.get(), IgnitedRevenantServant.setCustomAttributes().build());
         event.put(GCEntityType.IGNITED_BERSERKER.get(), IgnitedBerserkerServant.setCustomAttributes().build());
+        event.put(GCEntityType.WATCHER_SERVANT.get(), WatcherServant.setCustomAttributes().build());
+        event.put(GCEntityType.THE_PROWLER.get(), ProwlerServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLETON_SERVANT.get(), KoboletonServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLEDIATOR.get(), KobolediatorServant.setCustomAttributes().build());
         event.put(GCEntityType.WADJET.get(), WadjetServant.setCustomAttributes().build());

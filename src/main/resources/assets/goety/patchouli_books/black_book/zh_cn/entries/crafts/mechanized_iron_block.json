@@ -1,0 +1,15 @@
+{
+  "name": "机械铁块",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "远古工厂的机械似乎主要由铁和红石加工而成，而先驱者的组成中还包含大量凋灵合金，尽管现在凋灵合金仍然遥不可及，但复现其它构成机械的金属材料已经不成问题"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:mechanized_iron_block"
+    }
+  ]
+}

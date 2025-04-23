@@ -2,6 +2,8 @@ package com.Polarice3.goety_cataclysm.common.entities;
 
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
+import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
@@ -88,6 +90,17 @@ public class GCEntityType {
             EntityType.Builder.of(IgnitedBerserkerServant::new, MobCategory.MONSTER)
                     .sized(1.0F, 2.4F)
                     .fireImmune());
+
+    public static final RegistryObject<EntityType<WatcherServant>> WATCHER_SERVANT = register("watcher_servant",
+            EntityType.Builder.of(WatcherServant::new, MobCategory.MONSTER)
+                    .sized(0.85F, 0.85F)
+                    .fireImmune());
+
+    public static final RegistryObject<EntityType<ProwlerServant>> THE_PROWLER = register("the_prowler",
+            EntityType.Builder.of(ProwlerServant::new, MobCategory.MONSTER)
+                    .sized(2.5F, 2.75F)
+                    .fireImmune()
+                    .clientTrackingRange(8));
 
     public static final RegistryObject<EntityType<KoboletonServant>> KOBOLETON_SERVANT = register("koboleton_servant",
             EntityType.Builder.of(KoboletonServant::new, MobCategory.MONSTER)
@@ -186,6 +199,26 @@ public class GCEntityType {
                     .fireImmune()
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE));
+
+    public static final RegistryObject<EntityType<DeathLaserBeam>> DEATH_LASER_BEAM = register("death_laser_beam",
+            EntityType.Builder.<DeathLaserBeam>of(DeathLaserBeam::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F)
+                    .fireImmune());
+
+    public static final RegistryObject<EntityType<LaserBeamProjectile>> LASER_BEAM = register("laser_beam",
+            EntityType.Builder.<LaserBeamProjectile>of(LaserBeamProjectile::new, MobCategory.MISC)
+                    .sized(0.3125F, 0.3125F)
+                    .fireImmune()
+                    .clientTrackingRange(4)
+                    .updateInterval(10)
+                    .setShouldReceiveVelocityUpdates(true));
+
+    public static final RegistryObject<EntityType<WitherHomingMissile>> WITHER_HOMING_MISSILE = register("wither_homing_missile",
+            EntityType.Builder.<WitherHomingMissile>of(WitherHomingMissile::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .setUpdateInterval(1)
+                    .setTrackingRange(20)
+                    .setShouldReceiveVelocityUpdates(true));
 
     public static final RegistryObject<EntityType<Sandstorm>> SANDSTORM = register("sandstorm",
             EntityType.Builder.<Sandstorm>of(Sandstorm::new, MobCategory.MISC)

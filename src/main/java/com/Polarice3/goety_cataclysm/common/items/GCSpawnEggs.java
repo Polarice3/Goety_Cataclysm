@@ -52,6 +52,12 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> IGNITED_BERSERKER_SPAWN_EGG = ITEMS.register("ignited_berserker_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.IGNITED_BERSERKER, 0x501c00, 0xffd73f, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> WATCHER_SERVANT_SPAWN_EGG = ITEMS.register("watcher_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.WATCHER_SERVANT, 0x3f444c, 0xe83b3b, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> PROWLER_SERVANT_SPAWN_EGG = ITEMS.register("prowler_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.THE_PROWLER, 0x181a1b, 0x682e22, egg()));
+
     public static final RegistryObject<ServantSpawnEggItem> KOBOLETON_SERVANT_SPAWN_EGG = ITEMS.register("koboleton_servant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.KOBOLETON_SERVANT, 0xb7b196, 0xe18103, egg()));
 

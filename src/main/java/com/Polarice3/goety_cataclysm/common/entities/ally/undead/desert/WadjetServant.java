@@ -1,12 +1,17 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.common.entities.ModEntityType;
+import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.common.items.GCItems;
+import com.Polarice3.goety_cataclysm.common.items.revive.ArcaneSpirit;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
@@ -15,6 +20,7 @@ import com.github.L_Ender.cataclysm.entity.projectile.Ancient_Desert_Stele_Entit
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Sandstorm_Projectile;
 import com.github.L_Ender.cataclysm.init.ModEffect;
+import com.github.L_Ender.cataclysm.init.ModParticle;
 import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.client.model.tools.DynamicChain;
 import net.minecraft.core.BlockPos;
@@ -311,18 +317,23 @@ public class WadjetServant extends InternalAnimationSummon {
     }
 
     public void die(DamageSource p_21014_) {
+        if (this.getTrueOwner() != null && GCMobsConfig.WadjetSpirit.get()) {
+            ItemStack itemStack = new ItemStack(GCItems.ARCANE_SPIRIT.get());
+            ArcaneSpirit.setOwnerName(this.getTrueOwner(), itemStack);
+            ArcaneSpirit.setSummon(this, itemStack);
+            FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
+            flyingItem.setOwner(this.getTrueOwner());
+            flyingItem.setItem(itemStack);
+            flyingItem.setParticle(ModParticle.SANDSTORM.get());
+            flyingItem.setSecondsCool(30);
+            this.level().addFreshEntity(flyingItem);
+        }
         super.die(p_21014_);
         this.setAttackState(DEATH);
     }
 
     public int deathTimer() {
         return 60;
-    }
-
-    @Override
-    protected void dropCustomDeathLoot(DamageSource p_31464_, int p_31465_, boolean p_31466_) {
-        super.dropCustomDeathLoot(p_31464_, p_31465_, p_31466_);
-        this.spawnAtLocation(CataclysmItems.ANCIENT_SPEAR.get());
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {

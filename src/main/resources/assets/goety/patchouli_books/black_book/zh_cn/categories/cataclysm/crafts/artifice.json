@@ -1,0 +1,7 @@
+{
+  "name": "设备",
+  "description": "Utilizing and Manipulating Soul Energy.",
+  "icon": "goety_cataclysm:fabricator",
+  "parent": "goety:cataclysm/crafts",
+  "sortnum": 3
+}

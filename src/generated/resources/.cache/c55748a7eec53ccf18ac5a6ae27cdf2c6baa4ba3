@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-17T23:10:08.7106278	Item Models: goety_cataclysm
+// 1.20.1	2025-04-22T07:28:59.6964734	Item Models: goety_cataclysm
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/aptrgangr_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/coralssus_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/coral_golem_spawn_egg.json
@@ -16,5 +16,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/koboleton_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/lionfish_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/netherite_monstrosity_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/prowler_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/royal_draugr_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/wadjet_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/watcher_servant_spawn_egg.json

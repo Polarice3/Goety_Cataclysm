@@ -1,0 +1,22 @@
+{
+  "name": "機械製造機",
+  "icon": "goety_cataclysm:fabricator",
+  "category": "goety:cataclysm/crafts/artifice",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "過去の時代の力を利用すれば、あなたの指揮下でウォッチャーを大量生産するマシンを当時のまま複製することができます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:fabricator"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ウォッチャーを呼び出すには、機械化された鉄ブロックを使用する必要があります。スパイダーネストと同様に、杖で製造機を右クリックすると、有効な対象が近くにいる場合にのみ従者が出現するようになります。しゃがんでんで右クリックすると、従者がブロック内を巡回して出現するか、所有者の後を追って出現するかが変わります。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:fabricator": 1
+  }
+}

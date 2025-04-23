@@ -1,7 +1,9 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.blocks.CataclysmBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
@@ -20,6 +22,7 @@ import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Axe_Blade_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
+import com.github.L_Ender.cataclysm.init.ModParticle;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.core.BlockPos;
@@ -308,14 +311,17 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     }
 
     public void die(DamageSource p_21014_) {
+        if (this.getTrueOwner() != null) {
+            ItemStack itemStack = new ItemStack(CataclysmItems.APTRGANGR_HEAD.get());
+            FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
+            flyingItem.setOwner(this.getTrueOwner());
+            flyingItem.setItem(itemStack);
+            flyingItem.setParticle(ModParticle.CURSED_FLAME.get());
+            flyingItem.setSecondsCool(0);
+            this.level().addFreshEntity(flyingItem);
+        }
         super.die(p_21014_);
         this.setAttackState(7);
-    }
-
-    @Override
-    protected void dropCustomDeathLoot(DamageSource p_31464_, int p_31465_, boolean p_31466_) {
-        super.dropCustomDeathLoot(p_31464_, p_31465_, p_31466_);
-        this.spawnAtLocation(CataclysmItems.APTRGANGR_HEAD.get());
     }
 
     public int deathTimer(){

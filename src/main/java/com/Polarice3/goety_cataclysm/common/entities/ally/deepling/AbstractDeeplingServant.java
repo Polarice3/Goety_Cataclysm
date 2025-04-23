@@ -2,6 +2,8 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
+import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
@@ -87,6 +89,22 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
         this.playSound(CataclysmSounds.DEEPLING_IDLE.get(), 0.15F, 0.6F);
+    }
+
+    public boolean canRide(LivingEntity livingEntity){
+        if (livingEntity.getFirstPassenger() == null) {
+            if (livingEntity instanceof CoralssusServant servant) {
+                if (this.getTrueOwner() != null) {
+                    return servant.getTrueOwner() == this.getTrueOwner();
+                }
+            }
+            if (livingEntity instanceof CoralGolemServant servant) {
+                if (this.getTrueOwner() != null) {
+                    return servant.getTrueOwner() == this.getTrueOwner();
+                }
+            }
+        }
+        return super.canRide(livingEntity);
     }
 
     @Override

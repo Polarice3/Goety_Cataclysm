@@ -1,0 +1,15 @@
+{
+  "name": "Mechanized Iron Block",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The machines of the Ancient Factory appear to be made out of primarily Iron and Redstone, with the Harbinger having high amounts of Witherite. While Witherite remains out of your reach, the metal that makes up the rest of the machines is not."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:mechanized_iron_block"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "器械加工厂",
+  "icon": "goety_cataclysm:fabricator",
+  "category": "goety:cataclysm/crafts/artifice",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "凭借古代科技的力量，你可以复现一台能够大规模生产服从你命令的观测者的器械"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:fabricator"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "向器械内放入一颗机械铁块即可召唤一只观测者，就像与蜘蛛巢交互一样，用法杖右键点击器械可将其转化为目标敏感模式，使其只在周围存在仇恨目标时才能开始召唤观测者，如果是在潜行的同时右键：则是改变观测者的基础行为模式（巡逻或跟随）"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:fabricator": 1
+  }
+}

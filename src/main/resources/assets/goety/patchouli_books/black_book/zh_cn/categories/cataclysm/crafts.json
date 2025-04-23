@@ -1,0 +1,7 @@
+{
+  "name": "合成",
+  "description": "More cataclysmic items and blocks to craft!",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "parent": "goety:cataclysm",
+  "sortnum": 5
+}

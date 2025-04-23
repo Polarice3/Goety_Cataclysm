@@ -92,5 +92,17 @@
   "item.goety_cataclysm.deepling_priest_servant_spawn_egg": "ディープリングの祭司の従者のスポーンエッグ",
   "item.goety_cataclysm.deepling_warlock_servant_spawn_egg": "ディープリングの魔術師の従者のスポーンエッグ",
   "item.goety_cataclysm.deepling_servant_spawn_egg": "ディープリングの従者のスポーンエッグ",
-  "item.goety_cataclysm.lionfish_servant_spawn_egg": "ミノカサゴの従者のスポーンエッグ"
+  "item.goety_cataclysm.lionfish_servant_spawn_egg": "ミノカサゴの従者のスポーンエッグ",
+  "advancements.goety_cataclysm.craft_fabricator.title": "技術を手に入れました！",
+  "advancements.goety_cataclysm.craft_fabricator.description": "機械製造機をクラフトします。",
+  "advancements.goety_cataclysm.summon_prowler.title": "セキュリティ保護",
+  "advancements.goety_cataclysm.summon_prowler.description": "プラウラーを召喚します。",
+  "block.goety_cataclysm.fabricator": "機械製造機",
+  "entity.goety_cataclysm.the_prowler": "プラウラーの従者",
+  "entity.goety_cataclysm.watcher_servant": "ウォッチャーの従者",
+  "item.goety_cataclysm.mechanized_core": "機械化されたコア",
+  "item.goety_cataclysm.prowler_servant_spawn_egg": "プラウラーの従者のスポーンエッグ",
+  "item.goety_cataclysm.watcher_servant_spawn_egg": "ウォッチャーの従者のスポーンエッグ",
+  "item.goety_cataclysm.arcane_spirit": "秘術の魂",
+  "item.goety_cataclysm.warrior_spirit": "戦士の魂"
 }

@@ -19,6 +19,14 @@
     {
       "type": "patchouli:text",
       "text": "喂食骨头可以治疗瓦吉特，当它的主人穿戴死灵长袍时，她也会被动且缓慢地恢复血量"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:arcane_spirit",
+      "text": "这位远古的先锋被消灭后会掉落它的残魂，手持这缕残魂右键骸龙即可将其复活"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:arcane_spirit": 4
+  }
 }

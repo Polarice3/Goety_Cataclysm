@@ -254,7 +254,6 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
         double extraX = radius * Mth.sin((float) (Math.PI + angle));
         double extraZ = radius * Mth.cos(angle);
         p_289541_.accept(p_289537_, this.getX() + extraX, this.getY(0.65D) + p_289537_.getMyRidingOffset() + 0.0D, this.getZ()+ extraZ);
-
     }
 
     @Nullable

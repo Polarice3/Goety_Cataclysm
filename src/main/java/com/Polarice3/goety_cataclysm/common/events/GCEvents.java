@@ -14,7 +14,9 @@ import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
 import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
+import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.LevelEvent;
@@ -108,6 +111,34 @@ public class GCEvents {
                                 }
                                 if (killed.getType() == ModEntities.APTRGANGR.get()){
                                     killed.spawnAtLocation(new ItemStack(CataclysmItems.APTRGANGR_HEAD.get()));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void LootEvents(LootingLevelEvent event){
+        if (event.getDamageSource() != null) {
+            if (event.getEntity() != null) {
+                if (!event.getEntity().level().isClientSide) {
+                    int looting = 0;
+                    if (event.getDamageSource().getEntity() instanceof Player player) {
+                        if (event.getDamageSource().is(DamageTypes.MOB_PROJECTILE)) {
+                            if (event.getDamageSource().getDirectEntity() != null) {
+                                Entity direct = event.getDamageSource().getDirectEntity();
+                                if (direct.getType().getDescription().getString().contains(Cataclysm.MODID) || direct.getType().getDescription().getString().contains(GoetyCataclysm.MOD_ID)) {
+                                    if (CuriosFinder.findRing(player).getItem() == GoetyItems.RING_OF_WANT.get()) {
+                                        if (CuriosFinder.findRing(player).isEnchanted()) {
+                                            looting = CuriosFinder.findRing(player).getEnchantmentLevel(ModEnchantments.WANTING.get());
+                                        }
+                                    }
+                                    if (looting > event.getLootingLevel()) {
+                                        event.setLootingLevel(looting);
+                                    }
                                 }
                             }
                         }

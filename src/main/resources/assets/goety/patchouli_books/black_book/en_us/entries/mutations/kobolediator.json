@@ -19,6 +19,14 @@
     {
       "type": "patchouli:text",
       "text": "The undead gladiator can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:warrior_spirit",
+      "text": "When fallen, these ancient warriors will drop their spirit which can possess a Koboleton to return from the dead."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:warrior_spirit": 4
+  }
 }

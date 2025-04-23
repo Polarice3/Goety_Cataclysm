@@ -12,9 +12,14 @@ public class GCMobsConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingAnglerCatchTime;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> BlazeIgnitedHelm;
+
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedRevenantHelm;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ProwlerCore;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> WadjetSpirit;
 
     static {
         BUILDER.push("Servants");
@@ -27,9 +32,17 @@ public class GCMobsConfig {
                     .define("ignitedRevenantHelm", true);
             IgnitedBerserkerSoul = BUILDER.comment("Whether owned Ignited Berserkers drop Ignited Souls, Default: true")
                     .define("ignitedBerserkerSoul", true);
+            BlazeIgnitedHelm = BUILDER.comment("Whether Ignited Helms works on Blazes instead of just Wildfires, Default: false")
+                    .define("blazeIgnitedHelm", false);
             NetheriteMonstrosityGriefing = BUILDER.comment("Whether Netherite Monstrosity, owned by players, breaks blocks if mob griefing is enabled, Default: false")
                     .define("netheriteMonstrosityGriefing", false);
             BUILDER.pop();
+        KobolediatorSpirit = BUILDER.comment("Whether owned Kobolediators drop Warrior Spirits, Default: true")
+                .define("kobolediatorSpirit", true);
+        ProwlerCore = BUILDER.comment("Whether owned Prowlers drop Mechanized Cores, Default: true")
+                .define("prowlerCore", true);
+        WadjetSpirit = BUILDER.comment("Whether owned Wadjets drop Arcane Spirits, Default: true")
+                .define("wadjetSpirit", true);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }

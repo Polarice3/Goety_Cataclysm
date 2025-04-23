@@ -1,0 +1,37 @@
+{
+  "name": "徘徊者",
+  "icon": "cataclysm:mech_eye",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "一个机械造物，它过高的科技含量让你根本没法用手头现有的工具完全复现，但幸运的是，灵魂能量允许已故者的力量在你的指示下帮助你重现这一机械奇迹"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:the_prowler",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_prowler_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "手持铁锭或铁块右键即可治疗徘徊者"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:mechanized_core",
+      "text": "当这个毁灭机器被摧毁时，它会掉落含有关键电路的物品，这其中包含能够重建它的关键技术"
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:prowler",
+      "text": "使用机械核心右键机械铁块即可"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:mechanized_core": 4
+  }
+}

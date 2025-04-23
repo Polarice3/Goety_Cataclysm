@@ -4,9 +4,9 @@ import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.LaserBeamProjectile;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
-import com.github.L_Ender.cataclysm.entity.projectile.Laser_Beam_Entity;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
@@ -90,7 +90,6 @@ public class WatcherServant extends LLibrarySummon {
         return air;
     }
 
-
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
     }
@@ -124,7 +123,7 @@ public class WatcherServant extends LLibrarySummon {
                     double d5 = target.getZ() - d2;
 
                     Vec3 vec3 = new Vec3(d3, d4, d5);
-                    Laser_Beam_Entity laserBeam = new Laser_Beam_Entity(this, d3, d4, d5, this.level(), (float) CMConfig.HarbingerLaserdamage);
+                    LaserBeamProjectile laserBeam = new LaserBeamProjectile(this, d3, d4, d5, this.level(), (float) CMConfig.HarbingerLaserdamage);
                     float yRot = (float) (Mth.atan2(vec3.z, vec3.x) * (180F / Math.PI)) + 90F;
                     float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
                     laserBeam.setYRot(yRot);

@@ -1,0 +1,15 @@
+{
+  "name": "渊没精华",
+  "icon": "goety_cataclysm:abyss_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "击杀利维坦后掉落的精华，它们象征着你征服了利维坦，并赋予你接管那些追随者的权威"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:abyss_essence"
+    }
+  ]
+}

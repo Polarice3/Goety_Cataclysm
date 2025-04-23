@@ -22,6 +22,7 @@ public class GCPatchouliIntegration implements ICompatable {
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("coral_golem"), CORAL_GOLEM.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("coralssus"), CORALSSUS.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("ender_golem"), ENDER_GOLEM.get());
+        PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("prowler"), PROWLER.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("netherite_monstrosity"), NETHERITE_MONSTROSITY.get());
     }
 
@@ -156,9 +157,35 @@ public class GCPatchouliIntegration implements ICompatable {
         );
     });
 
+    public static final Supplier<IMultiblock> PROWLER = Suppliers.memoize(() -> {
+        IStateMatcher iron = PatchouliAPI.get().predicateMatcher(GCBlocks.MECHANIZED_IRON_BLOCK.get(),
+                state -> state.is(GCBlocks.MECHANIZED_IRON_BLOCK.get()));
+        return PatchouliAPI.get().makeMultiblock(
+                new String[][] {
+                        {
+                                "SSS",
+                                "SSS",
+                                "SSS"
+                        },
+                        {
+                                "SSS",
+                                "SSS",
+                                "SSS"
+                        },
+                        {
+                                "SSS",
+                                "S0S",
+                                "SSS"
+                        }
+                },
+                'S', iron,
+                '0', iron
+        );
+    });
+
     public static final Supplier<IMultiblock> NETHERITE_MONSTROSITY = Suppliers.memoize(() -> {
-        IStateMatcher gildedMold = PatchouliAPI.get().predicateMatcher(Blocks.GILDED_BLACKSTONE,
-                state -> state.is(Blocks.GILDED_BLACKSTONE));
+        IStateMatcher goldMold = PatchouliAPI.get().predicateMatcher(Blocks.GOLD_BLOCK,
+                state -> state.is(Tags.Blocks.STORAGE_BLOCKS_GOLD));
         IStateMatcher redstone = PatchouliAPI.get().predicateMatcher(Blocks.REDSTONE_BLOCK,
                 state -> state.is(Tags.Blocks.STORAGE_BLOCKS_REDSTONE));
         IStateMatcher redstoneCore = PatchouliAPI.get().predicateMatcher(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get(),
@@ -167,6 +194,8 @@ public class GCPatchouliIntegration implements ICompatable {
                 state -> state.is(Blocks.NETHER_BRICKS));
         IStateMatcher netherite = PatchouliAPI.get().predicateMatcher(Blocks.NETHERITE_BLOCK,
                 state -> state.is(Tags.Blocks.STORAGE_BLOCKS_NETHERITE));
+        IStateMatcher gilded = PatchouliAPI.get().predicateMatcher(Blocks.GILDED_BLACKSTONE,
+                state -> state.is(Blocks.GILDED_BLACKSTONE));
         IStateMatcher stoneMold = PatchouliAPI.get().predicateMatcher(Blocks.BLACKSTONE,
                 state -> state.getBlock().getDescriptionId().contains("blackstone") && !state.is(Blocks.GILDED_BLACKSTONE) && !(state.getBlock() instanceof SlabBlock) && !(state.getBlock() instanceof StairBlock) && !(state.getBlock() instanceof WallBlock));
         return PatchouliAPI.get().makeMultiblock(
@@ -175,15 +204,15 @@ public class GCPatchouliIntegration implements ICompatable {
                                 "_____OOOOO_____",
                                 "____OGSGSGO____",
                                 "___OSLLLLLSO___",
-                                "__OGLLNNNLLGO__",
-                                "_OSLLNBBBNLLSO_",
-                                "OGLLNBRRRBNLLGO",
-                                "OSLNBRRRRRBNLSO",
-                                "OGLNBRRCRRBNLGO",
-                                "OSLNBRRRRRBNLSO",
-                                "OGLLNBRRRBNLLGO",
-                                "_OSLLNBBBNLLSO_",
-                                "__OGLLNNNLLGO__",
+                                "__OGLLIIILLGO__",
+                                "_OSLLIBBBILLSO_",
+                                "OGLLIBNNNBILLGO",
+                                "OSLIBNRRRNBILSO",
+                                "OGLIBNRCRNBILGO",
+                                "OSLIBNRRRNBILSO",
+                                "OGLLIBNNNBILLGO",
+                                "_OSLLIBBBILLSO_",
+                                "__OGLLIIILLGO__",
                                 "___OSLLLLLSO___",
                                 "____OGSGSGO____",
                                 "_____OOOOO_____"
@@ -210,7 +239,8 @@ public class GCPatchouliIntegration implements ICompatable {
                 'L', Blocks.LAVA,
                 'N', netherite,
                 'B', netherBricks,
-                'G', gildedMold,
+                'I', gilded,
+                'G', goldMold,
                 'R', redstone,
                 'C', redstoneCore,
                 'S', stoneMold,

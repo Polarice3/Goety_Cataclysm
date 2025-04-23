@@ -19,6 +19,14 @@
     {
       "type": "patchouli:text",
       "text": "アンデッドの剣闘士は骨を与えることで治癒することができ、また、所有者がネクロケープを身に着けている場合は受動的に治癒することができます。"
+    },
+	{
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:warrior_spirit",
+      "text": "これらの戦士は倒れると魂を落とし、それが爬虫類の骸骨に憑依して死から蘇ります。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:warrior_spirit": 4
+  }
 }

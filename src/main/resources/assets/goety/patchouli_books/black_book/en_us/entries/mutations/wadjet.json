@@ -19,6 +19,14 @@
     {
       "type": "patchouli:text",
       "text": "The undead spellcaster can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:arcane_spirit",
+      "text": "When fallen, these ancient vanguards will drop their spirit which can possess a Koboleton to return from the dead."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:arcane_spirit": 4
+  }
 }

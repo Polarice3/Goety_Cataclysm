@@ -169,14 +169,14 @@ public class KoboletonServant extends AnimationSummon2 {
                                     if (!offhand.isEmpty()) {
                                         if (!offhand.is(ModTag.STICKY_ITEM)) {
                                             int i = offhand.getCount();
-                                            this.koboletonstealdrop(offhand.copyWithCount(1), target);
+                                            this.koboletonStealDrop(offhand.copyWithCount(1), target);
                                             target.setItemSlot(EquipmentSlot.OFFHAND, offhand.split(i - 1));
                                         }
                                     } else {
                                         if (!mainhand.isEmpty()) {
                                             if (!mainhand.is(ModTag.STICKY_ITEM)) {
                                                 int i = mainhand.getCount();
-                                                this.koboletonstealdrop(mainhand.copyWithCount(1), target);
+                                                this.koboletonStealDrop(mainhand.copyWithCount(1), target);
                                                 target.setItemSlot(EquipmentSlot.MAINHAND, mainhand.split(i - 1));
                                             }
                                         }
@@ -190,7 +190,7 @@ public class KoboletonServant extends AnimationSummon2 {
         }
     }
 
-    private ItemEntity koboletonstealdrop(ItemStack p_36179_, LivingEntity target) {
+    private ItemEntity koboletonStealDrop(ItemStack p_36179_, LivingEntity target) {
         if (p_36179_.isEmpty()) {
             return null;
         } else if (this.level().isClientSide) {

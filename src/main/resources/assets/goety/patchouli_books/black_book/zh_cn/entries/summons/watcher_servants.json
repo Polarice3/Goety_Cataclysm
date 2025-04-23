@@ -1,0 +1,20 @@
+{
+  "name": "观测者仆从",
+  "icon": "cataclysm:laser_gatling",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "远古工厂的守卫，可以发射炽热的激光，也可以用金属制的颚撕碎敌人，现在正通过奥术与技术手段大规模生产"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:watcher_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "手持铁锭右键可以治疗观测者"
+    }
+  ]
+}

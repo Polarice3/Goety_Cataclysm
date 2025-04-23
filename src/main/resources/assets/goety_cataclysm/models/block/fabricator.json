@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "goety_cataclysm:block/fabricator_top",
+    "bottom": "goety_cataclysm:block/fabricator_bottom",
+    "side": "goety_cataclysm:block/fabricator"
+  },
+  "render_type": "cutout"
+}

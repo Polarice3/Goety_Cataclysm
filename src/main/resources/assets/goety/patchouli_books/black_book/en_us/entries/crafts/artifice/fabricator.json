@@ -1,0 +1,22 @@
+{
+  "name": "Mechanical Fabricator",
+  "icon": "goety_cataclysm:fabricator",
+  "category": "goety:cataclysm/crafts/artifice",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "With the power of past generations, you're able to replicate a machine that will churn out Watchers under your command!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:fabricator"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The cage requires a Mechanized Iron Block to be added, in order to call forth a Watcher. Much like the Spider Nest, right-clicking the nest with a Wand or Staff will make it so that it will only spawn a servant if a valid target is near it. While crouching, however, it will change whether the servant will spawn patrolling the block or following the owner."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:fabricator": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "機械化された鉄ブロック",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "古代の工場の機械は主に鉄とレッドストーンで作られているようです。また、ハービンジャーにはウィザライトが大量に含まれています。ウィザライトはまだ入手できませんが、他の機械を構成する金属は入手可能です。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:mechanized_iron_block"
+    }
+  ]
+}

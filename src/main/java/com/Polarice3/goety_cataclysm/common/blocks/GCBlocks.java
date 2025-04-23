@@ -30,6 +30,8 @@ public class GCBlocks {
     public static final RegistryObject<Block> VOID_MOLD_BLOCK = register("void_mold_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.CRYING_OBSIDIAN)));
 
+    public static final RegistryObject<Block> FABRICATOR = register("fabricator", FabricatorBlock::new);
+
     public static <T extends Block> RegistryObject<T> register(final String string, final Supplier<? extends T> sup){
         return register(string, sup, true);
     }

@@ -1,5 +1,5 @@
 {
-  "name": "古の魔術槍士の骸",
+  "name": "Wadjet",
   "icon": "cataclysm:ancient_spear",
   "category": "goety:cataclysm/mutations",
   "pages": [
@@ -19,6 +19,14 @@
     {
       "type": "patchouli:text",
       "text": "アンデッドの魔法使いは骨を与えることで回復することができ、所有者がネクロのケープを身に着けている場合は、自動的に回復することができます。"
+    },
+	{
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:arcane_spirit",
+      "text": "これらの古代の先駆者たちは倒れると魂を落とし、それが爬虫類の骸骨に憑依して死から蘇ります。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:arcane_spirit": 4
+  }
 }
