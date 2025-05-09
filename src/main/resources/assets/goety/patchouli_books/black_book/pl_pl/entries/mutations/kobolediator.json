@@ -1,0 +1,32 @@
+{
+  "name": "Kobolediator",
+  "icon": "cataclysm:kobolediator_skull",
+  "category": "goety:cataclysm/mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Through a simple Koboleton, you've managed to revive a mighty Kobolediator and have it serve under your thumb."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_koboleton_to_kobolediator_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:kobolediator",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The undead gladiator can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:warrior_spirit",
+      "text": "When fallen, these ancient warriors will drop their spirit which can possess a Koboleton to return from the dead."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:warrior_spirit": 4
+  }
+}

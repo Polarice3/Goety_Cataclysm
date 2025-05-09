@@ -1,0 +1,7 @@
+{
+  "name": "Summons",
+  "description": "More Servants for a Darker Wizard.",
+  "icon": "cataclysm:draugr_head",
+  "parent": "goety:cataclysm",
+  "sortnum": 3
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Coralssus",
+  "icon": "minecraft:horn_coral_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A powerful creature from the Sunken City, possibly given life by the Deeplings through means you've managed to replicate."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coralssus",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coralssus",
+      "text": "Right click the center Coral with an Animation Core."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Only Fire, Horn and Tube Coral blocks can create a Coralssus with all the coral blocks being the same type. They can be healed by right-clicking on them with coral of their type."
+    }
+  ]
+}

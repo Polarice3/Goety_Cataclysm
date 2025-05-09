@@ -1,0 +1,20 @@
+{
+  "name": "Obserwatorzy",
+  "icon": "cataclysm:laser_gatling",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Obserwatorzy z Starożytnej Fabryki są w stanie strzelać laserami i rozrywać przeciwników używając swoich metalowych szczęk, a teraz mogą być twoi poprzez magię i technologie."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:watcher_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Obserwatorzy mogą być leczoni używając Sztabek Żelaza."
+    }
+  ]
+}

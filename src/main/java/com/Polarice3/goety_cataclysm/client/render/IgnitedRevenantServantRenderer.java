@@ -24,8 +24,8 @@ public class IgnitedRevenantServantRenderer extends MobRenderer<IgnitedRevenantS
 
     public IgnitedRevenantServantRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new IgnitedRevenantServantModel(), 0.5F);
-        this.addLayer(new Ignited_Revenant_GlowLayer(this));
-        this.addLayer(new Revenant_Layer(this));
+        this.addLayer(new IgnitedRevenantGlowLayer(this));
+        this.addLayer(new RevenantLayer(this));
     }
 
     public ResourceLocation getTextureLocation(IgnitedRevenantServant entity) {
@@ -45,23 +45,23 @@ public class IgnitedRevenantServantRenderer extends MobRenderer<IgnitedRevenantS
         }
     }
 
-    static class Ignited_Revenant_GlowLayer extends RenderLayer<IgnitedRevenantServant, IgnitedRevenantServantModel> {
-        public Ignited_Revenant_GlowLayer(IgnitedRevenantServantRenderer p_i50928_1_) {
+    static class IgnitedRevenantGlowLayer extends RenderLayer<IgnitedRevenantServant, IgnitedRevenantServantModel> {
+        public IgnitedRevenantGlowLayer(IgnitedRevenantServantRenderer p_i50928_1_) {
             super(p_i50928_1_);
         }
 
         public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, IgnitedRevenantServant entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-            VertexConsumer ivertexbuilder = bufferIn.getBuffer(CMRenderTypes.getFlickering(IGNITED_REVENANT_LAYER_TEXTURES, 0.0F));
+            VertexConsumer ivertexbuilder = bufferIn.getBuffer(CMRenderTypes.getFlickering(IGNITED_REVENANT_LAYER_TEXTURES));
             float alpha = 0.5F + (Mth.cos(ageInTicks * 0.2F) + 1.0F) * 0.2F;
             this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, alpha);
         }
     }
 
-    static class Revenant_Layer extends RenderLayer<IgnitedRevenantServant, IgnitedRevenantServantModel> {
+    static class RevenantLayer extends RenderLayer<IgnitedRevenantServant, IgnitedRevenantServantModel> {
         private final IgnitedRevenantServantModel model = new IgnitedRevenantServantModel();
         private static final ResourceLocation REVENANT_SHIELD = new ResourceLocation("cataclysm", "textures/entity/revenant_shield.png");
 
-        public Revenant_Layer(IgnitedRevenantServantRenderer renderIgnis) {
+        public RevenantLayer(IgnitedRevenantServantRenderer renderIgnis) {
             super(renderIgnis);
         }
 

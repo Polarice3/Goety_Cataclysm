@@ -1,0 +1,15 @@
+{
+  "name": "Void Rune Focus",
+  "icon": "goety_cataclysm:void_rune_focus",
+  "category": "goety:cataclysm/focuses/void",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "While one simply use a Void Rune, you figured it would be much better to simply turn it into a spell."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/void_rune_focus"
+    }
+  ]
+}

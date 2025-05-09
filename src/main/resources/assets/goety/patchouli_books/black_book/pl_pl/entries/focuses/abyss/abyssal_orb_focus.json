@@ -1,0 +1,18 @@
+{
+  "name": "Abyssal Orb Focus",
+  "icon": "goety_cataclysm:abyssal_orb_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "These orbs of abyssal energies will seek out any nearby targets, or target if the spell is cast while looking at a valid entity, and explode upon them, granting them Abyssal Fear effect."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/abyssal_orb_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:abyssal_orb_focus": 1
+  }
+}

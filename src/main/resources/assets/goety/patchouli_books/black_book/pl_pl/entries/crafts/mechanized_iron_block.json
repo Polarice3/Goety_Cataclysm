@@ -1,0 +1,15 @@
+{
+  "name": "Zmechanizowany Blok Żelaza",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Maszyneria z Starożytnej Fabryki wydaje sie być zbudowana z głownie Żelaza i Redstone, z wyjątkiem Zwiastunu, który wymaga dużej ilości Witerytu. Jest on dalej poza twoim zasięgiem, ale metal potrzebny do innych maszyn nie jest."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:mechanized_iron_block"
+    }
+  ]
+}

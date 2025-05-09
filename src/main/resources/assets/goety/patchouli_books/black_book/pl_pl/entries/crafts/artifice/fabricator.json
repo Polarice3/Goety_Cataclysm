@@ -1,0 +1,22 @@
+{
+  "name": "Mechaniczny Fabrykator",
+  "icon": "goety_cataclysm:fabricator",
+  "category": "goety:cataclysm/crafts/artifice",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Dzięki mocy poprzednich generacji udało ci sie replikować maszyne która będzie wypluwać Obserwatorów pod twoją władzą!"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:fabricator"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Potrzeba Zmechanizowanego Bloku Żelaza żeby przywołać Obserwatora. Tak jak Gniazdo Pająków, prawy przycisk używając Różdżki albo Laski sprawi że pojawi sie tylko kiedy właściwy cel jest w pobliżu. Jeśli zrobisz to kiedy kucasz, zmienisz czy sługa będzie patrolował czy podążał za właścicielem."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:fabricator": 1
+  }
+}

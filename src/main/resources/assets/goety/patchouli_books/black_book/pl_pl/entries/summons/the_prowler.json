@@ -1,0 +1,34 @@
+{
+  "name": "Włóczęga",
+  "icon": "cataclysm:mech_eye",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Mechaniczna istota, zbyt zaawansowana byś mógł ją odtworzyć tradycjonalnymi narzędziami. Na szczęście za pomocą Energii Dusz możesz stworzyć tą mechaniczną bestię z powrotem pod twoją kontrolą"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:the_prowler",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_prowler_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mogą być leczone przez użycie Sztabek Żelaza albo Żelaznych Bloków ."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:mechanized_core",
+      "text": "Po zniszczeniu zostawiają za sobią skomplikowane obwody i plany, które umożliwiają ich odtworzenie."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:prowler",
+      "text": "Użyj Prawego przycisku na centralnym Zmechanizowanym Bloku Żelaza używając Zmechanizowanego Rdzenia."
+    }
+  ]
+}

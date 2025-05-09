@@ -1,0 +1,18 @@
+{
+  "name": "Desert Crush Focus",
+  "icon": "goety_cataclysm:desert_crush_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Summons Ancient Desert Steles around the caster, that will then drop and damage any non-allied targets below them."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/desert_crush_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:desert_crush_focus": 1
+  }
+}

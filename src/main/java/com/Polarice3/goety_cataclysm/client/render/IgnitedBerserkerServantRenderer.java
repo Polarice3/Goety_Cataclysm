@@ -20,7 +20,7 @@ public class IgnitedBerserkerServantRenderer extends MobRenderer<IgnitedBerserke
 
     public IgnitedBerserkerServantRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new IgnitedBerserkerServantModel<>(renderManagerIn.bakeLayer(CMModelLayers.IGNITED_BERSERKER_MODEL)), 0.5F);
-        this.addLayer(new Ignited_Berserker_GlowLayer(this));
+        this.addLayer(new IgnitedBerserkerGlowLayer(this));
     }
 
     public ResourceLocation getTextureLocation(IgnitedBerserkerServant entity) {
@@ -31,13 +31,13 @@ public class IgnitedBerserkerServantRenderer extends MobRenderer<IgnitedBerserke
         matrixStackIn.scale(1.05F, 1.05F, 1.05F);
     }
 
-    static class Ignited_Berserker_GlowLayer extends RenderLayer<IgnitedBerserkerServant, IgnitedBerserkerServantModel<IgnitedBerserkerServant>> {
-        public Ignited_Berserker_GlowLayer(IgnitedBerserkerServantRenderer p_i50928_1_) {
+    static class IgnitedBerserkerGlowLayer extends RenderLayer<IgnitedBerserkerServant, IgnitedBerserkerServantModel<IgnitedBerserkerServant>> {
+        public IgnitedBerserkerGlowLayer(IgnitedBerserkerServantRenderer p_i50928_1_) {
             super(p_i50928_1_);
         }
 
         public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, IgnitedBerserkerServant entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-            VertexConsumer ivertexbuilder = bufferIn.getBuffer(CMRenderTypes.getFlickering(BERSERKER_LAYER_TEXTURES, 0.0F));
+            VertexConsumer ivertexbuilder = bufferIn.getBuffer(CMRenderTypes.getFlickering(BERSERKER_LAYER_TEXTURES));
             float alpha = 0.5F + (Mth.cos(ageInTicks * 0.2F) + 1.0F) * 0.2F;
             this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, alpha);
         }

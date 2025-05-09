@@ -1,0 +1,33 @@
+{
+  "name": "Ignited Revenant",
+  "icon": "cataclysm:burning_ashes",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_bygone_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Encountering an Ignited Revenant has been a surprised. Who knew one can revive the dead through fire? With your knowledge on blazes and necromancy, you've figured out how to have your own revenant."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_wildfire_to_ignited_revenant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ignited_revenant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The revenant can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape. If their shields are broken, giving them a Netherite Scrap will restore them."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_helm",
+      "text": "When extinguished, these fiery revenants will drop their helms which can possess a Wildfire to return from the dead."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_helm": 4
+  }
+}

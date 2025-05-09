@@ -1,0 +1,15 @@
+{
+  "name": "Esencje Przepaści",
+  "icon": "goety_cataclysm:abyss_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Pozostawione przez Lewiatana, te esencje są odznaką twojej wygranej przeciwko wielkiej bestii, dają ci autorytet nad jej podwładnymi."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:abyss_essence"
+    }
+  ]
+}

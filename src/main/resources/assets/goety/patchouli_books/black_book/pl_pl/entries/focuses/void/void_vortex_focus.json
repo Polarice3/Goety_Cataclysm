@@ -1,0 +1,18 @@
+{
+  "name": "Void Vortex Focus",
+  "icon": "goety_cataclysm:void_vortex_focus",
+  "category": "goety:cataclysm/focuses/void",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The spell conjures forth a tornado made by the very void itself, sucking in nearby non-allied targets within itself, before exploding."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/void_vortex_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:void_vortex_focus": 1
+  }
+}

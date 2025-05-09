@@ -1,0 +1,7 @@
+{
+  "name": "Krafty",
+  "description": "Więcej rzeczy i bloków z catalysmu do kraftowania",
+  "icon": "goety_cataclysm:mechanized_iron_block",
+  "parent": "goety:cataclysm",
+  "sortnum": 5
+}

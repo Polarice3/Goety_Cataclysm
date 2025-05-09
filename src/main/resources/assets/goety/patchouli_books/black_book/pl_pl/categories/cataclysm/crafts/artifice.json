@@ -1,0 +1,7 @@
+{
+  "name": "Przyrządy",
+  "description": "Utylizowanie i Manipulacja Energią Dusz.",
+  "icon": "goety_cataclysm:fabricator",
+  "parent": "goety:cataclysm/crafts",
+  "sortnum": 3
+}
