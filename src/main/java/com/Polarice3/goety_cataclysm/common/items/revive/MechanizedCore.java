@@ -5,6 +5,7 @@ import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.items.revive.ReviveServantItem;
 import com.Polarice3.Goety.common.ritual.RitualRequirements;
 import com.Polarice3.Goety.utils.MathHelper;
+import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.ServerParticleUtil;
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
@@ -51,37 +52,39 @@ public class MechanizedCore extends ReviveServantItem {
         Direction direction = context.getClickedFace();
         if (!level.isClientSide) {
             if (player != null) {
-                if (blockState.is(GCBlocks.MECHANIZED_IRON_BLOCK.get())) {
-                    if (this.isCube(level, direction, blockPos)) {
-                        if (RitualRequirements.canSummon(level, player, GCEntityType.THE_PROWLER.get())) {
-                            Entity entity;
-                            if (getSummon(stack, level) != null) {
-                                entity = getSummon(stack, level);
-                            } else {
-                                entity = new ProwlerServant(GCEntityType.THE_PROWLER.get(), level);
-                                IOwned owned = (IOwned) entity;
-                                owned.setTrueOwner(player);
-                            }
-                            if (entity instanceof ProwlerServant servant && servant.getTrueOwner() == player) {
-                                servant.setHealth(servant.getMaxHealth());
-                                BlockPos blockPos1 = blockPos.relative(direction.getOpposite());
-                                Vec3 vec3 = Vec3.atBottomCenterOf(blockPos1.below());
-                                servant.setPos(vec3);
-                                servant.lookAt(EntityAnchorArgument.Anchor.EYES, player.position());
-                                if (level.addFreshEntity(servant)) {
-                                    this.removeCube(level, direction, blockPos);
-                                    servant.spawnAnim();
-                                    if (level instanceof ServerLevel serverLevel) {
-                                        for (int i = 0; i < 8; ++i) {
-                                            ServerParticleUtil.addParticlesAroundSelf(serverLevel, ModParticleTypes.BIG_ELECTRIC.get(), servant);
-                                            ServerParticleUtil.addParticlesAroundSelf(serverLevel, ParticleTypes.SMOKE, servant);
+                if (!SEHelper.getFocusCoolDown(player).isOnCooldown(this)) {
+                    if (blockState.is(GCBlocks.MECHANIZED_IRON_BLOCK.get())) {
+                        if (this.isCube(level, direction, blockPos)) {
+                            if (RitualRequirements.canSummon(level, player, GCEntityType.THE_PROWLER.get())) {
+                                Entity entity;
+                                if (getSummon(stack, level) != null) {
+                                    entity = getSummon(stack, level);
+                                } else {
+                                    entity = new ProwlerServant(GCEntityType.THE_PROWLER.get(), level);
+                                    IOwned owned = (IOwned) entity;
+                                    owned.setTrueOwner(player);
+                                }
+                                if (entity instanceof ProwlerServant servant && servant.getTrueOwner() == player) {
+                                    servant.setHealth(servant.getMaxHealth());
+                                    BlockPos blockPos1 = blockPos.relative(direction.getOpposite());
+                                    Vec3 vec3 = Vec3.atBottomCenterOf(blockPos1.below());
+                                    servant.setPos(vec3);
+                                    servant.lookAt(EntityAnchorArgument.Anchor.EYES, player.position());
+                                    if (level.addFreshEntity(servant)) {
+                                        this.removeCube(level, direction, blockPos);
+                                        servant.spawnAnim();
+                                        if (level instanceof ServerLevel serverLevel) {
+                                            for (int i = 0; i < 8; ++i) {
+                                                ServerParticleUtil.addParticlesAroundSelf(serverLevel, ModParticleTypes.BIG_ELECTRIC.get(), servant);
+                                                ServerParticleUtil.addParticlesAroundSelf(serverLevel, ParticleTypes.SMOKE, servant);
+                                            }
                                         }
+                                        servant.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 0.5F);
+                                        player.swing(context.getHand());
+                                        player.getCooldowns().addCooldown(this, MathHelper.secondsToTicks(30));
+                                        stack.shrink(1);
+                                        return InteractionResult.CONSUME;
                                     }
-                                    servant.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 0.5F);
-                                    player.swing(context.getHand());
-                                    player.getCooldowns().addCooldown(this, MathHelper.secondsToTicks(30));
-                                    stack.shrink(1);
-                                    return InteractionResult.CONSUME;
                                 }
                             }
                         }

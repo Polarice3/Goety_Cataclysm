@@ -103,5 +103,10 @@
   "item.goety_cataclysm.prowler_servant_spawn_egg": "徘徊者仆从刷怪蛋",
   "item.goety_cataclysm.watcher_servant_spawn_egg": "观测者仆从刷怪蛋",
   "item.goety_cataclysm.arcane_spirit": "奥术残魂",
-  "item.goety_cataclysm.warrior_spirit": "历战残魂"
+  "item.goety_cataclysm.warrior_spirit": "历战残魂",
+  "block.goety_cataclysm.ender_golem_skull": "末影傀儡头骨",
+  "block.goety_cataclysm.netherite_plating": "下界合金镀层",
+  "block.goety_cataclysm.wall_ender_golem_skull": "末影傀儡头骨",
+  "item.goety_cataclysm.death_laser_focus": "死亡激光聚晶",
+  "item.goety_cataclysm.death_laser_focus.info": "发射致命激光，造成持续伤害。"
 }

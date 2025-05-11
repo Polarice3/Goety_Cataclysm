@@ -20,6 +20,10 @@
       "text": "Right click the center Reinforced Redstone Block with an Infernal Forge."
     },
     {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:netherite_plating"
+    },
+    {
       "type": "patchouli:text",
       "text": "The Blackstone can be substituted with other variants aside from Gilded Blackstone for the mold. Despite what the Redstone Monstrosity entry says, this Monstrosity variant's power surpasses its counterpart. They can be repaired by right-clicking on them with Netherite Blocks, Lava Buckets or Lava Power Cells, or by putting them above Soul Fire. The Monstrosity shares the same summon cap as its Redstone counterpart."
     }

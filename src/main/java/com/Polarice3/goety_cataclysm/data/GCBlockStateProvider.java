@@ -15,6 +15,7 @@ public class GCBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlockWithItem(GCBlocks.MECHANIZED_IRON_BLOCK.get());
+        simpleBlockWithItem(GCBlocks.NETHERITE_PLATING.get());
         simpleBlockWithItem(GCBlocks.VOID_MOLD_BLOCK.get());
     }
 

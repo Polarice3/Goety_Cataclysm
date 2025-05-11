@@ -1,0 +1,30 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:thunderbolt_focus"
+  },
+  "craftType": "storm",
+  "soulCost": 1,
+  "duration": 30,
+  "ingredients": [
+    {
+      "item": "cataclysm:laser_gatling"
+    },
+    {
+      "item": "goety_cataclysm:mechanized_iron_block"
+    },
+    {
+      "item": "goety_cataclysm:mechanized_iron_block"
+    },
+    {
+      "item": "cataclysm:mech_eye"
+    },
+    {
+      "item": "goety:discharge_focus"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:death_laser_focus"
+  }
+}

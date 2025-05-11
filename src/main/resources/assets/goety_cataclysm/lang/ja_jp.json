@@ -104,5 +104,10 @@
   "item.goety_cataclysm.prowler_servant_spawn_egg": "プラウラーの従者のスポーンエッグ",
   "item.goety_cataclysm.watcher_servant_spawn_egg": "ウォッチャーの従者のスポーンエッグ",
   "item.goety_cataclysm.arcane_spirit": "秘術の魂",
-  "item.goety_cataclysm.warrior_spirit": "戦士の魂"
+  "item.goety_cataclysm.warrior_spirit": "戦士の魂",
+  "block.goety_cataclysm.ender_golem_skull": "エンダーゴーレムの頭蓋骨",
+  "block.goety_cataclysm.netherite_plating": "ネザーライトメッキ",
+  "block.goety_cataclysm.wall_ender_golem_skull": "エンダーゴーレムの頭蓋骨",
+  "item.goety_cataclysm.death_laser_focus": "デスレーザーフォーカス",
+  "item.goety_cataclysm.death_laser_focus.info": "継続的なダメージを与える致命的なレーザーを発射します。"
 }

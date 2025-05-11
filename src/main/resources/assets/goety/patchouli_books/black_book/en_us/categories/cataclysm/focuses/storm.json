@@ -1,0 +1,6 @@
+{
+  "name": "Storm",
+  "description": "More power over the storms.",
+  "icon": "goety_cataclysm:death_laser_focus",
+  "parent": "goety:cataclysm/focuses"
+}

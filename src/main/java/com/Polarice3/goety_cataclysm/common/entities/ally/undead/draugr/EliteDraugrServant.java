@@ -45,6 +45,10 @@ import java.util.function.Predicate;
 
 public class EliteDraugrServant extends InternalAnimationSummon implements CrossbowAttackMob {
     private static final EntityDataAccessor<Boolean> IS_CHARGING_CROSSBOW = SynchedEntityData.defineId(EliteDraugrServant.class, EntityDataSerializers.BOOLEAN);
+    public static final int RELOAD = 1;
+    public static final int SHOOT = 2;
+    public static final int SWING = 3;
+    public static final int SHOOT_2 = 4;
     public AnimationState idleAnimationState = new AnimationState();
     public AnimationState ReloadAnimationState = new AnimationState();
     public AnimationState attackAnimationState = new AnimationState();
@@ -59,9 +63,9 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
 
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new ReloadedGoal(this, 1, 0, 20, 20.0F));
-        this.goalSelector.addGoal(0, new CrossBowShootGoal(this, 0, 4, 0, 23, 15, 12.0F));
-        this.goalSelector.addGoal(1, new CrossBowReloadGoal(this, 0, 1, 1, 30, 15, 12.0F));
+        this.goalSelector.addGoal(0, new ReloadedGoal(this, RELOAD, 0, 20, 20.0F));
+        this.goalSelector.addGoal(0, new CrossBowShootGoal(this, 0, SHOOT_2, 0, 23, 15, 12.0F));
+        this.goalSelector.addGoal(1, new CrossBowReloadGoal(this, 0, RELOAD, RELOAD, 30, 15, 12.0F));
         this.goalSelector.addGoal(2, new WanderGoal<>(this, 1.0, 80));
         this.goalSelector.addGoal(4, new Elite_DraugrAttackGoal(this, 1.0, 12.0F, true));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -574,9 +578,9 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
             }
 
             if (flag) {
-                this.entity.setAttackState(2);
+                this.entity.setAttackState(SHOOT);
             } else {
-                this.entity.setAttackState(3);
+                this.entity.setAttackState(SWING);
             }
 
         }

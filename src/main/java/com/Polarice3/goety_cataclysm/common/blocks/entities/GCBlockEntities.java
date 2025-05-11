@@ -12,4 +12,8 @@ public class GCBlockEntities {
 
     public static final RegistryObject<BlockEntityType<FabricatorBlockEntity>> FABRICATOR = BLOCK_ENTITY.register("fabricator",
             () -> BlockEntityType.Builder.of(FabricatorBlockEntity::new, GCBlocks.FABRICATOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<EnderGolemSkullBlockEntity>> ENDER_GOLEM_SKULL = BLOCK_ENTITY.register("ender_golem_skull",
+            () -> BlockEntityType.Builder.of(EnderGolemSkullBlockEntity::new, GCBlocks.ENDER_GOLEM_SKULL_BLOCK.get(), GCBlocks.WALL_ENDER_GOLEM_SKULL_BLOCK.get()).build(null));
+
 }

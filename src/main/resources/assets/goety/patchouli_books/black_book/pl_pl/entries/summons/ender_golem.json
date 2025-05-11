@@ -35,6 +35,19 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:void_lantern_block"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ender_golem_skull",
+      "text": "Should the Golem fell from battle or command, they will drop their 'skull'. The Skull can be used to revive the Golem in a cheaper manner. However, the Skull remembers it's original creator and master and the revived Golem will only follow their commands."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem_revive",
+      "enable_visualize": false
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ender_golem_skull": 7
+  }
 }

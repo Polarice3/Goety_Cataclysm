@@ -13,7 +13,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SandstormSpell extends Spell {
 
@@ -41,6 +45,14 @@ public class SandstormSpell extends Spell {
     @Override
     public SpellType getSpellType() {
         return SpellType.WIND;
+    }
+
+    @Override
+    public List<Enchantment> acceptedEnchantments() {
+        List<Enchantment> list = new ArrayList<>();
+        list.add(ModEnchantments.POTENCY.get());
+        list.add(ModEnchantments.DURATION.get());
+        return list;
     }
 
     @Override

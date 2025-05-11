@@ -33,6 +33,12 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> BlazingFireRadius;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeathLaserCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeathLaserDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DeathLaserCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> DeathLaserDamage;
+    public static final ForgeConfigSpec.ConfigValue<Double> DeathLaserHPDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> DesertCrushCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> DesertCrushDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> DesertCrushCoolDown;
@@ -158,6 +164,18 @@ public class GCSpellConfig {
                     .defineInRange("blazingFireCoolDown", 300, 0, Integer.MAX_VALUE);
             BlazingFireRadius = BUILDER.comment("Blazing Fire's Fireballs default explosion radius, Default: 1.0")
                     .defineInRange("blazingFireRadius", 1.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Death Laser Spell");
+            DeathLaserCost = BUILDER.comment("Death Laser Spell Cost, Default: 128")
+                    .defineInRange("deathLaserCost", 128, 0, Integer.MAX_VALUE);
+            DeathLaserDuration = BUILDER.comment("Time to cast Death Laser Spell, Default: 40")
+                    .defineInRange("deathLaserDuration", 40, 0, 72000);
+            DeathLaserCoolDown = BUILDER.comment("Death Laser Spell Cooldown, Default: 200")
+                    .defineInRange("deathLaserCoolDown", 200, 0, Integer.MAX_VALUE);
+            DeathLaserDamage = BUILDER.comment("How much base damage Death Laser deals, Default: 5.0")
+                    .defineInRange("deathLaserDamage", 5.0, 1.0, Double.MAX_VALUE);
+            DeathLaserHPDamage = BUILDER.comment("How much Hp percentage damage Death Laser deals, Default: 5.0")
+                    .defineInRange("deathLaserHPDamage", 5.0, 1.0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Desert Crush Spell");
             DesertCrushCost = BUILDER.comment("Desert Crush Spell Cost, Default: 64")

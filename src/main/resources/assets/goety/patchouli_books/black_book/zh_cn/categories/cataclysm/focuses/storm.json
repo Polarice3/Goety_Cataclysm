@@ -1,0 +1,6 @@
+{
+  "name": "Storm",
+  "description": "更强大的风暴防御能力",
+  "icon": "goety_cataclysm:death_laser_focus",
+  "parent": "goety:cataclysm/focuses"
+}

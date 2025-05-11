@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.common.events;
 
 import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.api.magic.GolemType;
+import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.entities.projectiles.Fangs;
 import com.Polarice3.Goety.config.MobsConfig;
@@ -15,8 +16,10 @@ import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
 import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
 import com.github.L_Ender.cataclysm.Cataclysm;
+import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -27,9 +30,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.ArrayUtils;
@@ -144,6 +149,15 @@ public class GCEvents {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void PotionApplicationEvent(MobEffectEvent.Applicable event){
+        if (!event.getEntity().canBeAffected(new MobEffectInstance(ModEffect.EFFECTSTUN.get()))){
+            if (event.getEffectInstance().getEffect() == GoetyEffects.STUNNED.get()){
+                event.setResult(Event.Result.DENY);
             }
         }
     }

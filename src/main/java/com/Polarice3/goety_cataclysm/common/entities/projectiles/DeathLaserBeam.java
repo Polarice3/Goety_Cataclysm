@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
+import com.Polarice3.goety_cataclysm.util.GCDamageSource;
 import com.github.L_Ender.cataclysm.blocks.EMP_Block;
 import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
 import com.github.L_Ender.cataclysm.client.tool.ControlledAnimation;
@@ -9,7 +10,6 @@ import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.init.ModBlocks;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModTag;
-import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -57,6 +57,7 @@ public class DeathLaserBeam extends Entity {
     private static final EntityDataAccessor<Integer> CASTER = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> HEAD = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FIRE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IMMEDIATE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> HPDAMAGE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.FLOAT);
 
@@ -98,6 +99,10 @@ public class DeathLaserBeam extends Entity {
         return PushReaction.IGNORE;
     }
 
+    public boolean isActivated(){
+        return this.tickCount > 20 || this.isImmediate();
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -131,7 +136,7 @@ public class DeathLaserBeam extends Entity {
         if (!this.on && this.appear.getTimer() == 0) {
             this.discard();
         }
-        if (this.on && this.tickCount > 20) {
+        if (this.on && this.isActivated()) {
             this.appear.increaseTimer();
         } else {
             this.appear.decreaseTimer();
@@ -141,7 +146,7 @@ public class DeathLaserBeam extends Entity {
             this.discard();
         }
 
-        if (this.tickCount > 20) {
+        if (this.isActivated()) {
             this.calculateEndPos();
             List<LivingEntity> hit = this.raytraceEntities(this.level(), new Vec3(this.getX(), this.getY(), this.getZ()), new Vec3(this.endPosX, this.endPosY, this.endPosZ), false, true, true).entities;
             if (this.blockSide != null) {
@@ -156,18 +161,18 @@ public class DeathLaserBeam extends Entity {
                     for (BlockPos pos : BlockPos.betweenClosed(Mth.floor(this.collidePosX - 2.5F), Mth.floor(this.collidePosY - 2.5F), Mth.floor(this.collidePosZ - 2.5F), Mth.floor(this.collidePosX + 2.5F), Mth.floor(this.collidePosY + 2.5F), Mth.floor(this.collidePosZ + 2.5F))) {
                         BlockState block = level().getBlockState(pos);
                         if (block.is(ModBlocks.EMP.get())) {
-                            if(!block.getValue(EMP_Block.POWERED) && block.getValue(EMP_Block.OVERLOAD)) {
+                            if (!block.getValue(EMP_Block.POWERED) && block.getValue(EMP_Block.OVERLOAD)) {
                                 this.level().setBlockAndUpdate(pos, block.setValue(EMP_Block.OVERLOAD, false));
                             }
                         }
                     }
-                    if(this.getFire()) {
+                    if (this.getFire()) {
                         BlockPos blockpos1 = BlockPos.containing(this.collidePosX, this.collidePosY, this.collidePosZ);
-                        if(CMConfig.HarbingerLightFire) {
+                        if (CMConfig.HarbingerLightFire) {
                             if (this.level().isEmptyBlock(blockpos1)) {
                                 this.level().setBlockAndUpdate(blockpos1, BaseFireBlock.getState(this.level(), blockpos1));
                             }
-                        }else{
+                        } else {
                             if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
                                 if (this.level().isEmptyBlock(blockpos1)) {
                                     this.level().setBlockAndUpdate(blockpos1, BaseFireBlock.getState(this.level(), blockpos1));
@@ -182,7 +187,7 @@ public class DeathLaserBeam extends Entity {
                 for (LivingEntity target : hit) {
                     if (this.caster != null) {
                         if (!MobUtil.areAllies(this.caster, target)) {
-                            boolean flag = target.hurt(CMDamageTypes.causeDeathLaserDamage(this, this.caster), (float) (this.getDamage() + Math.min(this.getDamage(), target.getMaxHealth() * this.getHpDamage() * 0.01)));
+                            boolean flag = target.hurt(GCDamageSource.deathLaser(this, this.caster), (float) (this.getDamage() + Math.min(this.getDamage(), target.getMaxHealth() * this.getHpDamage() * 0.01)));
                             if (this.getFire()) {
                                 if (flag) {
                                     target.setSecondsOnFire(5);
@@ -193,7 +198,11 @@ public class DeathLaserBeam extends Entity {
                 }
             }
         }
-        if (this.tickCount - 20 > this.getDuration()) {
+        int count = this.tickCount - 20;
+        if (this.isImmediate()) {
+            count = this.tickCount;
+        }
+        if (count > this.getDuration()) {
             this.on = false;
         }
     }
@@ -217,6 +226,7 @@ public class DeathLaserBeam extends Entity {
         this.entityData.define(CASTER, -1);
         this.entityData.define(HEAD, 0);
         this.entityData.define(FIRE, false);
+        this.entityData.define(IMMEDIATE, false);
         this.entityData.define(DAMAGE, 0F);
         this.entityData.define(HPDAMAGE, 0F);
     }
@@ -283,6 +293,14 @@ public class DeathLaserBeam extends Entity {
 
     public void setFire(boolean fire) {
         this.entityData.set(FIRE, fire);
+    }
+
+    public boolean isImmediate() {
+        return this.entityData.get(IMMEDIATE);
+    }
+
+    public void setImmediate(boolean immediate) {
+        this.entityData.set(IMMEDIATE, immediate);
     }
 
     @Override

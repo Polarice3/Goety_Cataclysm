@@ -35,6 +35,19 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:void_lantern_block"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ender_golem_skull",
+      "text": "如果傀儡从战斗或指挥中倒下，他们会掉下他们的“头骨”。骷髅可以用来以一种更便宜的方式复活傀儡。然而，它记得它最初的创造者和主人，复活的傀儡只会听从他们的命令。"
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem_revive",
+      "enable_visualize": false
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ender_golem_skull": 7
+  }
 }

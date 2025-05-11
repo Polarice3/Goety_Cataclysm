@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.init;
 
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.client.render.*;
+import com.Polarice3.goety_cataclysm.client.render.block.EnderGolemSkullBlockEntityRenderer;
 import com.Polarice3.goety_cataclysm.client.render.block.FabricatorRenderer;
 import com.Polarice3.goety_cataclysm.common.blocks.entities.GCBlockEntities;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
@@ -16,6 +17,7 @@ public class GCClientInit {
     @SubscribeEvent
     public static void onRegisterRenders(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(GCBlockEntities.FABRICATOR.get(), FabricatorRenderer::new);
+        event.registerBlockEntityRenderer(GCBlockEntities.ENDER_GOLEM_SKULL.get(), EnderGolemSkullBlockEntityRenderer::new);
         event.registerEntityRenderer(GCEntityType.ENDER_GOLEM.get(), EnderGolemServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.NETHERITE_MONSTROSITY.get(), NMServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.DEEPLING.get(), DeeplingServantRenderer::new);

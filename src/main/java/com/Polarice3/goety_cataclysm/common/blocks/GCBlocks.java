@@ -27,10 +27,16 @@ public class GCBlocks {
     public static final RegistryObject<Block> MECHANIZED_IRON_BLOCK = register("mechanized_iron_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
+    public static final RegistryObject<Block> NETHERITE_PLATING = register("netherite_plating", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
+
     public static final RegistryObject<Block> VOID_MOLD_BLOCK = register("void_mold_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.CRYING_OBSIDIAN)));
 
     public static final RegistryObject<Block> FABRICATOR = register("fabricator", FabricatorBlock::new);
+
+    public static final RegistryObject<Block> ENDER_GOLEM_SKULL_BLOCK = register("ender_golem_skull", EnderGolemSkullBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
+    public static final RegistryObject<Block> WALL_ENDER_GOLEM_SKULL_BLOCK = register("wall_ender_golem_skull", WallEnderGolemSkullBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
 
     public static <T extends Block> RegistryObject<T> register(final String string, final Supplier<? extends T> sup){
         return register(string, sup, true);

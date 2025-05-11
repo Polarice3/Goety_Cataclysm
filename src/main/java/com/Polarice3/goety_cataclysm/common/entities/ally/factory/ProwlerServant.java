@@ -299,7 +299,7 @@ public class ProwlerServant extends InternalAnimationSummon {
         }
         if (this.getAttackState() == SPIN) {
             if (this.attackTicks == 23 || this.attackTicks == 32) {
-                AreaAttack(6.0f, 6.0F, 180, 1.0F);
+                this.AreaAttack(6.0f, 6.0F, 180, 1.0F);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
             if (this.attackTicks == 23) {
@@ -312,8 +312,7 @@ public class ProwlerServant extends InternalAnimationSummon {
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
             if (this.attackTicks == 20 || this.attackTicks == 26 || this.attackTicks == 32 || this.attackTicks == 38 || this.attackTicks == 44) {
-                AreaAttack(5.4f, 5.5F, 110, 0.5F);
-
+                this.AreaAttack(5.4f, 5.5F, 110, 0.5F);
             }
         }
         float f1 = (float) Math.cos(Math.toRadians(this.getYRot() + 90));
@@ -326,31 +325,30 @@ public class ProwlerServant extends InternalAnimationSummon {
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_SPIN_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
             if (this.attackTicks == 25) {
-                AreaAttack(5.5f, 5.5f, 70, 1.5F);
-
+                this.AreaAttack(5.5f, 5.5f, 70, 1.5F);
             }
         }
         if (this.getAttackState() == PIERCE) {
             if(target !=null) {
                 if (this.attackTicks == 12) {
-                    MissileLaunch(2.0f, 0.5F, target);
+                    this.MissileLaunch(2.0f, 0.5F, target);
                 }
                 if (this.attackTicks == 15) {
-                    MissileLaunch(2.3f, 0.5F, target);
+                    this.MissileLaunch(2.3f, 0.5F, target);
                 }
                 if (this.attackTicks == 18) {
-                    MissileLaunch(2.6f, 0.5F, target);
+                    this.MissileLaunch(2.6f, 0.5F, target);
                 }
             }
             if (this.attackTicks == 18) {
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), CataclysmSounds.PROWLER_SAW_ATTACK.get(), this.getSoundSource(), 1.5f, 1F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
             if (this.attackTicks == 25 || this.attackTicks == 32 || this.attackTicks == 40) {
-                AreaAttack(5.5F, 5.5F, 60, 0.5F);
+                this.AreaAttack(5.5F, 5.5F, 60, 0.5F);
             }
 
             if (this.attackTicks == 64) {
-                AreaAttack(5.5F, 5.5F, 140, 1.0F);
+                this.AreaAttack(5.5F, 5.5F, 140, 1.0F);
 
             }
         }

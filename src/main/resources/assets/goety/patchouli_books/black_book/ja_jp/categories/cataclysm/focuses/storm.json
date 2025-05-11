@@ -1,0 +1,6 @@
+{
+  "name": "Storm",
+  "description": "嵐に対するさらなる力.",
+  "icon": "goety_cataclysm:death_laser_focus",
+  "parent": "goety:cataclysm/focuses"
+}

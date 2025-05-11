@@ -1,9 +1,11 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.golem;
 
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
@@ -41,6 +43,7 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -122,7 +125,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
 
     public boolean hurt(DamageSource source, float damage) {
         if ((this.getAnimation() == VOID_RUNE_ATTACK || !this.getIsAwaken()) && (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) || !source.is(DamageTypes.MAGIC))) {
-            damage = (float)((double)damage * 0.5);
+            damage = (float)((double)damage * 0.5D);
         }
 
         double range = this.calculateRange(source);
@@ -131,7 +134,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
         } else {
             Entity entity = source.getDirectEntity();
             if (entity instanceof AbstractGolem) {
-                damage = (float)((double)damage * 0.5);
+                damage = (float)((double)damage * 0.5D);
             }
 
             return super.hurt(source, damage);
@@ -351,6 +354,25 @@ public class EnderGolemServant extends LLibraryBossSummon {
             this.playSound(CataclysmSounds.MONSTROSITYLAND.get(), 1.0F, 1.0F);
         }
 
+    }
+
+    public void onDeathUpdate(int deathDuration) {
+        super.onDeathUpdate(deathDuration);
+        if (this.deathTime == deathDuration) {
+            ItemStack itemStack = new ItemStack(GCBlocks.ENDER_GOLEM_SKULL_BLOCK.get());
+            if (this.getTrueOwner() != null){
+                EnderGolemSkullItem.setOwner(this.getTrueOwner(), itemStack);
+                if (this.getCustomName() != null){
+                    EnderGolemSkullItem.setCustomName(this.getCustomName().getString(), itemStack);
+                }
+                ItemEntity itemEntity = this.spawnAtLocation(itemStack);
+                if (itemEntity != null){
+                    itemEntity.setExtendedLifetime();
+                }
+            } else if (this.level().getRandom().nextFloat() <= 0.11F){
+                this.spawnAtLocation(itemStack);
+            }
+        }
     }
 
     public boolean canBePushedByEntity(Entity entity) {

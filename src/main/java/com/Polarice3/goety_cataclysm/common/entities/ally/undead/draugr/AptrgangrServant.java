@@ -77,6 +77,13 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     public AnimationState chargeendAnimationState = new AnimationState();
     public AnimationState chargehitAnimationState = new AnimationState();
     public AnimationState deathAnimationState = new AnimationState();
+    public static final int SWING_RIGHT_ATTACK = 1;
+    public static final int SMASH_ATTACK = 2;
+    public static final int CHARGE_START = 3;
+    public static final int CHARGE = 4;
+    public static final int CHARGE_END = 5;
+    public static final int CHARGE_HIT = 6;
+    public static final int DEATH = 7;
     private int earthquake_cooldown = 0;
     public static final int EARTHQUAKE_COOLDOWN = 80;
     private boolean chubu = false;
@@ -97,7 +104,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new InternalSummonMoveGoal(this,false,1.0D));
-        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,1,0,40,15,4.5F){
+        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,SWING_RIGHT_ATTACK,0,40,15,4.5F){
             @Override
             public boolean canUse() {
                 return super.canUse() && AptrgangrServant.this.getRandom().nextFloat() * 100.0F < 22f;
@@ -105,7 +112,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         });
 
 
-        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,2,0,40,10,6){
+        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,SMASH_ATTACK,0,40,10,6){
             @Override
             public boolean canUse() {
                 return super.canUse() && AptrgangrServant.this.getRandom().nextFloat() * 100.0F < 16f && AptrgangrServant.this.earthquake_cooldown <= 0;
@@ -117,7 +124,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             }
         });
 
-        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,2,0,40,10,12){
+        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,SMASH_ATTACK,0,40,10,12){
             @Override
             public boolean canUse() {
                 LivingEntity target = entity.getTarget();
@@ -132,17 +139,17 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
 
 
         //chargePrepare
-        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,3,4,24,24,15) {
+        this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,CHARGE_START,CHARGE,24,24,15) {
             @Override
             public boolean canUse() {
                 return super.canUse() && AptrgangrServant.this.getRandom().nextFloat() * 100.0F < 8f && AptrgangrServant.this.charge_cooldown <= 0 && !AptrgangrServant.this.isStaying();
             }
         });
 
-        this.goalSelector.addGoal(2, new InternalSummonStateGoal(this,4,4,5,40,0){
+        this.goalSelector.addGoal(2, new InternalSummonStateGoal(this,CHARGE,CHARGE,CHARGE_END,40,0){
             @Override
             public void tick() {
-                if(this.entity.onGround()){
+                if (this.entity.onGround()){
                     Vec3 vector3d = entity.getDeltaMovement();
                     float f = entity.getYRot() * ((float)Math.PI / 180F);
                     Vec3 vector3d1 = new Vec3(-Mth.sin(f), entity.getDeltaMovement().y, Mth.cos(f)).scale(1.0D).add(vector3d.scale(0.5D));
@@ -155,22 +162,22 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             }
             @Override
             public void stop() {
-                if(chubu) {
-                    entity.setAttackState(6);
+                if (chubu) {
+                    this.entity.setAttackState(CHARGE_HIT);
                     chubu = false;
-                }else{
+                } else {
                     super.stop();
                 }
             }
         });
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,5,5,0,23,0) {
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,CHARGE_END,CHARGE_END,0,23,0) {
             @Override
             public void stop() {
                 super.stop();
                 AptrgangrServant.this.charge_cooldown = CHARGE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this,6,6,0,18,0) {
+        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this,CHARGE_HIT,CHARGE_HIT,0,18,0) {
             @Override
             public void stop() {
                 super.stop();
@@ -220,7 +227,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
 
     @Override
     public boolean hurt(DamageSource source, float damage) {
-        if(!this.getPassengers().isEmpty() && this.getAttackState() == 4 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        if(!this.getPassengers().isEmpty() && this.getAttackState() == CHARGE && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
         }
 
@@ -321,7 +328,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             this.level().addFreshEntity(flyingItem);
         }
         super.die(p_21014_);
-        this.setAttackState(7);
+        this.setAttackState(DEATH);
     }
 
     public int deathTimer(){
@@ -341,7 +348,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             charge_cooldown--;
         }
 
-        if (!this.getPassengers().isEmpty() && this.getPassengers().get(0).isShiftKeyDown() && this.getAttackState() == 4) {
+        if (!this.getPassengers().isEmpty() && this.getPassengers().get(0).isShiftKeyDown() && this.getAttackState() == CHARGE) {
             this.getPassengers().get(0).setShiftKeyDown(false);
         }
 
@@ -349,22 +356,22 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
 
     public void aiStep() {
         super.aiStep();
-        if(this.getAttackState() == 1) {
+        if (this.getAttackState() == SWING_RIGHT_ATTACK) {
             if (this.attackTicks == 15) {
                 this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.06f, 0, 20);
-                AreaAttack(5.75f, 5.75f, 120, 1, 120,true);
+                this.AreaAttack(5.75f, 5.75f, 120, 1, 120,true);
             }
         }
-        if(this.getAttackState() == 2) {
+        if (this.getAttackState() == SMASH_ATTACK) {
             if (this.attackTicks == 11) {
                 this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
             }
             if (this.attackTicks == 15) {
-                AreaAttack(6.5f, 6.5f, 60, 1, 120,false);
+                this.AreaAttack(6.5f, 6.5f, 60, 1, 120,false);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.15f, 0, 20);
                 this.playSound(SoundEvents.ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.8f);
-                Makeparticle(0.6f, 5.0f, 0f);
+                this.MakeParticle(0.6f, 5.0f, 0f);
 
                 double theta = (yBodyRot) * (Math.PI / 180);
 
@@ -380,22 +387,22 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                     float rad = (float) Math.toRadians(angle);
                     double dx = -Math.sin(rad);
                     double dz = Math.cos(rad);
-                    Axe_Blade_Entity witherskull = new Axe_Blade_Entity(this, dx, 0, dz, this.level(),(float) CMConfig.AptrgangrAxeBladeDamage,angle);
+                    Axe_Blade_Entity axeBlade = new Axe_Blade_Entity(this, dx, 0, dz, this.level(),(float) CMConfig.AptrgangrAxeBladeDamage,angle);
                     double spawnX = this.getX() + vecX * 5;
                     double spawnY = this.getY(0.15D);
                     double spawnZ = this.getZ() + vecZ * 5;
-                    witherskull.setPos(spawnX, spawnY, spawnZ);
-                    this.level().addFreshEntity(witherskull);
+                    axeBlade.setPos(spawnX, spawnY, spawnZ);
+                    this.level().addFreshEntity(axeBlade);
 
                 }
             }
         }
-        if(this.getAttackState() == 4) {
-            ChargeGrab(0.0D,0.0D,0.5, 0.1F, 0, true);
+        if (this.getAttackState() == CHARGE) {
+            this.ChargeGrab(0.0D, 0.0D, 0.5, 0.1F, 0, true);
             if (this.horizontalCollision) {
-                chubu = true;
+                this.chubu = true;
                 if (!this.level().isClientSide) {
-                    Icicle_Crash();
+                    this.Icicle_Crash();
                 }
             }
             if (this.level().isClientSide) {
@@ -411,15 +418,15 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             }
         }
 
-        if(this.getAttackState() == 5) {
+        if (this.getAttackState() == CHARGE_END) {
             if (this.attackTicks == 4) {
                 this.playSound(CataclysmSounds.STRONGSWING.get(), 1.0F, 0.7f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.06f, 0, 20);
-                UpperAreaAttack(6.5f, 6.5f, 60, 1, 120,true);
+                this.UpperAreaAttack(6.5f, 6.5f, 60, 1, 120,true);
             }
         }
 
-        if(this.getAttackState() == 6) {
+        if (this.getAttackState() == CHARGE_HIT) {
             if (this.attackTicks == 1) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.1f, 0, 20);
                 this.playSound(SoundEvents.ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.9f);
@@ -428,7 +435,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
 
     }
 
-    private void Makeparticle(float size,float vec, float math) {
+    private void MakeParticle(float size, float vec, float math) {
         if (this.level().isClientSide) {
             float f = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
             float f1 = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
@@ -512,7 +519,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                     double d1 = entityHit.getZ() - this.getZ();
                     double d2 = Math.max(d0 * d0 + d1 * d1, 0.001D);
                     if (hurt && knockback) {
-                        entityHit.setDeltaMovement(entityHit.getDeltaMovement().add(0.0D, (double)0.4F * 2, 0.0D));
+                        entityHit.setDeltaMovement(entityHit.getDeltaMovement().add(0.0D, 0.8D, 0.0D));
                     }
 
                 }
@@ -528,11 +535,11 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         AABB attackRange = this.getBoundingBox().inflate(inflateXZ,inflateY,inflateXZ).expandTowards(xExpand, 0, zExpand);
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, attackRange)) {
             if (!MobUtil.areAllies(this, entity)) {
-                if(this.getPassengers().isEmpty()) {
+                if (this.getPassengers().isEmpty()) {
                     DamageSource damagesource = maledictio ? CMDamageTypes.causeMaledictioDamage(this) : this.getMobAttack();
                     boolean flag = entity.hurt(damagesource, damage);
                     if (entity.isDamageSourceBlocked(damagesource) && entity instanceof Player player && shieldbreakticks > 0) {
-                        disableShield(player, shieldbreakticks);
+                        this.disableShield(player, shieldbreakticks);
                     }
                     if (flag) {
                         if (!entity.getType().is(ModTag.IGNIS_CANT_POKE) && entity.isAlive()) {
@@ -563,17 +570,17 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             final int k = 8;
 
             for (BlockPos blockpos1 : BlockPos.betweenClosed(ceil.offset(-i, -j, -k), ceil.offset(i, j, k))) {
-                if (level().getBlockState(blockpos1).getBlock() instanceof Fallable) {
+                if (this.level().getBlockState(blockpos1).getBlock() instanceof Fallable) {
                     if (isHangingIcicle(blockpos1)) {
-                        while (isHangingIcicle(blockpos1.above()) && blockpos1.getY() < level().getMaxBuildHeight()) {
+                        while (isHangingIcicle(blockpos1.above()) && blockpos1.getY() < this.level().getMaxBuildHeight()) {
                             blockpos1 = blockpos1.above();
                         }
                         if (isHangingIcicle(blockpos1)) {
                             Vec3 vec3 = Vec3.atBottomCenterOf(blockpos1);
-                            FallingBlockEntity.fall(level(), BlockPos.containing(vec3.x, vec3.y, vec3.z), level().getBlockState(blockpos1));
+                            FallingBlockEntity.fall(this.level(), BlockPos.containing(vec3.x, vec3.y, vec3.z), level().getBlockState(blockpos1));
                         }
                     } else {
-                        this.level().scheduleTick(blockpos1, level().getBlockState(blockpos1).getBlock(), 2);
+                        this.level().scheduleTick(blockpos1, this.level().getBlockState(blockpos1).getBlock(), 2);
                     }
                 }
             }
@@ -582,7 +589,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     }
 
     private boolean isHangingIcicle(BlockPos pos) {
-        return level().getBlockState(pos).getBlock() instanceof PointedIcicleBlock && level().getBlockState(pos).getValue(PointedIcicleBlock.TIP_DIRECTION) == Direction.DOWN;
+        return this.level().getBlockState(pos).getBlock() instanceof PointedIcicleBlock && this.level().getBlockState(pos).getValue(PointedIcicleBlock.TIP_DIRECTION) == Direction.DOWN;
     }
 
     @Nullable
@@ -596,7 +603,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     }
 
     public void positionRider(Entity passenger, Entity.MoveFunction moveFunc) {
-        double theta = (yBodyRot) * (Math.PI / 180);
+        double theta = (this.yBodyRot) * (Math.PI / 180);
         theta += Math.PI / 2;
         double vecX = Math.cos(theta);
         double vecZ = Math.sin(theta);
@@ -604,23 +611,23 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         double pz = this.getZ() + 0.7F * vecZ;
 
         double y = this.getY() + passenger.getMyRidingOffset() + 0.6D;
-        if (hasPassenger(passenger)) {
-            if(this.getAttackState() == 6){
-                if(this.attackTicks == 1) {
-                    if(passenger instanceof LivingEntity living){
+        if (this.hasPassenger(passenger)) {
+            if (this.getAttackState() == CHARGE_HIT){
+                if (this.attackTicks == 1) {
+                    if (passenger instanceof LivingEntity living) {
                         DamageSource damagesource =  CMDamageTypes.causeMaledictioDamage(this) ;
                         boolean flag = living.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.5F));
-                        if(flag){
+                        if (flag){
                             this.playSound(SoundEvents.ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.9f);
                         }
                     }
                     passenger.stopRiding();
                 }
-            }else if(this.getAttackState() == 5){
-                if(this.attackTicks == 1) {
+            } else if (this.getAttackState() == CHARGE_END) {
+                if (this.attackTicks == 1) {
                     passenger.stopRiding();
                 }
-            }else if (this.getAttackState() != 4){
+            } else if (this.getAttackState() != CHARGE) {
                 passenger.stopRiding();
             }
             moveFunc.accept(passenger, px, y, pz);
@@ -637,10 +644,10 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             BlockPos blockpos = this.blockPosition();
             BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-            for(Pose pose : p_29487_.getDismountPoses()) {
+            for (Pose pose : p_29487_.getDismountPoses()) {
                 AABB aabb = p_29487_.getLocalBoundsForPose(pose);
 
-                for(int[] aint1 : aint) {
+                for (int[] aint1 : aint) {
                     blockpos$mutableblockpos.set(blockpos.getX() + aint1[0], blockpos.getY(), blockpos.getZ() + aint1[1]);
                     double d0 = this.level().getBlockFloorHeight(blockpos$mutableblockpos);
                     if (DismountHelper.isBlockFloorValid(d0)) {

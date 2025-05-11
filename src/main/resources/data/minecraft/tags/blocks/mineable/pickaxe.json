@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "goety_cataclysm:mechanized_iron_block",
-    "goety_cataclysm:void_mold_block"
+    "goety_cataclysm:netherite_plating",
+    "goety_cataclysm:void_mold_block",
+    "goety_cataclysm:fabricator"
   ]
 }

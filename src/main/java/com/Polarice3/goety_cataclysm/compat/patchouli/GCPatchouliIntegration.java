@@ -22,6 +22,7 @@ public class GCPatchouliIntegration implements ICompatable {
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("coral_golem"), CORAL_GOLEM.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("coralssus"), CORALSSUS.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("ender_golem"), ENDER_GOLEM.get());
+        PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("ender_golem_revive"), ENDER_GOLEM_REVIVE.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("prowler"), PROWLER.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("netherite_monstrosity"), NETHERITE_MONSTROSITY.get());
     }
@@ -157,6 +158,32 @@ public class GCPatchouliIntegration implements ICompatable {
         );
     });
 
+    public static final Supplier<IMultiblock> ENDER_GOLEM_REVIVE = Suppliers.memoize(() -> {
+        IStateMatcher voidMold = PatchouliAPI.get().predicateMatcher(GCBlocks.VOID_MOLD_BLOCK.get(),
+                state -> state.is(GCBlocks.VOID_MOLD_BLOCK.get()));
+        IStateMatcher voidStoneCore = PatchouliAPI.get().predicateMatcher(CataclysmBlocks.VOID_STONE.get(),
+                state -> state.is(CataclysmBlocks.VOID_STONE.get()));
+        return PatchouliAPI.get().makeMultiblock(
+                new String[][] {
+                        {
+                                "__H__"
+                        },
+                        {
+                                "RRRRR"
+                        },
+                        {
+                                "_RRR_"
+                        },
+                        {
+                                "__0__"
+                        }
+                },
+                'H', GCBlocks.ENDER_GOLEM_SKULL_BLOCK.get(),
+                'R', voidStoneCore,
+                '0', voidMold
+        );
+    });
+
     public static final Supplier<IMultiblock> PROWLER = Suppliers.memoize(() -> {
         IStateMatcher iron = PatchouliAPI.get().predicateMatcher(GCBlocks.MECHANIZED_IRON_BLOCK.get(),
                 state -> state.is(GCBlocks.MECHANIZED_IRON_BLOCK.get()));
@@ -192,8 +219,8 @@ public class GCPatchouliIntegration implements ICompatable {
                 state -> state.is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get()));
         IStateMatcher netherBricks = PatchouliAPI.get().predicateMatcher(Blocks.NETHER_BRICKS,
                 state -> state.is(Blocks.NETHER_BRICKS));
-        IStateMatcher netherite = PatchouliAPI.get().predicateMatcher(Blocks.NETHERITE_BLOCK,
-                state -> state.is(Tags.Blocks.STORAGE_BLOCKS_NETHERITE));
+        IStateMatcher netherite = PatchouliAPI.get().predicateMatcher(GCBlocks.NETHERITE_PLATING.get(),
+                state -> state.is(GCBlocks.NETHERITE_PLATING.get()));
         IStateMatcher gilded = PatchouliAPI.get().predicateMatcher(Blocks.GILDED_BLACKSTONE,
                 state -> state.is(Blocks.GILDED_BLACKSTONE));
         IStateMatcher stoneMold = PatchouliAPI.get().predicateMatcher(Blocks.BLACKSTONE,

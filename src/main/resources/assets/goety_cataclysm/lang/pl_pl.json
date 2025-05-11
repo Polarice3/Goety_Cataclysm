@@ -98,5 +98,10 @@
   "item.goety_cataclysm.netherite_monstrosity_spawn_egg": "Netherite Monstrosity Servant Spawn Egg",
   "item.goety_cataclysm.royal_draugr_servant_spawn_egg": "Royal Draugr Servant Spawn Egg",
   "item.goety_cataclysm.wadjet_spawn_egg": "Wadjet Servant Spawn Egg",
-  "itemGroup.goety_cataclysm": "Goety Cataclysm"
+  "itemGroup.goety_cataclysm": "Goety Cataclysm",
+  "block.goety_cataclysm.ender_golem_skull": "Ender Golem Skull",
+  "block.goety_cataclysm.netherite_plating": "Netherite Plating",
+  "block.goety_cataclysm.wall_ender_golem_skull": "Ender Golem Skull",
+  "item.goety_cataclysm.death_laser_focus": "Death Laser Focus",
+  "item.goety_cataclysm.death_laser_focus.info": "Shoots a deadly laser that deals constant damage."
 }

@@ -105,5 +105,10 @@
   "item.goety_cataclysm.wadjet_spawn_egg": "Ovo gerador servo Uadjet",
   "item.goety_cataclysm.watcher_servant_spawn_egg": "Ovo gerador servo Observador",
 
-  "itemGroup.goety_cataclysm": "Goety Cataclysm"
+  "itemGroup.goety_cataclysm": "Goety Cataclysm",
+  "block.goety_cataclysm.ender_golem_skull": "Crânio de Golem de Ender",
+  "block.goety_cataclysm.netherite_plating": "Revestimento de Netherita",
+  "block.goety_cataclysm.wall_ender_golem_skull": "Crânio de Golem de Ender",
+  "item.goety_cataclysm.death_laser_focus": "Focus da Laser da Morte",
+  "item.goety_cataclysm.death_laser_focus.info": "Dispara um laser mortal que causa dano constante."
 }

@@ -105,10 +105,9 @@ public class DeathLaserBeamRenderer extends EntityRenderer<DeathLaserBeam> {
         double y = Mth.lerp(frame, entity.yOld, entity.getY());
         double z = Mth.lerp(frame, entity.zOld, entity.getZ());
 
-
         float f1 = 0.0F;
 
-        if (entity.tickCount > 20) {
+        if (entity.isActivated()) {
             poseStack.pushPose();
 
             poseStack.translate(-x, -y, -z);

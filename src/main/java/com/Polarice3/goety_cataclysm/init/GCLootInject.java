@@ -14,6 +14,9 @@ public class GCLootInject {
     @SubscribeEvent
     public static void InjectLootTables(LootTableLoadEvent evt) {
         String name = evt.getName().toString();
+        if (name.equals("cataclysm:entities/ender_golem")) {
+            evt.getTable().addPool(getInjectPool("entities/ender_golem"));
+        }
         if (name.equals("cataclysm:entities/the_leviathan")) {
             evt.getTable().addPool(getInjectPool("entities/the_leviathan"));
         }

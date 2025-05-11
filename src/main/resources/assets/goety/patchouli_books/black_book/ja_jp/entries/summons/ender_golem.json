@@ -35,6 +35,18 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:void_lantern_block"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ender_golem_skull",
+      "text": "ゴーレムが戦闘または指揮から落ちた場合、彼らは「頭」を落とします。 スカルを使用すると、より安価な方法でゴーレムを復活させることができます。 しかし、スカルは元の創造主であり主人であることを覚えており、復活したゴーレムは彼らの命令にのみ従うでしょう。"    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem_revive",
+      "enable_visualize": false
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ender_golem_skull": 7
+  }
 }

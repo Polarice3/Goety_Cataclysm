@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "nbn",
+    "bob",
+    "nbn"
+  ],
+  "key":
+  {
+    "n":
+    {
+      "tag": "forge:ingots/netherite"
+    },
+    "o":
+    {
+      "tag": "forge:obsidian"
+    },
+    "b":
+    {
+      "tag": "forge:rods/blaze"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:netherite_plating",
+    "count": 1
+  }
+}

@@ -5,7 +5,7 @@ license="All Rights Reserved"
 modId="goety_cataclysm"
 version="${mod_version}"
 displayName="${mod_name}"
-displayURL="https://github.com/Polarice3/Goety-2"
+displayURL="https://github.com/Polarice3/Goety_Cataclysm"
 logoFile="GCLogo.png"
 credits="L_Ender for making L_Ender's Cataclysm, Lionfish API."
 authors="Polarice3"
@@ -27,12 +27,12 @@ side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="goety"
 mandatory=true
-versionRange="[2.5.29.4,)"
+versionRange="[2.5.33.0,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="cataclysm"
 mandatory=true
-versionRange="[2.56,)"
+versionRange="[2.65,)"
 ordering="NONE"
 side="BOTH"

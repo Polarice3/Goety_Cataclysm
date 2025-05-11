@@ -4,6 +4,7 @@ import com.Polarice3.Goety.api.magic.IMold;
 import com.Polarice3.Goety.common.research.ResearchList;
 import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
+import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
@@ -490,7 +491,7 @@ public class NetheriteMonstrosityMold implements IMold {
         List<BlockPos> invalid = new ArrayList<>();
         for (BlockPos blockPos1 : NETHERITE_LOCATIONS){
             BlockPos blockPos2 = blockPos.offset(blockPos1);
-            if (!level.getBlockState(blockPos2).is(Tags.Blocks.STORAGE_BLOCKS_NETHERITE)){
+            if (!level.getBlockState(blockPos2).is(GCBlocks.NETHERITE_PLATING.get())){
                 invalid.add(blockPos1);
             }
         }
@@ -608,7 +609,7 @@ public class NetheriteMonstrosityMold implements IMold {
             }
             for (BlockPos blockPos1 : NETHERITE_LOCATIONS) {
                 BlockPos blockPos2 = blockPos.offset(blockPos1);
-                if (level.getBlockState(blockPos2).is(Tags.Blocks.STORAGE_BLOCKS_NETHERITE)) {
+                if (level.getBlockState(blockPos2).is(GCBlocks.NETHERITE_PLATING.get())) {
                     level.levelEvent(2001, blockPos2, Block.getId(level.getBlockState(blockPos2)));
                     level.setBlockAndUpdate(blockPos2, Blocks.AIR.defaultBlockState());
                 }

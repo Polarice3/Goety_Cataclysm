@@ -16,9 +16,12 @@
   "advancements.goety_cataclysm.summon_prowler.title": "On the Prowl",
   "advancements.goety_cataclysm.summon_prowler.description": "Summon a Prowler.",
 
+  "block.goety_cataclysm.ender_golem_skull": "Ender Golem Skull",
   "block.goety_cataclysm.fabricator": "Mechanical Fabricator",
   "block.goety_cataclysm.mechanized_iron_block": "Mechanized Iron Block",
+  "block.goety_cataclysm.netherite_plating": "Netherite Plating",
   "block.goety_cataclysm.void_mold_block": "Void Mold Block",
+  "block.goety_cataclysm.wall_ender_golem_skull": "Ender Golem Skull",
 
   "entity.goety_cataclysm.aptrgangr": "Aptrgangr",
   "entity.goety_cataclysm.coralssus": "Coralssus",
@@ -64,6 +67,8 @@
   "item.goety_cataclysm.cursed_grave_focus.info": "Summons Draugr Servants. Cast crouching will summon the caster's servants towards them.",
   "item.goety_cataclysm.cursed_tomb_focus": "Cursed Tomb Focus",
   "item.goety_cataclysm.cursed_tomb_focus.info": "Summons Royal Draugr Servants. Cast crouching will summon the caster's servants towards them.",
+  "item.goety_cataclysm.death_laser_focus": "Death Laser Focus",
+  "item.goety_cataclysm.death_laser_focus.info": "Shoots a deadly laser that deals constant damage.",
   "item.goety_cataclysm.desert_crush_focus": "Desert Crush Focus",
   "item.goety_cataclysm.desert_crush_focus.info": "Summons Ancient Desert Steles around the caster, that will then drop and damage any non-allied targets below them.",
   "item.goety_cataclysm.desert_raid_focus": "Desert Raid Focus",

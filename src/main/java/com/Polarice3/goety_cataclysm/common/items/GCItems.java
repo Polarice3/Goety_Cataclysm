@@ -3,6 +3,8 @@ package com.Polarice3.goety_cataclysm.common.items;
 import com.Polarice3.Goety.common.items.ItemBase;
 import com.Polarice3.Goety.common.items.magic.MagicFocus;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
+import com.Polarice3.goety_cataclysm.client.render.block.GCISTER;
+import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
 import com.Polarice3.goety_cataclysm.common.items.revive.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
@@ -12,14 +14,20 @@ import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.KoboletonSpe
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.RoyalDraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.BlazingFireSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.FlareBombSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.storm.DeathLaserSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.void_spells.VoidRuneSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.void_spells.VoidVortexSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.wind.SandstormSpell;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Consumer;
 
 public class GCItems {
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GoetyCataclysm.MOD_ID);
@@ -50,6 +58,9 @@ public class GCItems {
     public static final RegistryObject<Item> EXTINCT_FLAME_FOCUS = ITEMS.register("extinct_flame_focus", () -> new MagicFocus(new BlazingFireSpell()));
     public static final RegistryObject<Item> FLARE_BOMB_FOCUS = ITEMS.register("flare_bomb_focus", () -> new MagicFocus(new FlareBombSpell()));
 
+    ///Storm
+    public static final RegistryObject<Item> DEATH_LASER_FOCUS = ITEMS.register("death_laser_focus", () -> new MagicFocus(new DeathLaserSpell()));
+
     ///Void
     public static final RegistryObject<Item> VOID_RUNE_FOCUS = ITEMS.register("void_rune_focus", () -> new MagicFocus(new VoidRuneSpell()));
     public static final RegistryObject<Item> VOID_VORTEX_FOCUS = ITEMS.register("void_vortex_focus", () -> new MagicFocus(new VoidVortexSpell()));
@@ -64,4 +75,16 @@ public class GCItems {
     public static final RegistryObject<Item> MECHANIZED_CORE = ITEMS.register("mechanized_core", MechanizedCore::new);
     public static final RegistryObject<Item> WARRIOR_SPIRIT = ITEMS.register("warrior_spirit", WarriorSpirit::new);
     public static final RegistryObject<Item> ARCANE_SPIRIT = ITEMS.register("arcane_spirit", ArcaneSpirit::new);
+    public static final RegistryObject<Item> ENDER_GOLEM_SKULL_ITEM = ITEMS.register("ender_golem_skull",
+            () -> new EnderGolemSkullItem((new Item.Properties()).rarity(Rarity.UNCOMMON).fireResistant()){
+                @Override
+                public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+                    consumer.accept(new IClientItemExtensions() {
+                        @Override
+                        public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                            return new GCISTER();
+                        }
+                    });
+                }
+            });
 }

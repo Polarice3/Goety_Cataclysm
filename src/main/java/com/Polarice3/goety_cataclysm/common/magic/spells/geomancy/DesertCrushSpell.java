@@ -16,11 +16,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DesertCrushSpell extends Spell {
 
@@ -48,6 +52,14 @@ public class DesertCrushSpell extends Spell {
     @Override
     public SpellType getSpellType() {
         return SpellType.GEOMANCY;
+    }
+
+    @Override
+    public List<Enchantment> acceptedEnchantments() {
+        List<Enchantment> list = new ArrayList<>();
+        list.add(ModEnchantments.POTENCY.get());
+        list.add(ModEnchantments.RANGE.get());
+        return list;
     }
 
     @Override
