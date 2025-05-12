@@ -6,6 +6,7 @@ import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.entities.projectiles.Fangs;
 import com.Polarice3.Goety.config.MobsConfig;
+import com.Polarice3.Goety.init.ModTags;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.NoKnockBackDamageSource;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
@@ -155,8 +156,8 @@ public class GCEvents {
 
     @SubscribeEvent
     public static void PotionApplicationEvent(MobEffectEvent.Applicable event){
-        if (!event.getEntity().canBeAffected(new MobEffectInstance(ModEffect.EFFECTSTUN.get()))){
-            if (event.getEffectInstance().getEffect() == GoetyEffects.STUNNED.get()){
+        if (event.getEffectInstance().getEffect() == ModEffect.EFFECTSTUN.get()){
+            if (event.getEntity().getType().is(ModTags.EntityTypes.UNSTUNNABLE)){
                 event.setResult(Event.Result.DENY);
             }
         }

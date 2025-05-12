@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "__comment": "entities that cannot get Goety's Stunned effect.",
+  "values": [
+    "cataclysm:the_prowler",
+    "cataclysm:coralssus",
+    "cataclysm:kobolediator",
+    "cataclysm:wadjet",
+    "cataclysm:aptrgangr",
+    "goety_cataclysm:the_prowler",
+    "goety_cataclysm:coralssus",
+    "goety_cataclysm:kobolediator",
+    "goety_cataclysm:wadjet",
+    "goety_cataclysm:aptrgangr"
+  ]
+}
