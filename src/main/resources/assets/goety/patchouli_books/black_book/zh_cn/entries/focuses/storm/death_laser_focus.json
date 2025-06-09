@@ -1,0 +1,18 @@
+{
+  "name": "死亡激光聚晶",
+  "icon": "goety_cataclysm:death_laser_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "施法者只需使用该魔法就可以复现徘徊者的死亡激光，轰炸面前的所有目标"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/death_laser_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:death_laser_focus": 1
+  }
+}

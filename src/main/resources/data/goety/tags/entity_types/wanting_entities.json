@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "cataclysm:flame_jet",
+    "cataclysm:void_rune",
+    "cataclysm:void_shard",
+    "cataclysm:blazing_bone",
+    "cataclysm:ashen_breath",
+    "cataclysm:lionfish_spike",
+    "goety_cataclysm:ignis_fireball",
+    "goety_cataclysm:ignis_abyss_fireball",
+    "goety_cataclysm:flare_bomb",
+    "goety_cataclysm:laser_beam",
+    "goety_cataclysm:wither_homing_missile"
+  ]
+}

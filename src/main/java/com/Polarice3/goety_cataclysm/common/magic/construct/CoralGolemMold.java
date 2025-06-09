@@ -170,7 +170,7 @@ public class CoralGolemMold implements IMold {
         if (!level.isClientSide) {
             for (BlockPos blockPos1 : CORAL_LOCATIONS) {
                 BlockPos blockPos2 = blockPos.offset(blockPos1);
-                if (level.getBlockState(blockPos2).is(Tags.Blocks.STORAGE_BLOCKS_COPPER)) {
+                if (level.getBlockState(blockPos2).is(BlockTags.CORAL_BLOCKS)) {
                     level.levelEvent(2001, blockPos2, Block.getId(level.getBlockState(blockPos2)));
                     level.setBlockAndUpdate(blockPos2, Blocks.AIR.defaultBlockState());
                 }

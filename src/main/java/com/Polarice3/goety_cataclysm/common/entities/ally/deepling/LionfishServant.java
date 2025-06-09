@@ -88,12 +88,12 @@ public class LionfishServant extends Summoned implements IAnimatedEntity {
         this.goalSelector.addGoal(4, new AnimalAIRandomSwimming(this, 1F, 12, 5){
             @Nullable
             protected Vec3 getPosition() {
-                return LionfishServant.this.isPatrolling() ? this.randomBoundPos() : super.getPosition();
+                return LionfishServant.this.isGuardingArea() ? this.randomBoundPos() : super.getPosition();
             }
 
             public Vec3 randomBoundPos() {
                 Vec3 vec3 = null;
-                int range = IServant.PATROL_RANGE / 2;
+                int range = IServant.GUARDING_RANGE / 2;
 
                 for(int i = 0; i < 10; ++i) {
                     BlockPos blockPos = LionfishServant.this.getBoundPos().offset(LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range), LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range), LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range));
