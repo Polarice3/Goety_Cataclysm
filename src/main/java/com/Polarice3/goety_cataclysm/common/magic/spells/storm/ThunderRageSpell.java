@@ -167,7 +167,7 @@ public class ThunderRageSpell extends Spell {
                 lightning.setPosRaw(d0, d1, d2);
                 lightning.setAreaDamage(GCSpellConfig.LightningSpearAreaDamage.get().floatValue() + potency);
                 if (rightStaff(staff)) {
-                    lightning.setHpDamage(GCSpellConfig.LightningSpearHPDamage.get().floatValue() + potency);
+                    lightning.setHpDamage(GCSpellConfig.LightningSpearHPDamage.get().floatValue());
                 }
                 lightning.setAreaRadius((float) (radius));
 
