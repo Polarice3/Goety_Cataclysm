@@ -1,0 +1,22 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "minecraft:pufferfish"
+  },
+  "craftType": "deep",
+  "entity_to_summon": "goety_cataclysm:urchinkin_servant",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:pufferfish"
+    },
+    {
+      "item": "minecraft:kelp"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

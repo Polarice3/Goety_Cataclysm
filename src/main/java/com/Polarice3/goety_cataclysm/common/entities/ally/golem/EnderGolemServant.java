@@ -6,6 +6,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
@@ -76,7 +77,6 @@ public class EnderGolemServant extends LLibraryBossSummon {
         this.setMaxUpStep(1.5F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.EnderGolemHealthMultiplier, CMConfig.EnderGolemDamageMultiplier);
     }
 
     public Animation[] getAnimations() {
@@ -96,10 +96,17 @@ public class EnderGolemServant extends LLibraryBossSummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 20.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 10.0F)
-                .add(Attributes.MAX_HEALTH, 150.0F)
-                .add(Attributes.ARMOR, 12.0F)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.EnderGolemDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.EnderGolemHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.EnderGolemArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0F);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.EnderGolemHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.EnderGolemArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.EnderGolemDamage.get());
     }
 
     protected int decreaseAirSupply(int air) {

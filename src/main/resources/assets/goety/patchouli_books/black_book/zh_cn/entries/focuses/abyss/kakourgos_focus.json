@@ -1,0 +1,18 @@
+{
+  "name": "罪行者聚晶",
+  "icon": "goety_cataclysm:kakourgos_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "自海洋而来，召唤那些多刺且有毒的小家伙滚来滚去，让它们用尖刺和粗暴的攻击毒死你的敌人"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/kakourgos_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:kakourgos_focus": 1
+  }
+}

@@ -8,12 +8,12 @@ import java.util.EnumSet;
 
 public class InternalSummonAttackGoal extends Goal {
     protected final InternalAnimationSummon entity;
-    private final int getattackstate;
-    private final int attackstate;
-    private final int attackendstate;
-    private final int attackMaxtick;
-    private final int attackseetick;
-    private final float attackrange;
+    protected final int getattackstate;
+    protected final int attackstate;
+    protected final int attackendstate;
+    protected final int attackMaxtick;
+    protected final int attackseetick;
+    protected final float attackrange;
 
     public InternalSummonAttackGoal(InternalAnimationSummon entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackrange) {
         this.entity = entity;

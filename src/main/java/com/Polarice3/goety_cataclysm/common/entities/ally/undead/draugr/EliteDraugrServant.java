@@ -1,8 +1,10 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +29,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.monster.CrossbowAttackMob;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.CrossbowItem;
@@ -81,10 +84,17 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.27F)
-                .add(Attributes.ATTACK_DAMAGE, 5.0F)
-                .add(Attributes.MAX_HEALTH, 32.0F)
-                .add(Attributes.ARMOR, 3.0F)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.EliteDraugrMeleeDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.EliteDraugrHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.EliteDraugrArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1F);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.EliteDraugrHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.EliteDraugrArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.EliteDraugrMeleeDamage.get());
     }
 
     public MobType getMobType() {
@@ -223,6 +233,9 @@ public class EliteDraugrServant extends InternalAnimationSummon implements Cross
     }
 
     public void shootCrossbowProjectile(LivingEntity p_32328_, ItemStack p_32329_, Projectile p_32330_, float p_32331_) {
+        if (p_32330_ instanceof AbstractArrow arrow) {
+            arrow.setBaseDamage(arrow.getBaseDamage() + GCAttributesConfig.EliteDraugrRangeDamage.get());
+        }
         this.shootCrossbowProjectile(this, p_32328_, p_32330_, p_32331_, 1.6F);
     }
 

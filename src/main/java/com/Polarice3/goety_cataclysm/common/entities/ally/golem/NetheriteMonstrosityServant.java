@@ -15,6 +15,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveG
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.FlareBomb;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
@@ -146,7 +147,6 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 0.0F);
-        setConfigAttribute(this, CMConfig.MonstrosityHealthMultiplier, CMConfig.MonstrosityDamageMultiplier);
     }
 
     protected void registerGoals() {
@@ -278,11 +278,18 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25F)
-                .add(Attributes.ATTACK_DAMAGE, 25.0D)
-                .add(Attributes.MAX_HEALTH, 600.0D)
-                .add(Attributes.ARMOR, 12.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.NetheriteMonstrosityDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.NetheriteMonstrosityHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.NetheriteMonstrosityArmor.get())
                 .add(Attributes.ARMOR_TOUGHNESS, 5.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.NetheriteMonstrosityHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.NetheriteMonstrosityArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.NetheriteMonstrosityDamage.get());
     }
 
     @Override
@@ -974,8 +981,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
                 boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player  && shieldbreakticks > 0) {
-                    this.disableShield(player, shieldbreakticks);
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    this.disableShield(entity, shieldbreakticks);
                 }
 
                 if (flag) {
@@ -1023,8 +1030,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(area))) {
             if (!MobUtil.areAllies(this, entity)) {
                 boolean flag = entity.hurt(this.getMobAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + Math.min(this.getAttributeValue(Attributes.ATTACK_DAMAGE), entity.getMaxHealth() * CMConfig.MonstrositysHpdamage)));
-                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player) {
-                    this.disableShield(player, 120);
+                if (entity.isDamageSourceBlocked(this.getMobAttack())) {
+                    this.disableShield(entity, 120);
                 }
 
                 if (flag) {

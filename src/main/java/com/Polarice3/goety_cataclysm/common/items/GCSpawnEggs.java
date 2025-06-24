@@ -79,6 +79,24 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> APTRGANGR_SPAWN_EGG = ITEMS.register("aptrgangr_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.APTRGANGR, 0x2f303c, 0x8bffe6, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> HIPPOCAMPTUS_SPAWN_EGG = ITEMS.register("hippocamptus_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.HIPPOCAMTUS, 0x504b77, 0xffe98e, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> CINDARIA_SERVANT_SPAWN_EGG = ITEMS.register("cindaria_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.CINDARIA_SERVANT, 0x7257e4, 0xb0fec0, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> CLAWDIAN_SPAWN_EGG = ITEMS.register("clawdian_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.CLAWDIAN, 0x383c61, 0xe3845a, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> URCHINKIN_SERVANT_SPAWN_EGG = ITEMS.register("urchinkin_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.URCHINKIN_SERVANT, 0x0f0220, 0xffffff, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> DROWNED_HOST_SERVANT_SPAWN_EGG = ITEMS.register("drowned_host_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DROWNED_HOST_SERVANT, 0x182d37, 0xe7b275, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> SYMBIOCTO_SERVANT_SPAWN_EGG = ITEMS.register("symbiocto_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.SYMBIOCTO_SERVANT, 0x462014, 0xf2b3a1, egg()));
+
     public static Item.Properties egg(){
         return new Item.Properties();
     }

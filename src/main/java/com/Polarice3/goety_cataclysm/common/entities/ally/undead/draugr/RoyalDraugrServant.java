@@ -2,7 +2,9 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.etc.IShieldEntity;
@@ -65,10 +67,17 @@ public class RoyalDraugrServant extends Summoned implements IShieldEntity {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.27F)
-                .add(Attributes.ATTACK_DAMAGE, 5.0F)
-                .add(Attributes.MAX_HEALTH, 30.0F)
-                .add(Attributes.ARMOR, 5.0F)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.RoyalDraugrDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.RoyalDraugrHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.RoyalDraugrArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.1F);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.RoyalDraugrHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.RoyalDraugrArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.RoyalDraugrDamage.get());
     }
 
     public MobType getMobType() {

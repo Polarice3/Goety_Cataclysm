@@ -3,6 +3,7 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 import com.Polarice3.Goety.utils.ItemHelper;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.projectile.ThrownCoral_Bardiche_Entity;
@@ -60,11 +61,18 @@ public class DeeplingBruteServant extends AbstractDeeplingServant{
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.29F)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.MAX_HEALTH, 60)
-                .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.ARMOR, 8)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.35);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.DeeplingBruteDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.DeeplingBruteHealth.get())
+                .add(Attributes.FOLLOW_RANGE, 20.0D)
+                .add(Attributes.ARMOR, GCAttributesConfig.DeeplingBruteArmor.get())
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.35D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.DeeplingBruteHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.DeeplingBruteArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.DeeplingBruteDamage.get());
     }
 
     @Override

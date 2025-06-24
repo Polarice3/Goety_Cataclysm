@@ -3,7 +3,9 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.neutral.Owned;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import net.minecraft.nbt.CompoundTag;
@@ -48,10 +50,17 @@ public class DraugrServant extends Summoned {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.MAX_HEALTH, 28.0D)
-                .add(Attributes.ARMOR, 3.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.DraugrDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.DraugrHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.DraugrArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.05D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.DraugrHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.DraugrArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.DraugrDamage.get());
     }
 
     public MobType getMobType() {

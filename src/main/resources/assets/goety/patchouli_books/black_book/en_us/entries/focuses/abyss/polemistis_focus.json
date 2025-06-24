@@ -1,0 +1,18 @@
+{
+  "name": "Polemistís Focus",
+  "icon": "goety_cataclysm:polemistis_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The spell not only allows you to summon Drowned Servants directly, but also come wearing an ink shooting friend as a hat."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/polemistis_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:polemistis_focus": 1
+  }
+}

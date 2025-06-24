@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "cataclysm:laser",
-    "cataclysm:deathlaser"
+    "cataclysm:deathlaser",
+    "cataclysm:lightning",
+    "cataclysm:storm_bringer",
+    "cataclysm:flame_strike"
   ]
 }

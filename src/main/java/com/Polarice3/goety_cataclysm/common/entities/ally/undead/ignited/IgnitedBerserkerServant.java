@@ -10,6 +10,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveG
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedSoul;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -130,18 +131,23 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
                 IgnitedBerserkerServant.this.spin_cooldown = SPIN_COOLDOWN;
             }
         });
-
-
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.32F)
-                .add(Attributes.ATTACK_DAMAGE, 7.5F)
-                .add(Attributes.MAX_HEALTH, 65.0D)
-                .add(Attributes.ARMOR, 8.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.IgnitedBerserkerDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.IgnitedBerserkerHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.IgnitedBerserkerArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.IgnitedBerserkerHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.IgnitedBerserkerArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.IgnitedBerserkerDamage.get());
     }
 
     @Override
@@ -409,10 +415,9 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
                 if (!MobUtil.areAllies(this, entityHit)) {
                     DamageSource damagesource = CMDamageTypes.causeSwordDanceDamage(this);
                     boolean flag = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(damagesource) && entityHit instanceof Player player && shieldbreakticks > 0) {
-                        disableShield(player, shieldbreakticks);
+                    if (entityHit.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
+                        disableShield(entityHit, shieldbreakticks);
                     }
-
 
                     if (flag) {
                         MobEffectInstance effectinstance1 = entityHit.getEffect(ModEffect.EFFECTBLAZING_BRAND.get());

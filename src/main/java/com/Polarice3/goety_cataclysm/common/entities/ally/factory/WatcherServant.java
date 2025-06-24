@@ -1,12 +1,13 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.factory;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.LaserBeamProjectile;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
@@ -67,10 +68,17 @@ public class WatcherServant extends LLibrarySummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 5)
-                .add(Attributes.MAX_HEALTH, 25)
-                .add(Attributes.ARMOR, 5)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.WatcherMeleeDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.WatcherHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.WatcherArmor.get())
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.WatcherHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.WatcherArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.WatcherMeleeDamage.get());
     }
 
     @Override
@@ -123,7 +131,7 @@ public class WatcherServant extends LLibrarySummon {
                     double d5 = target.getZ() - d2;
 
                     Vec3 vec3 = new Vec3(d3, d4, d5);
-                    LaserBeamProjectile laserBeam = new LaserBeamProjectile(this, d3, d4, d5, this.level(), (float) CMConfig.HarbingerLaserdamage);
+                    LaserBeamProjectile laserBeam = new LaserBeamProjectile(this, d3, d4, d5, this.level(), GCAttributesConfig.WatcherRangeDamage.get().floatValue());
                     float yRot = (float) (Mth.atan2(vec3.z, vec3.x) * (180F / Math.PI)) + 90F;
                     float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
                     laserBeam.setYRot(yRot);

@@ -72,6 +72,13 @@ repositories {
         }
     }
     maven {
+        name = "Modrinth Maven"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven {
         name = "Curios"
         url = "https://maven.theillusivec4.top"
     }
@@ -110,9 +117,9 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     //Compat
-    implementation fg.deobf("curse.maven:goety-586095:6628028")
+    implementation fg.deobf("curse.maven:goety-586095:6660730")
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:6501448")
+    implementation fg.deobf("maven.modrinth:l_enders-cataclysm:QHJDhxzx")
 
     //Testing Only
     runtimeOnly fg.deobf("curse.maven:yeetus-635427:4680832")
@@ -149,7 +156,7 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 

@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "item": "cataclysm:essence_of_the_storm"
+  },
+  "craftType": "deep",
+  "entity_to_summon": "goety_cataclysm:clawdian",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:chitin_claw"
+    },
+    {
+      "item": "cataclysm:lacrima"
+    },
+    {
+      "item": "cataclysm:chitin_claw"
+    },
+    {
+      "item": "cataclysm:lacrima"
+    },
+    {
+      "item": "cataclysm:blessed_amethyst_crab_meat"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "cataclysm:blessed_amethyst_crab_meat"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

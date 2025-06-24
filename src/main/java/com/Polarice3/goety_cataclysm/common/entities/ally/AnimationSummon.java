@@ -65,11 +65,15 @@ public class AnimationSummon extends Summoned {
         return Math.atan2(second.getZ() - first.getZ(), second.getX() - first.getX()) * 57.29577951308232 + 90.0;
     }
 
-    public void disableShield(Player player, int ticks) {
-        if (player.isBlocking() && !player.level().isClientSide) {
-            player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
-            player.stopUsingItem();
-            player.level().broadcastEntityEvent(this, (byte)30);
+    public void disableShield(LivingEntity livingEntity, int ticks) {
+        if (livingEntity instanceof Player player) {
+            if (player.isBlocking() && !player.level().isClientSide) {
+                player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
+                player.stopUsingItem();
+                player.level().broadcastEntityEvent(this, (byte) 30);
+            }
+        } else {
+            MobUtil.disableShield(livingEntity);
         }
 
     }

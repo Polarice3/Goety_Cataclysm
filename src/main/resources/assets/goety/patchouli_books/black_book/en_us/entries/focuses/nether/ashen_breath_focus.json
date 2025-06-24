@@ -1,0 +1,15 @@
+{
+  "name": "Ashen Breath Focus",
+  "icon": "goety_cataclysm:ashen_breath_focus",
+  "category": "goety:cataclysm/focuses/nether",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Rather than burning flames, you breath a short burst of burning ash upon your foes, dealing more damage and blinding your foes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/ashen_breath_focus"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 
 import com.Polarice3.Goety.utils.ItemHelper;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssMark;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
@@ -52,10 +54,18 @@ public class DeeplingWarlockServant extends AbstractDeeplingServant{
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.27F)
-                .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.MAX_HEALTH, 45)
-                .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.DeeplingPriestDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.DeeplingPriestHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.DeeplingPriestArmor.get())
+                .add(Attributes.FOLLOW_RANGE, 20.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.DeeplingPriestHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.DeeplingPriestArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.DeeplingPriestDamage.get());
     }
 
     @Override

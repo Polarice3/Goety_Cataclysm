@@ -1,0 +1,75 @@
+{
+  "name": "卫城的仆从们",
+  "icon": "cataclysm:lacrima",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你在斯库拉的庇护所中发现了许多海洋生物，当然，你也设法将他们招入了你的麾下"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:urchinkin_servant"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_urchinkin_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这些体表覆盖毒刺的微小生物却能够造成巨大的妨害，如果它们的召唤者穿了荒野长袍，那它们的毒甚至能毒害亡灵生物"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:symbiocto_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "一种奇特的章鱼，似乎和溺尸有共生关系，它会紧紧抓住宿主的头，向自己或宿主的敌人喷射墨水，如果章鱼共生体仆从没附身在溺尸仆从身上，你可以用命令聚晶让它去附身一个，或者，如果你愿意的话，潜行时右键章鱼共生体仆从可以让它附身在你的头上，在不潜行时空手右键它即可让它从你的头上下来"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:cindaria_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_cindaria_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这位皇室成员不仅可以向敌人发射沧波棱刺，在近战时可以同时命中成群生物并造成大量伤害"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:hippocamtus",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_hippocamtus_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "卫城的守卫兵，这些海上的战士不仅有着更远的触及距离，还可以格挡攻击并让攻击者陷入一定时间的眩晕，以便用长矛迅速了结它们"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:clawdian",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_clawdian_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这个巨大的仆从在战斗力上胜过许多同类型的敌人或仆从，尽管它和冥行武弁一样不太可控的冲锋是个可悲的习惯，距离较远时，巨钳守卫可以抓起地上的方块砸向目标，当然，它们还具有召唤水波浪的强大能力"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这类可以通过喂食鱼类/召唤者穿戴深渊长袍后治疗"
+    }
+  ]
+}

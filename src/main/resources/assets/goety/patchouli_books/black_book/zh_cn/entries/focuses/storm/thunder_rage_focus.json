@@ -1,0 +1,18 @@
+{
+  "name": "雷霆之怒聚晶",
+  "icon": "goety_cataclysm:thunder_rage_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "复刻斯库拉的愤怒！这个法术需要长按连续施法，然后，施法者会在自身周围逐渐生成风暴与风暴云，随后生成的是施法者头顶上能够持续发射一连串沧波棱刺或鸣雷槊的云层"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:thunder_rage_focus": 1
+  }
+}

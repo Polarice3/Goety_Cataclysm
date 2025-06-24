@@ -12,11 +12,11 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonState
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.WarriorSpirit;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
@@ -97,7 +97,6 @@ public class KobolediatorServant extends InternalAnimationSummon {
         this.setMaxUpStep(1.25F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.KobolediatorHealthMultiplier, CMConfig.KobolediatorDamageMultiplier);
     }
 
     protected void registerGoals() {
@@ -169,10 +168,17 @@ public class KobolediatorServant extends InternalAnimationSummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 14.0D)
-                .add(Attributes.MAX_HEALTH, 180.0D)
-                .add(Attributes.ARMOR, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.KobolediatorDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.KobolediatorHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.KobolediatorArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.KobolediatorHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.KobolediatorArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.KobolediatorDamage.get());
     }
 
     public MobType getMobType() {
@@ -548,8 +554,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
                     entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && entityHit instanceof Player player && shieldbreakticks > 0) {
-                        this.disableShield(player, shieldbreakticks);
+                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                        this.disableShield(entityHit, shieldbreakticks);
                     }
 
                 }
@@ -628,8 +634,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
                 boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(this.getMobAttack()) && entity instanceof Player player  && shieldbreakticks > 0) {
-                    disableShield(player, shieldbreakticks);
+                if (entity.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    disableShield(entity, shieldbreakticks);
                 }
 
                 if (flag) {

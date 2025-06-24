@@ -1,0 +1,39 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:rotting_focus"
+  },
+  "craftType": "deep",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:ink_sac"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:polemistis_focus"
+  }
+}

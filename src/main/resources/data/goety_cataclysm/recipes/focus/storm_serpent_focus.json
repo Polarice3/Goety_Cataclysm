@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:animation_core"
+  },
+  "craftType": "storm",
+  "soulCost": 1,
+  "duration": 30,
+  "ingredients": [
+    {
+      "item": "cataclysm:astrape"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "cataclysm:essence_of_the_storm"
+    },
+    {
+      "item": "cataclysm:essence_of_the_storm"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:storm_serpent_focus"
+  }
+}

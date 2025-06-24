@@ -2,7 +2,6 @@ package com.Polarice3.goety_cataclysm.common.events;
 
 import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.api.magic.GolemType;
-import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.entities.projectiles.Fangs;
 import com.Polarice3.Goety.config.MobsConfig;
@@ -19,6 +18,7 @@ import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -29,6 +29,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
@@ -91,6 +92,37 @@ public class GCEvents {
             if (event.getTarget() instanceof NMPart nmPart){
                 if (nmPart.getParent().getTrueOwner() == event.getEntity() || (nmPart.getParent().getTrueOwner() instanceof IOwned owned && owned.getTrueOwner() == event.getEntity())) {
                     event.getItemStack().getItem().interactLivingEntity(event.getItemStack(), event.getEntity(), nmPart.getParent(), event.getHand());
+                }
+            }
+        }
+    }
+
+    /*@SubscribeEvent
+    public static void TargetEvent(LivingChangeTargetEvent event) {
+        LivingEntity livingEntity = event.getEntity();
+        if (livingEntity instanceof IOwned) {
+            if (event.getOriginalTarget() instanceof Symbiocto_Entity symbiocto){
+                if (symbiocto.getVehicle() instanceof Drowned_Host_Entity vehicle) {
+                    event.setNewTarget(vehicle);
+                }
+            }
+        }
+    }*/
+
+    @SubscribeEvent
+    public void onLivingDamage(LivingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        DamageSource source = event.getSource();
+        float damage = event.getAmount();
+
+        if (source.is(ModTags.DamageTypes.SHOCK_ATTACKS)) {
+            if (entity.hasEffect(ModEffect.EFFECTWETNESS.get())) {
+                MobEffectInstance effectinstance1 = entity.getEffect(ModEffect.EFFECTWETNESS.get());
+                if (effectinstance1 != null) {
+                    float i = (effectinstance1.getAmplifier() + 1) * 0.2F;
+                    float f = damage + damage * i;
+                    damage = Math.min(Float.MAX_VALUE, f);
+                    event.setAmount(damage);
                 }
             }
         }

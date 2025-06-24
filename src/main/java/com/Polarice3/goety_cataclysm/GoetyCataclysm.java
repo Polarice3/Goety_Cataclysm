@@ -3,6 +3,7 @@ package com.Polarice3.goety_cataclysm;
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.blocks.entities.GCBlockEntities;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.common.entities.ally.acropolis.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
@@ -22,6 +23,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.Ignited
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.GCSpawnEggs;
 import com.Polarice3.goety_cataclysm.compat.GCModCompat;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GCCreativeTab;
@@ -65,6 +67,9 @@ public class GoetyCataclysm {
         modEventBus.addListener(this::setupEntityAttributeCreation);
 
         getOrCreateDirectory(FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm"), "goety_cataclysm");
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GCAttributesConfig.SPEC, "goety_cataclysm/goety_cataclysm-attributes.toml");
+        GCAttributesConfig.loadConfig(GCAttributesConfig.SPEC, FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm/goety_cataclysm-attributes.toml").toString());
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, GCSpellConfig.SPEC, "goety_cataclysm/goety_cataclysm-spells.toml");
         GCSpellConfig.loadConfig(GCSpellConfig.SPEC, FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm/goety_cataclysm-spells.toml").toString());
@@ -128,5 +133,11 @@ public class GoetyCataclysm {
         event.put(GCEntityType.ROYAL_DRAUGR_SERVANT.get(), RoyalDraugrServant.setCustomAttributes().build());
         event.put(GCEntityType.ELITE_DRAUGR_SERVANT.get(), EliteDraugrServant.setCustomAttributes().build());
         event.put(GCEntityType.APTRGANGR.get(), AptrgangrServant.setCustomAttributes().build());
+        event.put(GCEntityType.HIPPOCAMTUS.get(), HippocamtusServant.setCustomAttributes().build());
+        event.put(GCEntityType.CINDARIA_SERVANT.get(), CindariaServant.setCustomAttributes().build());
+        event.put(GCEntityType.CLAWDIAN.get(), ClawdianServant.setCustomAttributes().build());
+        event.put(GCEntityType.URCHINKIN_SERVANT.get(), UrchinkinServant.setCustomAttributes().build());
+        event.put(GCEntityType.DROWNED_HOST_SERVANT.get(), DrownedHostServant.setCustomAttributes().build());
+        event.put(GCEntityType.SYMBIOCTO_SERVANT.get(), SymbioctoServant.setCustomAttributes().build());
     }
 }

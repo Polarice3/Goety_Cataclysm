@@ -9,6 +9,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonMoveGoa
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.IgnitedHelm;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -77,7 +78,6 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
         this.setMaxUpStep(1.5F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.RevenantHealthMultiplier, CMConfig.RevenantDamageMultiplier);
     }
 
     @Override
@@ -102,10 +102,17 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 6.0D)
-                .add(Attributes.MAX_HEALTH, 80.0D)
-                .add(Attributes.ARMOR, 12.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.IgnitedRevenantMeleeDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.IgnitedRevenantHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.IgnitedRevenantArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.IgnitedRevenantHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.IgnitedRevenantArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.IgnitedRevenantMeleeDamage.get());
     }
 
     protected int decreaseAirSupply(int air) {
@@ -501,7 +508,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             double vy = 0;
             double vz = Mth.sin(throwAngle);
 
-            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), (float) CMConfig.BlazingBonedamage,this);
+            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), GCAttributesConfig.IgnitedRevenantRangeDamage.get().floatValue(), this);
 
             projectile.moveTo(sx, sy, sz, i * 45F, this.getXRot());
             float speed = 0.5F;
@@ -525,7 +532,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             double vy = 0;
             double vz = Mth.sin(throwAngle);
 
-            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), (float) CMConfig.BlazingBonedamage,this);
+            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), GCAttributesConfig.IgnitedRevenantRangeDamage.get().floatValue(), this);
 
             projectile.moveTo(sx, sy, sz, i * 60F, this.getXRot());
             float speed = 0.6F;
@@ -549,7 +556,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             double vy = 0;
             double vz = Mth.sin(throwAngle);
 
-            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), (float) CMConfig.BlazingBonedamage,this);
+            Blazing_Bone_Entity projectile = new Blazing_Bone_Entity(this.level(), GCAttributesConfig.IgnitedRevenantRangeDamage.get().floatValue(), this);
 
             projectile.moveTo(sx, sy, sz, i * 36F, this.getXRot());
             float speed = 0.4F;

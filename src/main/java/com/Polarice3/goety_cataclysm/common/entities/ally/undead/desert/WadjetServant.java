@@ -11,8 +11,10 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonState
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.ArcaneSpirit;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
+import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
@@ -21,7 +23,6 @@ import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Sandstorm_Projectile;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModParticle;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.client.model.tools.DynamicChain;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,7 +103,6 @@ public class WadjetServant extends InternalAnimationSummon {
         this.setMaxUpStep(1.25F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.WadjetHealthMultiplier, CMConfig.WadjetDamageMultiplier);
     }
 
     protected void registerGoals() {
@@ -146,10 +146,17 @@ public class WadjetServant extends InternalAnimationSummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 11.0D)
-                .add(Attributes.MAX_HEALTH, 150.0D)
-                .add(Attributes.ARMOR, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.WadjetDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.WadjetHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.WadjetArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.7D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.WadjetHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.WadjetArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.WadjetDamage.get());
     }
 
     public MobType getMobType() {
@@ -375,7 +382,7 @@ public class WadjetServant extends InternalAnimationSummon {
         super.aiStep();
         if (this.getAttackState() == 3) {
             if (this.attackTicks == 18) {
-                this.playSound(ModSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
             }
 
             if (this.attackTicks == 20) {
@@ -389,24 +396,24 @@ public class WadjetServant extends InternalAnimationSummon {
 
         if (this.getAttackState() == 5) {
             if (this.attackTicks == 14) {
-                this.playSound(ModSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(8.0F, 6.0F, 45.0F, 1.0F, 90, false);
             }
 
             if (this.attackTicks == 37) {
-                this.playSound(ModSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(6.0F, 4.0F, 220.0F, 1.0F, 70, true);
             }
         }
 
         if (this.getAttackState() == 6) {
             if (this.attackTicks == 14) {
-                this.playSound(ModSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(6.0F, 4.0F, 220.0F, 1.0F, 60, true);
             }
 
             if (this.attackTicks == 28) {
-                this.playSound(ModSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(6.0F, 4.0F, 220.0F, 1.0F, 60, true);
             }
         }
@@ -429,9 +436,9 @@ public class WadjetServant extends InternalAnimationSummon {
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
                     boolean hurt = entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && entityHit instanceof Player player && shieldbreakticks > 0) {
+                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
                         if (shieldbreakticks > 0) {
-                            this.disableShield(player, shieldbreakticks);
+                            this.disableShield(entityHit, shieldbreakticks);
                         }
                     }
                     double d0 = entityHit.getX() - this.getX();
@@ -450,15 +457,15 @@ public class WadjetServant extends InternalAnimationSummon {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return ModSounds.WADJET_HURT.get();
+        return CataclysmSounds.WADJET_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.WADJET_DEATH.get();
+        return CataclysmSounds.WADJET_DEATH.get();
     }
 
     protected SoundEvent getAmbientSound() {
-        return this.isSleep() ? super.getAmbientSound() : ModSounds.WADJET_AMBIENT.get();
+        return this.isSleep() ? super.getAmbientSound() : CataclysmSounds.WADJET_AMBIENT.get();
     }
 
     protected BodyRotationControl createBodyControl() {

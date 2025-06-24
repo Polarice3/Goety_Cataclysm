@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "ldl",
+    "ded",
+    "ldl"
+  ],
+  "key":
+  {
+    "e":
+    {
+      "item": "goety:bouncy_bubble_focus"
+    },
+    "d":
+    {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "l":
+    {
+      "item": "cataclysm:lacrima"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:water_spear_focus",
+    "count": 1
+  }
+}

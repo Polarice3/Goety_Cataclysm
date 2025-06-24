@@ -1,7 +1,9 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 
 import com.Polarice3.Goety.utils.ItemHelper;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -58,10 +60,18 @@ public class DeeplingAnglerServant extends AbstractDeeplingServant {
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.27F)
-                .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.MAX_HEALTH, 30)
-                .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.DeeplingAnglerDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.DeeplingAnglerHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.DeeplingAnglerArmor.get())
+                .add(Attributes.FOLLOW_RANGE, 20.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.DeeplingAnglerHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.DeeplingAnglerArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.DeeplingAnglerDamage.get());
     }
 
     @Override

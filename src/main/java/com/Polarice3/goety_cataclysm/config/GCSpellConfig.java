@@ -28,10 +28,22 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> AbyssalOrbsDamage;
     public static final ForgeConfigSpec.ConfigValue<Double> AbyssalOrbsRadius;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathChargeUp;
+    public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> AshenBreathDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> BlazingFireRadius;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> CindariaCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CindariaDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CindariaCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CindariaSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> CindariaLimit;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> DeathLaserCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> DeathLaserDuration;
@@ -91,10 +103,36 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> KoboletonSummonDown;
     public static final ForgeConfigSpec.ConfigValue<Integer> KoboletonLimit;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> LightningSpearCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> LightningSpearDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> LightningSpearCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> LightningSpearDamage;
+    public static final ForgeConfigSpec.ConfigValue<Double> LightningSpearAreaDamage;
+    public static final ForgeConfigSpec.ConfigValue<Double> LightningSpearHPDamage;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> OctoHostCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> OctoHostDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> OctoHostCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> OctoHostSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> OctoHostLimit;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> SandstormCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> SandstormDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> SandstormCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> SandstormDamage;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> StormSerpentCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> StormSerpentCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> StormSerpentDamage;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> ThunderRageCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ThunderRageCoolDown;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> UrchinkinCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> UrchinkinDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> UrchinkinCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> UrchinkinSummonDown;
+    public static final ForgeConfigSpec.ConfigValue<Integer> UrchinkinLimit;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> VoidRuneCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> VoidRuneDuration;
@@ -105,6 +143,11 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> VoidVortexDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> VoidVortexCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> VoidVortexRadius;
+
+    public static final ForgeConfigSpec.ConfigValue<Integer> WaterSpearCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> WaterSpearDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> WaterSpearCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> WaterSpearDamage;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> AptygangrLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> CoralssusLimit;
@@ -155,6 +198,18 @@ public class GCSpellConfig {
             AbyssalOrbsRadius = BUILDER.comment("Abyssal Orbs default explosion radius, Default: 1.0")
                     .defineInRange("abyssalOrbsRadius", 1.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
+            BUILDER.push("Ashen Breath Spell");
+            AshenBreathCost = BUILDER.comment("Ashen Breath Spell Cost, Default: 16")
+                    .defineInRange("ashenBreathCost", 16, 0, Integer.MAX_VALUE);
+            AshenBreathChargeUp = BUILDER.comment("How many ticks the Ashen Breath Spell must charge before casting, Default: 0")
+                    .defineInRange("ashenBreathChargeUp", 0, 0, Integer.MAX_VALUE);
+            AshenBreathDuration = BUILDER.comment("How long the Ashen Breath Spell can be casted, setting it to 0 will allow the spell to be cast indefinitely, Default: 25")
+                    .defineInRange("ashenBreathTime", 25, 0, 72000);
+            AshenBreathCoolDown = BUILDER.comment("Ashen Breath Spell Cooldown, Default: 200")
+                    .defineInRange("ashenBreathCoolDown", 200, 0, Integer.MAX_VALUE);
+            AshenBreathDamage = BUILDER.comment("Ashen Breath Spell Damage, Default: 4.0")
+                    .defineInRange("ashenBreathDamage", 4.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
             BUILDER.push("Blazing Fire Spell");
             BlazingFireCost = BUILDER.comment("Blazing Fire Spell Cost, Default: 64")
                     .defineInRange("blazingFireCost", 64, 0, Integer.MAX_VALUE);
@@ -164,6 +219,18 @@ public class GCSpellConfig {
                     .defineInRange("blazingFireCoolDown", 300, 0, Integer.MAX_VALUE);
             BlazingFireRadius = BUILDER.comment("Blazing Fire's Fireballs default explosion radius, Default: 1.0")
                     .defineInRange("blazingFireRadius", 1.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Kyría Spell");
+            CindariaCost = BUILDER.comment("Kyría Spell Cost, Default: 64")
+                    .defineInRange("cindariaCost", 64, 0, Integer.MAX_VALUE);
+            CindariaDuration = BUILDER.comment("Time to cast Kyría Spell, Default: 20")
+                    .defineInRange("cindariaTime", 20, 0, 72000);
+            CindariaCoolDown = BUILDER.comment("Kyría Spell Cooldown, Default: 900")
+                    .defineInRange("cindariaCoolDown", 900, 0, Integer.MAX_VALUE);
+            CindariaSummonDown = BUILDER.comment("Kyría Spell Summon Down, Default: 150")
+                    .defineInRange("cindariaSummonDown", 150, 0, 72000);
+            CindariaLimit = BUILDER.comment("Number of Cindaria Servants that can a player can have, Default: 8")
+                    .defineInRange("cindariaLimit", 8, 1, Integer.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Death Laser Spell");
             DeathLaserCost = BUILDER.comment("Death Laser Spell Cost, Default: 128")
@@ -281,6 +348,32 @@ public class GCSpellConfig {
             KoboletonLimit = BUILDER.comment("Number of Koboleton Servants that can a player can have, Default: 32")
                     .defineInRange("koboletonLimit", 32, 1, Integer.MAX_VALUE);
             BUILDER.pop();
+            BUILDER.push("Lightning Spear Spell");
+            LightningSpearCost = BUILDER.comment("Lightning Spear Spell Cost, Default: 64")
+                    .defineInRange("lightningSpearCost", 64, 0, Integer.MAX_VALUE);
+            LightningSpearDuration = BUILDER.comment("Time to cast Lightning Spear Spell, Default: 27")
+                    .defineInRange("lightningSpearTime", 27, 0, 72000);
+            LightningSpearCoolDown = BUILDER.comment("Lightning Spear Spell Cooldown, Default: 80")
+                    .defineInRange("lightningSpearCoolDown", 80, 0, Integer.MAX_VALUE);
+            LightningSpearDamage = BUILDER.comment("Lightning Spear Spell Damage, Default: 14.0")
+                    .defineInRange("lightningSpearDamage", 14.0, 0, Double.MAX_VALUE);
+            LightningSpearAreaDamage = BUILDER.comment("How much damage Lightning Spear's storm cloud deals, Default: 4.0")
+                    .defineInRange("lightningSpearAreaDamage", 4.0, 0, Double.MAX_VALUE);
+            LightningSpearHPDamage = BUILDER.comment("How much Hp percentage damage Storm Staff fired Lightning Spear's storm cloud deals, Default: 0.04")
+                    .defineInRange("lightningSpearHPDamage", 0.04, 0.0, 1.0);
+            BUILDER.pop();
+            BUILDER.push("Polemistís Spell");
+            OctoHostCost = BUILDER.comment("Polemistís Spell Cost, Default: 32")
+                    .defineInRange("octoHostCost", 32, 0, Integer.MAX_VALUE);
+            OctoHostDuration = BUILDER.comment("Time to cast Polemistís Spell, Default: 60")
+                    .defineInRange("octoHostTime", 60, 0, 72000);
+            OctoHostCoolDown = BUILDER.comment("Polemistís Spell Cooldown, Default: 100")
+                    .defineInRange("octoHostCoolDown", 100, 0, Integer.MAX_VALUE);
+            OctoHostSummonDown = BUILDER.comment("Polemistís Spell Summon Down, Default: 300")
+                    .defineInRange("octoHostSummonDown", 300, 0, 72000);
+            OctoHostLimit = BUILDER.comment("Number of Symbiocto Servants that can a player can have, Default: 32")
+                    .defineInRange("octoHostLimit", 16, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
             BUILDER.push("Sandstorm Spell");
             SandstormCost = BUILDER.comment("Sandstorm Spell Cost, Default: 32")
                     .defineInRange("sandstormCost", 32, 0, Integer.MAX_VALUE);
@@ -290,6 +383,32 @@ public class GCSpellConfig {
                     .defineInRange("sandstormCoolDown", 500, 0, Integer.MAX_VALUE);
             SandstormDamage = BUILDER.comment("Sandstorm Spell Damage, Default: 5.0")
                     .defineInRange("sandstormDamage", 5.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Storm Serpent Spell");
+            StormSerpentCost = BUILDER.comment("Storm Serpent Spell Cost, Default: 128")
+                    .defineInRange("stormSerpentCost", 128, 0, Integer.MAX_VALUE);
+            StormSerpentCoolDown = BUILDER.comment("Storm Serpent Spell Cooldown, Default: 350")
+                    .defineInRange("stormSerpentCoolDown", 350, 0, Integer.MAX_VALUE);
+            StormSerpentDamage = BUILDER.comment("Storm Serpent Spell Damage, Default: 16.0")
+                    .defineInRange("stormSerpentDamage", 16.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Thunder Rage Spell");
+            ThunderRageCost = BUILDER.comment("Thunder Rage Spell Cost, Default: 64")
+                    .defineInRange("thunderRageCost", 64, 0, Integer.MAX_VALUE);
+            ThunderRageCoolDown = BUILDER.comment("Thunder Rage Spell Cooldown, Default: 350")
+                    .defineInRange("thunderRageCoolDown", 350, 0, Integer.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Kakoúrgos Spell");
+            UrchinkinCost = BUILDER.comment("Kakoúrgos Spell Cost, Default: 8")
+                    .defineInRange("urchinkinCost", 8, 0, Integer.MAX_VALUE);
+            UrchinkinDuration = BUILDER.comment("Time to cast Kakoúrgos Spell, Default: 60")
+                    .defineInRange("urchinkinTime", 60, 0, 72000);
+            UrchinkinCoolDown = BUILDER.comment("Kakoúrgos Spell Cooldown, Default: 100")
+                    .defineInRange("urchinkinCoolDown", 100, 0, Integer.MAX_VALUE);
+            UrchinkinSummonDown = BUILDER.comment("Kakoúrgos Spell Summon Down, Default: 120")
+                    .defineInRange("urchinkinSummonDown", 120, 0, 72000);
+            UrchinkinLimit = BUILDER.comment("Number of Urchinkin Servants that can a player can have, Default: 32")
+                    .defineInRange("urchinkinLimit", 32, 1, Integer.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Void Rune Spell");
             VoidRuneCost = BUILDER.comment("Void Rune Spell Cost, Default: 12")
@@ -310,6 +429,16 @@ public class GCSpellConfig {
                     .defineInRange("voidVortexCoolDown", 280, 0, Integer.MAX_VALUE);
             VoidVortexRadius = BUILDER.comment("Void Vortex default explosion radius, Default: 2.0")
                     .defineInRange("voidVortexRadius", 2.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Water Spear Spell");
+            WaterSpearCost = BUILDER.comment("Water Spear Spell Cost, Default: 12")
+                    .defineInRange("waterSpearCost", 12, 0, Integer.MAX_VALUE);
+            WaterSpearDuration = BUILDER.comment("Time to cast Water Spear Spell, Default: 0")
+                    .defineInRange("waterSpearTime", 0, 0, 72000);
+            WaterSpearCoolDown = BUILDER.comment("Water Spear Spell Cooldown, Default: 50")
+                    .defineInRange("waterSpearCoolDown", 50, 0, Integer.MAX_VALUE);
+            WaterSpearDamage = BUILDER.comment("Water Spear Spell Damage, Default: 8.0")
+                    .defineInRange("waterSpearDamage", 8.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
         BUILDER.push("Servant Limits");
         AptygangrLimit = BUILDER.comment("Number of Aptrgangr Servants that an individual player can have in total, Default: 2")

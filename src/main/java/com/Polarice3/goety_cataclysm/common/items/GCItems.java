@@ -12,9 +12,13 @@ import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.EliteDraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.KoboletonSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.RoyalDraugrSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.nether.AshenBreathSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.BlazingFireSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.FlareBombSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.storm.DeathLaserSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.storm.LightningSpearSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.storm.StormSerpentSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.storm.ThunderRageSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.void_spells.VoidRuneSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.void_spells.VoidVortexSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.wind.SandstormSpell;
@@ -41,9 +45,13 @@ public class GCItems {
     public static final RegistryObject<Item> ABYSSAL_MINE_FOCUS = ITEMS.register("abyssal_mine_focus", () -> new MagicFocus(new AbyssalMinesSpell()));
     public static final RegistryObject<Item> ABYSSAL_BEAM_FOCUS = ITEMS.register("abyssal_beam_focus", () -> new MagicFocus(new AbyssalBeamSpell()));
     public static final RegistryObject<Item> ABYSSAL_ORB_FOCUS = ITEMS.register("abyssal_orb_focus", () -> new MagicFocus(new AbyssalOrbsSpell()));
+    public static final RegistryObject<Item> WATER_SPEAR_FOCUS = ITEMS.register("water_spear_focus", () -> new MagicFocus(new WaterSpearSpell()));
     public static final RegistryObject<Item> SUNKEN_SWELL_FOCUS = ITEMS.register("sunken_swell_focus", () -> new MagicFocus(new DeeplingSpell()));
     public static final RegistryObject<Item> SUNKEN_CURRENT_FOCUS = ITEMS.register("sunken_current_focus", () -> new MagicFocus(new DeeplingBruteSpell()));
     public static final RegistryObject<Item> SUNKEN_TRIBUNE_FOCUS = ITEMS.register("sunken_tribune_focus", () -> new MagicFocus(new DeeplingCasterSpell()));
+    public static final RegistryObject<Item> KAKOURGOS_FOCUS = ITEMS.register("kakourgos_focus", () -> new MagicFocus(new UrchinkinSpell()));
+    public static final RegistryObject<Item> POLEMISTIS_FOCUS = ITEMS.register("polemistis_focus", () -> new MagicFocus(new OctoHostSpell()));
+    public static final RegistryObject<Item> KYRIA_FOCUS = ITEMS.register("kyria_focus", () -> new MagicFocus(new CindariaSpell()));
 
     ///Geomancy
     public static final RegistryObject<Item> DESERT_CRUSH_FOCUS = ITEMS.register("desert_crush_focus", () -> new MagicFocus(new DesertCrushSpell()));
@@ -55,11 +63,15 @@ public class GCItems {
     public static final RegistryObject<Item> CURSED_TOMB_FOCUS = ITEMS.register("cursed_tomb_focus", () -> new MagicFocus(new RoyalDraugrSpell()));
 
     ///Nether
+    public static final RegistryObject<Item> ASHEN_BREATH_FOCUS = ITEMS.register("ashen_breath_focus", () -> new MagicFocus(new AshenBreathSpell()));
     public static final RegistryObject<Item> EXTINCT_FLAME_FOCUS = ITEMS.register("extinct_flame_focus", () -> new MagicFocus(new BlazingFireSpell()));
     public static final RegistryObject<Item> FLARE_BOMB_FOCUS = ITEMS.register("flare_bomb_focus", () -> new MagicFocus(new FlareBombSpell()));
 
     ///Storm
     public static final RegistryObject<Item> DEATH_LASER_FOCUS = ITEMS.register("death_laser_focus", () -> new MagicFocus(new DeathLaserSpell()));
+    public static final RegistryObject<Item> LIGHTNING_SPEAR_FOCUS = ITEMS.register("lightning_spear_focus", () -> new MagicFocus(new LightningSpearSpell()));
+    public static final RegistryObject<Item> THUNDER_RAGE_FOCUS = ITEMS.register("thunder_rage_focus", () -> new MagicFocus(new ThunderRageSpell()));
+    public static final RegistryObject<Item> STORM_SERPENT_FOCUS = ITEMS.register("storm_serpent_focus", () -> new MagicFocus(new StormSerpentSpell()));
 
     ///Void
     public static final RegistryObject<Item> VOID_RUNE_FOCUS = ITEMS.register("void_rune_focus", () -> new MagicFocus(new VoidRuneSpell()));

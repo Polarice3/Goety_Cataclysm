@@ -1,0 +1,18 @@
+{
+  "name": "Thunder Rage Focus",
+  "icon": "goety_cataclysm:thunder_rage_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Replicating Scylla's wrath, this spell requires continuous casting, where the caster will emit whirlwinds and storm clouds around them, before unleashing a barrage of water and lightning spears at where they're looking from the clouds above."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:thunder_rage_focus": 1
+  }
+}

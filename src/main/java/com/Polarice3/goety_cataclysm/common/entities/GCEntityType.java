@@ -1,6 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities;
 
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
+import com.Polarice3.goety_cataclysm.common.entities.ally.acropolis.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
@@ -137,6 +138,37 @@ public class GCEntityType {
                     .sized(2.4F, 4.0F)
                     .clientTrackingRange(8));
 
+    public static final RegistryObject<EntityType<HippocamtusServant>> HIPPOCAMTUS = register("hippocamtus",
+            EntityType.Builder.of(HippocamtusServant::new, MobCategory.MONSTER)
+                    .sized(0.95F, 3.0F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<CindariaServant>> CINDARIA_SERVANT = register("cindaria_servant",
+            EntityType.Builder.of(CindariaServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 2.3F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<ClawdianServant>> CLAWDIAN = register("clawdian",
+            EntityType.Builder.of(ClawdianServant::new, MobCategory.MONSTER)
+                    .sized(2.5F, 4.5F)
+                    .clientTrackingRange(8)
+                    .fireImmune());
+
+    public static final RegistryObject<EntityType<UrchinkinServant>> URCHINKIN_SERVANT = register("urchinkin_servant",
+            EntityType.Builder.of(UrchinkinServant::new, MobCategory.MONSTER)
+                    .sized(0.7F, 0.7F)
+                    .clientTrackingRange(4));
+
+    public static final RegistryObject<EntityType<DrownedHostServant>> DROWNED_HOST_SERVANT = register("drowned_host_servant",
+            EntityType.Builder.of(DrownedHostServant::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.95F)
+                    .clientTrackingRange(4));
+
+    public static final RegistryObject<EntityType<SymbioctoServant>> SYMBIOCTO_SERVANT = register("symbiocto_servant",
+            EntityType.Builder.of(SymbioctoServant::new, MobCategory.MONSTER)
+                    .sized(1.1F, 0.95F)
+                    .clientTrackingRange(4));
+
     public static final RegistryObject<EntityType<IgnisFireball>> IGNIS_FIREBALL = register("ignis_fireball",
             EntityType.Builder.<IgnisFireball>of(IgnisFireball::new, MobCategory.MISC)
                     .sized(0.6F, 0.6F)
@@ -200,6 +232,13 @@ public class GCEntityType {
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE));
 
+    public static final RegistryObject<EntityType<StormSerpent>> STORM_SERPENT = register("storm_serpent",
+            EntityType.Builder.<StormSerpent>of(StormSerpent::new, MobCategory.MISC)
+                    .sized(2.0F, 9.0F)
+                    .clientTrackingRange(6)
+                    .updateInterval(2)
+                    .fireImmune());
+
     public static final RegistryObject<EntityType<DeathLaserBeam>> DEATH_LASER_BEAM = register("death_laser_beam",
             EntityType.Builder.<DeathLaserBeam>of(DeathLaserBeam::new, MobCategory.MISC)
                     .sized(0.1F, 0.1F)
@@ -226,6 +265,12 @@ public class GCEntityType {
                     .fireImmune()
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE));
+
+    public static final RegistryObject<EntityType<OctoInk>> OCTO_INK = register("octo_ink",
+            EntityType.Builder.<OctoInk>of(OctoInk::new, MobCategory.MISC)
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(10));
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String p_20635_, EntityType.Builder<T> p_20636_) {
         return ENTITY_TYPE.register(p_20635_, () -> p_20636_.build(GoetyCataclysm.location(p_20635_).toString()));

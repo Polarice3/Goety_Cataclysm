@@ -1,0 +1,79 @@
+{
+  "name": "Acropolis Servants",
+  "icon": "cataclysm:lacrima",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A menagerie of sea creatures that are found on Scylla's sanctuary that you've managed to summon and bind to your command."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:urchinkin_servant"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_urchinkin_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Covered with poisonous spines, these tiny creatures can be a massive hindrance, especially if their summoner wears a Wild Robe where their spikes poison even the undead."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:symbiocto_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_drowned_servant_to_drowned_host"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An odd species of octopuses that have a symbiotic relationship with the Drowned, where they will latch onto their heads and shoot powerful ink shots at their and their host's foes. If the Symbiocto is not attached to a Drowned, it can be commanded to attach themselves to another. Or, if one wishes, one can right-click one with an empty hand, while crouching, will have them attach to you. Right-click on them without crouching and with empty hand to de-attach them."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:cindaria_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_cindaria_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These regal creatures are not only capable of shooting spears of water at their foes, but their melee attack hits multiple targets and deals lots of damage."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:hippocamtus",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_hippocamtus_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Guardians of the Acropolis, these seafaring warriors can not only attack their foes from longer distances, but also parry attacks that stuns them long enough to rapidly stab them with their spears."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:clawdian",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_clawdian_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These powerful juggernauts can outperform many foes and servants of similar caliber, though they have a sad habit of charging off ledges like their fellow Aptrgangr. When afar, the crustacean grabs hold of the land and throws them at their target. They also have the hydrokinetic ability to summon waves towards their foes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These creatures can be healed by either donning an Abyss Robe, or feeding them fish."
+    }
+  ]
+}

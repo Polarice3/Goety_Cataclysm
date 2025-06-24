@@ -1,0 +1,18 @@
+{
+  "name": "风暴巨蛇聚晶",
+  "icon": "goety_cataclysm:storm_serpent_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这个聚晶能够让你召唤出幻化的蛇，让它们向着你的敌人猛扑，随后它们会爆炸，并让你的敌人对雷电伤害变得更脆弱"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/storm_serpent_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:storm_serpent_focus": 1
+  }
+}

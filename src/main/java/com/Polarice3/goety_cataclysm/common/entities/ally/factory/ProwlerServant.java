@@ -14,7 +14,9 @@ import com.Polarice3.goety_cataclysm.common.entities.projectiles.DeathLaserBeam;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.WitherHomingMissile;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.MechanizedCore;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
@@ -78,7 +80,6 @@ public class ProwlerServant extends InternalAnimationSummon {
         this.setMaxUpStep(1.25F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.ProwlerHealthMultiplier, CMConfig.ProwlerDamageMultiplier);
     }
 
     protected void registerGoals() {
@@ -135,10 +136,17 @@ public class ProwlerServant extends InternalAnimationSummon {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 14)
-                .add(Attributes.MAX_HEALTH, 160)
-                .add(Attributes.ARMOR, 10)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.95);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.ProwlerMeleeDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.ProwlerHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.ProwlerArmor.get())
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.95D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.ProwlerHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.ProwlerArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.ProwlerMeleeDamage.get());
     }
 
     @Override
@@ -393,8 +401,9 @@ public class ProwlerServant extends InternalAnimationSummon {
         double d1 = this.getY() + y;
         double d2 = this.getZ() + 0.5f * vecZ + f1 * math;
 
-        WitherHomingMissile missile = new WitherHomingMissile(this.level(),this,target);
+        WitherHomingMissile missile = new WitherHomingMissile(this.level(), this,target);
         missile.setPosRaw(d0, d1, d2);
+        missile.setDamage(GCAttributesConfig.ProwlerMissileDamage.get().floatValue());
         this.level().addFreshEntity(missile);
     }
 
@@ -483,7 +492,7 @@ public class ProwlerServant extends InternalAnimationSummon {
             LivingEntity target = this.entity.getTarget();
             super.tick();
             if (this.entity.attackTicks == this.attackshot) {
-                DeathLaserBeam DeathBeam = new DeathLaserBeam(GCEntityType.DEATH_LASER_BEAM.get(), this.entity.level(), this.entity, this.entity.getX(), this.entity.getY() + 1.8, this.entity.getZ(), (float) ((this.entity.yHeadRot + 90) * Math.PI / 180), (float) (-this.entity.getXRot() * Math.PI / 180), 28,(float) CMConfig.DeathLaserdamage,(float) CMConfig.DeathLaserHpdamage);
+                DeathLaserBeam DeathBeam = new DeathLaserBeam(GCEntityType.DEATH_LASER_BEAM.get(), this.entity.level(), this.entity, this.entity.getX(), this.entity.getY() + 1.8, this.entity.getZ(), (float) ((this.entity.yHeadRot + 90) * Math.PI / 180), (float) (-this.entity.getXRot() * Math.PI / 180), 28, GCSpellConfig.DeathLaserDamage.get().floatValue(),GCSpellConfig.DeathLaserHPDamage.get().floatValue());
                 this.entity.level().addFreshEntity(DeathBeam);
             }
             if (this.entity.attackTicks >= this.attackshot) {

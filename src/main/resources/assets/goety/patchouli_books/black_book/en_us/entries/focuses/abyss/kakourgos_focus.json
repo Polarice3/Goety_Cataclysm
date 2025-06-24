@@ -1,0 +1,18 @@
+{
+  "name": "Kakoúrgos Focus",
+  "icon": "goety_cataclysm:kakourgos_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "From the sea, you call upon small spiny fellas to roll and poison your foes with their spiky bodies and rough attitude."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/kakourgos_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:kakourgos_focus": 1
+  }
+}

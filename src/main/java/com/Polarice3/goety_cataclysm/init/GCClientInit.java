@@ -39,6 +39,12 @@ public class GCClientInit {
         event.registerEntityRenderer(GCEntityType.ROYAL_DRAUGR_SERVANT.get(), RoyalDraugrServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.ELITE_DRAUGR_SERVANT.get(), EliteDraugrServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.APTRGANGR.get(), AptrgangrServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.HIPPOCAMTUS.get(), HippocamtusServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.CINDARIA_SERVANT.get(), CindariaServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.CLAWDIAN.get(), ClawdianServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.URCHINKIN_SERVANT.get(), UrchinkinServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.DROWNED_HOST_SERVANT.get(), DrownedHostServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.SYMBIOCTO_SERVANT.get(), SymbioctoServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.IGNIS_FIREBALL.get(), IgnisFireballRenderer::new);
         event.registerEntityRenderer(GCEntityType.IGNIS_ABYSS_FIREBALL.get(), IgnisAbyssFireballRenderer::new);
         event.registerEntityRenderer(GCEntityType.FLARE_BOMB.get(), FlareBombRenderer::new);
@@ -48,9 +54,11 @@ public class GCClientInit {
         event.registerEntityRenderer(GCEntityType.ABYSS_ORB.get(), AbyssOrbRenderer::new);
         event.registerEntityRenderer(GCEntityType.ABYSS_MARK.get(), AbyssMarkRenderer::new);
         event.registerEntityRenderer(GCEntityType.VOID_VORTEX.get(), VoidVortexRenderer::new);
+        event.registerEntityRenderer(GCEntityType.STORM_SERPENT.get(), StormSerpentRenderer::new);
         event.registerEntityRenderer(GCEntityType.DEATH_LASER_BEAM.get(), DeathLaserBeamRenderer::new);
         event.registerEntityRenderer(GCEntityType.LASER_BEAM.get(), LaserBeamRenderer::new);
         event.registerEntityRenderer(GCEntityType.WITHER_HOMING_MISSILE.get(), WitherHomingMissileRenderer::new);
         event.registerEntityRenderer(GCEntityType.SANDSTORM.get(), SandstormRenderer::new);
+        event.registerEntityRenderer(GCEntityType.OCTO_INK.get(), OctoInkRenderer::new);
     }
 }

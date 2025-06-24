@@ -1,0 +1,18 @@
+{
+  "name": "自辩聚晶",
+  "icon": "goety_cataclysm:polemistis_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这个法术不仅能够让你直接召唤溺尸仆从，还可以额外召唤他一个能喷射墨水的朋友来当帽子"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/polemistis_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:polemistis_focus": 1
+  }
+}

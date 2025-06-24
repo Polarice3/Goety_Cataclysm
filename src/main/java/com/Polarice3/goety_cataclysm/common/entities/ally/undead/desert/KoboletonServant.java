@@ -2,8 +2,10 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert;
 
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.utils.CuriosFinder;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.AnimationSummon2;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.config.CMConfig;
@@ -71,10 +73,17 @@ public class KoboletonServant extends AnimationSummon2 {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 15.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4F)
-                .add(Attributes.ATTACK_DAMAGE, 3.0D)
-                .add(Attributes.MAX_HEALTH, 25.0D)
-                .add(Attributes.ARMOR, 0.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.KoboletonDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.KoboletonHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.KoboletonArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.KoboletonHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.KoboletonArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.KoboletonDamage.get());
     }
 
     @Override

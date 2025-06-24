@@ -5,6 +5,7 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.AttackSummonAnimationGoal1;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
@@ -108,10 +109,17 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 20.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 11.0F)
-                .add(Attributes.MAX_HEALTH, 110.0F)
-                .add(Attributes.ARMOR, 5.0F)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.CoralGolemDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.CoralGolemHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.CoralGolemArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8F);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.CoralGolemHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.CoralGolemArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.CoralGolemDamage.get());
     }
 
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
@@ -145,9 +153,10 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
     boolean wantsToSwim() {
         if (this.searchingForLand) {
             return true;
+        } else if (this.getTarget() != null && this.getTarget().isInWater()) {
+            return true;
         } else {
-            LivingEntity livingentity = this.getTarget();
-            return livingentity != null && livingentity.isInWater();
+            return this.getTrueOwner() != null && this.isFollowing() && (this.getTrueOwner().isInWater() || (this.isInWater() && this.getTrueOwner().getY() > this.getY()));
         }
     }
 
@@ -436,9 +445,12 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
 
         public void tick() {
             LivingEntity livingentity = this.drowned.getTarget();
+            LivingEntity owner = this.drowned.getTrueOwner();
             if (this.drowned.wantsToSwim() && this.drowned.isInWater()) {
-                if (livingentity != null && livingentity.getY() > this.drowned.getY() || this.drowned.searchingForLand) {
-                    this.drowned.setDeltaMovement(this.drowned.getDeltaMovement().add(0.0, 0.002, 0.0));
+                if ((livingentity != null && livingentity.getY() > this.drowned.getY())
+                        || this.drowned.searchingForLand
+                        || (owner != null && owner.getY() > this.drowned.getY() && this.drowned.isFollowing())) {
+                    this.drowned.setDeltaMovement(this.drowned.getDeltaMovement().add(0.0D, 0.002D, 0.0D));
                 }
 
                 if (this.operation != Operation.MOVE_TO || this.drowned.getNavigation().isDone()) {

@@ -2,7 +2,9 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 
 import com.Polarice3.Goety.api.entities.ally.IServant;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.ModDamageSource;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.github.L_Ender.cataclysm.entity.AI.AnimalAIRandomSwimming;
 import com.github.L_Ender.cataclysm.entity.etc.AquaticMoveController;
@@ -131,9 +133,17 @@ public class LionfishServant extends Summoned implements IAnimatedEntity {
 
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 2.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.LionfishDamage.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.LionfishArmor.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.MAX_HEALTH, 12.0D);
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.LionfishHealth.get());
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.LionfishHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.LionfishArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.LionfishDamage.get());
     }
 
     public MobType getMobType() {

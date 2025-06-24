@@ -3,6 +3,7 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 import com.Polarice3.Goety.utils.ItemHelper;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
@@ -54,10 +55,18 @@ public class DeeplingPriestServant extends AbstractDeeplingServant{
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.27F)
-                .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.MAX_HEALTH, 45)
-                .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25);
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.DeeplingPriestDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.DeeplingPriestHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.DeeplingPriestArmor.get())
+                .add(Attributes.FOLLOW_RANGE, 20.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.DeeplingPriestHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.DeeplingPriestArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.DeeplingPriestDamage.get());
     }
 
     @Override
@@ -135,9 +144,9 @@ public class DeeplingPriestServant extends AbstractDeeplingServant{
                 if (this.getAnimationTick() >18 && this.getAnimationTick() <47) {
                     for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(7.0D))) {
                         if (!MobUtil.areAllies(this, entity) && isEntityLookingAt(entity, this, 0.6)) {
-                            boolean flag = entity.hurt(damageSources().indirectMagic(this,this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.7F);
+                            boolean flag = entity.hurt(damageSources().indirectMagic(this, this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.7F);
 
-                            if(flag){
+                            if (flag){
                                 entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 80));
                             }
                         }

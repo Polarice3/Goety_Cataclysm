@@ -1,0 +1,15 @@
+{
+  "name": "沧棱聚晶",
+  "icon": "goety_cataclysm:water_spear_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "发射被称为沧波棱刺的水矛，它在命中墙面时会反弹，使用深渊魔杖承载该聚晶时则可以一次发射两发沧波棱刺"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/water_spear_focus"
+    }
+  ]
+}

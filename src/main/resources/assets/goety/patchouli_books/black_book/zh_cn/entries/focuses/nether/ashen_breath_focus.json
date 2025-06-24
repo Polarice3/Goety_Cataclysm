@@ -1,0 +1,15 @@
+{
+  "name": "烬息聚晶",
+  "icon": "goety_cataclysm:ashen_breath_focus",
+  "category": "goety:cataclysm/focuses/nether",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你不想喷火，你想向敌人喷一些短暂燃烧的灰烬，然后造成更高的伤害并对它们施加失明效果"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/ashen_breath_focus"
+    }
+  ]
+}

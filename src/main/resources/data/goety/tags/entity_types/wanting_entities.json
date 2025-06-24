@@ -2,15 +2,26 @@
   "replace": false,
   "values": [
     "cataclysm:flame_jet",
+    "cataclysm:lightning_storm",
     "cataclysm:void_rune",
     "cataclysm:void_shard",
     "cataclysm:blazing_bone",
     "cataclysm:ashen_breath",
     "cataclysm:lionfish_spike",
+    "cataclysm:spark",
+    "cataclysm:lightning_area_effect",
+    "cataclysm:bolt_strike",
+    "cataclysm:wave",
+    "cataclysm:storm_serpent",
+    "cataclysm:accretion",
+    "cataclysm:octo_ink",
+    "cataclysm:water_spear",
+    "cataclysm:lightning_spear",
     "goety_cataclysm:ignis_fireball",
     "goety_cataclysm:ignis_abyss_fireball",
     "goety_cataclysm:flare_bomb",
     "goety_cataclysm:laser_beam",
-    "goety_cataclysm:wither_homing_missile"
+    "goety_cataclysm:wither_homing_missile",
+    "goety_cataclysm:octo_ink"
   ]
 }

@@ -13,6 +13,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
@@ -36,6 +39,7 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class WitherHomingMissile extends Projectile {
+    private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(WitherHomingMissile.class, EntityDataSerializers.FLOAT);
     public double xPower;
     public double yPower;
     public double zPower;
@@ -84,6 +88,7 @@ public class WitherHomingMissile extends Projectile {
     }
 
     protected void defineSynchedData() {
+        this.entityData.define(DAMAGE, (float) CMConfig.WitherHomingMissiledamage);
     }
 
     public boolean shouldRenderAtSqrDistance(double p_36837_) {
@@ -101,6 +106,7 @@ public class WitherHomingMissile extends Projectile {
         if (this.finalTarget != null) {
             p_37357_.putUUID("Target", this.finalTarget.getUUID());
         }
+        p_37357_.putFloat("damage", this.getDamage());
         p_37357_.put("power", this.newDoubleList(new double[]{this.xPower, this.yPower, this.zPower}));
     }
 
@@ -117,9 +123,17 @@ public class WitherHomingMissile extends Projectile {
                 this.zPower = listtag.getDouble(2);
             }
         }
+        this.setDamage(p_37353_.getFloat("damage"));
 
     }
 
+    public float getDamage() {
+        return this.entityData.get(DAMAGE);
+    }
+
+    public void setDamage(float damage) {
+        this.entityData.set(DAMAGE, damage);
+    }
 
     public void tick() {
         Entity entity = this.getOwner();
@@ -189,7 +203,7 @@ public class WitherHomingMissile extends Projectile {
             Entity entity1 = this.getOwner();
             boolean flag;
             if (entity1 instanceof LivingEntity livingentity) {
-                flag = entity.hurt(this.damageSources().mobProjectile(this, livingentity), (float) CMConfig.WitherHomingMissiledamage);
+                flag = entity.hurt(this.damageSources().mobProjectile(this, livingentity), this.getDamage());
                 if (flag) {
                     if (entity.isAlive()) {
                         this.doEnchantDamageEffects(livingentity, entity);
@@ -198,7 +212,7 @@ public class WitherHomingMissile extends Projectile {
                     }
                 }
             } else {
-                flag = entity.hurt(this.damageSources().magic(), 3.0F);
+                flag = entity.hurt(this.damageSources().magic(), this.getDamage());
             }
 
             if (flag && entity instanceof LivingEntity livingEntity) {

@@ -1,0 +1,39 @@
+{
+  "parent": "goety_cataclysm:root",
+  "display": {
+    "icon": {
+      "item": "cataclysm:aptrgangr_head"
+    },
+    "title": {
+      "translate": "advancements.goety_cataclysm.summon_aptrgangr.title"
+    },
+    "description": {
+      "translate": "advancements.goety_cataclysm.summon_aptrgangr.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "summon": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "goety_cataclysm:aptrgangr"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:summoned_entity"
+    }
+  },
+  "requirements": [
+    [
+      "summon"
+    ]
+  ]
+}

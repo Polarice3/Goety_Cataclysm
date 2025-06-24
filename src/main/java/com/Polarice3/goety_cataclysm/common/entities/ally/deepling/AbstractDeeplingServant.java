@@ -264,7 +264,7 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
         } else if (this.getTarget() != null && this.getTarget().isInWater()) {
             return true;
         } else {
-            return this.getTrueOwner() != null && this.getTrueOwner().isInWater();
+            return this.getTrueOwner() != null && this.isFollowing() && (this.getTrueOwner().isInWater() || (this.isInWater() && this.getTrueOwner().getY() > this.getY()));
         }
     }
 
@@ -333,8 +333,11 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
 
         public void tick() {
             LivingEntity livingentity = this.drowned.getTarget();
+            LivingEntity owner = this.drowned.getTrueOwner();
             if (this.drowned.wantsToSwim() && this.drowned.isInWater()) {
-                if (livingentity != null && livingentity.getY() > this.drowned.getY() || this.drowned.searchingForLand) {
+                if ((livingentity != null && livingentity.getY() > this.drowned.getY())
+                        || this.drowned.searchingForLand
+                        || (owner != null && owner.getY() > this.drowned.getY() && this.drowned.isFollowing())) {
                     this.drowned.setDeltaMovement(this.drowned.getDeltaMovement().add(0.0D, 0.002D, 0.0D));
                 }
 

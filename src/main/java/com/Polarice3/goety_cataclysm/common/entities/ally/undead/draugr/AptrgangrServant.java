@@ -11,11 +11,11 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.blocks.PointedIcicleBlock;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.IHoldEntity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
@@ -95,7 +95,6 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         this.setMaxUpStep(1.25F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
-        setConfigAttribute(this, CMConfig.AptrgangrHealthMultiplier, CMConfig.AptrgangrDamageMultiplier);
     }
 
     protected void registerGoals() {
@@ -110,7 +109,6 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                 return super.canUse() && AptrgangrServant.this.getRandom().nextFloat() * 100.0F < 22f;
             }
         });
-
 
         this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,SMASH_ATTACK,0,40,10,6){
             @Override
@@ -136,7 +134,6 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                 AptrgangrServant.this.earthquake_cooldown = EARTHQUAKE_COOLDOWN;
             }
         });
-
 
         //chargePrepare
         this.goalSelector.addGoal(3, new InternalSummonAttackGoal(this,0,CHARGE_START,CHARGE,24,24,15) {
@@ -190,10 +187,17 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         return Monster.createMonsterAttributes()
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.28F)
-                .add(Attributes.ATTACK_DAMAGE, 18.0D)
-                .add(Attributes.MAX_HEALTH, 160.0D)
-                .add(Attributes.ARMOR, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.AptrgangrDamage.get())
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.AptrgangrHealth.get())
+                .add(Attributes.ARMOR, GCAttributesConfig.AptrgangrArmor.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.AptrgangrHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.AptrgangrArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.AptrgangrDamage.get());
     }
 
     public MobType getMobType() {
@@ -382,18 +386,17 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                 float angleStep = 30.0f;
 
                 for (int i = 0; i < numberOfSkulls; i++) {
-                    float angle = yBodyRot + (i - (numberOfSkulls / 2)) * angleStep;
+                    float angle = yBodyRot + (i - ((float) numberOfSkulls / 2)) * angleStep;
 
                     float rad = (float) Math.toRadians(angle);
                     double dx = -Math.sin(rad);
                     double dz = Math.cos(rad);
-                    Axe_Blade_Entity axeBlade = new Axe_Blade_Entity(this, dx, 0, dz, this.level(),(float) CMConfig.AptrgangrAxeBladeDamage,angle);
+                    Axe_Blade_Entity axeBlade = new Axe_Blade_Entity(this, dx, 0, dz, this.level(),GCAttributesConfig.AptrgangrAxeDamage.get().floatValue(), angle);
                     double spawnX = this.getX() + vecX * 5;
                     double spawnY = this.getY(0.15D);
                     double spawnZ = this.getZ() + vecZ * 5;
                     axeBlade.setPos(spawnX, spawnY, spawnZ);
                     this.level().addFreshEntity(axeBlade);
-
                 }
             }
         }
@@ -481,8 +484,8 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
                     boolean hurt =  entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && entityHit instanceof Player player && shieldbreakticks > 0) {
-                        disableShield(player, shieldbreakticks);
+                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                        disableShield(entityHit, shieldbreakticks);
                     }
                     double d0 = entityHit.getX() - this.getX();
                     double d1 = entityHit.getZ() - this.getZ();
@@ -512,8 +515,8 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
                     boolean hurt =  entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && entityHit instanceof Player player && shieldbreakticks > 0) {
-                        disableShield(player, shieldbreakticks);
+                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                        disableShield(entityHit, shieldbreakticks);
                     }
                     double d0 = entityHit.getX() - this.getX();
                     double d1 = entityHit.getZ() - this.getZ();
@@ -538,8 +541,8 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                 if (this.getPassengers().isEmpty()) {
                     DamageSource damagesource = maledictio ? CMDamageTypes.causeMaledictioDamage(this) : this.getMobAttack();
                     boolean flag = entity.hurt(damagesource, damage);
-                    if (entity.isDamageSourceBlocked(damagesource) && entity instanceof Player player && shieldbreakticks > 0) {
-                        this.disableShield(player, shieldbreakticks);
+                    if (entity.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
+                        this.disableShield(entity, shieldbreakticks);
                     }
                     if (flag) {
                         if (!entity.getType().is(ModTag.IGNIS_CANT_POKE) && entity.isAlive()) {

@@ -31,7 +31,11 @@ public class GCEntityTypeTagsProvider extends IntrinsicHolderTagsProvider<Entity
                 .add(GCEntityType.IGNITED_BERSERKER.get())
                 .add(GCEntityType.WATCHER_SERVANT.get())
                 .add(GCEntityType.THE_PROWLER.get())
-                .add(GCEntityType.APTRGANGR.get());
+                .add(GCEntityType.APTRGANGR.get())
+                .add(GCEntityType.CLAWDIAN.get())
+                .add(GCEntityType.CINDARIA_SERVANT.get())
+                .add(GCEntityType.URCHINKIN_SERVANT.get())
+                .add(GCEntityType.HIPPOCAMTUS.get());
         this.tag(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)
                 .add(GCEntityType.NETHERITE_MONSTROSITY.get())
                 .add(GCEntityType.ENDER_GOLEM.get())

@@ -19,6 +19,7 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ProwlerCore;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> SymbioctoBreath;
     public static final ForgeConfigSpec.ConfigValue<Boolean> WadjetSpirit;
 
     static {
@@ -26,6 +27,8 @@ public class GCMobsConfig {
             BUILDER.push("Abyss Servants");
             DeeplingAnglerCatchTime = BUILDER.comment("How long until a Deepling Angler Servant will catch another Lionfish if they don't have one already attached, Default: 12000")
                     .defineInRange("deeplingAnglerCatchTime", 12000, 0, Integer.MAX_VALUE);
+            SymbioctoBreath = BUILDER.comment("Whether Symbioctos provide water breathing to ridden entity, Default: true")
+                    .define("symbioctoBreath", true);
             BUILDER.pop();
             BUILDER.push("Nether Servants");
             IgnitedRevenantHelm = BUILDER.comment("Whether owned Ignited Revenants drop Ignited Helms, Default: true")

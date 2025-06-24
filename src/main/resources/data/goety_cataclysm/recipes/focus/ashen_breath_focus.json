@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "bmb",
+    "mem",
+    "bmb"
+  ],
+  "key":
+  {
+    "e":
+    {
+      "item": "goety:fire_breath_focus"
+    },
+    "b":
+    {
+      "item": "minecraft:blackstone"
+    },
+    "m":
+    {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:ashen_breath_focus",
+    "count": 1
+  }
+}
