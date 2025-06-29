@@ -11,6 +11,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServan
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.AncientRemnantServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KobolediatorServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.WadjetServant;
@@ -22,6 +23,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.Ignited
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.IgnitedRevenantServant;
 import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.GCSpawnEggs;
+import com.Polarice3.goety_cataclysm.common.network.GCNetwork;
 import com.Polarice3.goety_cataclysm.compat.GCModCompat;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
@@ -108,6 +110,8 @@ public class GoetyCataclysm {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        GCNetwork.init();
+
         GCModCompat.setup(event);
     }
 
@@ -126,6 +130,7 @@ public class GoetyCataclysm {
         event.put(GCEntityType.IGNITED_BERSERKER.get(), IgnitedBerserkerServant.setCustomAttributes().build());
         event.put(GCEntityType.WATCHER_SERVANT.get(), WatcherServant.setCustomAttributes().build());
         event.put(GCEntityType.THE_PROWLER.get(), ProwlerServant.setCustomAttributes().build());
+        event.put(GCEntityType.ANCIENT_REMNANT.get(), AncientRemnantServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLETON_SERVANT.get(), KoboletonServant.setCustomAttributes().build());
         event.put(GCEntityType.KOBOLEDIATOR.get(), KobolediatorServant.setCustomAttributes().build());
         event.put(GCEntityType.WADJET.get(), WadjetServant.setCustomAttributes().build());

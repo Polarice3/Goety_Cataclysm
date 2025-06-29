@@ -9,6 +9,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServan
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.AncientRemnantServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KobolediatorServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.WadjetServant;
@@ -102,6 +103,14 @@ public class GCEntityType {
                     .sized(2.5F, 2.75F)
                     .fireImmune()
                     .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<AncientRemnantServant>> ANCIENT_REMNANT = register("ancient_remnant",
+            EntityType.Builder.of(AncientRemnantServant::new, MobCategory.MONSTER)
+                    .sized(4.35F, 5.0F)
+                    .noSummon() //WIP Recipe
+                    .fireImmune()
+                    .clientTrackingRange(8)
+                    .setShouldReceiveVelocityUpdates(true));
 
     public static final RegistryObject<EntityType<KoboletonServant>> KOBOLETON_SERVANT = register("koboleton_servant",
             EntityType.Builder.of(KoboletonServant::new, MobCategory.MONSTER)

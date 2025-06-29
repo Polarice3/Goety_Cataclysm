@@ -140,5 +140,8 @@
   "item.goety_cataclysm.symbiocto_servant_spawn_egg": "章鱼共生体仆从刷怪蛋",
   "item.goety_cataclysm.urchinkin_servant_spawn_egg": "小海胆仆从刷怪蛋",
   "item.goety_cataclysm.storm_serpent_focus": "风暴巨蛇聚晶",
-  "item.goety_cataclysm.storm_serpent_focus.info": "召唤风暴巨蛇，让它们向任何有效目标或实体猛扑"
+  "item.goety_cataclysm.storm_serpent_focus.info": "召唤风暴巨蛇，让它们向任何有效目标或实体猛扑",
+  "entity.goety_cataclysm.ancient_remnant": "远古遗魂",
+  "item.goety_cataclysm.remnant_skull": "遗魂头骨",
+  "item.goety_cataclysm.ancient_remnant_spawn_egg": "远古遗魂仆从刷怪蛋"
 }

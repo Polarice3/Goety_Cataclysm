@@ -1,5 +1,5 @@
-// 1.20.1	2025-06-24T20:47:19.0537973	Tags for minecraft:entity_type mod id goety_cataclysm
-347ad848da04544019daa6b7fae2c7438cfc7e14 data/minecraft/tags/entity_types/fall_damage_immune.json
+// 1.20.1	2025-06-29T20:59:03.8550756	Tags for minecraft:entity_type mod id goety_cataclysm
+4db8b2a1053be898ee5694e89d30dfc5e8c8637a data/minecraft/tags/entity_types/fall_damage_immune.json
 5afd829b81cac1f302f86961a52ddd5a89302e28 data/minecraft/tags/entity_types/freeze_immune_entity_types.json
 72e4cbc431cb8527f72caee2aab973bea7bd7467 data/minecraft/tags/entity_types/impact_projectiles.json
 5afd829b81cac1f302f86961a52ddd5a89302e28 data/minecraft/tags/entity_types/powder_snow_walkable_mobs.json

@@ -1,0 +1,15 @@
+{
+  "name": "水の槍のフォーカス",
+  "icon": "goety_cataclysm:water_spear_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "この呪文は、表面で跳ね返る高圧な水の槍を発射します。深淵の杖で唱えると、2本の槍を発射します。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/water_spear_focus"
+    }
+  ]
+}

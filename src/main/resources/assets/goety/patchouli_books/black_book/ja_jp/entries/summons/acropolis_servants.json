@@ -1,0 +1,79 @@
+{
+  "name": "アクロポリスの従者",
+  "icon": "cataclysm:lacrima",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "スキュラの聖域で発見された、召喚して自分の命令に従わせられる海の生き物です。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:urchinkin_servant"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_urchinkin_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "毒の棘で覆われたこれらの小さな生き物です。召喚者が野生のローブを着用している場合、酸毒となりアンデッドにも毒が与えられるようになるため、大きな障害となります。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:symbiocto_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_drowned_servant_to_drowned_host"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ドラウンドと共生関係にある奇妙なタコの一種で、ドラウンドの頭にしがみつき、自身や宿主の敵に強力な墨の弾丸を撃ち込む。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:cindaria_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_cindaria_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "これらの荘麗な生き物は、敵に向かって水の槍を発射できるだけでなく、近接攻撃で複数のターゲットに命中し、多大なダメージを与えます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:hippocamtus",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_hippocamtus_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "アクロポリスの守護者であるこれらの戦士は、遠距離から敵を攻撃できるだけでなく、敵を十分に長い間気絶させてから槍で素早く突き刺す攻撃もできます。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:clawdian",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_clawdian_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "これらの強力なジャガーノートは、同程度の力を持つ多くの敵や従者を圧倒する能力を持つが、似た部類のアプトルガングルと同様に、崖で突進するというデメリットがあります。遠くにいる場合、クローディアンは地面を掴み、標的に向かってそれを投げつけます。また、敵に向かって波動を召喚するハイドロキネシス能力も持っています。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "これらの生物は、深淵のローブを着用するか、魚を与えることで回復できます。"
+    }
+  ]
+}

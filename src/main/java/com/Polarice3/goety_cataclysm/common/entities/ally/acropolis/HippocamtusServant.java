@@ -492,17 +492,17 @@ public class HippocamtusServant extends InternalAnimationSummon {
         return p_34192_.getEffect() != ModEffect.EFFECTABYSSAL_CURSE.get() && super.canBeAffected(p_34192_);
     }
 
-
-    public boolean removeWhenFarAway(double p_21542_) {
-        return false;
-    }
-
-    protected boolean shouldDespawnInPeaceful() {
-        return false;
-    }
-
     protected boolean canRide(Entity p_31508_) {
         return false;
+    }
+
+    @Override
+    public void tryKill(Player player) {
+        if (this.killChance <= 0){
+            this.warnKill(player);
+        } else {
+            super.tryKill(player);
+        }
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {

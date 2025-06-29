@@ -1,0 +1,18 @@
+{
+  "name": "雷神のフォーカス",
+  "icon": "goety_cataclysm:thunder_rage_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "スキュラの怒りを再現するこの呪文は、継続的な詠唱を必要とし、術者は周囲に旋風と嵐の雲を発生させ、その後、上空の雲から見ている方向に水と稲妻の槍の弾幕を放ちます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:thunder_rage_focus": 1
+  }
+}

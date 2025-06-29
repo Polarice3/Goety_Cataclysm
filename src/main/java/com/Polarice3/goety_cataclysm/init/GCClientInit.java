@@ -32,6 +32,7 @@ public class GCClientInit {
         event.registerEntityRenderer(GCEntityType.IGNITED_BERSERKER.get(), IgnitedBerserkerServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.WATCHER_SERVANT.get(), WatcherServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.THE_PROWLER.get(), ProwlerServantRenderer::new);
+        event.registerEntityRenderer(GCEntityType.ANCIENT_REMNANT.get(), AncientRemnantServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.KOBOLETON_SERVANT.get(), KoboletonServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.KOBOLEDIATOR.get(), KobolediatorServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.WADJET.get(), WadjetServantRenderer::new);

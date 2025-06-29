@@ -34,10 +34,10 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> AshenBreathDamage;
 
-    public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireCost;
-    public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireDuration;
-    public static final ForgeConfigSpec.ConfigValue<Integer> BlazingFireCoolDown;
-    public static final ForgeConfigSpec.ConfigValue<Double> BlazingFireRadius;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameRadius;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> CindariaCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> CindariaDuration;
@@ -210,15 +210,15 @@ public class GCSpellConfig {
             AshenBreathDamage = BUILDER.comment("Ashen Breath Spell Damage, Default: 4.0")
                     .defineInRange("ashenBreathDamage", 4.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
-            BUILDER.push("Blazing Fire Spell");
-            BlazingFireCost = BUILDER.comment("Blazing Fire Spell Cost, Default: 64")
-                    .defineInRange("blazingFireCost", 64, 0, Integer.MAX_VALUE);
-            BlazingFireDuration = BUILDER.comment("Time to cast Blazing Fire Spell, Default: 70")
-                    .defineInRange("blazingFireTime", 70, 0, 72000);
-            BlazingFireCoolDown = BUILDER.comment("Blazing Fire Spell Cooldown, Default: 300")
-                    .defineInRange("blazingFireCoolDown", 300, 0, Integer.MAX_VALUE);
-            BlazingFireRadius = BUILDER.comment("Blazing Fire's Fireballs default explosion radius, Default: 1.0")
-                    .defineInRange("blazingFireRadius", 1.0, 0, Double.MAX_VALUE);
+            BUILDER.push("Extinct Flame Spell");
+            ExtinctFlameCost = BUILDER.comment("Extinct Flame Spell Cost, Default: 64")
+                    .defineInRange("extinctFlameCost", 64, 0, Integer.MAX_VALUE);
+            ExtinctFlameDuration = BUILDER.comment("Time to cast Extinct Flame Spell, Default: 70")
+                    .defineInRange("extinctFlameTime", 70, 0, 72000);
+            ExtinctFlameCoolDown = BUILDER.comment("Extinct Flame Spell Cooldown, Default: 300")
+                    .defineInRange("extinctFlameCoolDown", 300, 0, Integer.MAX_VALUE);
+            ExtinctFlameRadius = BUILDER.comment("Extinct Flame's Fireballs default explosion radius, Default: 1.0")
+                    .defineInRange("extinctFlameRadius", 1.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Kyría Spell");
             CindariaCost = BUILDER.comment("Kyría Spell Cost, Default: 64")

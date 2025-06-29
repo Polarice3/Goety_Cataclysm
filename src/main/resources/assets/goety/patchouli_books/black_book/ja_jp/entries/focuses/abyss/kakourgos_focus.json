@@ -1,0 +1,18 @@
+{
+  "name": "悪人のフォーカス",
+  "icon": "goety_cataclysm:kakourgos_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "海から小さなとげのある生き物を呼び出して、そのとげのある体と荒々しい態度で敵に転がり、毒を盛ってもらいます。ギリシャ語:Kakoúrgos"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/kakourgos_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:kakourgos_focus": 1
+  }
+}

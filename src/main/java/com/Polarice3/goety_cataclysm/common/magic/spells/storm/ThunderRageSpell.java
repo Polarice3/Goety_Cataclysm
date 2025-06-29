@@ -6,7 +6,6 @@ import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.WandUtil;
-import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -45,7 +44,7 @@ public class ThunderRageSpell extends Spell {
         return 150;
     }
 
-    public int castDuration(LivingEntity caster) {
+    public int castDuration(LivingEntity caster, ItemStack staff) {
         return 150;
     }
 
@@ -239,11 +238,10 @@ public class ThunderRageSpell extends Spell {
     }
 
     @Override
-    public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, int useTimeRemaining) {
-        int useTime = this.castDuration(caster) - useTimeRemaining;
-        if (useTime >= 115){
+    public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, ItemStack focus, int castTime, SpellStat spellStat) {
+        if (castTime >= 115){
             if (caster instanceof Player player) {
-                SEHelper.addCooldown(player, GCItems.THUNDER_RAGE_FOCUS.get(), this.spellCooldown());
+                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown());
                 SEHelper.sendSEUpdatePacket(player);
             }
         }

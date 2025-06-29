@@ -117,7 +117,7 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     //Compat
-    implementation fg.deobf("curse.maven:goety-586095:6660730")
+    implementation fg.deobf("curse.maven:goety-586095:6706891")
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
     implementation fg.deobf("maven.modrinth:l_enders-cataclysm:QHJDhxzx")
 

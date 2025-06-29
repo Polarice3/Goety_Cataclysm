@@ -1,0 +1,15 @@
+{
+  "name": "灰のブレスのフォーカス",
+  "icon": "goety_cataclysm:ashen_breath_focus",
+  "category": "goety:cataclysm/focuses/nether",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "燃える炎の代わりに、燃える灰を敵に短時間吹き付けることで、より多くのダメージを与え、敵の目をくらませます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/ashen_breath_focus"
+    }
+  ]
+}

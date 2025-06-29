@@ -1,0 +1,7 @@
+{
+  "__comment": "all mobs that are immune to the effects of the irradiated effect.",
+  "values": [
+    "goety_cataclysm:netherite_monstrosity",
+    "goety_cataclysm:ancient_remnant"
+  ]
+}

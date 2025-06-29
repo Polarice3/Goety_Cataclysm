@@ -32,7 +32,7 @@ public class AbyssalBeamSpell extends Spell {
         return GCSpellConfig.AbyssalBeamDuration.get() + 10;
     }
 
-    public int castDuration(LivingEntity caster) {
+    public int castDuration(LivingEntity caster, ItemStack staff) {
         return this.defaultCastDuration();
     }
 

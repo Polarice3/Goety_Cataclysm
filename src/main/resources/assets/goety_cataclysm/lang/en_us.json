@@ -27,6 +27,7 @@
   "block.goety_cataclysm.void_mold_block": "Void Mold Block",
   "block.goety_cataclysm.wall_ender_golem_skull": "Ender Golem Skull",
 
+  "entity.goety_cataclysm.ancient_remnant": "Ancient Remnant",
   "entity.goety_cataclysm.aptrgangr": "Aptrgangr",
   "entity.goety_cataclysm.cindaria_servant": "Cindaria Servant",
   "entity.goety_cataclysm.clawdian": "Clawdian",
@@ -61,6 +62,7 @@
   "item.goety_cataclysm.ignited_helm": "Ignited Helm",
   "item.goety_cataclysm.ignited_soul": "Ignited Soul",
   "item.goety_cataclysm.mechanized_core": "Mechanized Core",
+  "item.goety_cataclysm.remnant_skull": "Remnant Skull",
   "item.goety_cataclysm.warrior_spirit": "Warrior Spirit",
 
   "item.goety_cataclysm.abyssal_mine_focus": "Abyssal Mine Focus",
@@ -114,6 +116,7 @@
   "item.goety_cataclysm.water_spear_focus": "Water Spear Focus",
   "item.goety_cataclysm.water_spear_focus.info": "Shoots a Water Spear. The spear will bounce and ricochet off walls and blocks.",
 
+  "item.goety_cataclysm.ancient_remnant_spawn_egg": "Ancient Remnant Servant Spawn Egg",
   "item.goety_cataclysm.aptrgangr_spawn_egg": "Aptrgangr Servant Spawn Egg",
   "item.goety_cataclysm.cindaria_servant_spawn_egg": "Cindaria Servant Spawn Egg",
   "item.goety_cataclysm.clawdian_spawn_egg": "Clawdian Servant Spawn Egg",

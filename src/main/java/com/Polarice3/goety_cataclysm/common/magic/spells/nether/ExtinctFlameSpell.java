@@ -22,21 +22,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlazingFireSpell extends Spell {
+public class ExtinctFlameSpell extends Spell {
 
     @Override
     public SpellStat defaultStats() {
-        return super.defaultStats().setRadius(GCSpellConfig.BlazingFireRadius.get());
+        return super.defaultStats().setRadius(GCSpellConfig.ExtinctFlameRadius.get());
     }
 
     @Override
     public int defaultSoulCost() {
-        return GCSpellConfig.BlazingFireCost.get();
+        return GCSpellConfig.ExtinctFlameCost.get();
     }
 
     @Override
     public int defaultCastDuration() {
-        return GCSpellConfig.BlazingFireDuration.get();
+        return GCSpellConfig.ExtinctFlameDuration.get();
     }
 
     @Nullable
@@ -47,7 +47,7 @@ public class BlazingFireSpell extends Spell {
 
     @Override
     public int defaultSpellCooldown() {
-        return GCSpellConfig.BlazingFireCoolDown.get();
+        return GCSpellConfig.ExtinctFlameCoolDown.get();
     }
 
     @Override

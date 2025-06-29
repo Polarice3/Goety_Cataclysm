@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "__comment": "all mobs that are not shaken by a tremorsaurus roar.",
+  "values": [
+    "goety_cataclysm:netherite_monstrosity",
+    "goety_cataclysm:ancient_remnant"
+  ]
+}

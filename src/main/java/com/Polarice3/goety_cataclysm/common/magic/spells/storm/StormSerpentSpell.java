@@ -8,11 +8,11 @@ import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.StormSerpent;
-import com.Polarice3.goety_cataclysm.common.items.GCItems;
+import com.Polarice3.goety_cataclysm.common.network.GCNetwork;
+import com.Polarice3.goety_cataclysm.common.network.server.SRingParticlePacket;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.Gathering_Water_Particle;
-import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.client.particle.RoarParticle;
 import com.github.L_Ender.cataclysm.client.particle.StormParticle;
 import net.minecraft.server.level.ServerLevel;
@@ -40,7 +40,7 @@ public class StormSerpentSpell extends Spell {
     }
 
     @Override
-    public int castDuration(LivingEntity caster) {
+    public int castDuration(LivingEntity caster, ItemStack staff) {
         return 75;
     }
 
@@ -83,7 +83,7 @@ public class StormSerpentSpell extends Spell {
             }
         }
         if (castTime == 30) {
-            worldIn.sendParticles(new RingParticle.RingData(0f, (float) Math.PI / 2f, 30, 94/255F, 150/255F, 226/255F, 1.0f, 65, false, RingParticle.EnumRingBehavior.GROW), caster.getX(), caster.getY() + 0.02f, caster.getZ(), 1, 0, 0, 0, 0);
+            GCNetwork.sentToTrackingEntityAndPlayer(caster, new SRingParticlePacket(0.0F, (float) Math.PI / 2.0F, 30, 94, 150, 226, 1.0F, 65, false, 1, caster.getX(), caster.getY() + 0.02f, caster.getZ()));
         }
 
         if (castTime < 40 && castTime > 30) {
@@ -95,16 +95,13 @@ public class StormSerpentSpell extends Spell {
             worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 4f + caster.getRandom().nextFloat() * 1.2f, 1.0F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
             worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 2f + caster.getRandom().nextFloat() * 0.7f, 0.35F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
         }
-        /*if (castTime == 1) {
-            ScreenShake_Entity.ScreenShake(worldIn, caster.position(), 35, 0.1f, 0, 120);
-        }*/
         if (castTime == 30) {
             this.playSound(worldIn, caster, CataclysmSounds.SCYLLA_ROAR.get(), 0.6F, 1.0f);
-            RoarParticle(caster, -0.4f, 0,2.4F, 20,99,194,224, 0.4F, 0.4f,0.5F,2.5F);
+            RoarParticle(caster, -0.4f, 0, 2.4F, 20, 99, 194, 224, 0.4F, 0.4f, 0.5F, 2.5F);
         }
 
         if (castTime == 33 || castTime == 36 || castTime == 39) {
-            RoarParticle(caster, -0.4f, 0,2.4F, 20,99,194,224, 0.4F, 0.4f,0.5F,2.5F);
+            RoarParticle(caster, -0.4f, 0, 2.4F, 20, 99, 194, 224, 0.4F, 0.4f, 0.5F, 2.5F);
         }
         if (castTime == 28) {
             for (int i = 0; i < 2; ++i) {
@@ -169,11 +166,10 @@ public class StormSerpentSpell extends Spell {
     }
 
     @Override
-    public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, int useTimeRemaining) {
-        int useTime = this.castDuration(caster) - useTimeRemaining;
-        if (useTime >= 28){
+    public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, ItemStack focus, int castTime, SpellStat spellStat) {
+        if (castTime >= 28){
             if (caster instanceof Player player) {
-                SEHelper.addCooldown(player, GCItems.STORM_SERPENT_FOCUS.get(), this.spellCooldown());
+                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown());
                 SEHelper.sendSEUpdatePacket(player);
             }
         }

@@ -65,6 +65,10 @@ public class GCAttributesConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> WadjetArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> WadjetDamage;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> AncientRemnantHealth;
+    public static final ForgeConfigSpec.ConfigValue<Double> AncientRemnantArmor;
+    public static final ForgeConfigSpec.ConfigValue<Double> AncientRemnantDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Double> IgnitedRevenantHealth;
     public static final ForgeConfigSpec.ConfigValue<Double> IgnitedRevenantArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> IgnitedRevenantMeleeDamage;
@@ -237,6 +241,14 @@ public class GCAttributesConfig {
                             .defineInRange("wadjetArmor", 5.0, 0.0, Double.MAX_VALUE);
                     WadjetDamage = BUILDER.comment("How much damage Wadjet Servants melee attack deals, Default: 11.0")
                             .defineInRange("wadjetDamage", 11.0, 1.0, Double.MAX_VALUE);
+                    BUILDER.pop();
+                    BUILDER.push("Ancient Remnant Servant");
+                    AncientRemnantHealth = BUILDER.comment("How much Max Health Ancient Remnant Servants have, Default: 450.0")
+                            .defineInRange("ancientRemnantHealth", 450.0, 1.0, Double.MAX_VALUE);
+                    AncientRemnantArmor = BUILDER.comment("How much natural Armor Ancient Remnant Servants have, Default: 12.0")
+                            .defineInRange("ancientRemnantArmor", 12.0, 0.0, Double.MAX_VALUE);
+                    AncientRemnantDamage = BUILDER.comment("How much damage Ancient Remnant Servants melee attack deals, Default: 25.0")
+                            .defineInRange("ancientRemnantDamage", 25.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
                 BUILDER.pop();
                 BUILDER.push("Ignited");

@@ -24,6 +24,7 @@ public class GCEntityTypeTagsProvider extends IntrinsicHolderTagsProvider<Entity
                 .add(GCEntityType.KOBOLETON_SERVANT.get())
                 .add(GCEntityType.KOBOLEDIATOR.get())
                 .add(GCEntityType.WADJET.get())
+                .add(GCEntityType.ANCIENT_REMNANT.get())
                 .add(GCEntityType.ENDER_GOLEM.get())
                 .add(GCEntityType.CORALSSUS.get())
                 .add(GCEntityType.CORAL_GOLEM.get())

@@ -1,0 +1,18 @@
+{
+  "name": "戦闘員のフォーカス",
+  "icon": "goety_cataclysm:polemistis_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "この呪文は、ドラウンドの従者を直接召喚できるだけでなく、インクを撃つ友人を帽子のようにかぶって召喚させることもできます。ギリシャ語:Polemistís"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/polemistis_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:polemistis_focus": 1
+  }
+}

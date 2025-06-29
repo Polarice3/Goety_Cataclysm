@@ -20,7 +20,9 @@ public class GCCreativeTab {
             .displayItems((parameters, output) -> {
                 GCItems.ITEMS.getEntries().forEach(i -> {
                     if (i.isPresent()) {
-                        output.accept(i.get());
+                        if (!GCItems.shouldSkipCreativeModTab(i.get())) {
+                            output.accept(i.get());
+                        }
                     }
                 });
                 GCSpawnEggs.ITEMS.getEntries().forEach(i -> {

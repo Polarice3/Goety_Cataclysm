@@ -17,6 +17,7 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedRevenantHelm;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> AncientRemnantGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ProwlerCore;
     public static final ForgeConfigSpec.ConfigValue<Boolean> SymbioctoBreath;
@@ -42,6 +43,8 @@ public class GCMobsConfig {
             BUILDER.pop();
         KobolediatorSpirit = BUILDER.comment("Whether owned Kobolediators drop Warrior Spirits, Default: true")
                 .define("kobolediatorSpirit", true);
+        AncientRemnantGriefing = BUILDER.comment("Whether Ancient Remnant, owned by players, breaks blocks if mob griefing is enabled, Default: false")
+                .define("ancientRemnantGriefing", false);
         ProwlerCore = BUILDER.comment("Whether owned Prowlers drop Mechanized Cores, Default: true")
                 .define("prowlerCore", true);
         WadjetSpirit = BUILDER.comment("Whether owned Wadjets drop Arcane Spirits, Default: true")
