@@ -1,0 +1,30 @@
+{
+  "name": "古の魔獣の骸",
+  "icon": "cataclysm:remnant_skull",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "強力な素材と魔法を使えば、現代の残骸をその先祖と同じくらい強力な力に変えることができます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_modern_remnant_to_ancient_remnant_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ancient_remnant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "骨を与えることで回復し、所有者がネクロのケープを装備している場合は自動的に回復します。第二段階に入ると、炎上中でも毎秒遅延なく自動的に回復できるようになります。"
+    }
+  ]
+}

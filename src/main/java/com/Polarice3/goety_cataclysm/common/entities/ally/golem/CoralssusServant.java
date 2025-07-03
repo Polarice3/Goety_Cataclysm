@@ -8,6 +8,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
@@ -380,7 +381,7 @@ public class CoralssusServant extends InternalAnimationSummon {
 
         if (this.isNoAi()) {
             this.setAirSupply(this.getMaxAirSupply());
-        } else if (this.isInWaterRainOrBubble()) {
+        } else if (this.isInWaterRainOrBubble() || !GCMobsConfig.CoralssusMoistness.get()) {
             if (this.getMoistness() < 40000) {
                 this.setMoistness(this.getMoistness() + 2);
             }
@@ -470,8 +471,8 @@ public class CoralssusServant extends InternalAnimationSummon {
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
             if (!MobUtil.areAllies(this, entity)) {
                 this.launch(entity, true);
-                entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
-                if (entity.isDamageSourceBlocked(this.getMobAttack())) {
+                entity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
+                if (entity.isDamageSourceBlocked(this.getServantAttack())) {
                     if (shieldbreakticks > 0) {
                         this.disableShield(entity, shieldbreakticks);
                     }

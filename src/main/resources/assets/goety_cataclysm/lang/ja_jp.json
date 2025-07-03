@@ -144,5 +144,10 @@
   "item.goety_cataclysm.storm_serpent_focus.info": "ストームサーペントを召喚します。ターゲットまたは近くの有効なエンティティに突進します。",
   "entity.goety_cataclysm.ancient_remnant": "古の魔獣の骸",
   "item.goety_cataclysm.remnant_skull": "§l§f魔獣の頭蓋骨",
-  "item.goety_cataclysm.ancient_remnant_spawn_egg": "古の魔獣の骸の従者のスポーンエッグ"
+  "item.goety_cataclysm.ancient_remnant_spawn_egg": "古の魔獣の骸の従者のスポーンエッグ",
+  "advancements.goety_cataclysm.convert_ancient_remnant.title": "君主万歳！",
+  "advancements.goety_cataclysm.convert_ancient_remnant.description": "現代の魔獣の骸を古の魔獣の骸に変異させる。",
+  "block.goety_cataclysm.ancient_plating": "古代のメッキ",
+  "item.goety_cataclysm.amethyst_cluster_focus": "アメジストクラスターのフォーカス",
+  "item.goety_cataclysm.amethyst_cluster_focus.info": "術者の周囲にアメジストクラスターを発射します。"
 }

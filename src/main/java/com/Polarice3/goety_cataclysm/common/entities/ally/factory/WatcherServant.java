@@ -112,7 +112,7 @@ public class WatcherServant extends LLibrarySummon {
                 if (target != null) {
                     if (distanceTo(target) < 3 && this.hasLineOfSight(target)) {
                         float damage = (float) ((int) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
-                        target.hurt(this.getMobAttack(), damage);
+                        target.hurt(this.getServantAttack(), damage);
                     }
                 }
             }

@@ -2,7 +2,6 @@ package com.Polarice3.goety_cataclysm.common.entities.ally;
 
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -212,9 +211,5 @@ public class AnimationSummon extends Summoned {
     @Override
     public boolean canUpdateMove() {
         return true;
-    }
-
-    public DamageSource getMobAttack(){
-        return this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this);
     }
 }

@@ -7,6 +7,7 @@ import com.Polarice3.goety_cataclysm.client.render.block.GCISTER;
 import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
 import com.Polarice3.goety_cataclysm.common.items.revive.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
+import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.AmethystClusterSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.EliteDraugrSpell;
@@ -54,6 +55,7 @@ public class GCItems {
     public static final RegistryObject<Item> KYRIA_FOCUS = ITEMS.register("kyria_focus", () -> new MagicFocus(new CindariaSpell()));
 
     ///Geomancy
+    public static final RegistryObject<Item> AMETHYST_CLUSTER_FOCUS = ITEMS.register("amethyst_cluster_focus", () -> new MagicFocus(new AmethystClusterSpell()));
     public static final RegistryObject<Item> DESERT_CRUSH_FOCUS = ITEMS.register("desert_crush_focus", () -> new MagicFocus(new DesertCrushSpell()));
 
     ///Necromancy

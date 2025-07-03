@@ -14,6 +14,8 @@ public class GCMobsConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> BlazeIgnitedHelm;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> DeeplingMoistness;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> CoralssusMoistness;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedRevenantHelm;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
@@ -28,6 +30,10 @@ public class GCMobsConfig {
             BUILDER.push("Abyss Servants");
             DeeplingAnglerCatchTime = BUILDER.comment("How long until a Deepling Angler Servant will catch another Lionfish if they don't have one already attached, Default: 12000")
                     .defineInRange("deeplingAnglerCatchTime", 12000, 0, Integer.MAX_VALUE);
+            DeeplingMoistness = BUILDER.comment("Whether Deeplings can lose moistness out of water which would lead to them losing health, Default: true")
+                    .define("deeplingMoistness", true);
+            CoralssusMoistness = BUILDER.comment("Whether Coralssus can lose moistness out of water which would lead to them losing health, Default: true")
+                    .define("coralssusMoistness", true);
             SymbioctoBreath = BUILDER.comment("Whether Symbioctos provide water breathing to ridden entity, Default: true")
                     .define("symbioctoBreath", true);
             BUILDER.pop();

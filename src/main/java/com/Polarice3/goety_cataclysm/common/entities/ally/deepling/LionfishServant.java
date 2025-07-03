@@ -209,7 +209,7 @@ public class LionfishServant extends Summoned implements IAnimatedEntity {
                     this.playSound(SoundEvents.PHANTOM_BITE, 0.4F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
                     if (target != null) {
                         float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                        target.hurt(this.getMobAttack(), damage);
+                        target.hurt(this.getServantAttack(), damage);
                     }
                 }
             }

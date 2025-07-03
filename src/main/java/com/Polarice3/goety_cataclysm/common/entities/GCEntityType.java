@@ -107,7 +107,6 @@ public class GCEntityType {
     public static final RegistryObject<EntityType<AncientRemnantServant>> ANCIENT_REMNANT = register("ancient_remnant",
             EntityType.Builder.of(AncientRemnantServant::new, MobCategory.MONSTER)
                     .sized(4.35F, 5.0F)
-                    .noSummon() //WIP Recipe
                     .fireImmune()
                     .clientTrackingRange(8)
                     .setShouldReceiveVelocityUpdates(true));

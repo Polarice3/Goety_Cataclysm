@@ -337,16 +337,6 @@ public class PortalAbyssBlast extends Entity {
     }
 
     @Override
-    public boolean canBeCollidedWith() {
-        return false;
-    }
-
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
-
-    @Override
     public boolean shouldRenderAtSqrDistance(double p_36837_) {
         double d0 = this.getBoundingBox().getSize() * 10.0D;
         if (Double.isNaN(d0)) {

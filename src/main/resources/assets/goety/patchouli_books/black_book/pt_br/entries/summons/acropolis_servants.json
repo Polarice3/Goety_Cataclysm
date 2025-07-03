@@ -1,0 +1,79 @@
+{
+  "name": "Servos da Acrópole",
+  "icon": "cataclysm:lacrima",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Uma coleção de criaturas marinhas encontradas no santuário de Scylla, A Imperatriz da Tempestade que você conseguiu invocar e vincular ao seu comando."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:urchinkin_servant"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_urchinkin_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cobertos de espinhos venenosos, essas pequenas criaturas podem ser um grande incômodo, especialmente se seu invocador vestir uma Túnica Selvagem, onde seus espinhos envenenam até os mortos-vivos."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:symbiocto_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_drowned_servant_to_drowned_host"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Uma espécie estranha de polvos que têm uma relação simbiótica com os Afogados, onde se agarram às suas cabeças e disparam poderosos jatos de tinta nos inimigos deles e de seus hospedeiros."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:cindaria_servant",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_cindaria_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Essas criaturas nobres não só são capazes de lançar lanças de água em seus inimigos, mas seu ataque corpo a corpo atinge múltiplos alvos e causa muito dano."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:hippocamtus",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_hippocamtus_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Guardadores da Acrópole, esses guerreiros marinhos não só podem atacar seus inimigos de longas distâncias, mas também aparar ataques que os atordoam por tempo suficiente para esfaqueá-los rapidamente com suas lanças."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:clawdian",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_clawdian_servant_thrall"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Esses poderosos juggernauts podem superar muitos inimigos e servos de calibre similar, embora tenham o triste hábito de se lançar de bordas como seus companheiros Aptrgangr. Quando estão longe, o crustáceo agarra o solo e o arremessa em seu alvo. Eles também têm a habilidade hidrocinética de invocar ondas em direção aos seus inimigos."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Essas criaturas podem ser curadas vestindo uma Túnica do Abismo ou alimentando-as com peixes."
+    }
+  ]
+}

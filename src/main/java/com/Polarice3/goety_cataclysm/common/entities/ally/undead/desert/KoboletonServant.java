@@ -168,7 +168,7 @@ public class KoboletonServant extends AnimationSummon2 {
                     if (target != null) {
                         if (this.distanceTo(target) < this.getBbWidth() * 2.5F * this.getBbWidth() * 2.5F + target.getBbWidth()) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            target.hurt(this.getMobAttack(), damage);
+                            target.hurt(this.getServantAttack(), damage);
 
                             ItemStack offhand = target.getOffhandItem();
                             ItemStack mainhand = target.getMainHandItem();
@@ -222,8 +222,8 @@ public class KoboletonServant extends AnimationSummon2 {
 
     }
 
-    public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {
-        ItemStack itemstack = pPlayer.getItemInHand(p_230254_2_);
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
             if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {

@@ -67,7 +67,7 @@ public class OctoHostSpell extends SummonSpell {
 
     @Override
     public Predicate<LivingEntity> summonPredicate() {
-        return livingEntity -> livingEntity instanceof SymbioctoServant;
+        return livingEntity -> livingEntity instanceof SymbioctoServant || livingEntity instanceof DrownedHostServant;
     }
 
     @Override

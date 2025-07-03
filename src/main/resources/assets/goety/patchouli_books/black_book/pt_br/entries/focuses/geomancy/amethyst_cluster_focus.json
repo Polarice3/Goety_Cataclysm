@@ -1,0 +1,19 @@
+{
+  "name": "Foco de Aglomerado de Ametista",
+  "icon": "goety_cataclysm:amethyst_cluster_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O conjurador dispara um aglomerado de ametistas ao seu redor, assim como o caranguejo que derrotou."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/amethyst_cluster_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/geo_staff)Cajado Geomântico$() dispara mais ametistas."
+    }
+  ]
+}

@@ -1,12 +1,10 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
-import com.Polarice3.Goety.utils.CuriosFinder;
-import com.Polarice3.Goety.utils.ExplosionUtil;
-import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -19,6 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -122,8 +121,9 @@ public class IgnisFireball extends AbstractIgnisFireball{
                 flag = entity.hurt(this.damageSources().magic(), 6.0F + this.getExtraDamage());
             }
 
-            LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-            ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), this.getRadius(), true, Explosion.BlockInteraction.KEEP, lootMode);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 1.0F, true, Explosion.BlockInteraction.KEEP);
+            explosion.explode();
+            explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
             this.discard();
 
             if (flag && entity instanceof LivingEntity livingEntity) {
@@ -148,8 +148,9 @@ public class IgnisFireball extends AbstractIgnisFireball{
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         if (!this.level().isClientSide && this.getFired()) {
-            LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-            ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), this.getRadius(), true, Explosion.BlockInteraction.KEEP, lootMode);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 1.0F, true, Explosion.BlockInteraction.KEEP);
+            explosion.explode();
+            explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
             this.discard();
         }
     }

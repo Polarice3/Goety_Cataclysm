@@ -1,0 +1,30 @@
+{
+  "name": "远古遗魂",
+  "icon": "cataclysm:remnant_skull",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "拥有一些强大的材料和魔法后，你就能让现世遗魂“返祖”，让它成为与祖辈一样的强大战力"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_modern_remnant_to_ancient_remnant_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ancient_remnant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "远古遗魂可以通过喂食骨头来治愈，当它的主人装备死灵长袍时，它也会缓慢恢复血量，当它进入第二阶段后，即使被火焰点燃，它也能随时间恢复自身的血量。"
+    }
+  ]
+}

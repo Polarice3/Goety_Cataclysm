@@ -1,0 +1,18 @@
+{
+  "name": "Lightning Spear Focus",
+  "icon": "goety_cataclysm:lightning_spear_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The spell shoots a spear of lightning that leaves a small storm cloud, that damages enemies standing on them, where they hit. Casting with an Storm Staff shoots two spears instead."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/lightning_spear_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:lightning_spear_focus": 1
+  }
+}

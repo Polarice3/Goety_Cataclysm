@@ -1,0 +1,19 @@
+{
+  "name": "アメジストクラスターのフォーカス",
+  "icon": "goety_cataclysm:amethyst_cluster_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "術者は、殺したカニのように、周囲にアメジストの塊を発射できます。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/amethyst_cluster_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l:crafts/staff/geo_staff)地の杖$()で唱えると、さらに多く発射できます。"
+    }
+  ]
+}

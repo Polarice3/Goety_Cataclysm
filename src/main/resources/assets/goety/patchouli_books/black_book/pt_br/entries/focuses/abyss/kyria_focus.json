@@ -1,0 +1,18 @@
+{
+  "name": "Foco Kyría",
+  "icon": "goety_cataclysm:kyria_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Com o foco em uma varinha ou cajado, a nobreza pomposa do mar atende ao seu chamado."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/kyria_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:kyria_focus": 1
+  }
+}

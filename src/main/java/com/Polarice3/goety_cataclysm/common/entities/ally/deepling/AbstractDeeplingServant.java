@@ -4,6 +4,7 @@ import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.goety_cataclysm.common.entities.ally.LLibrarySummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
@@ -121,7 +122,7 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
         if (this.isNoAi()) {
             this.setAirSupply(this.getMaxAirSupply());
         } else {
-            if (this.isInWaterRainOrBubble()) {
+            if (this.isInWaterRainOrBubble() || !GCMobsConfig.DeeplingMoistness.get()) {
                 this.setMoistness(6000);
             } else {
                 int dry = this.level().isDay() ? 2 : 1;

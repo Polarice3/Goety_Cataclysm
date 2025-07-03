@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "goety_cataclysm:ancient_plating",
     "goety_cataclysm:netherite_plating",
     "goety_cataclysm:void_mold_block"
   ]

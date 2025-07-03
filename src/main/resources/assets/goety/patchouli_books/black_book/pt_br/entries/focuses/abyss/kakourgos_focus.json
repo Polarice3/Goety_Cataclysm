@@ -1,0 +1,18 @@
+{
+  "name": "Foco Kakoúrgos",
+  "icon": "goety_cataclysm:kakourgos_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Do mar, você invoca pequenos seres espinhosos para envenenar seus inimigos com seus corpos pontiagudos e atitude agressiva."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/kakourgos_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:kakourgos_focus": 1
+  }
+}

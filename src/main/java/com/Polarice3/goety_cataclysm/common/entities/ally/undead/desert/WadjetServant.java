@@ -51,6 +51,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -435,8 +436,8 @@ public class WadjetServant extends InternalAnimationSummon {
             float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
-                    boolean hurt = entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    boolean hurt = entityHit.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    if (entityHit.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                         if (shieldbreakticks > 0) {
                             this.disableShield(entityHit, shieldbreakticks);
                         }
@@ -496,12 +497,16 @@ public class WadjetServant extends InternalAnimationSummon {
     public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {
         ItemStack itemstack = pPlayer.getItemInHand(p_230254_2_);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get()) || itemstack.is(Items.BONE_BLOCK)) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
                 this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-                this.heal(2.0F);
+                if (itemstack.is(Items.BONE_BLOCK)){
+                    this.heal(6.0F);
+                } else {
+                    this.heal(2.0F);
+                }
                 if (this.level() instanceof ServerLevel serverLevel) {
                     for (int i = 0; i < 7; ++i) {
                         double d0 = this.random.nextGaussian() * 0.02D;

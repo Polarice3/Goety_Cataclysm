@@ -1,0 +1,18 @@
+{
+  "name": "Foco da Fúria do Trovão",
+  "icon": "goety_cataclysm:thunder_rage_focus",
+  "category": "goety:cataclysm/focuses/storm",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Replicando a ira de Scylla, A Imperatriz da Tempestade, este feitiço requer conjuração contínua, onde o conjurador emitirá redemoinhos e nuvens de tempestade ao seu redor, antes de desencadear uma barragem de lanças de água e relâmpago no local onde estão olhando, vindas das nuvens acima."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:thunder_rage_focus": 1
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "goety_cataclysm:root",
+  "display": {
+    "icon": {
+      "item": "cataclysm:remnant_skull"
+    },
+    "title": {
+      "translate": "advancements.goety_cataclysm.convert_ancient_remnant.title"
+    },
+    "description": {
+      "translate": "advancements.goety_cataclysm.convert_ancient_remnant.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ancient_remnant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "goety_cataclysm:ancient_remnant"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:summoned_entity"
+    }
+  },
+  "requirements": [
+    [
+      "ancient_remnant"
+    ]
+  ]
+}

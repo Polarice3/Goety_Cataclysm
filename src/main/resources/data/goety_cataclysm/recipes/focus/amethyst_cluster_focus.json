@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "bmb",
+    "mem",
+    "bmb"
+  ],
+  "key":
+  {
+    "e":
+    {
+      "item": "goety:empty_focus"
+    },
+    "b":
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    "m":
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:amethyst_cluster_focus",
+    "count": 1
+  }
+}

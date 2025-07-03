@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "goety_cataclysm:ancient_plating"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "goety_cataclysm:blocks/ancient_plating"
+}

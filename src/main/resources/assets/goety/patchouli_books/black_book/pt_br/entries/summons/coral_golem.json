@@ -1,0 +1,26 @@
+{
+  "name": "Coral Golem",
+  "icon": "minecraft:copper_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_floral_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Slightly less powerful and more mechanical cousins of the Coralssus, these golems are nonetheless a powerful servant to have on hand."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:coral_golem",
+      "scale": 0.5
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:coral_golem",
+      "text": "Right click the center Copper Block with an Animation Core."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The corals can be of any type. They can be healed by right-clicking on them with corals."
+    }
+  ]
+}

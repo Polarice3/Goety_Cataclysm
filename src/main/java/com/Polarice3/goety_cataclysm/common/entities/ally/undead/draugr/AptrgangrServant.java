@@ -483,8 +483,8 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
-                    boolean hurt =  entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    boolean hurt =  entityHit.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    if (entityHit.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                         disableShield(entityHit, shieldbreakticks);
                     }
                     double d0 = entityHit.getX() - this.getX();
@@ -514,8 +514,8 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
             float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
-                    boolean hurt =  entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    boolean hurt =  entityHit.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    if (entityHit.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                         disableShield(entityHit, shieldbreakticks);
                     }
                     double d0 = entityHit.getX() - this.getX();
@@ -539,7 +539,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, attackRange)) {
             if (!MobUtil.areAllies(this, entity)) {
                 if (this.getPassengers().isEmpty()) {
-                    DamageSource damagesource = maledictio ? CMDamageTypes.causeMaledictioDamage(this) : this.getMobAttack();
+                    DamageSource damagesource = maledictio ? CMDamageTypes.causeMaledictioDamage(this) : this.getServantAttack();
                     boolean flag = entity.hurt(damagesource, damage);
                     if (entity.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                         this.disableShield(entity, shieldbreakticks);
@@ -703,12 +703,16 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
     public InteractionResult mobInteract(Player pPlayer, InteractionHand p_230254_2_) {
         ItemStack itemstack = pPlayer.getItemInHand(p_230254_2_);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if ((itemstack.is(Items.ROTTEN_FLESH) || itemstack.is(Tags.Items.BONES)) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Items.ROTTEN_FLESH) || itemstack.is(Tags.Items.BONES) || itemstack.is(Items.BONE_BLOCK)) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
                 this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-                this.heal(2.0F);
+                if (itemstack.is(Items.BONE_BLOCK)){
+                    this.heal(6.0F);
+                } else {
+                    this.heal(2.0F);
+                }
                 if (this.level() instanceof ServerLevel serverLevel) {
                     for (int i = 0; i < 7; ++i) {
                         double d0 = this.random.nextGaussian() * 0.02D;

@@ -71,7 +71,7 @@ public class UrchinkinServant extends Summoned {
         super.registerGoals();
         this.goalSelector.addGoal(2, new Roll(this, 0, 1, 0, 40, 12, 5.0F, 13, 30, 50.0F));
         this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.0, true));
-        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this));
+        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this, 1.0D, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }

@@ -1,0 +1,30 @@
+{
+  "name": "Ancient Remnant",
+  "icon": "cataclysm:remnant_skull",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "With some powerful materials and magic, you're able to turn the Modern Remnant into a force that's just as strong as its progenitor."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_modern_remnant_to_ancient_remnant_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ancient_remnant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The undead monarch can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape. When in its second phase, they will be able to passively heal even on fire and without delay per second."
+    }
+  ]
+}

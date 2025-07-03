@@ -1,0 +1,31 @@
+{
+  "name": "Netherite Monstrosity",
+  "icon": "cataclysm:monstrous_helm",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "While the Redstone Monstrosity is one of the most powerful servants you can field, perhaps, with the power of the Infernal Forge, you'll be able to replicate its Netherite counterpart."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:netherite_monstrosity",
+      "scale": 0.75
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity",
+      "text": "Right click the center Reinforced Redstone Block with an Infernal Forge."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:netherite_plating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Blackstone can be substituted with other variants aside from Gilded Blackstone for the mold. Despite what the Redstone Monstrosity entry says, this Monstrosity variant's power surpasses its counterpart. They can be repaired by right-clicking on them with Netherite Blocks, Lava Buckets or Lava Power Cells, or by putting them above Soul Fire. The Monstrosity shares the same summon cap as its Redstone counterpart."
+    }
+  ]
+}

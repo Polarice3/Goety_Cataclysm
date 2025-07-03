@@ -52,6 +52,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -455,7 +456,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
             if (this.tickCount % 4 == 0) {
                 for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5D))) {
                     if (!MobUtil.areAllies(this, Lentity)) {
-                        boolean flag = Lentity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
+                        boolean flag = Lentity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
                         if (flag) {
                             if (Lentity.onGround()) {
                                 double d0 = Lentity.getX() - this.getX();
@@ -553,8 +554,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
             float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
             if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                 if (!MobUtil.areAllies(this, entityHit)) {
-                    entityHit.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                    if (entityHit.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                    entityHit.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                    if (entityHit.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                         this.disableShield(entityHit, shieldbreakticks);
                     }
 
@@ -633,8 +634,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
         List<LivingEntity> hit = this.level().getEntitiesOfClass(LivingEntity.class, selection);
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
-                boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                boolean flag = entity.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                if (entity.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                     disableShield(entity, shieldbreakticks);
                 }
 
@@ -693,12 +694,16 @@ public class KobolediatorServant extends InternalAnimationSummon {
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get()) || itemstack.is(Items.BONE_BLOCK)) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
                 this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-                this.heal(2.0F);
+                if (itemstack.is(Items.BONE_BLOCK)){
+                    this.heal(6.0F);
+                } else {
+                    this.heal(2.0F);
+                }
                 if (this.level() instanceof ServerLevel serverLevel) {
                     for (int i = 0; i < 7; ++i) {
                         double d0 = this.random.nextGaussian() * 0.02D;

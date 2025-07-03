@@ -1,0 +1,15 @@
+{
+  "name": "Foco da Lança de Água",
+  "icon": "goety_cataclysm:water_spear_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O feitiço dispara uma lança de água de alta pressão que ricocheteia em superfícies. Conjurar com um Cajado do Abismo dispara duas lanças em vez de uma."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/water_spear_focus"
+    }
+  ]
+}

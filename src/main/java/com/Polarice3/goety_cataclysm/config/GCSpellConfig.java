@@ -28,6 +28,11 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> AbyssalOrbsDamage;
     public static final ForgeConfigSpec.ConfigValue<Double> AbyssalOrbsRadius;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> AmethystClusterCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> AmethystClusterDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> AmethystClusterCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> AmethystClusterDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathChargeUp;
     public static final ForgeConfigSpec.ConfigValue<Integer> AshenBreathDuration;
@@ -149,10 +154,13 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> WaterSpearCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> WaterSpearDamage;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> AncientRemnantLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> AptygangrLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ClawdianLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> CoralssusLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> CoralGolemLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> EnderGolemLimit;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HippocamtusLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedBerserkerLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> IgnitedRevenantLimit;
     public static final ForgeConfigSpec.ConfigValue<Integer> WatcherLimit;
@@ -197,6 +205,16 @@ public class GCSpellConfig {
                     .defineInRange("abyssalOrbsDamage", 4.0, 0, Double.MAX_VALUE);
             AbyssalOrbsRadius = BUILDER.comment("Abyssal Orbs default explosion radius, Default: 1.0")
                     .defineInRange("abyssalOrbsRadius", 1.0, 0, Double.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Amethyst Cluster Spell");
+            AmethystClusterCost = BUILDER.comment("Amethyst Cluster Spell Cost, Default: 32")
+                    .defineInRange("amethystClusterCost", 32, 0, Integer.MAX_VALUE);
+            AmethystClusterDuration = BUILDER.comment("Time to cast Amethyst Cluster Spell, Default: 50")
+                    .defineInRange("amethystClusterDuration", 50, 0, 72000);
+            AmethystClusterCoolDown = BUILDER.comment("Amethyst Cluster Spell Cooldown, Default: 240")
+                    .defineInRange("amethystClusterCoolDown", 240, 0, Integer.MAX_VALUE);
+            AmethystClusterDamage = BUILDER.comment("Amethyst Cluster Spell Damage, Default: 12.0")
+                    .defineInRange("amethystClusterDamage", 12.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Ashen Breath Spell");
             AshenBreathCost = BUILDER.comment("Ashen Breath Spell Cost, Default: 16")
@@ -441,14 +459,20 @@ public class GCSpellConfig {
                     .defineInRange("waterSpearDamage", 8.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
         BUILDER.push("Servant Limits");
+        AncientRemnantLimit = BUILDER.comment("Number of Ancient Remnants that an individual player can have, Default: 1")
+                .defineInRange("ancientRemnantLimit", 1, 0, Integer.MAX_VALUE);
         AptygangrLimit = BUILDER.comment("Number of Aptrgangr Servants that an individual player can have in total, Default: 2")
                 .defineInRange("aptygangrLimit", 2, 1, Integer.MAX_VALUE);
+        ClawdianLimit = BUILDER.comment("Total number of Clawdian Servants an individual player can have, Default: 2")
+                .defineInRange("clawdianLimit", 2, 0, Integer.MAX_VALUE);
         CoralssusLimit = BUILDER.comment("Number of Coralssus Servants that an individual player can have in total, Default: 2")
                 .defineInRange("coralssusLimit", 2, 1, Integer.MAX_VALUE);
         CoralGolemLimit = BUILDER.comment("Number of Coral Golem Servants that an individual player can have in total, Default: 4")
                 .defineInRange("coralGolemLimit", 4, 1, Integer.MAX_VALUE);
         EnderGolemLimit = BUILDER.comment("Total number of Ender Golems an individual player can have, Default: 2")
                 .defineInRange("enderGolemLimit", 2, 0, Integer.MAX_VALUE);
+        HippocamtusLimit = BUILDER.comment("Total number of Hippocamtus Servants an individual player can have, Default: 4")
+                .defineInRange("hippocamtusLimit", 4, 0, Integer.MAX_VALUE);
         IgnitedBerserkerLimit = BUILDER.comment("Total number of Ignited Berserkers an individual player can have, Default: 2")
                 .defineInRange("ignitedBerserkerLimit", 2, 0, Integer.MAX_VALUE);
         IgnitedRevenantLimit = BUILDER.comment("Total number of Ignited Revenant an individual player can have, Default: 2")

@@ -1,0 +1,18 @@
+{
+  "name": "Abyssal Beam Focus",
+  "icon": "goety_cataclysm:abyssal_beam_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The spell replicates a Deepling Warlock's ability to call forth beams of abyssal energies through a portal."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/abyssal_beam_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:abyssal_beam_focus": 1
+  }
+}

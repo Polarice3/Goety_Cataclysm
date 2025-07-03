@@ -1,0 +1,19 @@
+{
+  "name": "紫晶簇聚晶",
+  "icon": "goety_cataclysm:amethyst_cluster_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "施法者会在周围发射一圈紫水晶簇，这招就像你的手下败将——紫水晶巨蟹一样"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/amethyst_cluster_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/geo_staff)地卜魔杖$()施法时，一次可以发射更多紫水晶簇"
+    }
+  ]
+}

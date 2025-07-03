@@ -1,12 +1,10 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
-import com.Polarice3.Goety.utils.CuriosFinder;
-import com.Polarice3.Goety.utils.ExplosionUtil;
-import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -127,8 +126,9 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
             } else {
                 flag = entity.hurt(this.damageSources().magic(), 5.0F + this.getExtraDamage());
             }
-            LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-            ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), this.getRadius(), true, Explosion.BlockInteraction.KEEP, lootMode);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, true, Explosion.BlockInteraction.KEEP);
+            explosion.explode();
+            explosion.finalizeExplosion(3, 0.75);
             this.discard();
 
             if (flag && entity instanceof LivingEntity livingEntity) {
@@ -180,14 +180,13 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
             this.yPower = motionY * 0.05D;
             this.zPower = motionZ * 0.05D;
 
-            if (this.tickCount > 500 || this.getTotalBounces() > 5) {
-                if (!this.level().isClientSide) {
-                    LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-                    ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), this.getRadius(), true, Explosion.BlockInteraction.KEEP, lootMode);
-                    this.discard();
-                }
-            } else {
+            if (this.tickCount <= 500 && this.getTotalBounces() <= 5) {
                 this.setTotalBounces(this.getTotalBounces() + 1);
+            } else if (!this.level().isClientSide) {
+                IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, true, Explosion.BlockInteraction.KEEP);
+                explosion.explode();
+                explosion.finalizeExplosion(3, 0.5);
+                this.discard();
             }
         }
 

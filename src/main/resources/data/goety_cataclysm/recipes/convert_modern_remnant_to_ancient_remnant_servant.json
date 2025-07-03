@@ -1,0 +1,45 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:convert_tamed",
+  "activation_item": {
+    "item": "cataclysm:necklace_of_the_desert"
+  },
+  "craftType": "necroturgy",
+  "entity_to_convert": {
+    "tag": "goety_cataclysm:modern_remnants",
+    "display_name": "entity.cataclysm.modern_remnant"
+  },
+  "entity_to_convert_into": "goety_cataclysm:ancient_remnant",
+  "soulCost": 10,
+  "duration": 10,
+  "research": "terminus",
+  "ingredients": [
+    {
+      "item": "cataclysm:sandstorm_in_a_bottle"
+    },
+    {
+      "item": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "item": "cataclysm:bone_reptile_helmet"
+    },
+    {
+      "item": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "item": "cataclysm:bone_reptile_chestplate"
+    },
+    {
+      "item": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "item": "cataclysm:desert_eye"
+    },
+    {
+      "item": "goety_cataclysm:ancient_plating"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

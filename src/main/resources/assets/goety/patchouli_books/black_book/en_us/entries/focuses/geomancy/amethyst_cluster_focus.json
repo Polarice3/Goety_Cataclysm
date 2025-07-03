@@ -1,0 +1,19 @@
+{
+  "name": "Amethyst Cluster Focus",
+  "icon": "goety_cataclysm:amethyst_cluster_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The caster shoots a cluster of amethysts around themselves much like the crab they had slain."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:focus/amethyst_cluster_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/geo_staff)Geo Staff$() will shoot more amethysts."
+    }
+  ]
+}

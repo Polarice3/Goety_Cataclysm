@@ -1,0 +1,53 @@
+{
+  "name": "Ender Golem",
+  "icon": "goety_cataclysm:void_mold_block",
+  "category": "goety:cataclysm/summons",
+  "advancement": "goety:goety/read_warred_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A variant of the mighty Redstone Golem, but rather than being made out of redstone, this golem utilizes the very void of the End."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ender_golem",
+      "scale": 0.75
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem",
+      "text": "Right click the center Void Stone with an Animation Core."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Obsidian can be substituted with Obsidian Bricks. The resulting Golem proves far superior to the Iron Golems as not only is it stronger, but it can be commanded to follow, wander or stay in position through a wand/staff. They can be repaired by right-clicking on them with Void Stone or Void Runes."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_mold_block",
+      "text": "Void Crystal and Obsidian are used to create a powerful mold."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_stone",
+      "recipe2": "goety_cataclysm:void_crystal"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:void_lantern_block"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ender_golem_skull",
+      "text": "Should the Golem fell from battle or command, they will drop their 'skull'. The Skull can be used to revive the Golem in a cheaper manner. However, the Skull remembers it's original creator and master and the revived Golem will only follow their commands."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:ender_golem_revive",
+      "enable_visualize": false
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ender_golem_skull": 7
+  }
+}

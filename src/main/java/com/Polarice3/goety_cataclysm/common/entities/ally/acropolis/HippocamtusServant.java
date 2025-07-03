@@ -8,6 +8,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
@@ -47,6 +48,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class HippocamtusServant extends InternalAnimationSummon {
     boolean searchingForLand;
@@ -86,7 +88,7 @@ public class HippocamtusServant extends InternalAnimationSummon {
 
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this));
+        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this, 1.0D, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(3, new InternalSummonMoveGoal(this, false, 1.0));
@@ -175,6 +177,16 @@ public class HippocamtusServant extends InternalAnimationSummon {
     @Override
     public int xpReward() {
         return 35;
+    }
+
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof HippocamtusServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.HippocamtusLimit.get();
     }
 
     boolean wantsToSwim() {
@@ -430,7 +442,7 @@ public class HippocamtusServant extends InternalAnimationSummon {
                 float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!MobUtil.areAllies(this, entityHit)) {
-                        DamageSource damagesource = penetrate ? CMDamageTypes.causePenetrateDamage(this) : this.getMobAttack();
+                        DamageSource damagesource = penetrate ? CMDamageTypes.causePenetrateDamage(this) : this.getServantAttack();
                         boolean hurt = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entityHit.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entityHit, shieldbreakticks);

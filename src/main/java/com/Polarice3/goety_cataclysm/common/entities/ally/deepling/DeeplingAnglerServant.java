@@ -181,7 +181,7 @@ public class DeeplingAnglerServant extends AbstractDeeplingServant {
                     if (target != null) {
                         if (this.distanceTo(target) < 3.0F) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            if (target.hurt(this.getMobAttack(), damage)) {
+                            if (target.hurt(this.getServantAttack(), damage)) {
                                 ItemHelper.hurtAndBreak(this.getMainHandItem(), 1, this);
                             }
                         }
@@ -194,7 +194,7 @@ public class DeeplingAnglerServant extends AbstractDeeplingServant {
                     if (target != null) {
                         if (this.distanceTo(target) < 3.0F) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            boolean flag = target.hurt(this.getMobAttack(), damage);
+                            boolean flag = target.hurt(this.getServantAttack(), damage);
                             if (flag) {
                                 target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 1), this);
                                 ItemHelper.hurtAndBreak(this.getMainHandItem(), 1, this);

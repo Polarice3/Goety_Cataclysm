@@ -11,6 +11,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveG
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.client.particle.Not_Spin_TrailParticle;
@@ -74,6 +75,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class ClawdianServant extends InternalAnimationSummon implements IHoldEntity {
     boolean searchingForLand;
@@ -133,51 +135,42 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
             }
         });
         this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, CHARGE_READY, CHARGE_LOOP, 30, 30, 18.0F) {
+            @Override
             public boolean canUse() {
-                return super.canUse() && ClawdianServant.this.getRandom().nextFloat() * 100.0F < 17.0F && ClawdianServant.this.charge_cooldown <= 0 && this.entity.onGround() && !this.entity.isSwimming();
+                BlockPos currentPos = entity.blockPosition();
+                float yaw = entity.getYRot() * ((float) Math.PI / 180F);
+                float dx = -Mth.sin(yaw) * 2;
+                float dz = Mth.cos(yaw) * 2;
+
+                BlockPos targetPos = currentPos.offset((int) dx, 0, (int) dz);
+                return super.canUse() && !isDangerousFallZone(entity, targetPos) && ClawdianServant.this.getRandom().nextFloat() * 100.0F < 17f && ClawdianServant.this.charge_cooldown <= 0 && this.entity.onGround() && !this.entity.isSwimming();
             }
         });
         this.goalSelector.addGoal(2, new InternalSummonStateGoal(this, CHARGE_LOOP, CHARGE_LOOP, CHARGE_END, 45, 45) {
+            @Override
             public void tick() {
-                LivingEntity target = this.entity.getTarget();
-                if (this.entity.attackTicks < this.attackseetick && target != null) {
-                    this.entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
-                    this.entity.lookAt(target, 2.0F, 30.0F);
+                LivingEntity target = entity.getTarget();
+                if (entity.attackTicks < attackseetick && target != null) {
+                    entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
+                    entity.lookAt(target, 2.0F, 30.0F);
                 } else {
-                    this.entity.setYRot(this.entity.yRotO);
+                    entity.setYRot(entity.yRotO);
                 }
 
-                BlockPos currentPos = this.entity.blockPosition();
-                float yaw = this.entity.getYRot() * 0.017453292F;
-                float dx = -Mth.sin(yaw) * 2.0F;
-                float dz = Mth.cos(yaw) * 2.0F;
-                BlockPos targetPos = currentPos.offset((int)dx, 0, (int)dz);
-                if (this.entity.onGround() && !this.isDangerousFallZone(this.entity, targetPos)) {
-                    Vec3 motion = this.entity.getDeltaMovement();
-                    Vec3 push = (new Vec3((double)(-Mth.sin(yaw)), motion.y, (double)Mth.cos(yaw))).scale(0.5).add(motion.scale(0.5));
-                    this.entity.setDeltaMovement(push.x, motion.y, push.z);
-                }
+                BlockPos currentPos = entity.blockPosition();
+                float yaw = entity.getYRot() * ((float) Math.PI / 180F);
+                float dx = -Mth.sin(yaw) * 2;
+                float dz = Mth.cos(yaw) * 2;
 
-            }
-
-            private boolean isDangerousFallZone(PathfinderMob mob, BlockPos pos) {
-                PathNavigation navigation = mob.getNavigation();
-                NodeEvaluator evaluator = navigation.getNodeEvaluator();
-                if (evaluator == null) {
-                    return false;
-                } else {
-                    BlockPathTypes type = evaluator.getBlockPathType(mob.level(), Mth.floor((float)pos.getX()), Mth.floor((float)pos.getY()), Mth.floor((float)pos.getZ()), mob);
-                    int safeDrop = 2;
-                    BlockPos.MutableBlockPos checkPos = pos.mutable();
-
-                    for(int i = 1; i <= safeDrop; ++i) {
-                        checkPos.move(Direction.DOWN);
-                        if (!mob.level().getBlockState(checkPos).isAir()) {
-                            return false;
-                        }
+                BlockPos targetPos = currentPos.offset((int) dx, 0, (int) dz);
+                if(this.entity.onGround()) {
+                    if (!isDangerousFallZone(entity, targetPos)) {
+                        Vec3 motion = entity.getDeltaMovement();
+                        Vec3 push = new Vec3(-Mth.sin(yaw), motion.y, Mth.cos(yaw)).scale(0.5D).add(motion.scale(0.5D));
+                        entity.setDeltaMovement(push.x, motion.y, push.z);
+                    }else{
+                        entity.setDeltaMovement(0, entity.getDeltaMovement().y, 0);
                     }
-
-                    return type == BlockPathTypes.DAMAGE_OTHER || type == BlockPathTypes.OPEN || type == BlockPathTypes.DANGER_OTHER;
                 }
             }
         });
@@ -279,6 +272,16 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         return 100;
     }
 
+    @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof ClawdianServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.ClawdianLimit.get();
+    }
+
     protected void blockedByShield(LivingEntity entity) {
         if (this.getAttackState() == CLAW_PUNCH) {
             double d0 = entity.getX() - this.getX();
@@ -309,6 +312,31 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
             super.travel(travelVector);
         }
 
+    }
+
+    private boolean isDangerousFallZone(PathfinderMob mob, BlockPos pos) {
+        PathNavigation navigation = mob.getNavigation();
+        NodeEvaluator evaluator = navigation.getNodeEvaluator();
+
+        if (evaluator == null) {
+            return false;
+        }
+
+        BlockPathTypes type = evaluator.getBlockPathType(mob.level(), Mth.floor(pos.getX()),Mth.floor(pos.getY()),Mth.floor(pos.getZ()),mob);
+
+        int safeDrop = 2;
+        BlockPos.MutableBlockPos checkPos = pos.mutable();
+
+        for (int i = 1; i <= safeDrop; i++) {
+            checkPos.move(Direction.DOWN);
+            if (!mob.level().getBlockState(checkPos).isAir()) {
+                return false;
+            }
+        }
+
+        return type == BlockPathTypes.DAMAGE_OTHER
+                || type == BlockPathTypes.OPEN
+                || type == BlockPathTypes.DANGER_OTHER;
     }
 
     public void updateSwimming() {
@@ -600,7 +628,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 if (this.tickCount % 2 == 0) {
                     for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2D))) {
                         if (!MobUtil.areAllies(this, Lentity)) {
-                            boolean flag = Lentity.hurt(this.getMobAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.6F));
+                            boolean flag = Lentity.hurt(this.getServantAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.6F));
                             if (flag) {
                                 if (Lentity.onGround()) {
                                     double d0 = Lentity.getX() - this.getX();
@@ -801,7 +829,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 List<LivingEntity> hit = level().getEntitiesOfClass(LivingEntity.class, selection);
                 for (LivingEntity entity : hit) {
                     if (!MobUtil.areAllies(this, entity)) {
-                        DamageSource damagesource = this.getMobAttack();
+                        DamageSource damagesource = this.getServantAttack();
                         boolean flag = entity.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entity.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entity, shieldbreakticks);
@@ -833,7 +861,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!MobUtil.areAllies(this, entityHit)) {
-                        DamageSource damagesource = this.getMobAttack();
+                        DamageSource damagesource = this.getServantAttack();
                         boolean hurt = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entityHit.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entityHit, shieldbreakticks);

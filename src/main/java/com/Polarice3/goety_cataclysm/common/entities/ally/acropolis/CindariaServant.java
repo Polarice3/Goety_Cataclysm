@@ -3,7 +3,6 @@ package com.Polarice3.goety_cataclysm.common.entities.ally.acropolis;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.common.entities.ally.InternalAnimationSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
@@ -67,7 +66,7 @@ public class CindariaServant extends InternalAnimationSummon {
 
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this));
+        this.goalSelector.addGoal(5, new WaterWanderGoal<>(this, 1.0D, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(3, new CindariaMoveGoal(this, 1.0, 8.0F));
@@ -244,10 +243,7 @@ public class CindariaServant extends InternalAnimationSummon {
                 float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!MobUtil.areAllies(this, entityHit)) {
-                        DamageSource damagesource = this.damageSources().mobAttack(this);
-                        if (this.getTrueOwner() != null) {
-                            damagesource = ModDamageSource.summonAttack(this, this.getTrueOwner());
-                        }
+                        DamageSource damagesource = this.getServantAttack();
                         boolean hurt = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entityHit.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entityHit, shieldbreakticks);

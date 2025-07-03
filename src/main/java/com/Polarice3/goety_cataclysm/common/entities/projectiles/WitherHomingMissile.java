@@ -1,8 +1,10 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
+import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.init.ModEntities;
@@ -25,6 +27,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -34,8 +38,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 public class WitherHomingMissile extends Projectile {
@@ -171,6 +179,27 @@ public class WitherHomingMissile extends Projectile {
                 if (this.finalTarget == null) {
                     this.targetId = null;
                 }
+            } else {
+                List<LivingEntity> list = new ArrayList<>();
+                for (Entity entity1 : this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(16.0F))) {
+                    LivingEntity livingEntity = null;
+                    if (entity1 instanceof PartEntity<?> partEntity && partEntity.getParent() instanceof LivingEntity living){
+                        livingEntity = living;
+                    } else if (entity1 instanceof LivingEntity living){
+                        livingEntity = living;
+                    }
+                    if (livingEntity != null) {
+                        if (MobUtil.ownedPredicate(this).test(livingEntity)){
+                            list.add(livingEntity);
+                        }
+                    }
+                }
+                list.sort(Comparator.comparingDouble(this::distanceTo));
+                if (list.stream().findFirst().isPresent()){
+                    LivingEntity livingEntity = list.stream().findFirst().get();
+                    this.finalTarget = livingEntity;
+                    this.targetId = livingEntity.getUUID();
+                }
             }
 
             if (this.finalTarget == null || !this.finalTarget.isAlive() || (this.finalTarget instanceof Player && this.finalTarget.isSpectator())) {
@@ -251,8 +280,28 @@ public class WitherHomingMissile extends Projectile {
         }
     }
 
-    protected boolean canHitEntity(Entity p_36842_) {
-        return super.canHitEntity(p_36842_) && !p_36842_.noPhysics;
+    protected boolean canHitEntity(Entity pEntity) {
+        if (this.getOwner() != null){
+            if (this.getOwner() instanceof Mob mob && mob.getTarget() == pEntity){
+                return super.canHitEntity(pEntity) && !pEntity.noPhysics;
+            } else {
+                if (MobUtil.areAllies(this.getOwner(), pEntity)){
+                    return false;
+                }
+                if (this.getOwner() instanceof Enemy && pEntity instanceof Enemy){
+                    return false;
+                }
+                if (pEntity instanceof Projectile projectile && projectile.getOwner() == this.getOwner()){
+                    return false;
+                }
+                if (pEntity instanceof IOwned owned0 && this.getOwner() instanceof IOwned owned1){
+                    if (MobUtil.ownerStack(owned0, owned1)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return super.canHitEntity(pEntity) && !pEntity.noPhysics;
     }
 
     protected float getInertia() {

@@ -166,7 +166,7 @@ public class DeeplingBruteServant extends AbstractDeeplingServant{
                     if (target != null) {
                         if (this.distanceTo(target) < 3.0F) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            if (target.hurt(this.getMobAttack(), damage)) {
+                            if (target.hurt(this.getServantAttack(), damage)) {
                                 ItemHelper.hurtAndBreak(this.getMainHandItem(), 1, this);
                             }
                         }
@@ -197,7 +197,7 @@ public class DeeplingBruteServant extends AbstractDeeplingServant{
         if (!list.isEmpty()) {
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity && !MobUtil.areAllies(this, entity)) {
-                    entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                    entity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                     this.SpinAttackTicks = 0;
                     this.setDeltaMovement(this.getDeltaMovement().scale(-0.2D));
                     break;

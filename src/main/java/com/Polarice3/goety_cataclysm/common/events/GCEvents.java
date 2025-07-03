@@ -7,6 +7,7 @@ import com.Polarice3.Goety.common.entities.projectiles.Fangs;
 import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.init.ModTags;
 import com.Polarice3.Goety.utils.CuriosFinder;
+import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.NoKnockBackDamageSource;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
@@ -18,11 +19,13 @@ import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -35,6 +38,7 @@ import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -191,6 +195,19 @@ public class GCEvents {
         if (event.getEffectInstance().getEffect() == ModEffect.EFFECTSTUN.get()){
             if (event.getEntity().getType().is(ModTags.EntityTypes.UNSTUNNABLE)){
                 event.setResult(Event.Result.DENY);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void ExplosionEvent(ExplosionEvent.Detonate event) {
+        if (event.getExplosion() instanceof IgnisExplosion) {
+            if (event.getExplosion().getIndirectSourceEntity() != null) {
+                LivingEntity livingEntity = event.getExplosion().getIndirectSourceEntity();
+                if (CuriosFinder.hasWanting(livingEntity)) {
+                    event.getAffectedEntities().removeIf(entity -> entity instanceof ItemEntity);
+                }
+                event.getAffectedEntities().removeIf(entity -> MobUtil.areAllies(livingEntity, entity));
             }
         }
     }

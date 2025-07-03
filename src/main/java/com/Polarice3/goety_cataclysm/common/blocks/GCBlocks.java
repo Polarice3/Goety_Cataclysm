@@ -30,6 +30,9 @@ public class GCBlocks {
     public static final RegistryObject<Block> NETHERITE_PLATING = register("netherite_plating", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
 
+    public static final RegistryObject<Block> ANCIENT_PLATING = register("ancient_plating", () ->
+            new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)));
+
     public static final RegistryObject<Block> VOID_MOLD_BLOCK = register("void_mold_block", () ->
             new Block(BlockBehaviour.Properties.copy(Blocks.CRYING_OBSIDIAN)));
 

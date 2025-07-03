@@ -134,7 +134,7 @@ public class DeeplingServant extends AbstractDeeplingServant{
                     if (target != null) {
                         if (this.distanceTo(target) < 3.0F) {
                             float damage = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-                            if (target.hurt(this.getMobAttack(), damage)) {
+                            if (target.hurt(this.getServantAttack(), damage)) {
                                 ItemHelper.hurtAndBreak(this.getMainHandItem(), 1, this);
                             }
                         }

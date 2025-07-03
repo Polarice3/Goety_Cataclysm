@@ -776,7 +776,7 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
                 AABB attackRange = this.getBoundingBox().inflate(0.75D, 0.75D, 0.75D).expandTowards(xExpand, 0, zExpand);
                 for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, attackRange)) {
                     if (!MobUtil.areAllies(this, Lentity)) {
-                        boolean flag = Lentity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
+                        boolean flag = Lentity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.4F);
                         if (flag) {
                             double theta = (this.yBodyRot) * (Math.PI / 180);
                             theta += Math.PI / 2;
@@ -980,8 +980,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         List<LivingEntity> hit = level().getEntitiesOfClass(LivingEntity.class, selection);
         for (LivingEntity entity : hit) {
             if (!MobUtil.areAllies(this, entity)) {
-                boolean flag = entity.hurt(this.getMobAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
-                if (entity.isDamageSourceBlocked(this.getMobAttack()) && shieldbreakticks > 0) {
+                boolean flag = entity.hurt(this.getServantAttack(), (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
+                if (entity.isDamageSourceBlocked(this.getServantAttack()) && shieldbreakticks > 0) {
                     this.disableShield(entity, shieldbreakticks);
                 }
 
@@ -1029,8 +1029,8 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         this.playSound(SoundEvents.GENERIC_EXPLODE, 1.5f, 1F + this.getRandom().nextFloat() * 0.1F);
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(area))) {
             if (!MobUtil.areAllies(this, entity)) {
-                boolean flag = entity.hurt(this.getMobAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + Math.min(this.getAttributeValue(Attributes.ATTACK_DAMAGE), entity.getMaxHealth() * CMConfig.MonstrositysHpdamage)));
-                if (entity.isDamageSourceBlocked(this.getMobAttack())) {
+                boolean flag = entity.hurt(this.getServantAttack(), (float) ((float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + Math.min(this.getAttributeValue(Attributes.ATTACK_DAMAGE), entity.getMaxHealth() * CMConfig.MonstrositysHpdamage)));
+                if (entity.isDamageSourceBlocked(this.getServantAttack())) {
                     this.disableShield(entity, 120);
                 }
 

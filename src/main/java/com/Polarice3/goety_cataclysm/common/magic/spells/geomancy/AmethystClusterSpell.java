@@ -5,34 +5,46 @@ import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.utils.WandUtil;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.entity.projectile.Amethyst_Cluster_Projectile_Entity;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AmethystClusterSpell extends Spell {
 
     @Override
     public int defaultSoulCost() {
-        return 0;
+        return GCSpellConfig.AmethystClusterCost.get();
     }
 
     @Override
     public int defaultCastDuration() {
-        return 50;
+        return GCSpellConfig.AmethystClusterDuration.get();
     }
 
     @Override
     public int defaultSpellCooldown() {
-        return 240;
+        return GCSpellConfig.AmethystClusterCoolDown.get();
     }
 
     @Override
     public SpellType getSpellType() {
         return SpellType.GEOMANCY;
+    }
+
+    @Override
+    public List<Enchantment> acceptedEnchantments() {
+        List<Enchantment> list = new ArrayList<>();
+        list.add(ModEnchantments.POTENCY.get());
+        list.add(ModEnchantments.VELOCITY.get());
+        return list;
     }
 
     @Override
@@ -58,7 +70,7 @@ public class AmethystClusterSpell extends Spell {
             double vy = 0 + caster.getRandom().nextFloat() * 0.3F;
             double vz = Mth.sin(throwAngle);
             double v3 = Mth.sqrt((float) (vx * vx + vz * vz));
-            Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), worldIn, caster, (float) CMConfig.AmethystClusterdamage + potency);
+            Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), worldIn, caster, GCSpellConfig.AmethystClusterDamage.get().floatValue() + potency);
 
             projectile.moveTo(sx, sy, sz, i * 11.25F, caster.getXRot());
             float speed = 0.8F + velocity;

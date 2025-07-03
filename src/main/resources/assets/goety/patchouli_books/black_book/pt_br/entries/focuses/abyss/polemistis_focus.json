@@ -1,0 +1,18 @@
+{
+  "name": "Foco Polemistís",
+  "icon": "goety_cataclysm:polemistis_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O feitiço não só permite que você invoque Servos Afogados diretamente, mas também vem com um amigo que dispara tinta como chapéu."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/polemistis_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:polemistis_focus": 1
+  }
+}

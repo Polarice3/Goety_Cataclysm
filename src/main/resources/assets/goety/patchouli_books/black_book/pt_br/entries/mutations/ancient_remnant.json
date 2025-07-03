@@ -1,0 +1,30 @@
+{
+  "name": "Fóssil Ancestral, O Dinossauro Egípcio",
+  "icon": "cataclysm:remnant_skull",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Com materiais poderosos e magia, você pode transformar o Mini-Fóssil em uma força tão forte quanto seu progenitor."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_modern_remnant_to_ancient_remnant_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ancient_remnant",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:ancient_plating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O monarca dos mortos-vivos pode ser curado ao receber ossos e se regenera passivamente se seu dono estiver usando uma Capa Necromântica. Em sua segunda fase, ele se cura continuamente, mesmo em chamas e sem intervalo por segundo."
+    }
+  ]
+}

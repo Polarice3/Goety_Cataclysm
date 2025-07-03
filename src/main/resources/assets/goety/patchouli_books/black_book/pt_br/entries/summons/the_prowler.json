@@ -1,0 +1,37 @@
+{
+  "name": "The Prowler",
+  "icon": "cataclysm:mech_eye",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A mechanical being that's too high-tech for you to truly replicate with the tools you currently have. Fortunately, the power of Soul Energy allows the power of the long deceased to help recreate this mechanical wonder under your rule."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:the_prowler",
+      "scale": 0.5
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:thrall/summon_prowler_servant"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "They can be healed by right-clicking on them with Iron Ingots or Blocks of Iron."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:mechanized_core",
+      "text": "When destroyed, these destructive engines will drop their complex circuitry which can contains the blueprints and technology to be reconstructed."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:prowler",
+      "text": "Right click a center Mechanized Iron Block with the Mechanized Core."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:mechanized_core": 4
+  }
+}

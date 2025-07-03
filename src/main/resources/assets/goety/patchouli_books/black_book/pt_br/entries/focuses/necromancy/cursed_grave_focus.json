@@ -1,0 +1,18 @@
+{
+  "name": "Cursed Grave Focus",
+  "icon": "goety_cataclysm:cursed_grave_focus",
+  "category": "goety:cataclysm/focuses/necromancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Corpses of valiant warriors can be found in many cold and icy biomes. With necromancy, you're able to revive these corpses in a similar fashion to Maledictus' curse upon its jailers."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/cursed_grave_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:cursed_grave_focus": 1
+  }
+}

@@ -143,5 +143,10 @@
   "item.goety_cataclysm.storm_serpent_focus.info": "召唤风暴巨蛇，让它们向任何有效目标或实体猛扑",
   "entity.goety_cataclysm.ancient_remnant": "远古遗魂",
   "item.goety_cataclysm.remnant_skull": "遗魂头骨",
-  "item.goety_cataclysm.ancient_remnant_spawn_egg": "远古遗魂仆从刷怪蛋"
+  "item.goety_cataclysm.ancient_remnant_spawn_egg": "远古遗魂仆从刷怪蛋",
+  "advancements.goety_cataclysm.convert_ancient_remnant.title": "吾王万岁！",
+  "advancements.goety_cataclysm.convert_ancient_remnant.description": "把现世遗魂转化为远古遗魂",
+  "block.goety_cataclysm.ancient_plating": "远古金属镀层",
+  "item.goety_cataclysm.amethyst_cluster_focus": "紫晶簇聚晶",
+  "item.goety_cataclysm.amethyst_cluster_focus.info": "在施法者周围发射紫水晶簇"
 }

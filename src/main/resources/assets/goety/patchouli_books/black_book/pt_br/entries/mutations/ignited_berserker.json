@@ -1,0 +1,33 @@
+{
+  "name": "Ignited Berserker",
+  "icon": "cataclysm:dying_ember",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_bygone_scroll",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Having a spirit of an ancient berserker possess a fire elemental surprisingly didn't end in disaster."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_blazes_to_ignited_berserker"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:ignited_berserker",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The berserker can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:ignited_soul",
+      "text": "When extinguished, these fiery revenants will drop their burning cores which can possess a Blaze to return from the dead."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:ignited_soul": 4
+  }
+}

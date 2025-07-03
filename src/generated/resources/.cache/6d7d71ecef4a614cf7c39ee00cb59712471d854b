@@ -1,10 +1,13 @@
-// 1.20.1	2025-05-11T22:02:59.3519905	Block States: goety_cataclysm
+// 1.20.1	2025-07-02T11:58:16.412296	Block States: goety_cataclysm
+ff746ad1ccefc5ebbb07d733dde9f8d22faf47e8 assets/goety_cataclysm/blockstates/ancient_plating.json
 1a711de0f4fa98d3e985b9bc812966cce72bad6b assets/goety_cataclysm/blockstates/mechanized_iron_block.json
 ddfa72bab3c2bd46287fab084248cdad75d0cad8 assets/goety_cataclysm/blockstates/netherite_plating.json
 5fd4267a2992ee7297fe193e899ad601f97897d3 assets/goety_cataclysm/blockstates/void_mold_block.json
+e8f8ded0259f2f43af07afb3793fd74ff7634de6 assets/goety_cataclysm/models/block/ancient_plating.json
 c16758f78c1709af9c4fff7e30fda5ce089680d4 assets/goety_cataclysm/models/block/mechanized_iron_block.json
 f4df7aaf624f60361fb3837fa9d7651c4045bfc7 assets/goety_cataclysm/models/block/netherite_plating.json
 1f8147186c8a5d2b1445bfe4a7c71c31951d3bca assets/goety_cataclysm/models/block/void_mold_block.json
+94bc371b2b1facc27b4f1e096480ecb873dee3b3 assets/goety_cataclysm/models/item/ancient_plating.json
 ca1e1007988168a989b69db70ea3900aa9679127 assets/goety_cataclysm/models/item/mechanized_iron_block.json
 e824100230e3512d8f6ae83289bc2851970a0799 assets/goety_cataclysm/models/item/netherite_plating.json
 8b21e66b39367f3b2eaeebcdb262ae2130b5a05c assets/goety_cataclysm/models/item/void_mold_block.json

@@ -1,0 +1,18 @@
+{
+  "name": "Sunken Current Focus",
+  "icon": "goety_cataclysm:sunken_current_focus",
+  "category": "goety:cataclysm/focuses/abyss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You've upgraded the focus to summon forth Deepling Brutes, a superior and more powerful version of the humble Deepling."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/sunken_current_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:sunken_current_focus": 1
+  }
+}

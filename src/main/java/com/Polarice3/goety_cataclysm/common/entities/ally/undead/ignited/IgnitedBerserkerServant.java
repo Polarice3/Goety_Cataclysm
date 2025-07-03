@@ -305,7 +305,7 @@ public class IgnitedBerserkerServant extends InternalAnimationSummon {
             if (this.tickCount % 4 == 0) {
                 for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(1.0D))) {
                     if (!MobUtil.areAllies(this, entity)) {
-                        boolean flag = entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                        boolean flag = entity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                         if (flag) {
                             double d0 = entity.getX() - this.getX();
                             double d1 = entity.getZ() - this.getZ();

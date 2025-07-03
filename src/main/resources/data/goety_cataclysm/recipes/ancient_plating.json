@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "nbn",
+    "bob",
+    "nbn"
+  ],
+  "key":
+  {
+    "n":
+    {
+      "item": "goety_cataclysm:netherite_plating"
+    },
+    "o":
+    {
+      "item": "cataclysm:ancient_metal_block"
+    },
+    "b":
+    {
+      "item": "cataclysm:koboleton_bone"
+    }
+  },
+  "result":
+  {
+    "item": "goety_cataclysm:ancient_plating",
+    "count": 1
+  }
+}

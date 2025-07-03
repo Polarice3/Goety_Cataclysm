@@ -7,7 +7,11 @@ import com.Polarice3.Goety.common.entities.ModEntityType;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.common.entities.projectiles.FlyingItem;
 import com.Polarice3.Goety.config.MobsConfig;
+import com.Polarice3.Goety.init.ModTags;
+import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.SEHelper;
+import com.Polarice3.Goety.utils.ServantUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.IABossSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttackGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
@@ -17,6 +21,7 @@ import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.revive.GCRemnantSkull;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.client.particle.RoarParticle;
@@ -64,6 +69,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -77,12 +83,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class AncientRemnantServant extends IABossSummon implements IAutoRideable, PlayerRideable {
     public AnimationState idleAnimationState = new AnimationState();
@@ -109,6 +117,23 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     private static final EntityDataAccessor<Boolean> AUTO_MODE = SynchedEntityData.defineId(AncientRemnantServant.class, EntityDataSerializers.BOOLEAN);
     public final LegSolver legSolver = new LegSolver(new LegSolver.Leg(0F, 0.75F, 4.0F, false), new LegSolver.Leg(0F, -0.75F, 4.0F, false));
     private AttackMode mode = AttackMode.CIRCLE;
+    public static int SLEEP = 1;
+    public static int AWAKEN = 2;
+    public static int DEATH = 3;
+    public static int RIGHT_BITE = 4;
+    public static int THREE_TAIL_HIT = 5;
+    public static int SANDSTORM_ROAR = 6;
+    public static int PHASE_ROAR = 7;
+    public static int RIGHT_STOMP = 8;
+    public static int LEFT_STOMP = 9;
+    public static int CHARGE_PREPARE = 10;
+    public static int CHARGE = 11;
+    public static int CHARGE_STUN = 12;
+    public static int RIGHT_DOUBLE_STOMP = 13;
+    public static int LEFT_DOUBLE_STOMP = 14;
+    public static int GROUND_TAIL = 15;
+    public static int TAIL_SWING = 16;
+    public static int MONOLITH = 17;
     private int hunting_cooldown = 160;
     private int roar_cooldown = 0;
     private int monoltih_cooldown = 0;
@@ -136,10 +161,10 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(5, new RemnantAttackModeGoal(this));
         //right bite
-        this.goalSelector.addGoal(3, new RemnantAttackGoal(this, 0, 4, 0, 70, 29, 6, 10));
+        this.goalSelector.addGoal(3, new RemnantAttackGoal(this, 0, RIGHT_BITE, 0, 70, 29, 6, 10));
 
         //sleep
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,1,1,0,0,0){
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, SLEEP, SLEEP, 0, 0, 0){
             @Override
             public void tick() {
                 entity.setDeltaMovement(0, entity.getDeltaMovement().y, 0);
@@ -147,15 +172,15 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         });
 
         //awaken
-        this.goalSelector.addGoal(0, new RemnantAwakenGoal(this,1,2,0,80));
+        this.goalSelector.addGoal(0, new RemnantAwakenGoal(this, SLEEP, AWAKEN, 0, 80));
         //change roar
-        this.goalSelector.addGoal(0, new RemnantPhaseChangeGoal(this,0,7,0,60));
+        this.goalSelector.addGoal(0, new RemnantPhaseChangeGoal(this, 0, PHASE_ROAR, 0, 60));
 
         //stomp
-        this.goalSelector.addGoal(3, new RemnantStompGoal(this,0, 8,9, 13, 14,0,50,66, 26, 20, 36));
+        this.goalSelector.addGoal(3, new RemnantStompGoal(this, 0, RIGHT_STOMP, LEFT_STOMP, RIGHT_DOUBLE_STOMP, LEFT_DOUBLE_STOMP, 0, 50,66, 26, 20, 36));
 
         //sandstorm_roar
-        this.goalSelector.addGoal(3, new RemnantAttackGoal(this,0, 6, 0, 60, 11, 32F, 18){
+        this.goalSelector.addGoal(3, new RemnantAttackGoal(this, 0, SANDSTORM_ROAR, 0, 60, 11, 32.0F, 18){
 
             @Override
             public boolean canUse() {
@@ -170,13 +195,13 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         });
 
         //monolith
-        this.goalSelector.addGoal(3, new RemnantMonolithAttackGoal(this,0, 17, 0, 70, 20));
+        this.goalSelector.addGoal(3, new RemnantMonolithAttackGoal(this, 0, MONOLITH, 0, 70, 20));
 
         //charge_prepare
-        this.goalSelector.addGoal(3, new RemnantChargeGoal(this,0, 10, 11, 70, 66, 32F, 60));
+        this.goalSelector.addGoal(3, new RemnantChargeGoal(this, 0, CHARGE_PREPARE, CHARGE, 70, 66, 32.0F, 60));
 
         //charge
-        this.goalSelector.addGoal(2, new InternalSummonStateGoal(this,11,11,12,60,0){
+        this.goalSelector.addGoal(2, new InternalSummonStateGoal(this, CHARGE, CHARGE, CHARGE_STUN, 60, 0){
             @Override
             public void tick() {
                 if(this.entity.onGround()){
@@ -189,10 +214,10 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         });
 
         //charge stun
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,12,12,0,120,0));
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, CHARGE_STUN, CHARGE_STUN, 0, 120, 0));
 
         //ground_tail
-        this.goalSelector.addGoal(3, new RemnantAttackGoal(this,0, 15, 0, 110, 85, 12, 10){
+        this.goalSelector.addGoal(3, new RemnantAttackGoal(this, 0, GROUND_TAIL, 0, 110, 85, 12, 10){
             @Override
             public boolean canUse() {
                 LivingEntity target = entity.getTarget();
@@ -206,7 +231,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         });
 
         //tail_swing
-        this.goalSelector.addGoal(3, new RemnantAttackGoal(this,0, 16, 0, 58, 13, 7.5f, 10){
+        this.goalSelector.addGoal(3, new RemnantAttackGoal(this, 0, TAIL_SWING, 0, 58, 13, 7.5F, 10){
             @Override
             public boolean canUse() {
                 LivingEntity target = entity.getTarget();
@@ -215,7 +240,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         });
 
         //phase_roar
-        this.goalSelector.addGoal(2, new RemnantPhaseChangeGoal(this,0,7,0,60));
+        this.goalSelector.addGoal(2, new RemnantPhaseChangeGoal(this, 0, PHASE_ROAR, 0, 60));
 
     }
 
@@ -255,6 +280,16 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     }
 
     @Override
+    public Predicate<Entity> summonPredicate() {
+        return entity -> entity instanceof AncientRemnantServant;
+    }
+
+    @Override
+    public int getSummonLimit(LivingEntity owner) {
+        return GCSpellConfig.AncientRemnantLimit.get();
+    }
+
+    @Override
     public ItemEntity spawnAtLocation(ItemStack stack) {
         ItemEntity itementity = this.spawnAtLocation(stack,0.0f);
         if (itementity != null) {
@@ -267,14 +302,14 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     @Override
     public boolean hurt(DamageSource source, float damage) {
         double range = calculateRange(source);
-        if (this.getAttackState() == 7 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        if (this.getAttackState() == PHASE_ROAR && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
         }
         if (range > CMConfig.AncientRemnantLongRangelimit * CMConfig.AncientRemnantLongRangelimit && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
         }
         Entity entity = source.getDirectEntity();
-        if (this.getAttackState() != 12){
+        if (this.getAttackState() != CHARGE_STUN){
             if (entity instanceof AbstractArrow) {
                 return false;
             }
@@ -379,7 +414,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     }
 
     @Override
-    public boolean isPushedByFluid() {
+    public boolean isPushedByFluid(FluidType type) {
         return false;
     }
 
@@ -551,7 +586,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             this.level().addFreshEntity(flyingItem);
         }
         super.die(p_21014_);
-        this.setAttackState(3);
+        this.setAttackState(DEATH);
     }
 
     protected void onDeathAIUpdate() {
@@ -614,14 +649,13 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.idleAnimationState.animateWhen(getAttackState() != 3, this.tickCount);
+            this.idleAnimationState.animateWhen(this.getAttackState() != DEATH, this.tickCount);
         }
         this.legSolver.update(this, this.yBodyRot, this.getScale());
 
         if (this.hunting_cooldown > 0) {
             this.hunting_cooldown--;
         }
-
         if (this.roar_cooldown > 0) {
             this.roar_cooldown--;
         }
@@ -640,18 +674,46 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             }
         }
         if (this.getIsPower()) {
-            if (this.tickCount % 20 == 0) {
-                this.heal(1.0F);
-            }
+            this.setNoHealTime(0);
         }
         this.floatRemnant();
         this.frame++;
         float moveX = (float) (getX() - xo);
         float moveZ = (float) (getZ() - zo);
         float speed = Mth.sqrt(moveX * moveX + moveZ * moveZ);
-        if (!this.isSilent() && frame % 8 == 1 && speed > 0.05 && this.getAttackState() == 11 && this.onGround()) {
+        if (!this.isSilent() && frame % 8 == 1 && speed > 0.05 && this.getAttackState() == CHARGE && this.onGround()) {
             this.playSound(CataclysmSounds.REMNANT_CHARGE_STEP.get(), 1F, 1.0f);
             ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
+        }
+    }
+
+    @Override
+    public void healServant() {
+        if (!this.getType().is(ModTags.EntityTypes.NO_HEAL_SERVANTS)) {
+            if (this.getIsPower()) {
+                if (this.getTrueOwner() instanceof Player player) {
+                    if (!this.isDeadOrDying() && this.getHealth() < this.getMaxHealth()) {
+                        if (this.tickCount % 20 == 0) {
+                            if (ServantUtil.isNecroHeal(this) && MobsConfig.UndeadMinionHeal.get()) {
+                                if (CuriosFinder.hasUndeadCape(player) && SEHelper.getSoulsAmount(player, MobsConfig.UndeadMinionHealCost.get())) {
+                                    this.heal(1.0F);
+                                    Vec3 vector3d = this.getDeltaMovement();
+                                    if (this.level() instanceof ServerLevel serverWorld) {
+                                        SEHelper.decreaseSouls(player, MobsConfig.UndeadMinionHealCost.get());
+                                        serverWorld.sendParticles(ParticleTypes.SCULK_SOUL, this.getRandomX(0.5F), this.getRandomY(), this.getRandomZ(0.5F), 0, vector3d.x * -0.2, 0.1, vector3d.z * -0.2, 0.5);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (this.tickCount % 20 == 0) {
+                        this.heal(1.0F);
+                    }
+                }
+            } else {
+                super.healServant();
+            }
         }
     }
 
@@ -688,7 +750,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             for (BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(this.getY()), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
                 BlockState blockstate = this.level().getBlockState(blockpos);
                 if (!blockstate.isAir() && blockstate.canEntityDestroy(this.level(), blockpos, this) && !blockstate.is(ModTag.REMNANT_IMMUNE) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, blockstate)) {
-                    if (random.nextInt(6) == 0 && !blockstate.hasBlockEntity()) {
+                    if (this.random.nextInt(6) == 0 && !blockstate.hasBlockEntity()) {
                         Cm_Falling_Block_Entity fallingBlockEntity = new Cm_Falling_Block_Entity(level(), blockpos.getX() + 0.5D, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D, blockstate, 20);
                         flag = this.level().destroyBlock(blockpos, false, this) || flag;
                         fallingBlockEntity.setDeltaMovement(fallingBlockEntity.getDeltaMovement().add(this.position().subtract(fallingBlockEntity.position()).multiply((-1.2D + random.nextDouble()) / 3, 0.2D + getRandom().nextGaussian() * 0.15D, (-1.2D + random.nextDouble()) / 3)));
@@ -703,41 +765,37 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
     public void aiStep() {
         super.aiStep();
-
-        if (this.getAttackState() == 4) {
-            if(this.attackTicks == 8){
+        if (this.getAttackState() == RIGHT_BITE) {
+            if (this.attackTicks == 8) {
                 this.level().playSound(null, this, CataclysmSounds.REMNANT_BITE.get(), SoundSource.HOSTILE, 1.0f, 1.0f);
             }
-            if(this.attackTicks == 31){
+            if (this.attackTicks == 31) {
                 AreaAttack(7,7,70,1.35f,(float) CMConfig.RemnantHpDamage,160,0);
             }
         }
-
-        if (this.getAttackState() == 6) {
-            if(this.attackTicks == 14){
+        if (this.getAttackState() == SANDSTORM_ROAR) {
+            if (this.attackTicks == 14) {
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_ROAR.get(), SoundSource.HOSTILE, 3.0f, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 60);
                 Roarparticle(4f, 1.0f,8F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-            if(this.attackTicks == 17){
+            if (this.attackTicks == 17) {
                 Roarparticle(4f, 2.5f,7.0F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-            if(this.attackTicks == 20){
-                Roarparticle(4f, 2.5f,7F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
-
-            }
-            if(this.attackTicks == 23){
+            if (this.attackTicks == 20) {
                 Roarparticle(4f, 2.5f,7F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-            if(this.attackTicks == 26){
+            if (this.attackTicks == 23) {
+                Roarparticle(4f, 2.5f,7F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
+            }
+            if (this.attackTicks == 26) {
                 Roarparticle(4f, 1.25F,8F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-
-            if(this.attackTicks == 29){
+            if (this.attackTicks == 29) {
                 Roarparticle(4f, 0,9F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
 
-            if(this.attackTicks == 55) {
+            if (this.attackTicks == 55) {
                 for (int i = 0; i < 3; i++) {
                     float angle = i * Mth.PI / 1.5F;
                     double sx = this.getX() + (Mth.cos(angle) * 8);
@@ -750,8 +808,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 }
             }
         }
-
-        if(this.getAttackState() == 7) {
+        if (this.getAttackState() == PHASE_ROAR) {
             if (this.attackTicks == 14) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.15f, 0, 80);
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_ROAR.get(), SoundSource.HOSTILE, 3.0f, 1.0f);
@@ -786,8 +843,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 Roarparticle(5.5f, 0,3.1F, 10,255,255,255, 0.2F, 1.0f,0.8F,5F);
             }
         }
-
-        if (this.getAttackState() == 8){
+        if (this.getAttackState() == RIGHT_STOMP) {
             if (this.attackTicks == 28) {
                 StompParticle(0.9f,1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
@@ -798,14 +854,14 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 26;
                     int d2 = l - 25;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,1.4f);
+                    StompSound(ds,1.4f);
                 }
             }
         }
-        if (this.getAttackState() == 9){
+        if (this.getAttackState() == LEFT_STOMP){
             if (this.attackTicks == 28) {
                 StompParticle(0.9f,-1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
@@ -815,44 +871,41 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 26;
                     int d2 = l - 25;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,-1.4f);
+                    StompSound(ds,-1.4f);
                 }
             }
         }
 
-        if(this.getAttackState() == 10){
-            if(this.attackTicks == 1){
+        if (this.getAttackState() == CHARGE_PREPARE) {
+            if (this.attackTicks == 1) {
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_CHARGE_PREPARE.get(), SoundSource.HOSTILE, 3.0f, 1.0f);
             }
 
-            if(this.attackTicks == 14){
+            if (this.attackTicks == 14) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 StompParticle(-0.1f,-0.75f);
             }
 
-            if(this.attackTicks == 43){
+            if (this.attackTicks == 43) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 StompParticle(-0.1f,0.75f);
             }
 
-            if(this.attackTicks == 66){
+            if (this.attackTicks == 66) {
                 this.level().playSound(null, this, CataclysmSounds.REMNANT_CHARGE_ROAR.get(), SoundSource.HOSTILE, 3.0f, 1.0f);
                 Roarparticle(6f, 0.0f,4.0F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-            if(this.attackTicks == 69){
+            if (this.attackTicks == 69) {
                 Roarparticle(6f, 0.0f,4.0F, 10,255,255,255, 0.4F, 1.0f,0.8F,3.5F);
             }
-
-
         }
-
-        if(this.getAttackState() == 11) {
+        if (this.getAttackState() == CHARGE) {
             Charge();
             if (this.horizontalCollision) {
-                this.setAttackState(12);
+                this.setAttackState(CHARGE_STUN);
             }
             for (int l = 1; l <= 58; l = l + 3) {
                 if (this.attackTicks == l) {
@@ -861,7 +914,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             }
 
         }
-        if(this.getAttackState() == 12) {
+        if (this.getAttackState() == CHARGE_STUN) {
             if(this.attackTicks == 1){
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.25f, 0, 60);
             }
@@ -870,8 +923,8 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             }
         }
 
-        if(this.getAttackState() == 13) {
-            if(this.attackTicks == 28) {
+        if (this.getAttackState() == RIGHT_DOUBLE_STOMP) {
+            if (this.attackTicks == 28) {
                 StompParticle(0.9f,1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 this.playSound(CataclysmSounds.REMNANT_STOMP.get(), 1F, 1.0f);
@@ -881,14 +934,14 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 26;
                     int d2 = l - 25;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,1.4f);
+                    StompSound(ds,1.4f);
                 }
             }
 
-            if(this.attackTicks == 50) {
+            if (this.attackTicks == 50) {
                 StompParticle(0.9f,1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 this.playSound(CataclysmSounds.REMNANT_STOMP.get(), 1F, 1.0f);
@@ -898,16 +951,15 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 48;
                     int d2 = l - 47;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, 1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,1.4f);
+                    StompSound(ds,1.4f);
                 }
             }
         }
-
-        if(this.getAttackState() == 14) {
-            if(this.attackTicks == 28) {
+        if (this.getAttackState() == LEFT_DOUBLE_STOMP) {
+            if (this.attackTicks == 28) {
                 StompParticle(0.9f,-1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 this.playSound(CataclysmSounds.REMNANT_STOMP.get(), 1F, 1.0f);
@@ -916,13 +968,13 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 26;
                     int d2 = l - 25;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,-1.4f);
+                    StompSound(ds,-1.4f);
                 }
             }
-            if(this.attackTicks == 50) {
+            if (this.attackTicks == 50) {
                 StompParticle(0.9f,-1.4f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 this.playSound(CataclysmSounds.REMNANT_STOMP.get(), 1F, 1.0f);
@@ -931,49 +983,47 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                 if (this.attackTicks == l) {
                     int d = l - 48;
                     int d2 = l - 47;
-                    float ds = (d + d2) / 2;
+                    float ds = (d + d2) / 2.0F;
                     StompDamage(0.4f, d, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
                     StompDamage(0.4f, d2, 6,0.9F, 0, -1.4f,80, 0.9f, (float) CMConfig.RemnantStompHpDamage, 0.1f);
-                    Stompsound(ds,-1.4f);
+                    StompSound(ds,-1.4f);
                 }
             }
         }
-        if (this.getAttackState() == 15) {
-            if(this.attackTicks == 1) {
+        if (this.getAttackState() == GROUND_TAIL) {
+            if (this.attackTicks == 1) {
                 this.level().playSound(null, this, CataclysmSounds.REMNANT_TAIL_SLAM_1.get(), SoundSource.HOSTILE, 1.0f, 1.0f);
             }
-            if(this.attackTicks == 26) {
+            if (this.attackTicks == 26) {
                 AreaAttack(10,10,70,1.0f,(float) CMConfig.RemnantHpDamage,160,0);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 EarthQuakeSummon(5.5f, 22 + random.nextInt(8), 0.8f);
                 StompParticle(5.5f,0.8f);
             }
-            if(this.attackTicks == 55) {
+            if (this.attackTicks == 55) {
                 AreaAttack(10,10,70,1.0f,(float) CMConfig.RemnantHpDamage,160,0);
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_TAIL_SLAM_2.get(), SoundSource.HOSTILE, 1.0f, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 EarthQuakeSummon(5.25f, 22 + random.nextInt(8), 1.5f);
                 StompParticle(5.25f,1.5f);
             }
-            if(this.attackTicks == 85) {
+            if (this.attackTicks == 85) {
                 AreaAttack(10,10,70,1.0f,(float) CMConfig.RemnantHpDamage,160,0);
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_TAIL_SLAM_3.get(), SoundSource.HOSTILE, 1.0f, 1.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.1f, 0, 10);
                 EarthQuakeSummon(5.5f, 22 + random.nextInt(8), 0.8f);
                 StompParticle(5.5f,0.8f);
             }
-
         }
-
-        if(this.getAttackState() == 16) {
-            if(this.attackTicks == 12) {
+        if (this.getAttackState() == TAIL_SWING) {
+            if (this.attackTicks == 12) {
                 this.level().playSound(null, this, CataclysmSounds.REMNANT_TAIL_SWING.get(), SoundSource.HOSTILE, 2.0f, 1.0f);
             }
-            if(this.attackTicks == 25){
+            if (this.attackTicks == 25){
                 TailAreaAttack(8,8,1.05F,120,1.0f,(float) CMConfig.RemnantHpDamage,200,100);
             }
         }
-        if(this.getAttackState() == 17) {
+        if (this.getAttackState() == MONOLITH) {
             if (this.attackTicks == 16) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.15f, 0, 80);
                 this.level().playSound((Player) null, this, CataclysmSounds.REMNANT_ROAR.get(), SoundSource.HOSTILE, 3.0f, 1.1f);
@@ -1172,7 +1222,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         }
     }
 
-    private void Stompsound(float distance,float math) {
+    private void StompSound(float distance, float math) {
         double theta = (yBodyRot) * (Math.PI / 180);
         theta += Math.PI / 2;
         double vecX = Math.cos(theta);
@@ -1218,7 +1268,6 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             this.level().addParticle(new RingParticle.RingData(0f, (float) Math.PI / 2f, 20, 1f, 1f, 1f, 1f, 25f, false, RingParticle.EnumRingBehavior.GROW_THEN_SHRINK), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
         }
     }
-
 
     private void EarthQuakeSummon(float vec, int quake,float math) {
         float f = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)) ;
@@ -1321,7 +1370,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
     @Override
     public double getPassengersRidingOffset() {
-        return super.getPassengersRidingOffset() - 0.25D;
+        return super.getPassengersRidingOffset() + 0.5D;
     }
 
     @Override
@@ -1336,12 +1385,16 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (this.getTrueOwner() != null && pPlayer == this.getTrueOwner()) {
-            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get())) && this.getHealth() < this.getMaxHealth()) {
+            if ((itemstack.is(Tags.Items.BONES) || itemstack.is(CataclysmItems.KOBOLETON_BONE.get()) || itemstack.is(Items.BONE_BLOCK)) && this.getHealth() < this.getMaxHealth()) {
                 if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
                 this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-                this.heal(2.0F);
+                if (itemstack.is(Items.BONE_BLOCK)){
+                    this.heal(6.0F);
+                } else {
+                    this.heal(2.0F);
+                }
                 if (this.level() instanceof ServerLevel serverLevel) {
                     for (int i = 0; i < 7; ++i) {
                         double d0 = this.random.nextGaussian() * 0.02D;
@@ -1383,7 +1436,6 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         private final double attackrange;
         private final float random;
 
-
         public RemnantStompGoal(AncientRemnantServant entity, int getattackstate, int attackstate1, int attackstate2, int attackstate3, int attackstate4, int attackendstate, int attackMaxtick1, int attackMaxtick2, int attackseetick, double attackrange, float random) {
             this.entity = entity;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
@@ -1398,7 +1450,6 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             this.attackseetick = attackseetick;
             this.attackrange = attackrange;
             this.random = random;
-
         }
 
         @Override
@@ -1415,28 +1466,28 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         public void start() {
             if(this.entity.getIsPower()) {
                 if (this.entity.random.nextBoolean()) {
-                    this.entity.setAttackState(attackstate3);
+                    this.entity.setAttackState(this.attackstate3);
                 } else {
-                    this.entity.setAttackState(attackstate4);
+                    this.entity.setAttackState(this.attackstate4);
                 }
             }else {
                 if (this.entity.random.nextBoolean()) {
-                    this.entity.setAttackState(attackstate1);
+                    this.entity.setAttackState(this.attackstate1);
                 }else{
-                    this.entity.setAttackState(attackstate2);
+                    this.entity.setAttackState(this.attackstate2);
                 }
             }
             this.entity.hit = false;
-            LivingEntity target = entity.getTarget();
+            LivingEntity target = this.entity.getTarget();
             if (target != null) {
                 this.entity.lookAt(target, 30.0F, 30.0F);
-                entity.getLookControl().setLookAt(target, 30, 30);
+                this.entity.getLookControl().setLookAt(target, 30, 30);
             }
         }
 
         @Override
         public void stop() {
-            this.entity.setAttackState(attackendstate);
+            this.entity.setAttackState(this.attackendstate);
             this.entity.stomp_cooldown = STOMP_COOLDOWN;
             if(this.entity.hit) {
                 if (this.entity.getRage() > 0) {
@@ -1461,13 +1512,13 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             return false;
         }
         public void tick() {
-            LivingEntity target = entity.getTarget();
+            LivingEntity target = this.entity.getTarget();
             this.entity.getNavigation().stop();
-            if (entity.attackTicks < attackseetick && target != null) {
-                entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                entity.lookAt(target, 30.0F, 30.0F);
+            if (this.entity.attackTicks < this.attackseetick && target != null) {
+                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                this.entity.lookAt(target, 30.0F, 30.0F);
             } else {
-                entity.setYRot(entity.yRotO);
+                this.entity.setYRot(this.entity.yRotO);
             }
         }
     }
@@ -1490,24 +1541,24 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         @Override
         public boolean canUse() {
-            return this.entity.getNecklace() && this.entity.getAttackState() == getattackstate;
+            return this.entity.getNecklace() && this.entity.getAttackState() == this.getattackstate;
         }
 
         @Override
         public void start() {
-            if(getattackstate != attackstate) {
-                this.entity.setAttackState(attackstate);
+            if (getattackstate != this.attackstate) {
+                this.entity.setAttackState(this.attackstate);
             }
         }
 
         @Override
         public void stop() {
-            this.entity.setAttackState(attackendstate);
+            this.entity.setAttackState(this.attackendstate);
         }
 
         @Override
         public boolean canContinueToUse() {
-            return attackMaxtick > 0 ? this.entity.attackTicks <= attackMaxtick : canUse();
+            return attackMaxtick > 0 ? this.entity.attackTicks <= this.attackMaxtick : this.canUse();
         }
     }
 
@@ -1529,13 +1580,13 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         @Override
         public boolean canUse() {
-            return !this.entity.getIsPower() && this.entity.getAttackState() == getattackstate && this.entity.isPower();
+            return !this.entity.getIsPower() && this.entity.getAttackState() == this.getattackstate && this.entity.isPower();
         }
 
         @Override
         public void start() {
-            if(getattackstate != attackstate) {
-                this.entity.setAttackState(attackstate);
+            if (this.getattackstate != this.attackstate) {
+                this.entity.setAttackState(this.attackstate);
             }
         }
 
@@ -1546,12 +1597,12 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         @Override
         public void stop() {
-            this.entity.setAttackState(attackendstate);
+            this.entity.setAttackState(this.attackendstate);
         }
 
         @Override
         public boolean canContinueToUse() {
-            return attackMaxtick > 0 ? this.entity.attackTicks <= attackMaxtick : canUse();
+            return this.attackMaxtick > 0 ? this.entity.attackTicks <= this.attackMaxtick : this.canUse();
         }
     }
 
@@ -1571,7 +1622,6 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             this.attackendstate = attackendstate;
             this.attackMaxtick = attackMaxtick;
             this.attackseetick = attackseetick;
-
         }
 
         @Override
@@ -1587,23 +1637,23 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         @Override
         public void start() {
-            this.entity.setAttackState(attackstate);
+            this.entity.setAttackState(this.attackstate);
             this.entity.getNavigation().stop();
             this.entity.hit = false;
-            LivingEntity target = entity.getTarget();
+            LivingEntity target = this.entity.getTarget();
             if (target != null) {
                 this.entity.lookAt(target, 30.0F, 30.0F);
-                entity.getLookControl().setLookAt(target, 30, 30);
+                this.entity.getLookControl().setLookAt(target, 30, 30);
             }
         }
 
         @Override
         public void stop() {
-            this.entity.setAttackState(attackendstate);
+            this.entity.setAttackState(this.attackendstate);
             this.entity.monoltih_cooldown = MONOLITH2_COOLDOWN;
             LivingEntity target = entity.getTarget();
             if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-                this.entity.setTarget((LivingEntity)null);
+                this.entity.setTarget(null);
             }
             if (this.entity.getTarget() == null) {
                 this.entity.setAggressive(false);
@@ -1613,18 +1663,18 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         @Override
         public boolean canContinueToUse() {
-            return this.entity.attackTicks <= attackMaxtick && this.entity.getAttackState() == attackstate;
+            return this.entity.attackTicks <= this.attackMaxtick && this.entity.getAttackState() == this.attackstate;
         }
 
         public void tick() {
             this.entity.getNavigation().stop();
-            LivingEntity target = entity.getTarget();
-            if (entity.attackTicks < attackseetick && target != null) {
-                entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
+            LivingEntity target = this.entity.getTarget();
+            if (this.entity.attackTicks < attackseetick && target != null) {
+                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
             } else {
-                entity.setYRot(entity.yRotO);
+                this.entity.setYRot(entity.yRotO);
             }
-            if(this.entity.attackTicks == attackseetick && target !=null) {
+            if(this.entity.attackTicks == this.attackseetick && target !=null) {
                 double d1 = target.getY();
                 float f = (float) Mth.atan2(target.getZ() - this.entity.getZ(), target.getX() - this.entity.getX());
                 int l;
@@ -1690,41 +1740,38 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         protected final AncientRemnantServant entity;
         private final float random;
 
-
         public RemnantAttackGoal(AncientRemnantServant entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackrange, float random) {
             super(entity, getattackstate, attackstate, attackendstate, attackMaxtick, attackseetick, attackrange);
             this.entity = entity;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
             this.random = random;
-
         }
 
         @Override
         public boolean canUse() {
-            return super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < random && this.entity.mode == AttackMode.MELEE;
+            return super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < this.random && this.entity.mode == AttackMode.MELEE;
         }
-
 
         @Override
         public void start() {
             super.start();
             this.entity.hit = false;
-            LivingEntity target = entity.getTarget();
+            LivingEntity target = this.entity.getTarget();
             if (target != null) {
                 this.entity.lookAt(target, 30.0F, 30.0F);
-                entity.getLookControl().setLookAt(target, 30, 30);
+                this.entity.getLookControl().setLookAt(target, 30, 30);
             }
         }
 
         @Override
         public void stop() {
             super.stop();
-            if(this.entity.hit) {
+            if (this.entity.hit) {
                 if (this.entity.getRage() > 0) {
                     this.entity.setRage(this.entity.getRage() - 1);
                     this.entity.hit = false;
                 }
-            }else{
+            } else {
                 if (this.entity.getRage() < 5) {
                     this.entity.setRage(this.entity.getRage() + 1);
                     this.entity.hit = false;
@@ -1734,45 +1781,41 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         public void tick() {
             this.entity.getNavigation().stop();
-            LivingEntity target = entity.getTarget();
-            if (entity.attackTicks < attackseetick && target != null) {
-                entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                entity.lookAt(target, 30.0F, 30.0F);
+            LivingEntity target = this.entity.getTarget();
+            if (this.entity.attackTicks < this.attackseetick && target != null) {
+                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                this.entity.lookAt(target, 30.0F, 30.0F);
             } else {
-                entity.setYRot(entity.yRotO);
+                this.entity.setYRot(this.entity.yRotO);
             }
         }
     }
 
     static class RemnantChargeGoal extends InternalSummonAttackGoal {
         protected final AncientRemnantServant entity;
-
         private final float random;
-
 
         public RemnantChargeGoal(AncientRemnantServant entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackrange, float random) {
             super(entity, getattackstate, attackstate, attackendstate, attackMaxtick, attackseetick, attackrange);
             this.entity = entity;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
             this.random = random;
-
         }
 
         @Override
         public boolean canUse() {
             LivingEntity target = entity.getTarget();
-            return super.canUse() && this.entity.getRage() >= 5 && this.entity.getRandom().nextFloat() * 100.0F < random && this.entity.mode == AttackMode.MELEE;
+            return super.canUse() && this.entity.getRage() >= 5 && this.entity.getRandom().nextFloat() * 100.0F < this.random && this.entity.mode == AttackMode.MELEE;
         }
-
 
         @Override
         public void start() {
             super.start();
-            entity.setRage(0);
-            LivingEntity target = entity.getTarget();
+            this.entity.setRage(0);
+            LivingEntity target = this.entity.getTarget();
             if (target != null) {
                 this.entity.lookAt(target, 30.0F, 30.0F);
-                entity.getLookControl().setLookAt(target, 30, 30);
+                this.entity.getLookControl().setLookAt(target, 30, 30);
             }
         }
         @Override
@@ -1784,12 +1827,12 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         @Override
         public void stop() {
             super.stop();
-            if(this.entity.hit) {
+            if (this.entity.hit) {
                 if (this.entity.getRage() > 0) {
                     this.entity.setRage(this.entity.getRage() - 1);
                     this.entity.hit = false;
                 }
-            }else{
+            } else {
                 if (this.entity.getRage() < 5) {
                     this.entity.setRage(this.entity.getRage() + 1);
                 }
@@ -1797,7 +1840,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
         }
     }
 
-    class RemnantAttackModeGoal extends Goal {
+    static class RemnantAttackModeGoal extends Goal {
         private final AncientRemnantServant mob;
         private LivingEntity target;
         private int circlingTime = 0;
@@ -1830,17 +1873,17 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
         public void start() {
             this.mob.mode = AttackMode.CIRCLE;
-            circlingTime = 0;
-            circleDistance = 18 + this.mob.random.nextInt(10);
-            clockwise = this.mob.random.nextBoolean();
+            this.circlingTime = 0;
+            this.circleDistance = 18 + this.mob.random.nextInt(10);
+            this.clockwise = this.mob.random.nextBoolean();
             this.mob.setAggressive(true);
         }
 
         public void stop() {
             this.mob.mode = AttackMode.CIRCLE;
-            circlingTime = 0;
-            circleDistance = 18 + this.mob.random.nextInt(10);
-            clockwise = this.mob.random.nextBoolean();
+            this.circlingTime = 0;
+            this.circleDistance = 18 + this.mob.random.nextInt(10);
+            this.clockwise = this.mob.random.nextBoolean();
             this.target = this.mob.getTarget();
             if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
                 this.mob.setTarget(null);
@@ -1860,8 +1903,8 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
             LivingEntity target = this.mob.getTarget();
             if (target != null) {
                 if (this.mob.mode == AttackMode.CIRCLE) {
-                    circlingTime++;
-                    circleEntity(target, circleDistance, 1.0f, clockwise, circlingTime, 0, 1);
+                    this.circlingTime++;
+                    this.mob.circleEntity(target, circleDistance, 1.0f, clockwise, circlingTime, 0, 1);
                     if (huntingTime >= this.mob.hunting_cooldown) {
                         this.mob.mode = AttackMode.MELEE;
                     }else{

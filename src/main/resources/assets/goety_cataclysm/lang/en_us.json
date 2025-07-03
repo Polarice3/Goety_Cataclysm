@@ -1,6 +1,8 @@
 {
   "advancements.goety_cataclysm.root.title": "The Cataclysm Arts",
   "advancements.goety_cataclysm.root.description": "Of Goety and Cataclysm",
+  "advancements.goety_cataclysm.convert_ancient_remnant.title": "Long Live the Monarch!",
+  "advancements.goety_cataclysm.convert_ancient_remnant.description": "Convert a Modern Remnant to an Ancient Remnant.",
   "advancements.goety_cataclysm.convert_kobolediator.title": "Are You Not Entertained?",
   "advancements.goety_cataclysm.convert_kobolediator.description": "Convert a Koboleton to a Kobolediator.",
   "advancements.goety_cataclysm.convert_wadjet.title": "Curse of the Nile!",
@@ -20,6 +22,7 @@
   "advancements.goety_cataclysm.summon_prowler.title": "On the Prowl",
   "advancements.goety_cataclysm.summon_prowler.description": "Summon a Prowler.",
 
+  "block.goety_cataclysm.ancient_plating": "Ancient Plating",
   "block.goety_cataclysm.ender_golem_skull": "Ender Golem Skull",
   "block.goety_cataclysm.fabricator": "Mechanical Fabricator",
   "block.goety_cataclysm.mechanized_iron_block": "Mechanized Iron Block",
@@ -71,6 +74,8 @@
   "item.goety_cataclysm.abyssal_beam_focus.info": "Summons an Abyss Mark that will either follow a target or stay at pointed position before summoning a Abyssal Beam.",
   "item.goety_cataclysm.abyssal_orb_focus": "Abyssal Orb Focus",
   "item.goety_cataclysm.abyssal_orb_focus.info": "Summons several Abyss Orbs around the caster, that will slowly chase down and explode onto a target or a nearby valid entity.",
+  "item.goety_cataclysm.amethyst_cluster_focus": "Amethyst Cluster Focus",
+  "item.goety_cataclysm.amethyst_cluster_focus.info": "Shoots Amethyst Clusters around the caster.",
   "item.goety_cataclysm.ashen_breath_focus": "Ashen Breath Focus",
   "item.goety_cataclysm.ashen_breath_focus.info": "Shoots a torrent of hot ash in front of them, blinding non-allied targets.",
   "item.goety_cataclysm.extinct_flame_focus": "Extinct Flame Focus",

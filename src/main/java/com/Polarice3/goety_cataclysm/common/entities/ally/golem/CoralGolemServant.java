@@ -276,7 +276,7 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
             if (!MobUtil.areAllies(this, entity) && entity != this) {
-                entity.hurt(this.getMobAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
+                entity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE) + (float) this.random.nextInt(damage));
                 this.launch(entity, true);
             }
         }

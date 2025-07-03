@@ -1,0 +1,7 @@
+{
+  "name": "Artifices",
+  "description": "Utilizing and Manipulating Soul Energy.",
+  "icon": "goety_cataclysm:fabricator",
+  "parent": "goety:cataclysm/crafts",
+  "sortnum": 3
+}

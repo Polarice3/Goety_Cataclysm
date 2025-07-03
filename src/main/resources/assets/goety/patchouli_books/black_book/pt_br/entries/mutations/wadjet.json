@@ -1,0 +1,32 @@
+{
+  "name": "Wadjet",
+  "icon": "cataclysm:ancient_spear",
+  "category": "goety:cataclysm/mutations",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Through a simple Koboleton, you've managed to call forth a great Wadjet and have it serve under your thumb."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_koboleton_to_wadjet_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:wadjet",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The undead spellcaster can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:arcane_spirit",
+      "text": "When fallen, these ancient vanguards will drop their spirit which can possess a Koboleton to return from the dead."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:arcane_spirit": 4
+  }
+}

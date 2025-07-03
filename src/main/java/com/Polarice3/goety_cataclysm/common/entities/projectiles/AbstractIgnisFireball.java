@@ -17,9 +17,11 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,17 +34,25 @@ public abstract class AbstractIgnisFireball extends AbstractHurtingProjectile {
     protected static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(AbstractIgnisFireball.class, EntityDataSerializers.FLOAT);
     protected static final EntityDataAccessor<Boolean> FIRED = SynchedEntityData.defineId(AbstractIgnisFireball.class, EntityDataSerializers.BOOLEAN);
     public int timer;
+    private Vec3[] trailPositions;
+    private int trailPointer;
 
     public AbstractIgnisFireball(EntityType<? extends AbstractHurtingProjectile> p_36833_, Level p_36834_) {
         super(p_36833_, p_36834_);
+        this.trailPositions = new Vec3[64];
+        this.trailPointer = -1;
     }
 
     public AbstractIgnisFireball(EntityType<? extends AbstractHurtingProjectile> p_36817_, double p_36818_, double p_36819_, double p_36820_, double p_36821_, double p_36822_, double p_36823_, Level p_36824_) {
         super(p_36817_, p_36818_, p_36819_, p_36820_, p_36821_, p_36822_, p_36823_, p_36824_);
+        this.trailPositions = new Vec3[64];
+        this.trailPointer = -1;
     }
 
     public AbstractIgnisFireball(EntityType<? extends AbstractHurtingProjectile> p_36826_, LivingEntity p_36827_, double p_36828_, double p_36829_, double p_36830_, Level p_36831_) {
         super(p_36826_, p_36827_, p_36828_, p_36829_, p_36830_, p_36831_);
+        this.trailPositions = new Vec3[64];
+        this.trailPointer = -1;
     }
 
     protected void defineSynchedData() {
@@ -208,6 +218,17 @@ public abstract class AbstractIgnisFireball extends AbstractHurtingProjectile {
             this.discard();
         }
 
+        Vec3 trailAt = this.position().add(0.0, (double)(this.getBbHeight() / 2.0F), 0.0);
+        if (this.trailPointer == -1) {
+            Arrays.fill(this.trailPositions, trailAt);
+        }
+
+        if (++this.trailPointer == this.trailPositions.length) {
+            this.trailPointer = 0;
+        }
+
+        this.trailPositions[this.trailPointer] = trailAt;
+
     }
 
     public void setUp(int delay) {
@@ -243,6 +264,22 @@ public abstract class AbstractIgnisFireball extends AbstractHurtingProjectile {
             }
         }
         return super.canHitEntity(pEntity);
+    }
+
+    public Vec3 getTrailPosition(int pointer, float partialTick) {
+        if (this.isRemoved()) {
+            partialTick = 1.0F;
+        }
+
+        int i = this.trailPointer - pointer & 63;
+        int j = this.trailPointer - pointer - 1 & 63;
+        Vec3 d0 = this.trailPositions[j];
+        Vec3 d1 = this.trailPositions[i].subtract(d0);
+        return d0.add(d1.scale((double)partialTick));
+    }
+
+    public boolean hasTrail() {
+        return this.trailPointer != -1;
     }
 
     @Override
