@@ -17,7 +17,7 @@ public class GCLevelRegistry {
 
     public static void addBiomeSpawns(Holder<Biome> biome, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
         if (!biome.containsTag(ModTags.Biomes.COMMON_BLACKLIST) && !biome.is(biomeResourceKey -> biomeResourceKey.registry().getNamespace().contains("alexscaves"))){
-            if (biome.is(GCTags.Biomes.DRAUGR_NECROMANCER_SPAWN) && GCMobsConfig.DraugrNecromancerSpawnWeight.get() > 0){
+            if (biome.is(GCTags.Biomes.DRAUGR_NECROMANCER_SPAWN) && !biome.is(GCTags.Biomes.DRAUGR_NECROMANCER_EXCLUDE_SPAWN) && GCMobsConfig.DraugrNecromancerSpawnWeight.get() > 0){
                 builder.getMobSpawnSettings().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(GCEntityType.DRAUGR_NECROMANCER.get(), GCMobsConfig.DraugrNecromancerSpawnWeight.get(), GCMobsConfig.DraugrNecromancerSpawnMinCount.get(), GCMobsConfig.DraugrNecromancerSpawnMaxCount.get()));
             }
         }

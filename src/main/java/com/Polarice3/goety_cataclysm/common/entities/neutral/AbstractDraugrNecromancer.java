@@ -46,12 +46,14 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class AbstractDraugrNecromancer extends AbstractNecromancer {
+    public int attackTick;
+
     public AbstractDraugrNecromancer(EntityType<? extends AbstractSkeletonServant> type, Level level) {
         super(type, level);
     }
 
     public void projectileGoal(int priority) {
-        this.goalSelector.addGoal(priority, new NecromancerRangedGoal(this, 1.0, 40, 10.0F));
+        this.goalSelector.addGoal(priority, new NecromancerRangedGoal(this, 1.0, 30, 10.0F));
     }
 
     public void summonSpells(int priority) {
@@ -102,30 +104,48 @@ public class AbstractDraugrNecromancer extends AbstractNecromancer {
         }
     }
 
-    public void performRangedAttack(@NotNull LivingEntity p_33317_, float p_33318_) {
-        if (this.getNecroLevel() <= 0) {
-            PhantomArrow arrow = new PhantomArrow(this.level(), this);
-            double d0 = p_33317_.getX() - this.getX();
-            double d1 = p_33317_.getY(0.3333333333333333) - arrow.getY();
-            double d2 = p_33317_.getZ() - this.getZ();
-            double d3 = (double) Mth.sqrt((float)(d0 * d0 + d2 * d2));
-            arrow.shoot(d0, d1 + d3 * 0.20000000298023224, d2, 1.6F, 1.0F);
-            if (this.level().addFreshEntity(arrow)) {
-                this.playSound(CataclysmSounds.STRONGSWING.get());
-                this.swing(InteractionHand.MAIN_HAND);
-            }
-        } else {
-            for(int i = -this.getNecroLevel(); i <= this.getNecroLevel(); ++i) {
-                Vec3 vector3d = this.getViewVector(1.0F);
-                PhantomArrow arrow = new PhantomArrow(this.level(), this);
-                arrow.shoot(vector3d.x + (double)((float)i / 10.0F), vector3d.y, vector3d.z + (double)((float)i / 10.0F), 1.6F, 1.0F);
+    public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {
+        if (p_33317_ != null) {
+            if (this.getNecroLevel() <= 0) {
+                PhantomArrow arrow = new PhantomArrow(this.level(), this, p_33317_);
+                double d0 = p_33317_.getX() - this.getX();
+                double d1 = p_33317_.getY(0.3333333333333333) - arrow.getY();
+                double d2 = p_33317_.getZ() - this.getZ();
+                double d3 = (double) Mth.sqrt((float) (d0 * d0 + d2 * d2));
+                arrow.shoot(d0, d1 + d3 * 0.20000000298023224, d2, 1.6F, 1.0F);
                 if (this.level().addFreshEntity(arrow)) {
                     this.playSound(CataclysmSounds.STRONGSWING.get());
                     this.swing(InteractionHand.MAIN_HAND);
                 }
+            } else {
+                for (int i = -this.getNecroLevel(); i <= this.getNecroLevel(); ++i) {
+                    Vec3 vector3d = this.getViewVector(1.0F);
+                    PhantomArrow arrow = new PhantomArrow(this.level(), this, p_33317_);
+                    arrow.shoot(vector3d.x + (double) ((float) i / 10.0F), vector3d.y, vector3d.z + (double) ((float) i / 10.0F), 1.6F, 1.0F);
+                    if (this.level().addFreshEntity(arrow)) {
+                        this.playSound(CataclysmSounds.STRONGSWING.get());
+                        this.swing(InteractionHand.MAIN_HAND);
+                    }
+                }
             }
         }
+    }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.level().isClientSide) {
+            if (this.getCurrentAnimation() == this.getAnimationState(ATTACK)) {
+                ++this.attackTick;
+            } else {
+                if (this.attackTick > 0) {
+                    this.attackTick = 0;
+                }
+            }
+            if (this.attackTick >= 20) {
+                this.setAnimationState(IDLE);
+            }
+        }
     }
 
     @Override

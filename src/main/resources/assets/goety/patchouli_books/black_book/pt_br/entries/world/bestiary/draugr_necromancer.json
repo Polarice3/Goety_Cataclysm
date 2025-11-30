@@ -1,0 +1,20 @@
+{
+  "name": "Necromante Draugr",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/world/bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Estes mortos-vivos feiticeiros foram outrora os homens sábios dos guerreiros que prenderam Maledictus e caíram sob sua maldição. Em vez de permanecerem na Prisão Congelada, eles vagam pela tundra gelada em busca de vítimas para aumentar suas fileiras."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Estes necromantes possuem a habilidade de invocar Draugrs e atirar flechas fantasmagóricas que parecem perseguir seu alvo. Assim como outros Draugrs, estas criaturas não congelam e andam sobre a Neve Fofa."
+    }
+  ]
+}

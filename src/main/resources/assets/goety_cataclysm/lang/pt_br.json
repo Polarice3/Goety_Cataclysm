@@ -150,5 +150,12 @@
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "Converter um Mini-Fóssil em um Fóssil Ancestral.",
   "block.goety_cataclysm.ancient_plating": "Revestimento antigo",
   "item.goety_cataclysm.amethyst_cluster_focus": "Foco de Aglomerado de Ametista",
-  "item.goety_cataclysm.amethyst_cluster_focus.info": "Dispara Aglomerados de Ametista ao redor do conjurador."
+  "item.goety_cataclysm.amethyst_cluster_focus.info": "Dispara Aglomerados de Ametista ao redor do conjurador.",
+  "entity.goety_cataclysm.draugr_necromancer": "Necromante Draugr",
+  "entity.goety_cataclysm.draugr_necromancer_servant": "Necromante Draugr",
+  "item.goety_cataclysm.soul_jar_draugr": "Jarro de Alma",
+  "item.goety_cataclysm.draugr_necromancer_spawn_egg": "Ovo de Necromante Draugr",
+  "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "Ovo de Servo Necromante Draugr",
+  "entity.goety_cataclysm.zombie_amethyst_crab": "Caranguejão de Ametista Zumbi",
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "Ovo de Caranguejão de Ametista Zumbi"
 }

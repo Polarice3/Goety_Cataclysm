@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 
 public class PhantomArrow extends Phantom_Arrow_Entity {
 
@@ -40,6 +41,12 @@ public class PhantomArrow extends Phantom_Arrow_Entity {
     @Override
     protected Component getTypeName() {
         return ModEntities.PHANTOM_ARROW.get().getDescription();
+    }
+
+    protected void onHitEntity(EntityHitResult p_37573_) {
+        if (this.canHitEntity(p_37573_.getEntity())) {
+            super.onHitEntity(p_37573_);
+        }
     }
 
     @Override

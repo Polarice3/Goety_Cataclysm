@@ -1,0 +1,7 @@
+{
+  "name": "Exploração",
+  "description": "O mundo está muito mais cataclísmico do que eu me lembrava...",
+  "icon": "cataclysm:lionfish",
+  "parent": "goety:cataclysm",
+  "sortnum": 6
+}

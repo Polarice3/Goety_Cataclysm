@@ -1,0 +1,33 @@
+{
+  "name": "Necromante Draugr",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/unlock_necromancer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Você descobriu uma maneira de criar Necromantes Draugr, que atiram flechas de energias fantasmagóricas e invocam Draugrs para fazer sua vontade. Em vez de Esqueletos, o ritual é realizado em um Draugr."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_draugr_to_draugr_necromancer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eles podem ser ensinados a invocar Draugrs de Elite e Draugrs Reais também, clicando com o botão direito neles com os focos associados. Eles não podem invocar outros tipos de servos mortos-vivos. Clicar com o botão direito neles com a mão vazia fará com que o Necromante invoque Servos Mortos-Vivos para você. Eles são curados da mesma forma que os Servos Draugr comuns."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer_servant",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:soul_jar_draugr",
+      "text": "Se um Necromante Draugr cair, tenha um $(l:crafts/empty_soul_jar)Jarro de Alma Vazio$() fará com que sua alma o preencha, o que, ao clicar com o botão direito em um Draugr, o reviverá usando esse Draugr como seu novo corpo."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:soul_jar_draugr": 4
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Bestiário",
+  "description": "Documentação das criaturas cataclísmicas que habitam este mundo.",
+  "icon": "cataclysm:netherite_effigy",
+  "parent": "goety:cataclysm/world",
+  "sortnum": 1
+}

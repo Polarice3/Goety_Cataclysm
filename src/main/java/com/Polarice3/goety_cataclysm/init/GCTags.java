@@ -34,6 +34,7 @@ public class GCTags {
         private static void init(){}
 
         public static final TagKey<Biome> DRAUGR_NECROMANCER_SPAWN = tag("mob_spawn/draugr_necromancer");
+        public static final TagKey<Biome> DRAUGR_NECROMANCER_EXCLUDE_SPAWN = tag("mob_spawn/draugr_necromancer_exclude");
 
         private static TagKey<Biome> tag(String name) {
             return create(GoetyCataclysm.location(name));

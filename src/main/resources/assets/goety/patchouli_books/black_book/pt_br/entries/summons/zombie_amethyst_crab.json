@@ -1,11 +1,11 @@
 {
-  "name": "Zombie Amethyst Crab",
+  "name": "Caranguejão de Ametista Zumbi",
   "icon": "cataclysm:amethyst_crab_shell",
   "category": "goety:cataclysm/summons",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Amethyst Crabs are rare, and summoning and binding one seems pretty hard to do with such a perfect creature. When all else fails, Necromancy is a perfect solution to life's problems."
+      "text": "Os Caranguejão de Ametista são raros, e invocar e vincular um parece bastante difícil com uma criatura tão perfeita. Quando tudo mais falha, a Necromancia é uma solução perfeita para os problemas da vida."
     },
     {
       "type": "patchouli:entity",
