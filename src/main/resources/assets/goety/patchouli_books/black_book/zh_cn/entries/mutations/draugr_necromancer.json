@@ -1,0 +1,33 @@
+{
+  "name": "魂尸死灵法师仆从",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/unlock_necromancer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "你已经设法找到了创造魂尸死灵法师的方法，它可以发射幻影箭，并召唤服从你命令的魂尸仆从，当然，仪式不是在骷髅上进行的，而是在魂尸上进行的"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_draugr_to_draugr_necromancer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "将能够召唤精英魂尸与皇家魂尸的聚晶右键给予至魂尸死灵法师，它就可以召唤这两种仆从战斗，不过它不能召唤其它亡灵仆从，空手右键点击它们，魂尸死灵法师就会为你召唤亡灵仆从，它们的治疗方式与普通的魂尸仆从相同"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer_servant",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:soul_jar_draugr",
+      "text": "如果一名魂尸死灵法师被消灭，而你拥有一个$(l:crafts/empty_soul_jar)空灵魂罐$()，那么它的灵魂会填充进去，对一个魂尸右键使用这个灵魂罐，魂尸死灵法师将会使用这只魂尸作为新躯体来复活"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:soul_jar_draugr": 4
+  }
+}

@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
@@ -126,7 +127,7 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
             } else {
                 flag = entity.hurt(this.damageSources().magic(), 5.0F + this.getExtraDamage());
             }
-            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, true, Explosion.BlockInteraction.KEEP);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
             explosion.explode();
             explosion.finalizeExplosion(3, 0.75);
             this.discard();
@@ -183,7 +184,7 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
             if (this.tickCount <= 500 && this.getTotalBounces() <= 5) {
                 this.setTotalBounces(this.getTotalBounces() + 1);
             } else if (!this.level().isClientSide) {
-                IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, true, Explosion.BlockInteraction.KEEP);
+                IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 2.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
                 explosion.explode();
                 explosion.finalizeExplosion(3, 0.5);
                 this.discard();

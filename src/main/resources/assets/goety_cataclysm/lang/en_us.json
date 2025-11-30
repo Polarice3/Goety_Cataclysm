@@ -41,6 +41,8 @@
   "entity.goety_cataclysm.deepling_brute_servant": "Deepling Brute Servant",
   "entity.goety_cataclysm.deepling_priest_servant": "Deepling Priest Servant",
   "entity.goety_cataclysm.deepling_warlock_servant": "Deepling Warlock Servant",
+  "entity.goety_cataclysm.draugr_necromancer": "Draugr Necromancer",
+  "entity.goety_cataclysm.draugr_necromancer_servant": "Draugr Necromancer",
   "entity.goety_cataclysm.draugr_servant": "Draugr Servant",
   "entity.goety_cataclysm.drowned_host_servant": "Drowned Host Servant",
   "entity.goety_cataclysm.elite_draugr_servant": "Elite Draugr Servant",
@@ -50,6 +52,7 @@
   "entity.goety_cataclysm.ignited_revenant": "Ignited Revenant",
   "entity.goety_cataclysm.koboleton_servant": "Koboleton Servant",
   "entity.goety_cataclysm.kobolediator": "Kobolediator",
+  "entity.goety_cataclysm.leviathan": "The Leviathan",
   "entity.goety_cataclysm.lionfish": "Lionfish",
   "entity.goety_cataclysm.netherite_monstrosity": "Netherite Monstrosity",
   "entity.goety_cataclysm.royal_draugr_servant": "Royal Draugr Servant",
@@ -58,6 +61,7 @@
   "entity.goety_cataclysm.urchinkin_servant": "Urchinkin Servant",
   "entity.goety_cataclysm.wadjet": "Wadjet",
   "entity.goety_cataclysm.watcher_servant": "The Watcher",
+  "entity.goety_cataclysm.zombie_amethyst_crab": "Zombie Amethyst Crab",
 
   "item.goety_cataclysm.abyss_essence": "Essence of the Abyss",
 
@@ -66,6 +70,7 @@
   "item.goety_cataclysm.ignited_soul": "Ignited Soul",
   "item.goety_cataclysm.mechanized_core": "Mechanized Core",
   "item.goety_cataclysm.remnant_skull": "Remnant Skull",
+  "item.goety_cataclysm.soul_jar_draugr": "Soul Jar",
   "item.goety_cataclysm.warrior_spirit": "Warrior Spirit",
 
   "item.goety_cataclysm.abyssal_mine_focus": "Abyssal Mine Focus",
@@ -132,6 +137,8 @@
   "item.goety_cataclysm.deepling_priest_servant_spawn_egg": "Deepling Priest Servant Spawn Egg",
   "item.goety_cataclysm.deepling_warlock_servant_spawn_egg": "Deepling Warlock Servant Spawn Egg",
   "item.goety_cataclysm.deepling_servant_spawn_egg": "Deepling Servant Spawn Egg",
+  "item.goety_cataclysm.draugr_necromancer_spawn_egg": "Draugr Necromancer Spawn Egg",
+  "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "Draugr Necromancer Servant Spawn Egg",
   "item.goety_cataclysm.draugr_servant_spawn_egg": "Draugr Servant Spawn Egg",
   "item.goety_cataclysm.drowned_host_servant_spawn_egg": "Octohost Servant Spawn Egg",
   "item.goety_cataclysm.elite_draugr_servant_spawn_egg": "Elite Draugr Servant Spawn Egg",
@@ -149,6 +156,7 @@
   "item.goety_cataclysm.urchinkin_servant_spawn_egg": "Urchinkin Servant Spawn Egg",
   "item.goety_cataclysm.wadjet_spawn_egg": "Wadjet Servant Spawn Egg",
   "item.goety_cataclysm.watcher_servant_spawn_egg": "Watcher Servant Spawn Egg",
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "Zombie Amethyst Crab Spawn Egg",
 
   "itemGroup.goety_cataclysm": "Goety Cataclysm"
 }

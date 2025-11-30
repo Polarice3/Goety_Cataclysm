@@ -1,19 +1,17 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.deepling;
 
-import com.Polarice3.Goety.api.entities.ally.IServant;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.ModDamageSource;
+import com.Polarice3.goety_cataclysm.common.entities.ally.ai.Water3DWanderGoal;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
-import com.github.L_Ender.cataclysm.entity.AI.AnimalAIRandomSwimming;
 import com.github.L_Ender.cataclysm.entity.etc.AquaticMoveController;
 import com.github.L_Ender.cataclysm.entity.etc.path.SemiAquaticPathNavigator;
 import com.github.L_Ender.cataclysm.entity.projectile.Lionfish_Spike_Entity;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.AnimationHandler;
 import com.github.L_Ender.lionfishapi.server.animation.IAnimatedEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -29,9 +27,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.ai.util.GoalUtils;
-import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +35,6 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class LionfishServant extends Summoned implements IAnimatedEntity {
@@ -87,43 +81,7 @@ public class LionfishServant extends Summoned implements IAnimatedEntity {
         super.registerGoals();
         this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(2, new AnimationMeleeAttackGoal(this, 1.0f, false));
-        this.goalSelector.addGoal(4, new AnimalAIRandomSwimming(this, 1F, 12, 5){
-            @Nullable
-            protected Vec3 getPosition() {
-                return LionfishServant.this.isGuardingArea() ? this.randomBoundPos() : super.getPosition();
-            }
-
-            public Vec3 randomBoundPos() {
-                Vec3 vec3 = null;
-                int range = IServant.GUARDING_RANGE / 2;
-
-                for(int i = 0; i < 10; ++i) {
-                    BlockPos blockPos = LionfishServant.this.getBoundPos().offset(LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range), LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range), LionfishServant.this.getRandom().nextIntBetweenInclusive(-range, range));
-                    if (LionfishServant.this.getNavigation() instanceof WaterBoundPathNavigation) {
-                        if (GoalUtils.isWater(LionfishServant.this, blockPos)) {
-                            vec3 = Vec3.atBottomCenterOf(blockPos);
-                            break;
-                        }
-                    } else {
-                        BlockPos blockPos1 = LandRandomPos.movePosUpOutOfSolid(LionfishServant.this, blockPos);
-                        if (blockPos1 != null) {
-                            vec3 = Vec3.atBottomCenterOf(blockPos1);
-                            break;
-                        }
-                    }
-                }
-
-                return vec3;
-            }
-
-            public boolean canUse() {
-                if (!super.canUse()) {
-                    return false;
-                } else {
-                    return !LionfishServant.this.isStaying() && !LionfishServant.this.isCommanded() || LionfishServant.this.getTrueOwner() == null;
-                }
-            }
-        });
+        this.goalSelector.addGoal(4, new Water3DWanderGoal<>(this, 1F, 12, 5));
     }
 
     @Override

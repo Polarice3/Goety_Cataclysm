@@ -123,7 +123,7 @@ public class DeathLaserBeam extends Entity {
         if (!this.level().isClientSide) {
             if (this.caster instanceof ProwlerServant) {
                 this.updateWithProwler();
-            } else {
+            } else if (this.caster != null) {
                 this.updateWithCaster();
             }
         }

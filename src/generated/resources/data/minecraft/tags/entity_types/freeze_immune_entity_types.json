@@ -2,9 +2,12 @@
   "values": [
     "goety_cataclysm:netherite_monstrosity",
     "goety_cataclysm:ender_golem",
+    "goety_cataclysm:leviathan",
     "goety_cataclysm:draugr_servant",
     "goety_cataclysm:elite_draugr_servant",
     "goety_cataclysm:royal_draugr_servant",
-    "goety_cataclysm:aptrgangr"
+    "goety_cataclysm:draugr_necromancer_servant",
+    "goety_cataclysm:aptrgangr",
+    "goety_cataclysm:draugr_necromancer"
   ]
 }

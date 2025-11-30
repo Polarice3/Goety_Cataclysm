@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "goety_cataclysm:draugr_servant",
+    "goety_cataclysm:elite_draugr_servant",
+    "goety_cataclysm:royal_draugr_servant",
+    "goety_cataclysm:draugr_necromancer_servant",
+    "goety_cataclysm:aptrgangr"
+  ]
+}

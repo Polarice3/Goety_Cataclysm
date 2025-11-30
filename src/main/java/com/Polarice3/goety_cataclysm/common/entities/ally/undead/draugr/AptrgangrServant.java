@@ -14,6 +14,7 @@ import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
+import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.blocks.PointedIcicleBlock;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
@@ -24,6 +25,7 @@ import com.github.L_Ender.cataclysm.entity.projectile.Axe_Blade_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModParticle;
 import com.github.L_Ender.cataclysm.init.ModTag;
+import com.github.L_Ender.cataclysm.message.MessageEntityCamera;
 import com.github.L_Ender.cataclysm.util.CMDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -62,6 +64,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -551,6 +554,7 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                             }
                             if (!this.level().isClientSide) {
                                 entity.startRiding(this, true);
+                                Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), new MessageEntityCamera(entity.getId(), false));
                             }
                         }
 
@@ -624,14 +628,23 @@ public class AptrgangrServant extends InternalAnimationSummon implements IHoldEn
                             this.playSound(SoundEvents.ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.9f);
                         }
                     }
-                    passenger.stopRiding();
+                    if (!this.level().isClientSide) {
+                        passenger.stopRiding();
+                        Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> passenger), new MessageEntityCamera(passenger.getId(),true));
+                    }
                 }
             } else if (this.getAttackState() == CHARGE_END) {
                 if (this.attackTicks == 1) {
-                    passenger.stopRiding();
+                    if (!this.level().isClientSide) {
+                        passenger.stopRiding();
+                        Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> passenger), new MessageEntityCamera(passenger.getId(),true));
+                    }
                 }
             } else if (this.getAttackState() != CHARGE) {
-                passenger.stopRiding();
+                if (!this.level().isClientSide) {
+                    passenger.stopRiding();
+                    Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> passenger), new MessageEntityCamera(passenger.getId(),true));
+                }
             }
             moveFunc.accept(passenger, px, y, pz);
         }

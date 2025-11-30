@@ -1,0 +1,20 @@
+{
+  "name": "魂尸死灵法师",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/world/bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这些邪恶的亡灵曾是参与镇压咒翼灵骸的智者，但它们虽然受到了同样的诅咒，却并没有被囚禁在苦寒监牢中，如今它们在雪原上游荡并寻找新的受害者加入它们"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:text",
+      "text": "这些死灵法师拥有召唤其它魂尸和发射幻影箭，就像其它魂尸一样，它们也免疫冰冻伤害，且能够在细雪表面上行走"
+    }
+  ]
+}

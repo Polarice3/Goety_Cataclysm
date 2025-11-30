@@ -2,6 +2,7 @@
   "replace": false,
   "__comment": "all non-player mobs that glow, used by hullbreaker.",
   "values": [
-    "goety_cataclysm:netherite_monstrosity"
+    "goety_cataclysm:netherite_monstrosity",
+    "goety_cataclysm:leviathan"
   ]
 }

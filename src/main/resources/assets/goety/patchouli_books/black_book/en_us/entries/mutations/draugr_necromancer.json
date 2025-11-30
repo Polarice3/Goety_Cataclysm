@@ -1,0 +1,33 @@
+{
+  "name": "Draugr Necromancer",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/unlock_necromancer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "You've managed to discover a way to create Draugr Necromancers, which shoots arrows of phantasmal energies and summons Draugrs to do its bidding. Rather than Skeletons, the ritual is performed on a Draugrs instead."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_draugr_to_draugr_necromancer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "They can be taught to summon Elite Draugrs and Royal Draugrs as well, by right-clicking on them with the associated focuses. They cannot summon other types undead servants. Right-clicking on them with an empty hand will cause the Necromancer to summon Undead Servants for you. They are healed the same way as regular Draugr Servants."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer_servant",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:soul_jar_draugr",
+      "text": "Should a Draugr Necromancer fall, having an $(l:crafts/empty_soul_jar)Empty Soul Jar$() will cause their soul to fill it, which, when right-clicked on a Draugr, will revive them using said Draugr as their new body."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:soul_jar_draugr": 4
+  }
+}

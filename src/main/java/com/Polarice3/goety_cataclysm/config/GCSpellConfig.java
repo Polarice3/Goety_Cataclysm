@@ -43,6 +43,7 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameRadius;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ExtinctFlameGriefing;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> CindariaCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> CindariaDuration;
@@ -237,6 +238,8 @@ public class GCSpellConfig {
                     .defineInRange("extinctFlameCoolDown", 300, 0, Integer.MAX_VALUE);
             ExtinctFlameRadius = BUILDER.comment("Extinct Flame's Fireballs default explosion radius, Default: 1.0")
                     .defineInRange("extinctFlameRadius", 1.0, 0, Double.MAX_VALUE);
+            ExtinctFlameGriefing = BUILDER.comment("Whether Extinct Flame Spell can set fires, Default: false")
+                    .define("extinctFlameGriefing", false);
             BUILDER.pop();
             BUILDER.push("Kyría Spell");
             CindariaCost = BUILDER.comment("Kyría Spell Cost, Default: 64")

@@ -3,6 +3,7 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.AncientRemnantServant;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.client.particle.StormParticle;
@@ -24,18 +25,18 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class Sandstorm extends Entity {
-    private static final EntityDataAccessor<Optional<UUID>> CREATOR_ID = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.OPTIONAL_UUID);
     protected static final EntityDataAccessor<Integer> LIFESPAN = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.INT);
     protected static final EntityDataAccessor<Float> OFFSET = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> EXTRA_DAMAGE = SynchedEntityData.defineId(Sandstorm.class, EntityDataSerializers.FLOAT);
+    private LivingEntity caster;
+    private UUID casterUuid;
     public AnimationState SpawnAnimationState = new AnimationState();
     public AnimationState DespawnAnimationState = new AnimationState();
 
@@ -43,9 +44,9 @@ public class Sandstorm extends Entity {
         super(entityTypeIn, worldIn);
     }
 
-    public Sandstorm(Level worldIn, double x, double y, double z, int lifespan, float offset, UUID casterIn) {
+    public Sandstorm(Level worldIn, double x, double y, double z, int lifespan, float offset, LivingEntity casterIn) {
         this(GCEntityType.SANDSTORM.get(), worldIn);
-        this.setCreatorEntityUUID(casterIn);
+        this.setCaster(casterIn);
         this.setLifespan(lifespan);
         this.setPos(x, y, z);
         this.setState(1);
@@ -65,7 +66,7 @@ public class Sandstorm extends Entity {
     public void tick() {
         super.tick();
         updateMotion();
-        Entity owner = getCreatorEntity();
+        Entity owner = this.getCaster();
         if (owner != null && !owner.isAlive()) discard();
         if(level().isClientSide) {
             float ran = 0.04f;
@@ -94,31 +95,8 @@ public class Sandstorm extends Entity {
             Cataclysm.PROXY.playWorldSound(this, (byte) 2);
         }
 
-        for(LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2D, 0.0D, 0.2D))) {
-            if(entity != owner) {
-                if (entity.isAlive() && !entity.isInvulnerable() ) {
-                    float damage = (GCSpellConfig.SandstormDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + this.getExtraDamage();
-                    if (this.tickCount % 3 == 0) {
-                        if (owner == null) {
-                            boolean flag =  entity.hurt(this.damageSources().magic(), damage);
-                            if (flag) {
-                                MobEffectInstance effectinstance = new MobEffectInstance(ModEffect.EFFECTCURSE_OF_DESERT.get(), 200, 0);
-                                entity.addEffect(effectinstance);
-                            }
-                        } else {
-                            if (MobUtil.areAllies(owner, entity)) {
-                                return;
-                            }
-                            boolean flag = entity.hurt(this.damageSources().indirectMagic(this, owner), damage);
-                            if (flag) {
-                                MobEffectInstance effectinstance = new MobEffectInstance(ModEffect.EFFECTCURSE_OF_DESERT.get(), 200, 0);
-                                entity.addEffect(effectinstance);
-                            }
-                        }
-                    }
-                }
-            }
-
+        for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2D, 0.0D, 0.2D))) {
+            damage(entity);
         }
 
         this.setLifespan(this.getLifespan() - 1);
@@ -126,6 +104,31 @@ public class Sandstorm extends Entity {
         if (this.getLifespan() <= 0) {
             Cataclysm.PROXY.clearSoundCacheFor(this);
             this.remove(RemovalReason.DISCARDED);
+        }
+    }
+
+    private void damage(LivingEntity Hitentity) {
+        LivingEntity livingentity = this.getCaster();
+        if (Hitentity.isAlive() && !Hitentity.isInvulnerable() && Hitentity != livingentity) {
+            float damage = (GCSpellConfig.SandstormDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + this.getExtraDamage();
+            if (this.tickCount % 3 == 0) {
+                if (livingentity == null) {
+                    boolean flag =  Hitentity.hurt(this.damageSources().magic(), damage);
+                    if(flag) {
+                        MobEffectInstance effectinstance = new MobEffectInstance(ModEffect.EFFECTCURSE_OF_DESERT.get(), 200, 0);
+                        Hitentity.addEffect(effectinstance);
+                    }
+                } else {
+                    if (MobUtil.areAllies(livingentity, Hitentity)) {
+                        return;
+                    }
+                    boolean flag = Hitentity.hurt(this.damageSources().indirectMagic(this, livingentity), damage);
+                    if (flag) {
+                        MobEffectInstance effectinstance = new MobEffectInstance(ModEffect.EFFECTCURSE_OF_DESERT.get(), 200, 0);
+                        Hitentity.addEffect(effectinstance);
+                    }
+                }
+            }
         }
     }
 
@@ -153,27 +156,31 @@ public class Sandstorm extends Entity {
         this.entityData.set(EXTRA_DAMAGE, pDamage);
     }
 
-    public UUID getCreatorEntityUUID() {
-        return this.entityData.get(CREATOR_ID).orElse(null);
+    public void setCaster(@Nullable LivingEntity p_190549_1_) {
+        this.caster = p_190549_1_;
+        this.casterUuid = p_190549_1_ == null ? null : p_190549_1_.getUUID();
     }
 
-    public void setCreatorEntityUUID(UUID id) {
-        this.entityData.set(CREATOR_ID, Optional.ofNullable(id));
-    }
-
-    public Entity getCreatorEntity() {
-        UUID uuid = getCreatorEntityUUID();
-        if (uuid != null && this.level() instanceof ServerLevel serverLevel){
-            return serverLevel.getEntity(uuid);
+    @Nullable
+    public LivingEntity getCaster() {
+        if (this.caster == null && this.casterUuid != null && this.level() instanceof ServerLevel) {
+            Entity entity = ((ServerLevel)this.level()).getEntity(this.casterUuid);
+            if (entity instanceof LivingEntity) {
+                this.caster = (LivingEntity)entity;
+            }
         }
-        return null;
+
+        return this.caster;
     }
 
     private void updateMotion() {
-        Entity owner = getCreatorEntity();
+        Entity owner = this.getCaster();
         if(owner !=null) {
-            Vec3 center = owner.position().add(0.0, 0, 0.0);
             float radius = 6;
+            if (owner instanceof AncientRemnantServant) {
+                radius = 8;
+            }
+            Vec3 center = owner.position().add(0.0, 0, 0.0);
             float speed = this.tickCount * 0.04f;
             float offset = this.getOffset();
             Vec3 orbit = new Vec3(center.x + Math.cos((double) (speed + offset)) * (double) radius, center.y, center.z + Math.sin((double) (speed + offset)) * (double) radius);
@@ -183,7 +190,6 @@ public class Sandstorm extends Entity {
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(CREATOR_ID, Optional.empty());
         this.entityData.define(LIFESPAN, 300);
         this.entityData.define(OFFSET,0f);
         this.entityData.define(STATE,0);
@@ -236,7 +242,7 @@ public class Sandstorm extends Entity {
     protected void readAdditionalSaveData(CompoundTag compound) {
         this.setLifespan(compound.getInt("Lifespan"));
         if (compound.hasUUID("Owner")) {
-            this.setCreatorEntityUUID(compound.getUUID("Owner"));
+            this.casterUuid = compound.getUUID("Owner");
         }
         if (compound.contains("ExtraDamage")) {
             this.setExtraDamage(compound.getFloat("ExtraDamage"));
@@ -245,8 +251,8 @@ public class Sandstorm extends Entity {
 
     protected void addAdditionalSaveData(CompoundTag compound) {
         compound.putInt("Lifespan", getLifespan());
-        if (this.getCreatorEntityUUID() != null) {
-            compound.putUUID("Owner", this.getCreatorEntityUUID());
+        if (this.casterUuid != null) {
+            compound.putUUID("Owner", this.casterUuid);
         }
         compound.putFloat("ExtraDamage", this.getExtraDamage());
     }

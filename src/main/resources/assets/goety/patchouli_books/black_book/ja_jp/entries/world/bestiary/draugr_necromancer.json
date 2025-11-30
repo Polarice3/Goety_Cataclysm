@@ -1,0 +1,20 @@
+{
+  "name": "ドラウグルネクロマンサー",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/world/bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "これらの魔術的なアンデッドは、かつて呪いに倒れたマレディクタスを捕らえた戦士たちの賢者たちだった。彼らは凍てつく牢獄に留まるのではなく、戦力増強のための犠牲者を求めて極寒のツンドラをさまよっている。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:text",
+      "text": "ドラウグルを召喚し、標的に狙いを定める幻影の矢を放つ能力を持つ。他のドラウグルと同様に、粉雪の上でも凍り付かずに歩くことができる。"
+    }
+  ]
+}

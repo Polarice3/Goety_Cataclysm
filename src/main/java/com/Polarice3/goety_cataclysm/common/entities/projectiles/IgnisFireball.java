@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
@@ -121,7 +122,7 @@ public class IgnisFireball extends AbstractIgnisFireball{
                 flag = entity.hurt(this.damageSources().magic(), 6.0F + this.getExtraDamage());
             }
 
-            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 1.0F, true, Explosion.BlockInteraction.KEEP);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 1.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
             explosion.explode();
             explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
             this.discard();
@@ -148,7 +149,7 @@ public class IgnisFireball extends AbstractIgnisFireball{
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         if (!this.level().isClientSide && this.getFired()) {
-            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 1.0F, true, Explosion.BlockInteraction.KEEP);
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, (DamageSource)null, (ExplosionDamageCalculator)null, this.getX(), this.getY(), this.getZ(), 1.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
             explosion.explode();
             explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
             this.discard();

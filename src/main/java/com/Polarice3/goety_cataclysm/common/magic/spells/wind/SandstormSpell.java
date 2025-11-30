@@ -69,7 +69,7 @@ public class SandstormSpell extends Spell {
             double sx = caster.getX() + (double)(Mth.cos(angle) * 8.0F);
             double sy = caster.getY();
             double sz = caster.getZ() + (double)(Mth.sin(angle) * 8.0F);
-            Sandstorm sandstorm = new Sandstorm(worldIn, sx, sy, sz, 300 * (duration + 1), angle, caster.getUUID());
+            Sandstorm sandstorm = new Sandstorm(worldIn, sx, sy, sz, 300 * (duration + 1), angle, caster);
             sandstorm.setExtraDamage(potency);
             worldIn.addFreshEntity(sandstorm);
         }

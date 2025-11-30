@@ -802,7 +802,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
                     double sy = this.getY();
                     double sz = this.getZ() + (Mth.sin(angle) * 8);
                     if (!level().isClientSide()) {
-                        Sandstorm projectile = new Sandstorm(this.level(), sx,sy,sz,300,angle,this.getUUID());
+                        Sandstorm projectile = new Sandstorm(this.level(), sx, sy, sz, 300, angle, this);
                         this.level().addFreshEntity(projectile);
                     }
                 }

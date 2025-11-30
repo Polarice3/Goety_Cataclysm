@@ -1,0 +1,40 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:summon_tamed",
+  "activation_item": {
+    "tag": "forge:storage_blocks/amethyst"
+  },
+  "craftType": "necroturgy",
+  "entity_to_summon": "goety_cataclysm:zombie_amethyst_crab",
+  "soulCost": 10,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_meat"
+    }
+  ],
+  "result": {
+    "item": "goety:jei_dummy/none"
+  }
+}

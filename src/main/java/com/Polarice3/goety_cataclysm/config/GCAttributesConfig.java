@@ -11,6 +11,10 @@ public class GCAttributesConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> ZombieAmethystCrabHealth;
+    public static final ForgeConfigSpec.ConfigValue<Double> ZombieAmethystCrabArmor;
+    public static final ForgeConfigSpec.ConfigValue<Double> ZombieAmethystCrabDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Double> DeeplingHealth;
     public static final ForgeConfigSpec.ConfigValue<Double> DeeplingArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> DeeplingDamage;
@@ -96,6 +100,11 @@ public class GCAttributesConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> AptrgangrDamage;
     public static final ForgeConfigSpec.ConfigValue<Double> AptrgangrAxeDamage;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> DraugrNecromancerHealth;
+    public static final ForgeConfigSpec.ConfigValue<Double> DraugrNecromancerArmor;
+    public static final ForgeConfigSpec.ConfigValue<Double> DraugrNecromancerFollowRange;
+    public static final ForgeConfigSpec.ConfigValue<Double> DraugrNecromancerDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Double> EnderGolemHealth;
     public static final ForgeConfigSpec.ConfigValue<Double> EnderGolemArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> EnderGolemDamage;
@@ -128,6 +137,18 @@ public class GCAttributesConfig {
 
     static {
         BUILDER.push("Attributes");
+            BUILDER.push("General");
+                BUILDER.push("Necromancer");
+                DraugrNecromancerHealth = BUILDER.comment("How much Max Health Draugr Necromancers have, Default: 50.0")
+                        .defineInRange("draugrNecromancerHealth", 50.0, 1.0, Double.MAX_VALUE);
+                DraugrNecromancerArmor = BUILDER.comment("How much natural Armor Draugr Necromancers have, Default: 5.0")
+                        .defineInRange("draugrNecromancerArmor", 5.0, 0.0, Double.MAX_VALUE);
+                DraugrNecromancerFollowRange = BUILDER.comment("How much following/detection range Draugr Necromancers have, Default: 16.0")
+                        .defineInRange("draugrNecromancerFollowRange", 16.0, 1.0, 2048.0);
+                DraugrNecromancerDamage = BUILDER.comment("How much damage Draugr Necromancers deals, Default: 5.0")
+                        .defineInRange("draugrNecromancerDamage", 5.0, 1.0, Double.MAX_VALUE);
+                BUILDER.pop();
+            BUILDER.pop();
             BUILDER.push("Summoned Mobs");
                 BUILDER.push("Deeplings");
                     BUILDER.push("Deepling Servant");
@@ -354,6 +375,14 @@ public class GCAttributesConfig {
                     UrchinkinDamage = BUILDER.comment("How much damage Urchinkin Servants melee attack deals, Default: 3.0")
                             .defineInRange("urchinkinDamage", 3.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
+                BUILDER.pop();
+                BUILDER.push("Zombie Amethyst Crab Servant");
+                ZombieAmethystCrabHealth = BUILDER.comment("How much Max Health Zombie Amethyst Crab Servants have, Default: 200.0")
+                        .defineInRange("zombieAmethystCrabHealth", 200.0, 1.0, Double.MAX_VALUE);
+                ZombieAmethystCrabArmor = BUILDER.comment("How much natural Armor Zombie Amethyst Crab Servants have, Default: 10.0")
+                        .defineInRange("zombieAmethystCrabArmor", 10.0, 0.0, Double.MAX_VALUE);
+                ZombieAmethystCrabDamage = BUILDER.comment("How much damage Zombie Amethyst Crab Servants melee attack deals, Default: 13.0")
+                        .defineInRange("zombieAmethystCrabDamage", 13.0, 1.0, Double.MAX_VALUE);
                 BUILDER.pop();
                 BUILDER.push("Ender Golem Servant");
                 EnderGolemHealth = BUILDER.comment("How much Max Health Ender Golem Servants have, Default: 150.0")

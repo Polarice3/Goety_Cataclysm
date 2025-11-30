@@ -1,0 +1,16 @@
+{
+  "name": "Zombie Amethyst Crab",
+  "icon": "cataclysm:amethyst_crab_shell",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Amethyst Crabs are rare, and summoning and binding one seems pretty hard to do with such a perfect creature. When all else fails, Necromancy is a perfect solution to life's problems."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:zombie_amethyst_crab",
+      "scale": 0.5
+    }
+  ]
+}

@@ -89,6 +89,7 @@ public class GCItems {
     public static final RegistryObject<Item> MECHANIZED_CORE = ITEMS.register("mechanized_core", MechanizedCore::new);
     public static final RegistryObject<Item> WARRIOR_SPIRIT = ITEMS.register("warrior_spirit", WarriorSpirit::new);
     public static final RegistryObject<Item> ARCANE_SPIRIT = ITEMS.register("arcane_spirit", ArcaneSpirit::new);
+    public static final RegistryObject<Item> SOUL_JAR_DRAUGR = ITEMS.register("soul_jar_draugr", DraugrSoulJar::new);
     public static final RegistryObject<Item> REMNANT_SKULL = ITEMS.register("remnant_skull", GCRemnantSkull::new);
     public static final RegistryObject<Item> ENDER_GOLEM_SKULL_ITEM = ITEMS.register("ender_golem_skull",
             () -> new EnderGolemSkullItem((new Item.Properties()).rarity(Rarity.UNCOMMON).fireResistant()){

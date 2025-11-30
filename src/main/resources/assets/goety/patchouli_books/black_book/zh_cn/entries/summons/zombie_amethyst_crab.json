@@ -1,0 +1,16 @@
+{
+  "name": "僵尸紫水晶巨蟹",
+  "icon": "cataclysm:amethyst_crab_shell",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "紫水晶巨蟹很罕见，召唤和绑定这只完美的螃蟹似乎很难做到，当尝试的所有方法都失败时，改用死灵魔法是个更完美的选择"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:zombie_amethyst_crab",
+      "scale": 0.5
+    }
+  ]
+}

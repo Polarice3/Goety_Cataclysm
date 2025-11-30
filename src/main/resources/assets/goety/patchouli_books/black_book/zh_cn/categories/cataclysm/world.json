@@ -1,0 +1,7 @@
+{
+  "name": "探索",
+  "description": "这个世界比你记忆中的更加“灾变”",
+  "icon": "cataclysm:lionfish",
+  "parent": "goety:cataclysm",
+  "sortnum": 6
+}

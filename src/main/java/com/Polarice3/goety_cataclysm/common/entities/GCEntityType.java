@@ -3,25 +3,26 @@ package com.Polarice3.goety_cataclysm.common.entities;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.entities.ally.acropolis.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
+import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan.LeviathanServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralssusServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.EnderGolemServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ZombieAmethystCrab;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.AncientRemnantServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KobolediatorServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.WadjetServant;
-import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.AptrgangrServant;
-import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.DraugrServant;
-import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.EliteDraugrServant;
-import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.RoyalDraugrServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.IgnitedBerserkerServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.ignited.IgnitedRevenantServant;
+import com.Polarice3.goety_cataclysm.common.entities.hostile.DraugrNecromancer;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.*;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssBlastPortal;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssMark;
+import com.Polarice3.goety_cataclysm.common.entities.util.AbyssPortal;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -83,6 +84,14 @@ public class GCEntityType {
                     .sized(2.75F, 2.85F)
                     .clientTrackingRange(8));
 
+    public static final RegistryObject<EntityType<LeviathanServant>> LEVIATHAN = register("leviathan",
+            EntityType.Builder.of(LeviathanServant::new, MobCategory.MONSTER)
+                    .sized(4.5F, 3.0F)
+                    .fireImmune()
+                    .noSummon() //WIP
+                    .clientTrackingRange(8)
+                    .setShouldReceiveVelocityUpdates(true));
+
     public static final RegistryObject<EntityType<IgnitedRevenantServant>> IGNITED_REVENANT = register("ignited_revenant",
             EntityType.Builder.of(IgnitedRevenantServant::new, MobCategory.MONSTER)
                     .sized(1.6F, 2.8F)
@@ -103,6 +112,11 @@ public class GCEntityType {
                     .sized(2.5F, 2.75F)
                     .fireImmune()
                     .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<ZombieAmethystCrab>> ZOMBIE_AMETHYST_CRAB = register("zombie_amethyst_crab",
+            EntityType.Builder.of(ZombieAmethystCrab::new, MobCategory.MONSTER)
+                    .sized(2.5F, 2.6F)
+                    .fireImmune());
 
     public static final RegistryObject<EntityType<AncientRemnantServant>> ANCIENT_REMNANT = register("ancient_remnant",
             EntityType.Builder.of(AncientRemnantServant::new, MobCategory.MONSTER)
@@ -141,9 +155,19 @@ public class GCEntityType {
                     .sized(0.8F, 2.6F)
                     .clientTrackingRange(10));
 
+    public static final RegistryObject<EntityType<DraugrNecromancerServant>> DRAUGR_NECROMANCER_SERVANT = register("draugr_necromancer_servant",
+            EntityType.Builder.of(DraugrNecromancerServant::new, MobCategory.MONSTER)
+                    .sized(0.75F, 2.4875F)
+                    .clientTrackingRange(8));
+
     public static final RegistryObject<EntityType<AptrgangrServant>> APTRGANGR = register("aptrgangr",
             EntityType.Builder.of(AptrgangrServant::new, MobCategory.MONSTER)
                     .sized(2.4F, 4.0F)
+                    .clientTrackingRange(8));
+
+    public static final RegistryObject<EntityType<DraugrNecromancer>> DRAUGR_NECROMANCER = register("draugr_necromancer",
+            EntityType.Builder.of(DraugrNecromancer::new, MobCategory.MONSTER)
+                    .sized(0.75F, 2.4875F)
                     .clientTrackingRange(8));
 
     public static final RegistryObject<EntityType<HippocamtusServant>> HIPPOCAMTUS = register("hippocamtus",
@@ -177,6 +201,12 @@ public class GCEntityType {
                     .sized(1.1F, 0.95F)
                     .clientTrackingRange(4));
 
+    public static final RegistryObject<EntityType<PhantomArrow>> PHANTOM_ARROW = register("phantom_arrow",
+            EntityType.Builder.<PhantomArrow>of(PhantomArrow::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .setUpdateInterval(1)
+                    .setShouldReceiveVelocityUpdates(true));
+
     public static final RegistryObject<EntityType<IgnisFireball>> IGNIS_FIREBALL = register("ignis_fireball",
             EntityType.Builder.<IgnisFireball>of(IgnisFireball::new, MobCategory.MISC)
                     .sized(0.6F, 0.6F)
@@ -209,6 +239,12 @@ public class GCEntityType {
             EntityType.Builder.<PortalAbyssBlast>of(PortalAbyssBlast::new, MobCategory.MISC)
                     .sized(0.1F, 0.1F)
                     .fireImmune());
+
+    public static final RegistryObject<EntityType<AbyssPortal>> ABYSS_PORTAL = register("abyss_portal",
+            EntityType.Builder.<AbyssPortal>of(AbyssPortal::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(3.0F, 0.15F)
+                    .setCustomClientFactory(AbyssPortal::new));
 
     public static final RegistryObject<EntityType<AbyssBlastPortal>> ABYSS_BLAST_PORTAL = register("abyss_blast_portal",
             EntityType.Builder.<AbyssBlastPortal>of(AbyssBlastPortal::new, MobCategory.MISC)

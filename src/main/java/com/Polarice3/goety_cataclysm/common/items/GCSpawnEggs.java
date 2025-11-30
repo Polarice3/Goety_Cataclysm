@@ -4,6 +4,7 @@ import com.Polarice3.Goety.common.items.ServantSpawnEggItem;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,9 @@ public class GCSpawnEggs {
 
     public static final RegistryObject<ServantSpawnEggItem> NETHERITE_MONSTROSITY_SPAWN_EGG = ITEMS.register("netherite_monstrosity_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.NETHERITE_MONSTROSITY, 0x3b393b, 0xe1a61d, egg()));
+
+    public static final RegistryObject<ServantSpawnEggItem> ZOMBIE_AMETHYST_CRAB_SPAWN_EGG = ITEMS.register("zombie_amethyst_crab_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.ZOMBIE_AMETHYST_CRAB, 0x6e6935, 0x5d3a9a, egg()));
 
     public static final RegistryObject<ServantSpawnEggItem> DEEPLING_SERVANT_SPAWN_EGG = ITEMS.register("deepling_servant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.DEEPLING, 0x0b141c, 0xbaedf4, egg()));
@@ -79,6 +83,9 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> ELITE_DRAUGR_SERVANT_SPAWN_EGG = ITEMS.register("elite_draugr_servant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.ELITE_DRAUGR_SERVANT, 0x2e2a27, 0x383430, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> DRAUGR_NECROMANCER_SERVANT_SPAWN_EGG = ITEMS.register("draugr_necromancer_servant_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.DRAUGR_NECROMANCER_SERVANT, 0x2e2a27, 0x8bffe6, egg()));
+
     public static final RegistryObject<ServantSpawnEggItem> APTRGANGR_SPAWN_EGG = ITEMS.register("aptrgangr_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.APTRGANGR, 0x2f303c, 0x8bffe6, egg()));
 
@@ -99,6 +106,9 @@ public class GCSpawnEggs {
 
     public static final RegistryObject<ServantSpawnEggItem> SYMBIOCTO_SERVANT_SPAWN_EGG = ITEMS.register("symbiocto_servant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.SYMBIOCTO_SERVANT, 0x462014, 0xf2b3a1, egg()));
+
+    public static final RegistryObject<ForgeSpawnEggItem> DRAUGR_NECROMANCER_SPAWN_EGG = ITEMS.register("draugr_necromancer_spawn_egg",
+            () -> new ForgeSpawnEggItem(GCEntityType.DRAUGR_NECROMANCER, 0x301c13, 0x969cad, egg()));
 
     public static Item.Properties egg(){
         return new Item.Properties();

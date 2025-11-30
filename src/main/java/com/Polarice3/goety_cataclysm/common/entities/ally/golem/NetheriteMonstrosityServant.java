@@ -19,6 +19,7 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.RingParticle;
+import com.github.L_Ender.cataclysm.client.particle.RoarParticle;
 import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
@@ -712,12 +713,21 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
             if (this.attackTicks == 10) {
                 this.playSound(CataclysmSounds.MONSTROSITYGROWL.get(), 3, 1);
             }
+            if (this.attackTicks == 16) {
+                Roarparticle(3.5F, 2.7F, 10, 255, 255, 255, 0.4F, 1.0F, 0.8F, 8.0F);
+            }
             if (this.attackTicks == 17) {
                 berserkBlockBreaking(8, 8, 8);
                 EarthQuake(6.25D);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 20, 0.3f, 0, 20);
                 MakeParticle(4.4f, 2.0f);
                 MakeParticle(4.4f, -2.0f);
+            }
+            if (this.attackTicks == 18) {
+                Roarparticle(3.5f, 2.7F, 10, 255, 255, 255, 0.4F, 1.0f, 0.8F, 9F);
+            }
+            if (this.attackTicks == 20) {
+                Roarparticle(3.5f, 2.7F, 10, 255, 255, 255, 0.4F, 1.0f, 0.8F, 9F);
             }
         }
         if (this.getAttackState() == DEATH) {
@@ -809,7 +819,16 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
             }
             if (this.attackTicks == 26) {
                 this.playSound(CataclysmSounds.MONSTROSITYGROWL.get(), 3, 1);
+            }
 
+            if (this.attackTicks == 32) {
+                Roarparticle(2.0F, 4.5F, 10, 255, 255, 255, 0.4F, 1.0F, 0.6F, 4.5F);
+            }
+            if (this.attackTicks == 34) {
+                Roarparticle(2.0F, 4.5F, 10, 255, 255, 255, 0.4F, 1.0F, 0.6F, 5.0F);
+            }
+            if (this.attackTicks == 36) {
+                Roarparticle(2.0F, 4.5F, 10, 255, 255, 255, 0.4F, 1.0F, 0.6F, 5.5F);
             }
 
             for (int l = 31; l <= 41; l = l + 2) {
@@ -1087,6 +1106,17 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
             } else {
                 this.level().addParticle(new RingParticle.RingData(0f, (float) Math.PI / 2f, 35, 1f, 1f, 1f, 1f, 30f, false, RingParticle.EnumRingBehavior.GROW), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
             }
+        }
+    }
+
+    private void Roarparticle(float vec, float y, int duration, int r, int g, int b, float a, float start, float inc, float end) {
+        if (this.level().isClientSide) {
+            double theta = (yBodyRot) * (Math.PI / 180);
+            theta += Math.PI / 2;
+            double vecX = Math.cos(theta);
+            double vecZ = Math.sin(theta);
+
+            this.level().addParticle(new RoarParticle.RoarData(duration, r, g, b, a, start,inc,end), this.getX() + vec * vecX, this.getY() + y, this.getZ() + vec * vecZ, 0, 0, 0);
         }
     }
 

@@ -1,0 +1,7 @@
+{
+  "name": "探検",
+  "description": "世界は私が記憶していたものよりずっと破滅的だ...",
+  "icon": "cataclysm:lionfish",
+  "parent": "goety:cataclysm",
+  "sortnum": 6
+}

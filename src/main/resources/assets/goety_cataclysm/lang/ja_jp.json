@@ -149,5 +149,12 @@
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "現代の魔獣の骸を古の魔獣の骸に変異させる。",
   "block.goety_cataclysm.ancient_plating": "古代のメッキ",
   "item.goety_cataclysm.amethyst_cluster_focus": "アメジストクラスターのフォーカス",
-  "item.goety_cataclysm.amethyst_cluster_focus.info": "術者の周囲にアメジストクラスターを発射します。"
+  "item.goety_cataclysm.amethyst_cluster_focus.info": "術者の周囲にアメジストクラスターを発射します。",
+  "entity.goety_cataclysm.draugr_necromancer": "ドラウグルネクロマンサー",
+  "entity.goety_cataclysm.draugr_necromancer_servant": "ドラウグルネクロマンサーの従者",
+  "item.goety_cataclysm.soul_jar_draugr": "ソウルの瓶",
+  "item.goety_cataclysm.draugr_necromancer_spawn_egg": "ドラウグルネクロマンサーのスポーンエッグ",
+  "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "ドラウグルネクロマンサーの従者のスポーンエッグ",
+  "entity.goety_cataclysm.zombie_amethyst_crab": "ゾンビアメジストガニ",
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "ゾンビアメジストガニのスポーンエッグ"
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-02T21:58:09.808287	Item Models: goety_cataclysm
+// 1.20.1	2025-11-29T21:01:15.5976835	Item Models: goety_cataclysm
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/ancient_remnant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/aptrgangr_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/cindaria_servant_spawn_egg.json
@@ -10,6 +10,8 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/deepling_priest_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/deepling_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/deepling_warlock_servant_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/draugr_necromancer_servant_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/draugr_necromancer_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/draugr_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/drowned_host_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/elite_draugr_servant_spawn_egg.json
@@ -27,3 +29,4 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/urchinkin_servant_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/wadjet_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/watcher_servant_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/goety_cataclysm/models/item/zombie_amethyst_crab_spawn_egg.json

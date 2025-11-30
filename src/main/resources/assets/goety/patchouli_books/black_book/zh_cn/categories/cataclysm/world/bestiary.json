@@ -1,0 +1,7 @@
+{
+  "name": "图鉴",
+  "description": "记录这个世界上存在的更多灾变生物",
+  "icon": "cataclysm:netherite_effigy",
+  "parent": "goety:cataclysm/world",
+  "sortnum": 1
+}

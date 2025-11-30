@@ -1,0 +1,16 @@
+{
+  "name": "ゾンビアメジストガニ",
+  "icon": "cataclysm:amethyst_crab_shell",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "アメジストガニは希少で、これほど完璧な生き物を召喚して封じ込めるのは至難の業です。他の手段が全て失敗した時、死霊術は人生の問題に対する完璧な解決策となります。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:zombie_amethyst_crab",
+      "scale": 0.5
+    }
+  ]
+}

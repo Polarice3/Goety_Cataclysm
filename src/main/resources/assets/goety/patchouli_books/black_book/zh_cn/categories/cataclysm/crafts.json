@@ -1,6 +1,6 @@
 {
   "name": "合成",
-  "description": "More cataclysmic items and blocks to craft!",
+  "description": "更多灾变相关的物品或方块合成！",
   "icon": "goety_cataclysm:mechanized_iron_block",
   "parent": "goety:cataclysm",
   "sortnum": 5

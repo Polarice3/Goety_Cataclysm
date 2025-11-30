@@ -1,0 +1,33 @@
+{
+  "name": "ドラウグルネクロマンサーの従者",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/unlock_necromancer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "ドラウグルネクロマンサーの創造方法を発見しました。ドラウグルネクロマンサーは幻影のエネルギーの矢を放ち、ドラウグルを召喚して命令を遂行します。儀式はスケルトンではなく、ドラウグルに対して行われます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_draugr_to_draugr_necromancer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "エリートドラウグルとロイヤルドラウグルを召喚する方法も習得できます。召喚には、対応するフォーカスを右クリックする必要があります。他の種類のアンデッドの従者は召喚できません。何も持っていない手で右クリックすると、ネクロマンサーが従者を召喚します。従者は通常のドラウグルの従者と同じように回復します。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer_servant",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:soul_jar_draugr",
+      "text": "ドラウグルネクロマンサーが倒れた場合、$(l:crafts/empty_soul_jar)空のソウルの瓶$()があれば魂が満たされ、ドラウグルを右クリックすると、そのドラウグルを新しい体として復活します。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety:soul_jar_draugr": 4
+  }
+}

@@ -247,7 +247,7 @@ public class SymbioctoServant extends Summoned implements RangedAttackMob {
     }
 
     @Override
-    public boolean canRide(LivingEntity livingEntity) {
+    public boolean isAbleToRide(LivingEntity livingEntity) {
         if (livingEntity instanceof DrownedServant drownedServant) {
             if (!drownedServant.isBaby()) {
                 if (drownedServant.getTrueOwner() == this.getTrueOwner()) {
@@ -255,7 +255,7 @@ public class SymbioctoServant extends Summoned implements RangedAttackMob {
                 }
             }
         }
-        return super.canRide(livingEntity);
+        return super.isAbleToRide(livingEntity);
     }
 
     @Override

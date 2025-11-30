@@ -10,6 +10,10 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> DraugrNecromancerSpawnWeight;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DraugrNecromancerSpawnMinCount;
+    public static final ForgeConfigSpec.ConfigValue<Integer> DraugrNecromancerSpawnMaxCount;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingAnglerCatchTime;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> BlazeIgnitedHelm;
@@ -55,6 +59,16 @@ public class GCMobsConfig {
                 .define("prowlerCore", true);
         WadjetSpirit = BUILDER.comment("Whether owned Wadjets drop Arcane Spirits, Default: true")
                 .define("wadjetSpirit", true);
+        BUILDER.pop();
+        BUILDER.push("Spawning");
+            BUILDER.push("Draugr Necromancer");
+            DraugrNecromancerSpawnWeight = BUILDER.comment("Spawn Weight for Draugr Necromancer, Default: 5")
+                    .defineInRange("draugrNecromancerSpawnWeight", 5, 0, Integer.MAX_VALUE);
+            DraugrNecromancerSpawnMinCount = BUILDER.comment("Spawn minimum group count for Draugr Necromancer, Default: 1")
+                    .defineInRange("draugrNecromancerSpawnMinCount", 1, 1, Integer.MAX_VALUE);
+            DraugrNecromancerSpawnMaxCount = BUILDER.comment("Spawn maximum group count for Draugr Necromancer, must be equal or higher than min count, Default: 1")
+                    .defineInRange("draugrNecromancerSpawnMaxCount", 1, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
         BUILDER.pop();
         SPEC = BUILDER.build();
     }

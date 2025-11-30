@@ -42,7 +42,7 @@ public class ExtinctFlameSpell extends Spell {
     @Nullable
     @Override
     public SoundEvent CastingSound() {
-        return SoundEvents.EVOKER_PREPARE_SUMMON;
+        return SoundEvents.EMPTY;
     }
 
     @Override
@@ -61,6 +61,11 @@ public class ExtinctFlameSpell extends Spell {
         list.add(ModEnchantments.POTENCY.get());
         list.add(ModEnchantments.RADIUS.get());
         return list;
+    }
+
+    @Override
+    public void startSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, SpellStat spellStat) {
+        worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, this.getSoundSource(), 5.0F, 1.4F + caster.getRandom().nextFloat() * 0.1F);
     }
 
     @Override

@@ -1,0 +1,20 @@
+{
+  "name": "Draugr Necromancer",
+  "icon": "cataclysm:black_steel_ingot",
+  "category": "goety:cataclysm/world/bestiary",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "These sorcerous undead were once the wise-men of warriors that had imprisoned Maledictus fallen under his curse. Rather than remain at the Frosted Prison, they roam the cold tundra in search of victims to bolster their ranks."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:draugr_necromancer",
+      "scale": 0.95
+    },
+    {
+      "type": "patchouli:text",
+      "text": "These necromancers possess the ability to summon Draugrs and shoot phantasmal arrows that seemed to home into their target. Much like other Draugrs, these creatures won't freeze and walk on top of Powdered Snow."
+    }
+  ]
+}

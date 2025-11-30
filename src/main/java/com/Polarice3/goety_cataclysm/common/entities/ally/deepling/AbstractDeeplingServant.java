@@ -67,7 +67,7 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
 
     @Override
     public void followGoal() {
-        this.goalSelector.addGoal(5, new FollowOwnerWaterGoal(this, 1.0, 10.0F, 2.0F));
+        this.goalSelector.addGoal(3, new FollowOwnerWaterGoal(this, 1.0, 10.0F, 2.0F));
     }
 
     protected void defineSynchedData() {
@@ -92,7 +92,7 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
         this.playSound(CataclysmSounds.DEEPLING_IDLE.get(), 0.15F, 0.6F);
     }
 
-    public boolean canRide(LivingEntity livingEntity){
+    public boolean isAbleToRide(LivingEntity livingEntity){
         if (livingEntity.getFirstPassenger() == null) {
             if (livingEntity instanceof CoralssusServant servant) {
                 if (this.getTrueOwner() != null) {
@@ -105,7 +105,7 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
                 }
             }
         }
-        return super.canRide(livingEntity);
+        return super.isAbleToRide(livingEntity);
     }
 
     @Override

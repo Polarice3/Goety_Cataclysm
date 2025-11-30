@@ -1,0 +1,7 @@
+{
+  "name": "寓話",
+  "description": "この世界に生息する破滅的な生き物の記録。",
+  "icon": "cataclysm:netherite_effigy",
+  "parent": "goety:cataclysm/world",
+  "sortnum": 1
+}

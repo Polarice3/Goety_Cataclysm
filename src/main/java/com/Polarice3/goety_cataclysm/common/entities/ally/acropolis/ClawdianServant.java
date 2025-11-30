@@ -42,6 +42,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
@@ -374,6 +375,12 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
             return flag;
         }
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return CataclysmSounds.KOBOLEDIATOR_HURT.get();
     }
 
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
@@ -903,7 +910,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
                             if (entityHit.hurt(damagesource, 1)) {
                                 entityHit.startRiding(this, true);
-                                Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entityHit), new MessageEntityCamera(entityHit.getId(), true));
+                                Cataclysm.NETWORK_WRAPPER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entityHit), new MessageEntityCamera(entityHit.getId(), false));
                             }
                         } else if (!isAlliedTo(entityHit)) {
                             entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
