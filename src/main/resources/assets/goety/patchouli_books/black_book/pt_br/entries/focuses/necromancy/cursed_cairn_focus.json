@@ -1,11 +1,11 @@
 {
-  "name": "Cursed Cairn Focus",
+  "name": "Foco do Cairn Amaldiçoado",
   "icon": "goety_cataclysm:cursed_cairn_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell calls forth tall fallen crossbowmen that would pelt their foes with arrows."
+      "text": "O feitiço invoca altos besteiros caídos que bombardearão seus inimigos com flechas."
     },
     {
       "type": "goety:ritual",

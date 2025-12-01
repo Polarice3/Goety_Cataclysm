@@ -1,6 +1,6 @@
 {
-  "name": "Mutations",
-  "description": "Transforming one creature into another.",
+  "name": "Mutações",
+  "description": "Transformando uma criatura em outra.",
   "icon": "cataclysm:burning_ashes",
   "parent": "goety:cataclysm",
   "sortnum": 4

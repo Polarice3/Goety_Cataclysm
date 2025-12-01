@@ -1,6 +1,6 @@
 {
-  "name": "Summons",
-  "description": "More Servants for a Darker Wizard.",
+  "name": "Invocações",
+  "description": "Mais Servos para um Feiticeiro Mais Sombrio.",
   "icon": "cataclysm:draugr_head",
   "parent": "goety:cataclysm",
   "sortnum": 3

@@ -1,11 +1,11 @@
 {
-  "name": "Wadjet",
+  "name": "Uadjet",
   "icon": "cataclysm:ancient_spear",
   "category": "goety:cataclysm/mutations",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Through a simple Koboleton, you've managed to call forth a great Wadjet and have it serve under your thumb."
+      "text": "Através de um simples Cobóleto, você conseguiu convocar um grande Uadjet e tê-lo servindo sob seu comando."
     },
     {
       "type": "goety:ritual",
@@ -18,12 +18,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The undead spellcaster can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+      "text": "O Uadjet pode ser curado alimentando-o com ossos, e pode curar passivamente se seu usuário vestir uma Capa Necro."
     },
     {
       "type": "patchouli:spotlight",
       "item": "goety_cataclysm:arcane_spirit",
-      "text": "When fallen, these ancient vanguards will drop their spirit which can possess a Koboleton to return from the dead."
+      "text": "Quando abatidos, estes antigos serpentinos deixarão cair seu espírito que pode possuir um Cobóleto para retornar dos mortos."
     }
   ],
   "extra_recipe_mappings": {

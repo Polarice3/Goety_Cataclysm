@@ -1,11 +1,11 @@
 {
-  "name": "Sunken Swell Focus",
+  "name": "Foco do Inchaço Afundante",
   "icon": "goety_cataclysm:sunken_swell_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "With the authority given to you by ending the Leviathan, you're able to summon forth her servants under your command. Has a 25%% chance of summoning a Deepling Angler."
+      "text": "Com a autoridade concedida a você por derrotar o Leviatã, você é capaz de invocar seus servos sob seu comando. Tem 25%% de chance de invocar um Ondador Pescador."
     },
     {
       "type": "goety:ritual",

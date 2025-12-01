@@ -98,6 +98,11 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> RoyalDraugrSummonDown;
     public static final ForgeConfigSpec.ConfigValue<Integer> RoyalDraugrLimit;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeDuration;
+    public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> EarthShakeDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> FlareBombCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> FlareBombDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> FlareBombCoolDown;
@@ -346,6 +351,16 @@ public class GCSpellConfig {
                     .defineInRange("royalDraugrSummonDown", 300, 0, 72000);
             RoyalDraugrLimit = BUILDER.comment("Number of Royal Draugr Servants that can a player can have, Default: 16")
                     .defineInRange("royalDraugrLimit", 16, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Earth Shake Spell");
+            EarthShakeCost = BUILDER.comment("Earth Shake Spell Cost, Default: 48")
+                    .defineInRange("earthShakeCost", 48, 0, Integer.MAX_VALUE);
+            EarthShakeDuration = BUILDER.comment("Time to cast Earth Shake Spell, Default: 100")
+                    .defineInRange("earthShakeTime", 16, 0, 72000);
+            EarthShakeCoolDown = BUILDER.comment("Earth Shake Spell Cooldown, Default: 160")
+                    .defineInRange("earthShakeCoolDown", 160, 0, Integer.MAX_VALUE);
+            EarthShakeDamage = BUILDER.comment("Earth Shake Spell Damage, Default: 8.0")
+                    .defineInRange("earthShakeDamage", 8.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Flare Bomb Spell");
             FlareBombCost = BUILDER.comment("Flare Bomb Spell Cost, Default: 32")

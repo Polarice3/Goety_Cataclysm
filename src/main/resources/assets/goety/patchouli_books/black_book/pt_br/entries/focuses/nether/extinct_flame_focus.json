@@ -1,11 +1,11 @@
 {
-  "name": "Extinct Flame Focus",
+  "name": "Foco da Chama Extinta",
   "icon": "goety_cataclysm:extinct_flame_focus",
   "category": "goety:cataclysm/focuses/nether",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Tapping into the power of Ignis itself, you conjure forth fireballs that, after a short while, chase down nearby foes, blowing them up in a fiery explosion."
+      "text": "Acessando o poder do próprio Ignis, você conjura bolas de fogo que, após um curto período, perseguem inimigos próximos, explodindo-os em uma explosão flamejante."
     },
     {
       "type": "goety:ritual",

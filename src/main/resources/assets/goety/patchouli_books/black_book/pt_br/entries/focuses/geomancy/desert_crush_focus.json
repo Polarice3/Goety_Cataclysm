@@ -1,11 +1,11 @@
 {
-  "name": "Desert Crush Focus",
+  "name": "Foco do Esmagamento do Deserto",
   "icon": "goety_cataclysm:desert_crush_focus",
   "category": "goety:cataclysm/focuses/geomancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Summons Ancient Desert Steles around the caster, that will then drop and damage any non-allied targets below them."
+      "text": "Invoca Estelas do Deserto Antigo ao redor do conjurador, que então cairão e causarão dano a quaisquer alvos não aliados abaixo delas."
     },
     {
       "type": "goety:ritual",

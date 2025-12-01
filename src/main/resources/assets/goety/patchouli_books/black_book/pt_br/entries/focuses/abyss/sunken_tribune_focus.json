@@ -1,11 +1,11 @@
 {
-  "name": "Sunken Tribune Focus",
+  "name": "Foco da Tribuno Afundante",
   "icon": "goety_cataclysm:sunken_tribune_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell calls forth a Deepling spellcaster from the very depths. One can expect either a Priest or a Warlock to answer your call."
+      "text": "O feitiço invoca um conjurador Ondador das profundezas mais sombrias. Pode-se esperar que um Sacerdote ou um Bruxo atenda ao seu chamado."
     },
     {
       "type": "goety:ritual",

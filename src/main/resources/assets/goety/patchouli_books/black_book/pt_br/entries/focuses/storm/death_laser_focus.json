@@ -1,11 +1,11 @@
 {
-  "name": "Death Laser Focus",
+  "name": "Foco do Laser da Morte",
   "icon": "goety_cataclysm:death_laser_focus",
   "category": "goety:cataclysm/focuses/storm",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The caster replicates the Prowler's laser beam through magical means, blasting all targets in front of them."
+      "text": "O conjurador replica o raio laser do Peste-Robô por meios mágicos, explodindo todos os alvos à sua frente."
     },
     {
       "type": "goety:ritual",

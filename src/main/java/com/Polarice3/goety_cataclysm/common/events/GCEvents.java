@@ -11,7 +11,7 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.NoKnockBackDamageSource;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
-import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NMPart;
+import com.Polarice3.goety_cataclysm.common.entities.ally.OwnedCMPart;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
@@ -65,7 +65,7 @@ public class GCEvents {
 
     @SubscribeEvent
     public static void PlayerAttackEvent(AttackEntityEvent event){
-        if (event.getTarget() instanceof NMPart nmPart){
+        if (event.getTarget() instanceof OwnedCMPart<?> nmPart){
             ItemStack itemStack = event.getEntity().getMainHandItem();
             if (nmPart.getParent().getTrueOwner() == event.getEntity() || (nmPart.getParent().getTrueOwner() instanceof IOwned owned && owned.getTrueOwner() == event.getEntity())) {
                 if (MobsConfig.OwnerAttackCancel.get()) {
@@ -93,7 +93,7 @@ public class GCEvents {
     @SubscribeEvent
     public static void onLivingInteract(PlayerInteractEvent.EntityInteract event){
         if (!event.getLevel().isClientSide){
-            if (event.getTarget() instanceof NMPart nmPart){
+            if (event.getTarget() instanceof OwnedCMPart<?> nmPart){
                 if (nmPart.getParent().getTrueOwner() == event.getEntity() || (nmPart.getParent().getTrueOwner() instanceof IOwned owned && owned.getTrueOwner() == event.getEntity())) {
                     event.getItemStack().getItem().interactLivingEntity(event.getItemStack(), event.getEntity(), nmPart.getParent(), event.getHand());
                 }

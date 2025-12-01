@@ -1,11 +1,11 @@
 {
-  "name": "Flare Bomb Focus",
+  "name": "Foco de Bombas de Sinalização",
   "icon": "goety_cataclysm:flare_bomb_focus",
   "category": "goety:cataclysm/focuses/nether",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell replicates the infernal machine's flare bombs, which will not only explode upon impact, but also sends waves of flaming blades to jet out of the ground."
+      "text": "O feitiço replica as bombas sinalizadoras da Monstruosidade de Netherite, que não apenas explodem no impacto, mas também enviam ondas de lâminas flamejantes para jorrar do chão."
     },
     {
       "type": "goety:ritual",

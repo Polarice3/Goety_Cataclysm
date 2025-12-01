@@ -155,5 +155,7 @@
   "item.goety_cataclysm.draugr_necromancer_spawn_egg": "魂尸死灵法师刷怪蛋",
   "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "魂尸死灵法师仆从刷怪蛋",
   "entity.goety_cataclysm.zombie_amethyst_crab": "僵尸紫水晶巨蟹",
-  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "僵尸紫水晶巨蟹刷怪蛋"
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "僵尸紫水晶巨蟹刷怪蛋",
+  "item.goety_cataclysm.earth_shake_focus": "地球震动水晶",
+  "item.goety_cataclysm.earth_shake_focus.info": "向施法者周围发射地震波，对被击中的敌人造成伤害。"
 }

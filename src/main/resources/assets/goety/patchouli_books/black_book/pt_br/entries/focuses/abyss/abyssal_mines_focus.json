@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Mine Focus",
+  "name": "Foco da Mina Abissais",
   "icon": "goety_cataclysm:abyssal_mine_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "While they don't leave behind clouds of acids, these ethereal purple mines are not only more numerous but will also grant Abyssal Fear upon any victims it exploded on."
+      "text": "Embora não deixem para trás nuvens de ácidos, estas minas etéreas roxas não apenas são mais numerosas, mas também concederão Medo Abissal a quaisquer vítimas sobre as quais explodirem."
     },
     {
       "type": "goety:ritual",

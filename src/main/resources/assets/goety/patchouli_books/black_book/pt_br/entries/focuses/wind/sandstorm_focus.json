@@ -1,11 +1,11 @@
 {
-  "name": "Sandstorm Focus",
+  "name": "Foco da Tempestade de Areia",
   "icon": "goety_cataclysm:sandstorm_focus",
   "category": "goety:cataclysm/focuses/wind",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Rather than shooting out a simple cyclone, the spell conjures multiple sandy cyclones that orbits around the caster, damaging any non-allied targets caught into them."
+      "text": "Em vez de lançar um simples ciclone, o feitiço conjura múltiplos ciclones de areia que orbitam ao redor do conjurador, danificando quaisquer alvos não aliados pegos neles."
     },
     {
       "type": "goety:ritual",

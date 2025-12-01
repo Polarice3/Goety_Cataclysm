@@ -9,6 +9,7 @@ import com.Polarice3.goety_cataclysm.common.items.revive.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.AmethystClusterSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.EarthShakeSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.EliteDraugrSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.KoboletonSpell;
@@ -57,6 +58,7 @@ public class GCItems {
     ///Geomancy
     public static final RegistryObject<Item> AMETHYST_CLUSTER_FOCUS = ITEMS.register("amethyst_cluster_focus", () -> new MagicFocus(new AmethystClusterSpell()));
     public static final RegistryObject<Item> DESERT_CRUSH_FOCUS = ITEMS.register("desert_crush_focus", () -> new MagicFocus(new DesertCrushSpell()));
+    public static final RegistryObject<Item> EARTH_SHAKE_FOCUS = ITEMS.register("earth_shake_focus", () -> new MagicFocus(new EarthShakeSpell()));
 
     ///Necromancy
     public static final RegistryObject<Item> DESERT_RAID_FOCUS = ITEMS.register("desert_raid_focus", () -> new MagicFocus(new KoboletonSpell()));

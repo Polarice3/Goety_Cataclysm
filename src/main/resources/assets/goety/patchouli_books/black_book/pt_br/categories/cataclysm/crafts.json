@@ -1,6 +1,6 @@
 {
   "name": "Crafts",
-  "description": "More cataclysmic items and blocks to craft!",
+  "description": "Mais itens e blocos cataclísmicos por criar!",
   "icon": "goety_cataclysm:mechanized_iron_block",
   "parent": "goety:cataclysm",
   "sortnum": 5

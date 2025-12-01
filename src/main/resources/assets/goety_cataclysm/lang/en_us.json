@@ -97,6 +97,8 @@
   "item.goety_cataclysm.desert_crush_focus.info": "Summons Ancient Desert Steles around the caster, that will then drop and damage any non-allied targets below them.",
   "item.goety_cataclysm.desert_raid_focus": "Desert Raid Focus",
   "item.goety_cataclysm.desert_raid_focus.info": "Summons Koboleton Servants. Cast crouching will summon the caster's servants towards them.",
+  "item.goety_cataclysm.earth_shake_focus": "Earth Shake Focus",
+  "item.goety_cataclysm.earth_shake_focus.info": "Shoots quakes around the caster that damages enemies hit by them.",
   "item.goety_cataclysm.flare_bomb_focus": "Flare Bomb Focus",
   "item.goety_cataclysm.flare_bomb_focus.info": "Shoots a Flare Bomb. A Flare Bomb will non-destructively explode upon impact and summon Flare Jets in either a plus or cross pattern.",
   "item.goety_cataclysm.kakourgos_focus": "Kakoúrgos Focus",

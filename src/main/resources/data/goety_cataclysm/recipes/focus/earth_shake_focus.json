@@ -1,0 +1,27 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:quaking_focus"
+  },
+  "craftType": "geoturgy",
+  "soulCost": 1,
+  "duration": 10,
+  "ingredients": [
+    {
+      "item": "cataclysm:ancient_metal_ingot"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "cataclysm:amethyst_crab_shell"
+    },
+    {
+      "item": "minecraft:bell"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:earth_shake_focus"
+  }
+}

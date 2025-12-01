@@ -1,5 +1,6 @@
 package com.Polarice3.goety_cataclysm;
 
+import com.Polarice3.Goety.common.entities.neutral.Owned;
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.blocks.entities.GCBlockEntities;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
@@ -33,9 +34,12 @@ import com.Polarice3.goety_cataclysm.init.GCCreativeTab;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -72,6 +76,7 @@ public class GoetyCataclysm {
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setupEntityAttributeCreation);
+        modEventBus.addListener(this::SpawnPlacementEvent);
 
         getOrCreateDirectory(FMLPaths.CONFIGDIR.get().resolve("goety_cataclysm"), "goety_cataclysm");
 
@@ -157,5 +162,9 @@ public class GoetyCataclysm {
         event.put(GCEntityType.URCHINKIN_SERVANT.get(), UrchinkinServant.setCustomAttributes().build());
         event.put(GCEntityType.DROWNED_HOST_SERVANT.get(), DrownedHostServant.setCustomAttributes().build());
         event.put(GCEntityType.SYMBIOCTO_SERVANT.get(), SymbioctoServant.setCustomAttributes().build());
+    }
+
+    private void SpawnPlacementEvent(SpawnPlacementRegisterEvent event){
+        event.register(GCEntityType.DRAUGR_NECROMANCER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Owned::checkHostileSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
     }
 }

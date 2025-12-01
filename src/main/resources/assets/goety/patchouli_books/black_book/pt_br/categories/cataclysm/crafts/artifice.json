@@ -1,6 +1,6 @@
 {
-  "name": "Artifices",
-  "description": "Utilizing and Manipulating Soul Energy.",
+  "name": "Artefactos",
+  "description": "Utilizando e Manipulando Energia de Alma.",
   "icon": "goety_cataclysm:fabricator",
   "parent": "goety:cataclysm/crafts",
   "sortnum": 3

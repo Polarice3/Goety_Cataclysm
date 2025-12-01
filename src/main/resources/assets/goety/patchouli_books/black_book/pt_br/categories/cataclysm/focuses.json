@@ -1,6 +1,6 @@
 {
-  "name": "Focuses",
-  "description": "More cataclysmic spells to cast!",
+  "name": "Focos",
+  "description": "Mais feitiços cataclísmicos para conjurar!",
   "icon": "goety_cataclysm:flare_bomb_focus",
   "parent": "goety:cataclysm",
   "sortnum": 2

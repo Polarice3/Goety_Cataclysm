@@ -1,12 +1,12 @@
 {
-  "name": "Ignited Berserker",
+  "name": "Cavaleiro Flamejante",
   "icon": "cataclysm:dying_ember",
   "category": "goety:cataclysm/mutations",
   "advancement": "goety:goety/read_bygone_scroll",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Having a spirit of an ancient berserker possess a fire elemental surprisingly didn't end in disaster."
+      "text": "Ter o espírito de um antigo cavaleiro possuindo um elemental de fogo surpreendentemente não terminou em desastre."
     },
     {
       "type": "goety:ritual",
@@ -19,12 +19,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The berserker can be healed by feeding it bones, blaze rods or blaze powder, and can passively heal if their owner dons a Necro Cape."
+      "text": "O cavaleiro pode ser curado alimentando-o com ossos, varas de blaze ou pó de blaze, e pode curar passivamente se seu usuário vestir uma Capa Necro."
     },
     {
       "type": "patchouli:spotlight",
       "item": "goety_cataclysm:ignited_soul",
-      "text": "When extinguished, these fiery revenants will drop their burning cores which can possess a Blaze to return from the dead."
+      "text": "Quando extintos, estes cavaleiros flamejantes deixarão cair seus núcleos em chamas que podem possuir um Blaze para retornar dos mortos."
     }
   ],
   "extra_recipe_mappings": {

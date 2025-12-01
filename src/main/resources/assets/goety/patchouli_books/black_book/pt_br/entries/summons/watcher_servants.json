@@ -1,11 +1,11 @@
 {
-  "name": "Watcher Servants",
+  "name": "Servos Observadores",
   "icon": "cataclysm:laser_gatling",
   "category": "goety:cataclysm/summons",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The Watchers of the Ancient Factory, capable of shooting fiery lasers and ripping enemies with their metal jaws, now replicated through both arcane and technological means."
+      "text": "Os Observadores da Fábrica Antiga, capazes de disparar lasers flamejantes e rasgar inimigos com suas mandíbulas metálicas, agora replicados através de meios arcanos e tecnológicos."
     },
     {
       "type": "patchouli:entity",
@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Watchers can be healed by right-clicking on them Iron Ingots."
+      "text": "Observadores podem ser curados clicando neles com Barras de Ferro."
     }
   ]
 }

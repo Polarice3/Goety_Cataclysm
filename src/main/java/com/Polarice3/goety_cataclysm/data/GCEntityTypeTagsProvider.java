@@ -62,6 +62,7 @@ public class GCEntityTypeTagsProvider extends IntrinsicHolderTagsProvider<Entity
         this.tag(EntityTypeTags.IMPACT_PROJECTILES)
                 .add(GCEntityType.ABYSS_ORB.get())
                 .add(GCEntityType.IGNIS_FIREBALL.get())
-                .add(GCEntityType.IGNIS_ABYSS_FIREBALL.get());
+                .add(GCEntityType.IGNIS_ABYSS_FIREBALL.get())
+                .add(GCEntityType.WITHER_HOMING_MISSILE.get());
     }
 }

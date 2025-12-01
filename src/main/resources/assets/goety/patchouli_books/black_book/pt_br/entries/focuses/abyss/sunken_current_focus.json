@@ -1,11 +1,11 @@
 {
-  "name": "Sunken Current Focus",
+  "name": "Foco da Maré Afundante",
   "icon": "goety_cataclysm:sunken_current_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "You've upgraded the focus to summon forth Deepling Brutes, a superior and more powerful version of the humble Deepling."
+      "text": "Você aprimorou o foco para invocar Ondadores Brutos, uma versão superior e mais poderosa dos humildes Ondadores."
     },
     {
       "type": "goety:ritual",

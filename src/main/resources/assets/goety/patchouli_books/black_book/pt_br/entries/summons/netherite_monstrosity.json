@@ -1,5 +1,5 @@
 {
-  "name": "Netherite Monstrosity",
+  "name": "Monstruosidade de Netherite",
   "icon": "cataclysm:monstrous_helm",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_terminus_scroll",
@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "While the Redstone Monstrosity is one of the most powerful servants you can field, perhaps, with the power of the Infernal Forge, you'll be able to replicate its Netherite counterpart."
+      "text": "Embora a Monstruosidade de Redstone seja um dos servos mais poderosos que você pode colocar em campo, talvez, com o poder da Forja Infernal, você será capaz de replicar sua contraparte de Netherite."
     },
     {
       "type": "patchouli:entity",
@@ -17,7 +17,7 @@
     {
       "type": "multiblock",
       "multiblock_id": "goety_cataclysm:netherite_monstrosity",
-      "text": "Right click the center Reinforced Redstone Block with an Infernal Forge."
+      "text": "Clique com o botão direito no Bloco de Redstone Reforçado central com uma Forja Infernal."
     },
     {
       "type": "patchouli:crafting",
@@ -25,7 +25,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The Blackstone can be substituted with other variants aside from Gilded Blackstone for the mold. Despite what the Redstone Monstrosity entry says, this Monstrosity variant's power surpasses its counterpart. They can be repaired by right-clicking on them with Netherite Blocks, Lava Buckets or Lava Power Cells, or by putting them above Soul Fire. The Monstrosity shares the same summon cap as its Redstone counterpart."
+      "text": "A Pedra Negra pode ser substituída por outras variantes, exceto Pedra Negra Dourada, para o molde. Apesar do que a entrada da Monstruosidade de Redstone diz, o poder desta variante da Monstruosidade supera sua contraparte. Eles podem ser reparados clicando neles com Blocos de Netherite, Baldes de Lava ou Baterias de Lava, ou colocando-os sobre Fogo de Almas. A Monstruosidade compartilha o mesmo limite de invocação que sua contraparte de Redstone."
     }
   ]
 }

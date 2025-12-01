@@ -1,6 +1,6 @@
 {
   "name": "Nether",
-  "description": "More power over the fiery pits of the Nether.",
+  "description": "Mais poder sobre os poços de fogo do Nether.",
   "icon": "goety_cataclysm:flare_bomb_focus",
   "parent": "goety:cataclysm/focuses"
 }

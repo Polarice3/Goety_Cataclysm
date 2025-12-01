@@ -1,11 +1,11 @@
 {
-  "name": "Cursed Grave Focus",
+  "name": "Foco do Túmulo Amaldiçoada",
   "icon": "goety_cataclysm:cursed_grave_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Corpses of valiant warriors can be found in many cold and icy biomes. With necromancy, you're able to revive these corpses in a similar fashion to Maledictus' curse upon its jailers."
+      "text": "Corpos de guerreiros valentes podem ser encontrados em muitos biomas frios e gelados. Com a necromancia, você é capaz de reviver esses corpos de maneira similar à maldição de Maledictus sobre seus carcereiros."
     },
     {
       "type": "goety:ritual",

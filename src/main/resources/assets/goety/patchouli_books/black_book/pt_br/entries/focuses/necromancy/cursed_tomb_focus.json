@@ -1,11 +1,11 @@
 {
-  "name": "Cursed Tomb Focus",
+  "name": "Foco da Tumba Amaldiçoado",
   "icon": "goety_cataclysm:cursed_tomb_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Like regular Draugrs, but equipped with a shield that they occasionally used to block attacks."
+      "text": "Como os Draugrs comuns, mas equipados com um escudo que ocasionalmente usam para bloquear ataques."
     },
     {
       "type": "goety:ritual",

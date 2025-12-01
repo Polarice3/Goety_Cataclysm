@@ -1,11 +1,11 @@
 {
-  "name": "Void Rune Focus",
+  "name": "Foco da Runa do Vazio",
   "icon": "goety_cataclysm:void_rune_focus",
   "category": "goety:cataclysm/focuses/void",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "While one simply use a Void Rune, you figured it would be much better to simply turn it into a spell."
+      "text": "Embora se possa simplesmente usar uma Runa do Vazio, você percebeu que seria muito melhor simplesmente transformá-la em um feitiço."
     },
     {
       "type": "patchouli:crafting",

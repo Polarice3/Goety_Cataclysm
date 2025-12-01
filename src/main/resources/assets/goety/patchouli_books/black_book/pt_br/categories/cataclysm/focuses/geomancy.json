@@ -1,6 +1,6 @@
 {
-  "name": "Geomancy",
-  "description": "More power over the earth.",
+  "name": "Geomancia",
+  "description": "Mais poder sobre a terra.",
   "icon": "goety_cataclysm:desert_crush_focus",
   "parent": "goety:cataclysm/focuses"
 }

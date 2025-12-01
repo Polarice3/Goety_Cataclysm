@@ -156,5 +156,7 @@
   "item.goety_cataclysm.draugr_necromancer_spawn_egg": "ドラウグルネクロマンサーのスポーンエッグ",
   "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "ドラウグルネクロマンサーの従者のスポーンエッグ",
   "entity.goety_cataclysm.zombie_amethyst_crab": "ゾンビアメジストガニ",
-  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "ゾンビアメジストガニのスポーンエッグ"
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "ゾンビアメジストガニのスポーンエッグ",
+  "item.goety_cataclysm.earth_shake_focus": "地球振動フォーカス",
+  "item.goety_cataclysm.earth_shake_focus.info": "術者の周囲に地震を発生させ、当たった敵にダメージを与えます。"
 }

@@ -1,11 +1,11 @@
 {
-  "name": "Storm Serpent Focus",
+  "name": "Foco Serpentes da Tempestade",
   "icon": "goety_cataclysm:storm_serpent_focus",
   "category": "goety:cataclysm/focuses/storm",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell calls upon phantasmal serpents to lunge at your foes and explode in a stormy tempest, making them vulnerable to other lightning attacks."
+      "text": "O feitiço invoca serpentes fantasmagóricas da pura tempestade para investir contra seus inimigos e explodir em uma tempestade tempestuosa, tornando-os vulneráveis a outros ataques de relâmpago."
     },
     {
       "type": "goety:ritual",

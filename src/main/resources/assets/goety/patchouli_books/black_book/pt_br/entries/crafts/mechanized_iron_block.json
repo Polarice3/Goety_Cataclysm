@@ -1,11 +1,11 @@
 {
-  "name": "Mechanized Iron Block",
+  "name": "Bloco de Ferro Mecanizado",
   "icon": "goety_cataclysm:mechanized_iron_block",
   "category": "goety:cataclysm/crafts",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The machines of the Ancient Factory appear to be made out of primarily Iron and Redstone, with the Harbinger having high amounts of Witherite. While Witherite remains out of your reach, the metal that makes up the rest of the machines is not."
+      "text": "As máquinas da Fábrica Antiga parecem ser feitas principalmente de Ferro e Redstone, com o Wither Robô-Mecânico tendo altas quantidades de Witherita. Embora a Witherita permaneça fora do seu alcance, o metal que compõe o resto das máquinas não está."
     },
     {
       "type": "patchouli:crafting",

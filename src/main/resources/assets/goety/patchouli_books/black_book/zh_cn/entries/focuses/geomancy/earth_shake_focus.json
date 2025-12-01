@@ -1,0 +1,18 @@
+{
+  "name": "地球震动水晶",
+  "icon": "goety_cataclysm:earth_shake_focus",
+  "category": "goety:cataclysm/focuses/geomancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "召唤微小的冲击波从施法者的脚下射出，对沿途的敌人造成伤害。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/earth_shake_focus"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:earth_shake_focus": 1
+  }
+}

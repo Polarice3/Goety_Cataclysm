@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A powerful creature from the Sunken City, possibly given life by the Deeplings through means you've managed to replicate."
+      "text": "Uma criatura poderosa da Cidade Submersa, possivelmente dada vida pelos Ondadores através de meios que você conseguiu replicar."
     },
     {
       "type": "patchouli:entity",
@@ -16,11 +16,11 @@
     {
       "type": "multiblock",
       "multiblock_id": "goety_cataclysm:coralssus",
-      "text": "Right click the center Coral with an Animation Core."
+      "text": "Clique com o botão direito no Coral central com um Núcleo de Animação."
     },
     {
       "type": "patchouli:text",
-      "text": "Only Fire, Horn and Tube Coral blocks can create a Coralssus with all the coral blocks being the same type. They can be healed by right-clicking on them with coral of their type."
+      "text": "Apenas blocos de Coral de Fogo, Chifre e Tubo podem criar um Coralssus com todos os blocos de coral sendo do mesmo tipo. Eles podem ser curados clicando neles com coral de seu tipo."
     }
   ]
 }

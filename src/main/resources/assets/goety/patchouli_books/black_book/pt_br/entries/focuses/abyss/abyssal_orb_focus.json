@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Orb Focus",
+  "name": "Foco da Orbe Abissal",
   "icon": "goety_cataclysm:abyssal_orb_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "These orbs of abyssal energies will seek out any nearby targets, or target if the spell is cast while looking at a valid entity, and explode upon them, granting them Abyssal Fear effect."
+      "text": "Estas orbes de energias abissais procurarão quaisquer alvos próximos, ou mirarão se o feitiço for conjurado enquanto se olha para uma entidade válida, e explodirão sobre eles, concedendo-lhes o efeito de Medo Abissal."
     },
     {
       "type": "goety:ritual",

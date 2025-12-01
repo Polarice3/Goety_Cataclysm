@@ -1,11 +1,11 @@
 {
-  "name": "Essences of the Abyss",
+  "name": "Essências do Abismo",
   "icon": "goety_cataclysm:abyss_essence",
   "category": "goety:cataclysm/crafts",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Dropped by the Leviathan, these essences signifies your victory over the great beast, granting you authority over her subjects."
+      "text": "Dropadas pelo Leviatã, essas essências significam sua vitória sobre a grande besta, concedendo-lhe autoridade sobre seus súditos."
     },
     {
       "type": "patchouli:crafting",

@@ -1,18 +1,13 @@
 package com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan;
 
-import com.github.L_Ender.cataclysm.entity.partentity.Cm_Part_Entity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.syncher.EntityDataAccessor;
+import com.Polarice3.goety_cataclysm.common.entities.ally.OwnedCMPart;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.gameevent.GameEvent;
 
-public class LeviathanServantPart extends Cm_Part_Entity<LeviathanServant> {
+public class LeviathanServantPart extends OwnedCMPart<LeviathanServant> {
 
     private final EntityDimensions size;
     public float scale = 1;
@@ -28,27 +23,9 @@ public class LeviathanServantPart extends Cm_Part_Entity<LeviathanServant> {
         this.size = size;
     }
 
-    @Override
-    protected void defineSynchedData() {
-    }
-
-    @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
-
-    }
-
     public MobType getMobType() {
         return MobType.WATER;
     }
-
-    public boolean canBeCollidedWith() {
-        return false;
-    }
-
-    public boolean isPickable() {
-        return this.getParent().isAlive();
-    }
-
 
     @Override
     protected void setSize(EntityDimensions size) {
@@ -62,43 +39,6 @@ public class LeviathanServantPart extends Cm_Part_Entity<LeviathanServant> {
             this.gameEvent(GameEvent.ENTITY_DAMAGE);
         }
         return flag;
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-
-    }
-
-    @Override
-    public boolean is(Entity entity) {
-        return this == entity || this.getParent() == entity;
-    }
-
-    @Override
-    protected void setRot(float yaw, float pitch) {
-        this.setYRot(yaw % 360.0F);
-        this.setXRot(pitch % 360.0F);
-    }
-
-    @Override
-    protected boolean canRide(Entity entityIn) {
-        return false;
-    }
-
-    @Override
-    public boolean canChangeDimensions() {
-        return false;
-    }
-
-
-
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        throw new UnsupportedOperationException();
     }
 
     @Override

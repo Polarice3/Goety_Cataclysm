@@ -1,11 +1,11 @@
 {
-  "name": "Abyssal Beam Focus",
+  "name": "Foco do Feixe Abissal",
   "icon": "goety_cataclysm:abyssal_beam_focus",
   "category": "goety:cataclysm/focuses/abyss",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell replicates a Deepling Warlock's ability to call forth beams of abyssal energies through a portal."
+      "text": "O feitiço replica a habilidade de um Ondador Feiticeiro de invocar feixes de energias abissais através de um portal."
     },
     {
       "type": "goety:ritual",

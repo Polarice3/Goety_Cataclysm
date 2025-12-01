@@ -1,11 +1,11 @@
 {
-  "name": "Lightning Spear Focus",
+  "name": "Foco da Lança de Relâmpago",
   "icon": "goety_cataclysm:lightning_spear_focus",
   "category": "goety:cataclysm/focuses/storm",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell shoots a spear of lightning that leaves a small storm cloud, that damages enemies standing on them, where they hit. Casting with an Storm Staff shoots two spears instead."
+      "text": "O feitiço lança uma lança de relâmpago que deixa uma pequena nuvem de tempestade, que causa dano a inimigos que estiverem sobre ela, onde atingir. Conjurar com um Cajado da Tempestade lança duas lanças em vez de uma."
     },
     {
       "type": "goety:ritual",

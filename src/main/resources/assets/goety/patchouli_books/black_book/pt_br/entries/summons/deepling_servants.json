@@ -1,11 +1,11 @@
 {
-  "name": "Deepling Servants",
+  "name": "Servos Ondadores",
   "icon": "cataclysm:lionfish",
   "category": "goety:cataclysm/summons",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Followers of the Leviathan, odd creatures that resembles the denizens of the End, yet are incapable of teleportation and thrives within water."
+      "text": "Seguidores do Leviatã, criaturas estranhas que se assemelham aos habitantes do End, mas são incapazes de teletransporte e prosperam dentro dos oceanos."
     },
     {
       "type": "patchouli:entity",
@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "An average Deepling, capable of either throwing their coral spears from long distances, or using it in melee. They can be given a Coral Spear if required."
+      "text": "Um Ondador comum, capaz de lançar suas lanças de coral de longas distâncias, ou usá-las no combate corpo a corpo. Eles podem receber uma Lança de Coral se necessário."
     },
     {
       "type": "patchouli:entity",
@@ -31,11 +31,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Deeplings that wield fishing rods and have a Lionfish leashed to themselves. Their coloration and ability to poison their foes makes one wonder how the two relate to each other."
+      "text": "Ondadores que empunham varas de pescar e têm um Peixe-Leão preso a si mesmos. Sua coloração e capacidade de envenenar seus inimigos fazem alguém se perguntar como os dois se relacionam entre si."
     },
     {
       "type": "patchouli:text",
-      "text": "Using Shears on their Lionfish will unleashed them, whereupon they will follow and obey you. If bereft of a Lionfish, the angler will catch another after 10 minutes, by default, if they're in water and still have their fishing rods. Catching another will slowly dwindle their rod's durability, though they can be given another."
+      "text": "Usar Tesouras em seus Peixes-Leões os soltaram, onde então eles seguirão e obedecerão a você. Se privado de um Peixe-Leão, o pescador pegará outro após 10 minutos, por padrão, se estiverem na água e ainda tiverem suas varas de pescar. Pegar outro diminuirá lentamente a durabilidade de sua vara, embora possam receber outra."
     },
     {
       "type": "patchouli:entity",
@@ -48,7 +48,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Powerful Deeplings that possesses more finesse and strength than their regular counterparts. They can be given a Coral Bardiche if required"
+      "text": "Ondadores poderosos que possuem mais fineza e força do que suas contrapartes regulares. Eles podem receber uma Bardiche de Coral se necessário"
     },
     {
       "type": "patchouli:entity",
@@ -61,7 +61,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Even with them under your command, you've no clue whether these bringers of blinding lights worship the Leviathan or whatever being that powers the Altar of Amethyst. They can be given an Athame if required"
+      "text": "Mesmo com eles sob seu comando, você não tem ideia se estes portadores de luzes cegantes adoram o Leviatã ou qualquer ser que alimenta o Altar de Ametista. Eles podem receber um Athame se necessário"
     },
     {
       "type": "patchouli:entity",
@@ -74,11 +74,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Unlike their Priest cousins, these Deeplings tap into the power of the Leviathan to summon forth beams of abyssal energies from the ground. It doesn't have a fascination with fungi or tiny wart-full arachnids though. They can be given an Athame if required"
+      "text": "Ao contrário de seus primos Sacerdotes, estes Ondadores aproveitam o poder do Leviatã para invocar feixes de energias abissais do chão. Ele não tem uma fascinação por fungos ou pequenas aranhas cheias de verrugas. Eles podem receber um Athame se necessário"
     },
     {
       "type": "patchouli:text",
-      "text": "All Deepling variants can be healed by either donning an Abyss Robe, or feeding them fish."
+      "text": "Todas as variantes dos ondadores podem ser curadas vestindo uma Túnica do Abismo, ou alimentando-os com peixes."
     }
   ]
 }

@@ -1,15 +1,15 @@
 {
-  "name": "Draugr Servants",
+  "name": "Servos Draugr",
   "icon": "cataclysm:draugr_head",
   "category": "goety:cataclysm/summons",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Cursed jailers of Maledictus, so devoted to guard its prison, yet will do nothing, not even retaliate, when its sole prisoner escapes and wreak havoc."
+      "text": "Carcereiros amaldiçoados de Maledictus, tão devotados a guardar sua prisão, mas não farão nada, nem mesmo retaliar, quando seu único prisioneiro escapa e causa estragos."
     },
     {
       "type": "patchouli:text",
-      "text": "These Draugrs are either corpses of warriors animated and cursed in a similar fashion, or called and beguiled from the prison of Maledictus itself, using their heads as the receptacle to summon and bind their kind to your service."
+      "text": "Estes Draugrs são ou cadáveres de guerreiros animados e amaldiçoados de maneira similar, ou chamados e enfeitiçados da própria prisão de Maledictus, usando suas cabeças como receptáculo para invocar e prender sua espécie ao seu serviço."
     },
     {
       "type": "patchouli:entity",
@@ -49,7 +49,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "All Draugr types can be healed by either donning a Necro Cape, or feeding them bones or rotten flesh."
+      "text": "Todos os tipos de Draugr podem ser curados vestindo uma Capa Necro, ou alimentando-os com ossos ou carne podre."
     }
   ]
 }

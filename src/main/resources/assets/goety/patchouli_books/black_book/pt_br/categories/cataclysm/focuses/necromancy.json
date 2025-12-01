@@ -1,6 +1,6 @@
 {
-  "name": "Necromancy",
-  "description": "More power over the dead.",
+  "name": "Necromancia",
+  "description": "Mais poder sobre os mortos.",
   "icon": "goety_cataclysm:desert_raid_focus",
   "parent": "goety:cataclysm/focuses"
 }

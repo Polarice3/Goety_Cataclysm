@@ -1,12 +1,12 @@
 {
-  "name": "Ender Golem",
+  "name": "Golem do End",
   "icon": "goety_cataclysm:void_mold_block",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_warred_scroll",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A variant of the mighty Redstone Golem, but rather than being made out of redstone, this golem utilizes the very void of the End."
+      "text": "Uma variante do poderoso Golem de Redstone, mas em vez de ser feito de redstone, este golem utiliza o próprio vazio do End."
     },
     {
       "type": "patchouli:entity",
@@ -16,16 +16,16 @@
     {
       "type": "multiblock",
       "multiblock_id": "goety_cataclysm:ender_golem",
-      "text": "Right click the center Void Stone with an Animation Core."
+      "text": "Clique com o botão direito na Pedra do Vazio central com um Núcleo de Animação."
     },
     {
       "type": "patchouli:text",
-      "text": "The Obsidian can be substituted with Obsidian Bricks. The resulting Golem proves far superior to the Iron Golems as not only is it stronger, but it can be commanded to follow, wander or stay in position through a wand/staff. They can be repaired by right-clicking on them with Void Stone or Void Runes."
+      "text": "A Obsidiana pode ser substituída por Tijolos de Obsidiana. O Golem resultante prova ser muito superior aos Golems de Ferro, pois não só é mais forte, mas pode ser comandado para seguir, vagar ou ficar em posição através de uma varinha/cajado. Eles podem ser reparados clicando neles com Pedra do Vazio ou Runas do Vazio."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:void_mold_block",
-      "text": "Void Crystal and Obsidian are used to create a powerful mold."
+      "text": "Cristal do Vácuo e Obsidiana são usados para criar um molde poderoso."
     },
     {
       "type": "patchouli:crafting",
@@ -39,7 +39,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "goety_cataclysm:ender_golem_skull",
-      "text": "Should the Golem fell from battle or command, they will drop their 'skull'. The Skull can be used to revive the Golem in a cheaper manner. However, the Skull remembers it's original creator and master and the revived Golem will only follow their commands."
+      "text": "Se o Golem cair em batalha ou por comando, eles deixarão cair seu 'Crânio'. O Crânio pode ser usada para reviver o Golem da maneira mais barata. No entanto, o Crânio lembra do seu Criador/Mestre original e o Golem revivido só seguirá seus comandos."
     },
     {
       "type": "multiblock",

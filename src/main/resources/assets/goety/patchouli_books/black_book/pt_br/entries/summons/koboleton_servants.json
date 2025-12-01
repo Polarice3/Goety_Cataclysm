@@ -1,24 +1,32 @@
 {
-  "name": "Koboleton Servant",
-  "icon": "cataclysm:koboleton_bone",
-  "category": "goety:cataclysm/summons",
+  "name": "Cobóleto Gladiador",
+  "icon": "cataclysm:kobolediator_skull",
+  "category": "goety:cataclysm/mutations",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Servants of the Ancient Remnant, called forth from their Cursed Pyramid to serve under your command, their disarming abilities useful only towards beings like you."
-    },
-    {
-      "type": "patchouli:entity",
-      "entity": "goety_cataclysm:koboleton_servant",
-      "scale": 0.5
+      "text": "Através de um simples Cobóleto, você conseguiu reviver um poderoso Gladiador e tê-lo servindo sob seu comando."
     },
     {
       "type": "goety:ritual",
-      "recipe": "goety_cataclysm:thrall/summon_koboleton_servant_thrall"
+      "recipe": "goety_cataclysm:convert_koboleton_to_kobolediator_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:kobolediator",
+      "scale": 0.5
     },
     {
       "type": "patchouli:text",
-      "text": "Koboletons can be healed by feeding it bones, and can passively heal if their owner dons a Necro Cape."
+      "text": "O Cobóleto Gladiador pode ser curado alimentando-o com ossos, e pode curar passivamente se seu usuário vestir uma Capa Necro."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:warrior_spirit",
+      "text": "Quando abatidos, estes antigos guerreiros deixarão cair seu espírito que pode possuir um Cobóleto para retornar dos mortos."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:warrior_spirit": 4
+  }
 }
