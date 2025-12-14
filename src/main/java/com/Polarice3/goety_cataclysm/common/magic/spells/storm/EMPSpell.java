@@ -56,7 +56,7 @@ public class EMPSpell extends Spell {
         int potency = spellStat.getPotency();
         double radius = spellStat.getRadius();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster);
         }
         worldIn.sendParticles(ModParticle.EM_PULSE.get(), caster.getX(), caster.getY() + 0.5F, caster.getZ(), 1, 0.0, 0.0, 0.0, 0);

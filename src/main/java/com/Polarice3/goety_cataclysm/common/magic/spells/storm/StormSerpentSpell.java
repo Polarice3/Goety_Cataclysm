@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.StormSerpent;
@@ -65,10 +64,10 @@ public class StormSerpentSpell extends Spell {
     public void useSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, int castTime, SpellStat spellStat) {
         int potency = spellStat.getPotency();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
         }
         LivingEntity target = this.getTarget(caster);
-        float multiply = SpellConfig.SpellDamageMultiplier.get();
+        float multiply = WandUtil.damageMultiply();
         float damage = (float) (GCSpellConfig.StormSerpentDamage.get() * multiply);
         damage += potency;
         if (castTime < 20 && castTime > 1) {

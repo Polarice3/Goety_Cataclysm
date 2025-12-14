@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -64,12 +63,12 @@ public class LightningSpearSpell extends Spell {
         float velocity = spellStat.getVelocity();
         double radius = spellStat.getRadius();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 10.0F;
             radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster);
         }
         Vec3 vector3d = caster.getLookAngle();
-        float multiply = SpellConfig.SpellDamageMultiplier.get();
+        float multiply = WandUtil.damageMultiply();
         float damage = (float) (GCSpellConfig.LightningSpearDamage.get() * multiply);
         float areaDamage = (float) (GCSpellConfig.LightningSpearAreaDamage.get() * multiply);
         float yRot = (float)(Mth.atan2(vector3d.z, vector3d.x) * (180F / Math.PI)) + 90.0F;

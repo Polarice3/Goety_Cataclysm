@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "goety_cataclysm:netherite_monstrosity",
+    "goety_cataclysm:ancient_remnant",
+    "goety_cataclysm:leviathan",
+    "goety_cataclysm:aptrgangr",
+    "goety_cataclysm:clawdian",
+    "goety_cataclysm:coralssus",
+    "goety_cataclysm:coral_golem",
+    "goety_cataclysm:ender_golem",
+    "goety_cataclysm:hippocamtus",
+    "goety_cataclysm:ignited_berserker",
+    "goety_cataclysm:ignited_revenant",
+    "goety_cataclysm:kobolediator",
+    "goety_cataclysm:the_prowler",
+    "goety_cataclysm:wadjet",
+    "goety_cataclysm:zombie_amethyst_crab"
+  ]
+}

@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -67,7 +66,7 @@ public class EarthShakeSpell extends Spell {
         int potency = spellStat.getPotency();
         float velocity = spellStat.getVelocity();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 3.0F;
         }
         int quakeCount = 16;
@@ -78,7 +77,7 @@ public class EarthShakeSpell extends Spell {
         float angle = 360.0F / quakeCount;
         for (int i = 0; i < quakeCount; i++) {
             EarthQuake_Entity peq = new EarthQuake_Entity(worldIn, caster);
-            float damage = (float) (GCSpellConfig.EarthShakeDamage.get() * SpellConfig.SpellDamageMultiplier.get());
+            float damage = (float) (GCSpellConfig.EarthShakeDamage.get() * WandUtil.damageMultiply());
             peq.setDamage(damage + potency);
             peq.shootFromRotation(caster, 0, angle * i, 0.0F, velocity, 0.0F);
             peq.setPos(caster.getX(), caster.getY(), caster.getZ());

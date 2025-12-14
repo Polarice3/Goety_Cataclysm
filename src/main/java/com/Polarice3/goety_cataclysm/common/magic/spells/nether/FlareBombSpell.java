@@ -64,7 +64,7 @@ public class FlareBombSpell extends Spell {
         int potency = spellStat.getPotency();
         float velocity = spellStat.getVelocity();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += (float)WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 3.0F;
         }
         int i1 = this.rightStaff(staff) ? 5 : 1;

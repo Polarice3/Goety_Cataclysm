@@ -1,7 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities.util;
 
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.init.ModEntities;
@@ -237,7 +237,7 @@ public class AbyssMark extends Entity {
         } while(blockpos.getY() >= Mth.floor(minY) - 1);
 
         if (flag) {
-            caster.level().addFreshEntity(new AbyssBlastPortal(caster.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (GCSpellConfig.AbyssalBeamDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + potency, GCSpellConfig.AbyssalBeamHPDamage.get().floatValue(), caster));
+            caster.level().addFreshEntity(new AbyssBlastPortal(caster.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (GCSpellConfig.AbyssalBeamDamage.get().floatValue() * WandUtil.damageMultiply()) + potency, GCSpellConfig.AbyssalBeamHPDamage.get().floatValue(), caster));
         }
 
     }

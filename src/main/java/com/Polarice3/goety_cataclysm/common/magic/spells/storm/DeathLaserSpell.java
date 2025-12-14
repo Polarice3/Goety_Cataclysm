@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MathHelper;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
@@ -57,11 +56,11 @@ public class DeathLaserSpell extends Spell {
 
     @Override
     public void SpellResult(ServerLevel worldIn, LivingEntity caster, ItemStack staff, SpellStat spellStat) {
-        float damage = GCSpellConfig.DeathLaserDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get();
+        float damage = GCSpellConfig.DeathLaserDamage.get().floatValue() * WandUtil.damageMultiply();
         int potency = spellStat.getPotency();
         int duration = spellStat.getDuration();
         if (WandUtil.enchantedFocus(caster)){
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             duration += WandUtil.getLevels(ModEnchantments.DURATION.get(), caster);
         }
 

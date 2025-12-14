@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#goety_cataclysm:draugr_servants",
+    "goety_cataclysm:koboleton_servant",
+    "goety_cataclysm:kobolediator",
+    "goety_cataclysm:wadjet",
+    "goety_cataclysm:ancient_remnant",
+    "goety_cataclysm:ignited_berserker",
+    "goety_cataclysm:ignited_revenant"
+  ]
+}

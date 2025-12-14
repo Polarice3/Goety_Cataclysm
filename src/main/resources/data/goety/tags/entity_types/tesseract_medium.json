@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "__comment": "ownable entities that takes up 4 spaces in Esoteric Tesseracts",
+  "values": [
+    "goety_cataclysm:clawdian",
+    "goety_cataclysm:coralssus",
+    "goety_cataclysm:ender_golem",
+    "goety_cataclysm:kobolediator",
+    "goety_cataclysm:the_prowler",
+    "goety_cataclysm:wadjet",
+    "goety_cataclysm:zombie_amethyst_crab"
+  ]
+}

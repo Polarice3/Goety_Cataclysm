@@ -79,7 +79,7 @@ public class ThunderRageSpell extends Spell {
         float velocity = spellStat.getVelocity();
         double radius = spellStat.getRadius();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 10.0F;
             radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster);
         }
@@ -150,7 +150,8 @@ public class ThunderRageSpell extends Spell {
 
                 float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
 
-                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, caster.level(), GCSpellConfig.WaterSpearDamage.get().floatValue() + potency);
+                float waterDamage = GCSpellConfig.WaterSpearDamage.get().floatValue() * WandUtil.damageMultiply();
+                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, caster.level(), waterDamage + potency);
                 water.accelerationPower += velocity;
                 water.setYRot(yRot);
                 water.setXRot(xRot);
@@ -159,7 +160,8 @@ public class ThunderRageSpell extends Spell {
 
                 worldIn.addFreshEntity(water);
 
-                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vec3, caster.level(), GCSpellConfig.LightningSpearDamage.get().floatValue() + potency);
+                float lightningDamage = GCSpellConfig.LightningSpearDamage.get().floatValue() * WandUtil.damageMultiply();
+                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vec3, caster.level(), lightningDamage + potency);
                 lightning.accelerationPower += velocity;
                 lightning.setYRot(yRot);
                 lightning.setXRot(xRot);
@@ -241,7 +243,7 @@ public class ThunderRageSpell extends Spell {
     public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, ItemStack focus, int castTime, SpellStat spellStat) {
         if (castTime >= 115){
             if (caster instanceof Player player) {
-                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown());
+                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown(player));
                 SEHelper.sendSEUpdatePacket(player);
             }
         }

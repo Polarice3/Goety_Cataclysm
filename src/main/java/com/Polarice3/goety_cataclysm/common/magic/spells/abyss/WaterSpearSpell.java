@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -63,11 +62,11 @@ public class WaterSpearSpell extends Spell {
         int potency = spellStat.getPotency();
         float velocity = spellStat.getVelocity();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 10.0F;
         }
         Vec3 vector3d = caster.getLookAngle();
-        float damage = (float) (GCSpellConfig.WaterSpearDamage.get() * SpellConfig.SpellDamageMultiplier.get());
+        float damage = (float) (GCSpellConfig.WaterSpearDamage.get() * WandUtil.damageMultiply());
 
         float yRot = (float)(Mth.atan2(vector3d.z, vector3d.x) * (180F / Math.PI)) + 90.0F;
         float xRot = (float)(-(Mth.atan2(vector3d.y, Math.sqrt(vector3d.x * vector3d.x + vector3d.z * vector3d.z)) * (180F / Math.PI)));

@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.EverChargeSpell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MathHelper;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.WandUtil;
@@ -91,7 +90,7 @@ public class AshenBreathSpell extends EverChargeSpell {
         int potency = spellStat.getPotency();
         int range = spellStat.getRange();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             range += WandUtil.getLevels(ModEnchantments.RANGE.get(), caster);
         }
 
@@ -160,7 +159,7 @@ public class AshenBreathSpell extends EverChargeSpell {
             if (inRange && yawCheck && pitchCheck || CloseCheck) {
                 if (caster.tickCount % 3 == 0) {
                     if (!MobUtil.areAllies(caster, entityHit)) {
-                        float damage = (float) (GCSpellConfig.AshenBreathDamage.get() * SpellConfig.SpellDamageMultiplier.get());
+                        float damage = (float) (GCSpellConfig.AshenBreathDamage.get() * WandUtil.damageMultiply());
                         boolean flag = entityHit.hurt(caster.damageSources().indirectMagic(caster, caster), damage + potency);
                         if (flag) {
                             MobEffectInstance effectinstance = new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, false, false, true);

@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -67,7 +66,7 @@ public class DesertCrushSpell extends Spell {
         int potency = spellStat.getPotency();
         int range = spellStat.getRange();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             range += WandUtil.getLevels(ModEnchantments.RANGE.get(), caster);
         }
 
@@ -130,6 +129,6 @@ public class DesertCrushSpell extends Spell {
             blockpos = blockpos.above();
         } while(blockpos.getY() < Math.min(caster.level().getMaxBuildHeight(), caster.getBlockY() + 12));
 
-        caster.level().addFreshEntity(new Ancient_Desert_Stele_Entity(caster.level(), posX, (double)blockpos.getY() + d0 - 3.0, posZ, rotation, delay, (GCSpellConfig.DesertCrushDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + potency, caster));
+        caster.level().addFreshEntity(new Ancient_Desert_Stele_Entity(caster.level(), posX, (double)blockpos.getY() + d0 - 3.0, posZ, rotation, delay, (GCSpellConfig.DesertCrushDamage.get().floatValue() * WandUtil.damageMultiply()) + potency, caster));
     }
 }

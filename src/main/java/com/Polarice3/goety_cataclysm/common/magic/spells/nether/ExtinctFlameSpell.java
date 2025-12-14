@@ -73,7 +73,7 @@ public class ExtinctFlameSpell extends Spell {
         int potency = spellStat.getPotency();
         float radius = (float) spellStat.getRadius();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             radius += (float)WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster) / 2.0F;
         }
         switch (worldIn.random.nextInt(5)) {

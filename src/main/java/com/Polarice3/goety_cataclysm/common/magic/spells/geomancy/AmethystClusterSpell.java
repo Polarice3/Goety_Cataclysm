@@ -52,7 +52,7 @@ public class AmethystClusterSpell extends Spell {
         int potency = spellStat.getPotency();
         float velocity = spellStat.getVelocity();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             velocity += WandUtil.getLevels(ModEnchantments.VELOCITY.get(), caster) / 10.0F;
         }
         int amount = 16;
@@ -70,7 +70,8 @@ public class AmethystClusterSpell extends Spell {
             double vy = 0 + caster.getRandom().nextFloat() * 0.3F;
             double vz = Mth.sin(throwAngle);
             double v3 = Mth.sqrt((float) (vx * vx + vz * vz));
-            Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), worldIn, caster, GCSpellConfig.AmethystClusterDamage.get().floatValue() + potency);
+            float damage = GCSpellConfig.AmethystClusterDamage.get().floatValue() * WandUtil.damageMultiply();
+            Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), worldIn, caster, damage + potency);
 
             projectile.moveTo(sx, sy, sz, i * 11.25F, caster.getXRot());
             float speed = 0.8F + velocity;

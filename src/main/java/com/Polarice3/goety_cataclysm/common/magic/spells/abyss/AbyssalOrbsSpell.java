@@ -63,7 +63,7 @@ public class AbyssalOrbsSpell extends Spell {
         int potency = spellStat.getPotency();
         float radius = (float) spellStat.getRadius();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             radius += WandUtil.getLevels(ModEnchantments.RADIUS.get(), caster) / 2.0F;
         }
 
@@ -98,10 +98,11 @@ public class AbyssalOrbsSpell extends Spell {
 
     public void shootAbyssOrb(LivingEntity caster, double xMotion, double yMotion, double zMotion, int potency, float radius) {
         AbyssOrb fireball;
+        float damage = GCSpellConfig.AbyssalOrbsDamage.get().floatValue() * WandUtil.damageMultiply();
         if (this.getTarget(caster) != null) {
-            fireball = new AbyssOrb(caster, xMotion, yMotion, zMotion, caster.level(), GCSpellConfig.AbyssalOrbsDamage.get().floatValue() + potency, this.getTarget(caster));
+            fireball = new AbyssOrb(caster, xMotion, yMotion, zMotion, caster.level(), damage + potency, this.getTarget(caster));
         } else {
-            fireball = new AbyssOrb(caster, xMotion, yMotion, zMotion, caster.level(), GCSpellConfig.AbyssalOrbsDamage.get().floatValue() + potency, null);
+            fireball = new AbyssOrb(caster, xMotion, yMotion, zMotion, caster.level(), damage + potency, null);
         }
         fireball.setRadius(radius);
         fireball.setPos(fireball.getX(), caster.getEyeY(), fireball.getZ());

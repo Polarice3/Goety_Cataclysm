@@ -1,7 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.AncientRemnantServant;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
@@ -110,7 +110,7 @@ public class Sandstorm extends Entity {
     private void damage(LivingEntity Hitentity) {
         LivingEntity livingentity = this.getCaster();
         if (Hitentity.isAlive() && !Hitentity.isInvulnerable() && Hitentity != livingentity) {
-            float damage = (GCSpellConfig.SandstormDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + this.getExtraDamage();
+            float damage = (GCSpellConfig.SandstormDamage.get().floatValue() * WandUtil.damageMultiply()) + this.getExtraDamage();
             if (this.tickCount % 3 == 0) {
                 if (livingentity == null) {
                     boolean flag =  Hitentity.hurt(this.damageSources().magic(), damage);

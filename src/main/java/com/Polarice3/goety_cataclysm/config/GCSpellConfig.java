@@ -43,6 +43,9 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> ExtinctFlameCoolDown;
     public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameRadius;
+    public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameDamage;
+    public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameSoulDamage;
+    public static final ForgeConfigSpec.ConfigValue<Double> ExtinctFlameAbyssDamage;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ExtinctFlameGriefing;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> CindariaCost;
@@ -243,6 +246,12 @@ public class GCSpellConfig {
                     .defineInRange("extinctFlameCoolDown", 300, 0, Integer.MAX_VALUE);
             ExtinctFlameRadius = BUILDER.comment("Extinct Flame's Fireballs default explosion radius, Default: 1.0")
                     .defineInRange("extinctFlameRadius", 1.0, 0, Double.MAX_VALUE);
+            ExtinctFlameDamage = BUILDER.comment("How much base damage regular Extinct Flame Fireballs deals, Default: 6.0")
+                    .defineInRange("extinctFlameDamage", 6.0, 1.0, Double.MAX_VALUE);
+            ExtinctFlameSoulDamage = BUILDER.comment("How much base damage Extinct Flame Soul Fireballs deals, Default: 8.0")
+                    .defineInRange("extinctFlameSoulDamage", 8.0, 1.0, Double.MAX_VALUE);
+            ExtinctFlameAbyssDamage = BUILDER.comment("How much base damage Extinct Flame Abyss Fireballs deals, Default: 10.0")
+                    .defineInRange("extinctFlameAbyssDamage", 10.0, 1.0, Double.MAX_VALUE);
             ExtinctFlameGriefing = BUILDER.comment("Whether Extinct Flame Spell can set fires, Default: false")
                     .define("extinctFlameGriefing", false);
             BUILDER.pop();

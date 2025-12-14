@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssMark;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
@@ -59,7 +58,7 @@ public class AbyssalBeamSpell extends Spell {
         int potency = spellStat.getPotency();
         int range = spellStat.getRange();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             range += WandUtil.getLevels(ModEnchantments.RANGE.get(), caster);
         }
 
@@ -70,7 +69,7 @@ public class AbyssalBeamSpell extends Spell {
             location = caster.position();
         }
 
-        AbyssMark abyssMark = new AbyssMark(worldIn, location, GCSpellConfig.AbyssalBeamDuration.get(), (GCSpellConfig.AbyssalBeamDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + potency, GCSpellConfig.AbyssalBeamHPDamage.get().floatValue(), caster.getUUID(), target, this.rightStaff(staff), potency);
+        AbyssMark abyssMark = new AbyssMark(worldIn, location, GCSpellConfig.AbyssalBeamDuration.get(), (GCSpellConfig.AbyssalBeamDamage.get().floatValue() * WandUtil.damageMultiply()) + potency, GCSpellConfig.AbyssalBeamHPDamage.get().floatValue(), caster.getUUID(), target, this.rightStaff(staff), potency);
         worldIn.addFreshEntity(abyssMark);
     }
 

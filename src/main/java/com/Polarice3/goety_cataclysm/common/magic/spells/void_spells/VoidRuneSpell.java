@@ -4,7 +4,6 @@ import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
@@ -66,7 +65,7 @@ public class VoidRuneSpell extends Spell {
         int potency = spellStat.getPotency();
         int range = spellStat.getRange();
         if (WandUtil.enchantedFocus(caster)) {
-            potency += WandUtil.getLevels(ModEnchantments.POTENCY.get(), caster);
+            potency += WandUtil.getPotencyLevel(caster);
             range += WandUtil.getLevels(ModEnchantments.RANGE.get(), caster);
         }
 
@@ -149,7 +148,7 @@ public class VoidRuneSpell extends Spell {
         } while (blockpos.getY() >= lowestYCheck);
 
         if (flag) {
-            caster.level().addFreshEntity(new Void_Rune_Entity(caster.level(), x, (double) blockpos.getY() + d0, z, yRot, warmupDelayTicks, (GCSpellConfig.VoidRuneDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + potency, caster));
+            caster.level().addFreshEntity(new Void_Rune_Entity(caster.level(), x, (double) blockpos.getY() + d0, z, yRot, warmupDelayTicks, (GCSpellConfig.VoidRuneDamage.get().floatValue() * WandUtil.damageMultiply()) + potency, caster));
         }
     }
 
@@ -178,7 +177,7 @@ public class VoidRuneSpell extends Spell {
         } while(blockpos.getY() >= Mth.floor(minY) - 1);
 
         if (flag) {
-            caster.level().addFreshEntity(new Void_Rune_Entity(caster.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (GCSpellConfig.VoidRuneDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + potency, caster));
+            caster.level().addFreshEntity(new Void_Rune_Entity(caster.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (GCSpellConfig.VoidRuneDamage.get().floatValue() * WandUtil.damageMultiply()) + potency, caster));
         }
 
     }

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "__comment": "ownable entities that takes up 2 spaces in Esoteric Tesseracts",
+  "values": [
+    "goety_cataclysm:ignited_berserker",
+    "goety_cataclysm:ignited_revenant",
+    "goety_cataclysm:hippocamtus",
+    "goety_cataclysm:coral_golem"
+  ]
+}

@@ -15,6 +15,7 @@ import com.github.L_Ender.cataclysm.client.particle.RingParticle;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
+import com.github.L_Ender.cataclysm.entity.etc.ISemiAquatic;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.GroundPathNavigatorWide;
 import com.github.L_Ender.cataclysm.entity.etc.path.SemiAquaticPathNavigator;
@@ -68,7 +69,7 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-public class CoralssusServant extends InternalAnimationSummon {
+public class CoralssusServant extends InternalAnimationSummon implements VariantHolder<CoralssusServant.Variant>, ISemiAquatic {
     private static final EntityDataAccessor<Integer> MOISTNESS = SynchedEntityData.defineId(CoralssusServant.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(CoralssusServant.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> RIGHT = SynchedEntityData.defineId(CoralssusServant.class, EntityDataSerializers.BOOLEAN);

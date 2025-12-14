@@ -2,8 +2,8 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.api.entities.IOwned;
 import com.Polarice3.Goety.common.entities.projectiles.SpellThrowableProjectile;
-import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.client.particle.LightTrailParticle;
 import com.github.L_Ender.cataclysm.entity.projectile.Flame_Jet_Entity;
@@ -53,7 +53,7 @@ public class FlareBomb extends SpellThrowableProjectile {
         Entity entity = result.getEntity();
         if (!this.level().isClientSide && !MobUtil.areAllies(shooter, entity)) {
             boolean flag;
-            float damage = (GCSpellConfig.FlareBombDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + this.getExtraDamage();
+            float damage = (GCSpellConfig.FlareBombDamage.get().floatValue() * WandUtil.damageMultiply()) + this.getExtraDamage();
             if (shooter instanceof LivingEntity livingentity) {
                 flag = entity.hurt(this.damageSources().mobProjectile(this, livingentity), damage);
                 if (flag) {
@@ -141,7 +141,7 @@ public class FlareBomb extends SpellThrowableProjectile {
         } while(blockpos.getY() >= Mth.floor(minY) - 1);
 
         if (flag) {
-            float damage = (GCSpellConfig.FlareBombDamage.get().floatValue() * SpellConfig.SpellDamageMultiplier.get()) + this.getExtraDamage();
+            float damage = (GCSpellConfig.FlareBombDamage.get().floatValue() * WandUtil.damageMultiply()) + this.getExtraDamage();
             if (this.getOwner() != null) {
                 this.level().addFreshEntity(new Flame_Jet_Entity(this.level(), x, (double) blockpos.getY() + d0, z, rotation, delay, damage, this.getOwner()));
             } else {

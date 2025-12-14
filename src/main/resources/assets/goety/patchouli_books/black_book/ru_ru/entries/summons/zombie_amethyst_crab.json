@@ -1,0 +1,16 @@
+{
+  "name": "Зомби аметистовый краб",
+  "icon": "cataclysm:amethyst_crab_shell",
+  "category": "goety:cataclysm/summons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Аметистовые крабы встречаются довольно редко, а уж призвать и подчинить столь совершенное существо кажется сложной задачей. Но не стоит забывать, что идеальное решение для жизненных проблем - это некромантия."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:zombie_amethyst_crab",
+      "scale": 0.5
+    }
+  ]
+}

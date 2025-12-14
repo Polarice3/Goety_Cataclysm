@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "goety_cataclysm:coralssus",
+    "goety_cataclysm:coral_golem",
+    "goety_cataclysm:ender_golem",
+    "goety_cataclysm:netherite_monstrosity"
+  ]
+}

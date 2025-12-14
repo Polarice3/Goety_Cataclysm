@@ -150,5 +150,13 @@
   "item.goety_cataclysm.wadjet_spawn_egg": "Яйцо призыва Уаджита-прислужника",
   "item.goety_cataclysm.watcher_servant_spawn_egg": "Яйцо призыва наблюдателя-прислужника",
 
-  "itemGroup.goety_cataclysm": "Goety Cataclysm"
+  "itemGroup.goety_cataclysm": "Goety Cataclysm",
+
+  "entity.goety_cataclysm.draugr_necromancer": "Драугр некромант",
+  "entity.goety_cataclysm.draugr_necromancer_servant": "Драугр некромант-прислужник",
+  "item.goety_cataclysm.soul_jar_draugr": "Банка душ",
+  "item.goety_cataclysm.draugr_necromancer_spawn_egg": "Яйцо призыва драугра некроманта",
+  "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "Яйцо призыва драугра некроманта-прислужника",
+  "entity.goety_cataclysm.zombie_amethyst_crab": "Зомби аметистовый краб",
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "Яйцо призыва зомби аметистового краба"
 }

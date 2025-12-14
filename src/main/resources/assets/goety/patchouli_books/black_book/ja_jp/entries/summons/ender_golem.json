@@ -1,5 +1,5 @@
 {
-  "name": "Ender Golem",
+  "name": "エンダーゴーレム",
   "icon": "goety_cataclysm:void_mold_block",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_warred_scroll",
@@ -20,7 +20,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "黒曜石は黒曜石レンガで代用できます。その結果得られるゴーレムは鉄のゴーレムよりもはるかに優れており、より強力であるだけでなく、杖や杖を使って追従、徘徊、定位置に留まるよう命令できます。それらは、虚空石または虚空ルーンで右クリックして修復できます。"
+      "text": "黒曜石は黒曜石レンガで代用できます。その結果得られるゴーレムは鉄のゴーレムよりもはるかに優れており、より強力であるだけでなく、杖や杖を使って追従、徘徊、定位置に留まるよう命令できます。それらは、ボイドストーンまたはボイドルーンで右クリックして修復できます。"
     },
     {
       "type": "patchouli:crafting",

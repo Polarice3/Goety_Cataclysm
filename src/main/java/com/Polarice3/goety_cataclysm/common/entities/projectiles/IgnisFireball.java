@@ -1,6 +1,7 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.init.ModEffect;
@@ -103,7 +104,8 @@ public class IgnisFireball extends AbstractIgnisFireball{
             Entity entity = result.getEntity();
             boolean flag;
             if (shooter instanceof LivingEntity owner) {
-                float damage = this.isSoul() ? 8.0F : 6.0F;
+                float damage = this.isSoul() ? GCSpellConfig.ExtinctFlameSoulDamage.get().floatValue() : GCSpellConfig.ExtinctFlameDamage.get().floatValue();
+                damage *= WandUtil.damageMultiply();
                 damage += this.getExtraDamage();
                 if (entity instanceof LivingEntity livingEntity) {
                     flag = entity.hurt(damageSources().mobProjectile(this, owner), damage + (livingEntity.getMaxHealth() * 0.07F));

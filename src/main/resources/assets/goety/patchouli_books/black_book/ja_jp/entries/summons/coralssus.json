@@ -1,5 +1,5 @@
 {
-  "name": "Coralssus",
+  "name": "サンゴの怪物",
   "icon": "minecraft:horn_coral_block",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_floral_scroll",
@@ -20,7 +20,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "火、角、チューブ コーラル ブロックのみが、すべてのコーラル ブロックが同じタイプである Coralssus を作成できます。それらのタイプのサンゴで右クリックすると、それらを修復できます。"
+      "text": "ミレポラサンゴブロック、シカツノサンゴブロック、クダサンゴブロックのみが、すべてのサンゴブロックが同じタイプであるサンゴの怪物を作成できます。それらのタイプのサンゴで右クリックすると、それらを修復できます。"
     }
   ]
 }
