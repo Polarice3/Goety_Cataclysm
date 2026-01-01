@@ -131,9 +131,8 @@ public class RoyalDraugrSpell extends SummonSpell {
                     this.SummonSap(caster, summonedentity);
                     this.setTarget(caster, summonedentity);
                     if (worldIn.addFreshEntity(summonedentity)) {
-                        ColorUtil colorUtil = new ColorUtil(0xa7fc3e);
-                        ServerParticleUtil.windShockwaveParticle(worldIn, colorUtil, 0.1F, 0.1F, 0.05F, -1, summonedentity.position());
                         worldIn.sendParticles(ModParticleTypes.LICH.get(), summonedentity.getX(), summonedentity.getY(), summonedentity.getZ(), 1, 0, 0, 0, 0.0F);
+                        ServerParticleUtil.summonPowerfulUndeadParticles(worldIn, summonedentity);
                         worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.SOUL_EXPLODE.get(), this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
                         worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
                     }
@@ -162,8 +161,7 @@ public class RoyalDraugrSpell extends SummonSpell {
                     this.SummonSap(caster, summonedentity);
                     this.setTarget(caster, summonedentity);
                     if (worldIn.addFreshEntity(summonedentity)) {
-                        ColorUtil colorUtil = new ColorUtil(0x2ac9cf);
-                        ServerParticleUtil.windShockwaveParticle(worldIn, colorUtil, 0.1F, 0.1F, 0.05F, -1, summonedentity.position());
+                        this.summonParticles(worldIn, caster, staff, summonedentity);
                     }
                     this.summonAdvancement(caster, summonedentity);
                 }

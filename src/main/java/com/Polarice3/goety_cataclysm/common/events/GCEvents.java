@@ -17,6 +17,9 @@ import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
 import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
 import com.github.L_Ender.cataclysm.Cataclysm;
+import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.*;
+import com.github.L_Ender.cataclysm.entity.effect.*;
+import com.github.L_Ender.cataclysm.entity.projectile.*;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.util.CustomExplosion.IgnisExplosion;
@@ -32,10 +35,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LootingLevelEvent;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
@@ -112,6 +112,62 @@ public class GCEvents {
             }
         }
     }*/
+
+    @SubscribeEvent
+    public void onLivingAttack(LivingAttackEvent event) {
+        Entity proj = event.getSource().getDirectEntity();
+        Entity owner = null;
+        if (proj != null) {
+            if (proj instanceof Wave_Entity wave) {
+                owner = wave.getOwner();
+            } else if (proj instanceof Flame_Jet_Entity flameJet) {
+                owner = flameJet.getCaster();
+            } else if (proj instanceof Boltstrike_Entity boltstrike) {
+                owner = boltstrike.getCaster();
+            } else if (proj instanceof Axe_Blade_Entity axeBlade) {
+                owner = axeBlade.getOwner();
+            } else if (proj instanceof Lightning_Area_Effect_Entity lightningAreaEffect) {
+                owner = lightningAreaEffect.getOwner();
+            } else if (proj instanceof Death_Laser_Beam_Entity laserBeam) {
+                owner = laserBeam.caster;
+            } else if (proj instanceof Void_Rune_Entity voidRune) {
+                owner = voidRune.getCaster();
+            } else if (proj instanceof Lightning_Storm_Entity stormEntity) {
+                owner = stormEntity.getCaster();
+            } else if (proj instanceof Void_Vortex_Entity voidVortex) {
+                owner = voidVortex.getOwner();
+            } else if (proj instanceof The_Leviathan_Tongue_Entity tongue) {
+                owner = tongue.getController();
+            } else if (proj instanceof Abyss_Blast_Portal_Entity abyssBlastPortal) {
+                owner = abyssBlastPortal.getCaster();
+            } else if (proj instanceof Tidal_Tentacle_Entity entity) {
+                owner = entity.getCreatorEntity();
+            } else if (proj instanceof Abyss_Blast_Entity abyssBlast) {
+                owner = abyssBlast.caster;
+            } else if (proj instanceof Storm_Serpent_Entity stormSerpent) {
+                owner = stormSerpent.getCaster();
+            } else if (proj instanceof Abyss_Mine_Entity abyssMine) {
+                owner = abyssMine.getCaster();
+            } else if (proj instanceof Phantom_Halberd_Entity halberd) {
+                owner = halberd.getCaster();
+            } else if (proj instanceof Mini_Abyss_Blast_Entity abyssBlast) {
+                owner = abyssBlast.caster;
+            } else if (proj instanceof Wither_Smoke_Effect_Entity smokeEffect) {
+                owner = smokeEffect.getOwner();
+            } else if (proj instanceof Ashen_Breath_Entity ashenBreath) {
+                owner = ashenBreath.getCaster();
+            } else if (proj instanceof Sandstorm_Entity sandstorm) {
+                owner = sandstorm.getCaster();
+            } else if (proj instanceof Portal_Abyss_Blast_Entity abyssBlast) {
+                owner = abyssBlast.caster;
+            }
+        }
+        if (owner != null) {
+            if (MobUtil.areAllies(owner, event.getEntity())) {
+                event.setCanceled(true);
+            }
+        }
+    }
 
     @SubscribeEvent
     public void onLivingDamage(LivingDamageEvent event) {

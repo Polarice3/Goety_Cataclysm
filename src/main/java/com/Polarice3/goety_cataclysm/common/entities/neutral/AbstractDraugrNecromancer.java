@@ -285,11 +285,7 @@ public class AbstractDraugrNecromancer extends AbstractNecromancer {
                     summonedentity.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(AbstractDraugrNecromancer.this.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                     if (serverLevel.addFreshEntity(summonedentity)){
                         SoundUtil.playNecromancerSummon(summonedentity);
-                        ColorUtil colorUtil = new ColorUtil(0x2ac9cf);
-                        ServerParticleUtil.windShockwaveParticle(serverLevel, colorUtil, 0.1F, 0.1F, 0.05F, -1, summonedentity.position());
-                        for(int i2 = 0; i2 < serverLevel.getRandom().nextInt(10) + 10; ++i2) {
-                            serverLevel.sendParticles(new MagicSmokeParticle.Option(1552608, 16777215, 10 + serverLevel.getRandom().nextInt(10), 0.2F), summonedentity.getRandomX(1.5), summonedentity.getRandomY(), summonedentity.getRandomZ(1.5), 0, 0.0, 0.0, 0.0, 1.0);
-                        }
+                        ServerParticleUtil.summonUndeadParticles(serverLevel, summonedentity);
                     }
                 }
             }
