@@ -1,5 +1,5 @@
 {
-  "name": "Foco No Terremoto",
+  "name": "Foco do Terremoto",
   "icon": "goety_cataclysm:earth_shake_focus",
   "category": "goety:cataclysm/focuses/geomancy",
   "pages": [
@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/earth_shake_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/geo_staff)Cajado Geomântico$() invoca mais ondas de choque que se movem um pouco mais rápido."
     }
   ],
   "extra_recipe_mappings": {

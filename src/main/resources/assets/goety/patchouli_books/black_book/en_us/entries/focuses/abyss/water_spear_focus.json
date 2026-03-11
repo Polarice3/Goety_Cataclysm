@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell shoots a spear of high-pressured water that bounces off surfaces. Casting with an Abyss Staff shoots two spears instead."
+      "text": "The spell shoots a spear of high-pressured water that bounces off surfaces."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/water_spear_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/abyss_staff)Abyss Staff$() shoots two spears instead."
     }
   ]
 }

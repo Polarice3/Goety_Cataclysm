@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/flare_bomb_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/nether_staff)下界魔杖$()承载此聚晶施法时，一次可以发射更多燃光弹"
     }
   ],
   "extra_recipe_mappings": {

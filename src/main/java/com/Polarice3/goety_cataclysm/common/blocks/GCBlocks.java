@@ -41,6 +41,9 @@ public class GCBlocks {
     public static final RegistryObject<Block> ENDER_GOLEM_SKULL_BLOCK = register("ender_golem_skull", EnderGolemSkullBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
     public static final RegistryObject<Block> WALL_ENDER_GOLEM_SKULL_BLOCK = register("wall_ender_golem_skull", WallEnderGolemSkullBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
 
+    public static final RegistryObject<Block> NETHERITE_MONSTROSITY_HEAD_BLOCK = register("netherite_monstrosity_head", NMHeadBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
+    public static final RegistryObject<Block> WALL_NETHERITE_MONSTROSITY_HEAD_BLOCK = register("wall_netherite_monstrosity_head", WallNMHeadBlock::new, false, GoetyBlocks.LootTableType.EMPTY);
+
     public static <T extends Block> RegistryObject<T> register(final String string, final Supplier<? extends T> sup){
         return register(string, sup, true);
     }

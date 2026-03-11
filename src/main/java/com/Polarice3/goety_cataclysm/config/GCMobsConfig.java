@@ -25,6 +25,7 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
     public static final ForgeConfigSpec.ConfigValue<Boolean> AncientRemnantGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrositySpawnLava;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ProwlerCore;
     public static final ForgeConfigSpec.ConfigValue<Boolean> SymbioctoBreath;
     public static final ForgeConfigSpec.ConfigValue<Boolean> WadjetSpirit;
@@ -50,6 +51,8 @@ public class GCMobsConfig {
                     .define("blazeIgnitedHelm", false);
             NetheriteMonstrosityGriefing = BUILDER.comment("Whether Netherite Monstrosity, owned by players, breaks blocks if mob griefing is enabled, Default: false")
                     .define("netheriteMonstrosityGriefing", false);
+            NetheriteMonstrositySpawnLava = BUILDER.comment("Whether Netherite Monstrosity servants spawn lava, Default: true")
+                    .define("netheriteMonstrositySpawnLava", true);
             BUILDER.pop();
         KobolediatorSpirit = BUILDER.comment("Whether owned Kobolediators drop Warrior Spirits, Default: true")
                 .define("kobolediatorSpirit", true);

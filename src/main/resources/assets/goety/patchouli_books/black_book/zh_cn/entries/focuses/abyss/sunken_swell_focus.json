@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/sunken_swell_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/abyss_staff)深渊魔杖$()承载此聚晶施法时，一次可以召唤更多渊灵或渊灵垂钓者"
     }
   ],
   "extra_recipe_mappings": {

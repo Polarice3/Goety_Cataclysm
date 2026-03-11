@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "goety_cataclysm:ender_golem_skull",
+    "goety_cataclysm:wall_ender_golem_skull",
+    "goety_cataclysm:netherite_monstrosity_head",
+    "goety_cataclysm:wall_netherite_monstrosity_head"
+  ]
+}

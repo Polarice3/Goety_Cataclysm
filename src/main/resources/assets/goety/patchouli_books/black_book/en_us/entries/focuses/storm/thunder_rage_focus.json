@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/storm_staff)Storm Staff$() shoots more lightning spears and causes them to deal extra damage based on the target's max health."
     }
   ],
   "extra_recipe_mappings": {

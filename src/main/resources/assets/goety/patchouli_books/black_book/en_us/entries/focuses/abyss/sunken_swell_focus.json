@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/sunken_swell_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/abyss_staff)Abyss Staff$() summons more Deeplings and/or Deepling Anglers at once."
     }
   ],
   "extra_recipe_mappings": {

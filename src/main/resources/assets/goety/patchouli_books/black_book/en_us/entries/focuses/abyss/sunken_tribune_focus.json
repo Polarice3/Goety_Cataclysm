@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/sunken_tribune_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/abyss_staff)Abyss Staff$() summons more Deepling Priests and/or Warlocks at once."
     }
   ],
   "extra_recipe_mappings": {

@@ -158,5 +158,9 @@
   "entity.goety_cataclysm.zombie_amethyst_crab": "ゾンビアメジストガニ",
   "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "ゾンビアメジストガニのスポーンエッグ",
   "item.goety_cataclysm.earth_shake_focus": "地球振動フォーカス",
-  "item.goety_cataclysm.earth_shake_focus.info": "術者の周囲に地震を発生させ、当たった敵にダメージを与えます。"
+  "item.goety_cataclysm.earth_shake_focus.info": "術者の周囲に地震を発生させ、当たった敵にダメージを与えます。",
+  "block.goety_cataclysm.netherite_monstrosity_head": "ネザライトの怪物の頭",
+  "block.goety_cataclysm.wall_netherite_monstrosity_head": "ネザライトの怪物の頭",
+  "item.goety_cataclysm.battlefield_focus": "バトルフィールドのフォーカス",
+  "item.goety_cataclysm.battlefield_focus.info": "術者の周りにファントムハルバードを召喚します。"
 }

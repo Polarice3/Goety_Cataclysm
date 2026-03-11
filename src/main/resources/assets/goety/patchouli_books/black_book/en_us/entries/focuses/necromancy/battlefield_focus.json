@@ -1,0 +1,22 @@
+{
+  "name": "Battlefield Focus",
+  "icon": "goety_cataclysm:battlefield_focus",
+  "category": "goety:cataclysm/focuses/necromancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The spell summons the fallen weapons of the dead from ancient battles to skewer and slash foes in front of, or around when cast-crouching, the caster."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/battlefield_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/necro_staff)Necro Staff$() adds more rows of phantom halberds."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:battlefield_focus": 1
+  }
+}

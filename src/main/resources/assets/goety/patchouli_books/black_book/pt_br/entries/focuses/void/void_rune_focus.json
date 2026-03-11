@@ -1,15 +1,19 @@
 {
-  "name": "Foco da Runa do Vazio",
+  "name": "Foco da Runa do Vácuo",
   "icon": "goety_cataclysm:void_rune_focus",
   "category": "goety:cataclysm/focuses/void",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Embora se possa simplesmente usar uma Runa do Vazio, você percebeu que seria muito melhor simplesmente transformá-la em um feitiço."
+      "text": "Embora se possa simplesmente usar uma Runa do Vácuo, você percebeu que seria muito melhor simplesmente transformá-la em um feitiço."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/void_rune_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/void_staff)Cajado do Vácuo$() invoca mais fileiras de Runas do Vácuo."
     }
   ]
 }

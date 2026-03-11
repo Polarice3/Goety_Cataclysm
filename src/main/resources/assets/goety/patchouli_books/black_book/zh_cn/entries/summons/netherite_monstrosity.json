@@ -17,7 +17,7 @@
     {
       "type": "multiblock",
       "multiblock_id": "goety_cataclysm:netherite_monstrosity",
-      "text": "使用炼狱锻锤右键中心的强化红石块即可激活"
+      "text": "使用炼狱锻锤右键中心的强化红石块即可完成创建"
     },
     {
       "type": "patchouli:crafting",
@@ -26,6 +26,16 @@
     {
       "type": "patchouli:text",
       "text": "除了镶金黑石外，构成其中的其它黑石都可以使用别的黑石变种替代，不管红石巨兽的条目写了什么，都该更认可下界合金巨兽远超于红石巨兽的战斗力，使用熔岩桶、熔岩动力电池、下界合金块可以治疗你的下界合金巨兽，而下界合金巨兽的最大持有上限是引用、并与配置文件中红石巨兽的相关设置一致"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:netherite_monstrosity_head",
+      "text": "如果你的下界合金巨兽在听从你指挥或战斗的时候被消灭，它就会掉落自己的头颅，头颅能够让你以一种更便宜的方式复活下界合金巨兽，但是，复活后下界合金巨兽只会铭记并听命于它最初的创造者与主人"
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity_revive",
+      "enable_visualize": false
     }
   ]
 }

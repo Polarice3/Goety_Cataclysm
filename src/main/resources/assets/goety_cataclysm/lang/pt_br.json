@@ -161,5 +161,9 @@
   "item.goety_cataclysm.ignited_revenant_spawn_egg": "Ovo de servo Fantasma Incendiado",
   "entity.goety_cataclysm.ignited_revenant": "Fantasma Incendiado",
   "item.goety_cataclysm.earth_shake_focus": "Foco No Terremoto",
-  "item.goety_cataclysm.earth_shake_focus.info": "Dispara ondas sísmicas ao redor do conjurador, causando dano aos inimigos atingidos."
+  "item.goety_cataclysm.earth_shake_focus.info": "Dispara ondas sísmicas ao redor do conjurador, causando dano aos inimigos atingidos.",
+  "block.goety_cataclysm.netherite_monstrosity_head": "Cabeça da Monstruosidade de Netherita",
+  "block.goety_cataclysm.wall_netherite_monstrosity_head": "Cabeça da Monstruosidade de Netherita",
+  "item.goety_cataclysm.battlefield_focus": "Foco do Campo de Batalha",
+  "item.goety_cataclysm.battlefield_focus.info": "Invoca Alabardas Fantasmais ao redor do conjurador."
 }

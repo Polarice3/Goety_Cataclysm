@@ -168,7 +168,7 @@ public class StormSerpentSpell extends Spell {
     public void stopSpell(ServerLevel worldIn, LivingEntity caster, ItemStack staff, ItemStack focus, int castTime, SpellStat spellStat) {
         if (castTime >= 28){
             if (caster instanceof Player player) {
-                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown());
+                SEHelper.addCooldown(player, focus.getItem(), this.spellCooldown(caster));
                 SEHelper.sendSEUpdatePacket(player);
             }
         }

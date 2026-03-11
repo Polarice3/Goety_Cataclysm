@@ -8,6 +8,7 @@ import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.init.ModTags;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.Goety.utils.NoKnockBackDamageSource;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
@@ -15,6 +16,7 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.OwnedCMPart;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
+import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.GCGolemTypes;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.*;
@@ -114,7 +116,7 @@ public class GCEvents {
     }*/
 
     @SubscribeEvent
-    public void onLivingAttack(LivingAttackEvent event) {
+    public static void onLivingAttack(LivingAttackEvent event) {
         Entity proj = event.getSource().getDirectEntity();
         Entity owner = null;
         if (proj != null) {
@@ -170,19 +172,26 @@ public class GCEvents {
     }
 
     @SubscribeEvent
-    public void onLivingDamage(LivingDamageEvent event) {
-        LivingEntity entity = event.getEntity();
+    public static void onLivingDamage(LivingDamageEvent event) {
+        LivingEntity victim = event.getEntity();
         DamageSource source = event.getSource();
         float damage = event.getAmount();
 
         if (source.is(ModTags.DamageTypes.SHOCK_ATTACKS)) {
-            if (entity.hasEffect(ModEffect.EFFECTWETNESS.get())) {
-                MobEffectInstance effectinstance1 = entity.getEffect(ModEffect.EFFECTWETNESS.get());
+            if (victim.hasEffect(ModEffect.EFFECTWETNESS.get())) {
+                MobEffectInstance effectinstance1 = victim.getEffect(ModEffect.EFFECTWETNESS.get());
                 if (effectinstance1 != null) {
                     float i = (effectinstance1.getAmplifier() + 1) * 0.2F;
                     float f = damage + damage * i;
                     damage = Math.min(Float.MAX_VALUE, f);
                     event.setAmount(damage);
+                }
+            }
+        }
+        if (event.getAmount() > 0.0F) {
+            if (ModDamageSource.waterAttacks(source)) {
+                if (GCSpellConfig.WaterAttackWet.get() > 0) {
+                    victim.addEffect(new MobEffectInstance(ModEffect.EFFECTWETNESS.get(), GCSpellConfig.WaterAttackWet.get(), 0, false, true, true));
                 }
             }
         }

@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "你觉得指挥骸龙能够让你变得所向披靡，所以你创造了这个法术以随时召唤与你意识紧密相连的骸龙"
+      "text": "你觉得指挥骸龙能够让你变得所向披靡，所以你创造了这个法术以随时召唤与你意志紧密相连的骸龙"
     },
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/desert_raid_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/necro_staff)死灵魔杖$()承载此聚晶施法时，一次可以召唤更多骸龙"
     }
   ],
   "extra_recipe_mappings": {

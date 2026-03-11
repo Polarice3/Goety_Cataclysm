@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "该法术能够射出一道被称为鸣雷槊的闪电，并生成一片静电区，在命中敌人的位置上持续对敌人造成伤害，用风暴法杖承载此聚晶时可以一次发射两道闪电"
+      "text": "该法术能够射出一道被称为鸣雷槊的闪电，并生成一片静电区，在命中敌人的位置上持续对敌人造成伤害"
     },
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/lightning_spear_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/storm_staff)风暴魔杖$()承载此聚晶施法时，一次可以发射两道闪电"
     }
   ],
   "extra_recipe_mappings": {

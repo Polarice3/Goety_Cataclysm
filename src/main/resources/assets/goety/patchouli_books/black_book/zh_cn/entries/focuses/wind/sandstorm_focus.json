@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/sandstorm_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/wind_staff)风之法杖$()承载此聚晶施法时，一次可以召唤更多大型沙尘暴"
     }
   ],
   "extra_recipe_mappings": {

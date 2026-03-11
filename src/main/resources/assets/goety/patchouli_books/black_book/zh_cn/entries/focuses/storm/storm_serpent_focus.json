@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "这个聚晶能够让你召唤出幻化的蛇，让它们向着你的敌人猛扑，随后它们会爆炸，并让你的敌人对雷电伤害变得更脆弱"
+      "text": "这个聚晶能够让你召唤出幻形巨蛇，让它们向着你的敌人猛扑，随后它们会爆炸，并让你的敌人对雷电伤害变得更脆弱"
     },
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/storm_serpent_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/storm_staff)风暴魔杖$()承载此聚晶施法时，它会在该法术完全释放完毕后召唤出更多巨蛇"
     }
   ],
   "extra_recipe_mappings": {

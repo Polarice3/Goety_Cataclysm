@@ -10,6 +10,10 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/void_rune_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/void_staff)Void Staff$() summons more rows of Void Runes."
     }
   ]
 }

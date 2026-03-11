@@ -1,5 +1,5 @@
 {
-  "name": "Foco da Tumba Amaldiçoado",
+  "name": "Foco da Tumba Amaldiçoada",
   "icon": "goety_cataclysm:cursed_tomb_focus",
   "category": "goety:cataclysm/focuses/necromancy",
   "pages": [
@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/cursed_tomb_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/necro_staff)Cajado Necro$() invoca mais Draugrs de uma vez."
     }
   ],
   "extra_recipe_mappings": {

@@ -1,5 +1,5 @@
 {
-  "name": "Monstruosidade de Netherite",
+  "name": "Monstruosidade de Netherita",
   "icon": "cataclysm:monstrous_helm",
   "category": "goety:cataclysm/summons",
   "advancement": "goety:goety/read_terminus_scroll",
@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Embora a Monstruosidade de Redstone seja um dos servos mais poderosos que você pode colocar em campo, talvez, com o poder da Forja Infernal, você será capaz de replicar sua contraparte de Netherite."
+      "text": "Embora a Monstruosidade de Redstone seja um dos servos mais poderosos que você pode colocar em campo, talvez, com o poder da Forja Infernal, você será capaz de replicar sua contraparte de Netherita."
     },
     {
       "type": "patchouli:entity",
@@ -25,7 +25,17 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A Pedra Negra pode ser substituída por outras variantes, exceto Pedra Negra Dourada, para o molde. Apesar do que a entrada da Monstruosidade de Redstone diz, o poder desta variante da Monstruosidade supera sua contraparte. Eles podem ser reparados clicando neles com Blocos de Netherite, Baldes de Lava ou Baterias de Lava, ou colocando-os sobre Fogo de Almas. A Monstruosidade compartilha o mesmo limite de invocação que sua contraparte de Redstone."
+      "text": "A Pedra-Negra pode ser substituída por outras variantes, exceto Pedra-Negra Dourada, para o molde. Apesar do que a entrada da Monstruosidade de Redstone diz, o poder desta variante da Monstruosidade supera sua contraparte. Elas podem ser reparadas clicando nelas com Blocos de Netherita, Baldes de Lava ou Células de Energia de Lava, ou colocando-as sobre Fogo das Almas. A Monstruosidade compartilha o mesmo limite de invocação que sua contraparte de Redstone."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:netherite_monstrosity_head",
+      "text": "Se a Monstruosidade cair em batalha ou por comando, ela deixará cair sua cabeça. A Cabeça pode ser usada para reviver a Monstruosidade de forma mais barata. No entanto, a Cabeça lembra de seu criador e mestre original, e a Monstruosidade revivida só seguirá os comandos deles."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity_revive",
+      "enable_visualize": false
     }
   ]
 }

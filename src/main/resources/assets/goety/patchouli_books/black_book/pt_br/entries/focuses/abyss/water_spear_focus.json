@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O feitiço dispara uma lança de água de alta pressão que ricocheteia em superfícies. Conjurar com um Cajado do Abismo dispara duas lanças em vez de uma."
+      "text": "O feitiço dispara uma lança de água de alta pressão que ricocheteia em superfícies."
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/water_spear_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com um $(l:crafts/staff/abyss_staff)Cajado do Abismo$() dispara duas lanças em vez de uma."
     }
   ]
 }

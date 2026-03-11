@@ -4,9 +4,9 @@ import com.Polarice3.Goety.api.entities.IAutoRideable;
 import com.Polarice3.Goety.api.items.magic.IWand;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
-import com.Polarice3.Goety.common.entities.projectiles.Pyroclast;
 import com.Polarice3.Goety.utils.ItemHelper;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.IABossSummon;
@@ -14,7 +14,9 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonAttac
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.FlareBomb;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.GCLavaBomb;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.common.items.block.NMHeadItem;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -499,6 +501,25 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
     public void die(DamageSource p_21014_) {
         super.die(p_21014_);
         this.setAttackState(DEATH);
+    }
+
+    public void onDeathUpdate(int deathDuration) {
+        super.onDeathUpdate(deathDuration);
+        if (this.deathTime == deathDuration) {
+            ItemStack itemStack = new ItemStack(GCBlocks.NETHERITE_MONSTROSITY_HEAD_BLOCK.get());
+            if (this.getTrueOwner() != null){
+                NMHeadItem.setOwner(this.getTrueOwner(), itemStack);
+                if (this.getCustomName() != null){
+                    NMHeadItem.setCustomName(this.getCustomName().getString(), itemStack);
+                }
+                ItemEntity itemEntity = this.spawnAtLocation(itemStack);
+                if (itemEntity != null){
+                    itemEntity.setExtendedLifetime();
+                }
+            } else if (this.level().getRandom().nextFloat() <= 0.11F){
+                this.spawnAtLocation(itemStack);
+            }
+        }
     }
 
     public int deathTimer() {
@@ -1526,13 +1547,13 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
             if (target !=null) {
                 if (this.entity.attackTicks == this.attackshot) {
                     for (int i = 0; i < shots; ++i) {
-                        Pyroclast lava = new Pyroclast(this.entity, this.entity.level());
-                        lava.setExplosionPower(CMConfig.Lavabombradius);
+                        GCLavaBomb lava = new GCLavaBomb(GCEntityType.LAVA_BOMB.get(), this.entity.level(), this.entity);
                         double d0 = target.getX() - this.entity.headPart.getX();
-                        double d1 = target.getBoundingBox().minY + target.getBbHeight() / 3.0F - lava.getY();
+                        double d1 = target.getBoundingBox().minY + (double)(target.getBbHeight() / 3.0F) - lava.getY();
                         double d2 = target.getZ() - this.entity.headPart.getZ();
-                        double d3 = Mth.sqrt((float) (d0 * d0 + d2 * d2));
-                        lava.shoot(d0, d1 + d3 * 0.20000000298023224D, d2, 1.0F, 24 - this.entity.level().getDifficulty().getId() * 4);
+                        double d3 = (double)Mth.sqrt((float)(d0 * d0 + d2 * d2));
+                        lava.setMaxLavaTime(CMConfig.LavabombDuration + this.entity.getRandom().nextInt(CMConfig.LavabombDurationRand));
+                        lava.shoot(d0, d1 + d3 * 0.2F, d2, 1.0F, (float)(24 - this.entity.level().getDifficulty().getId() * 4));
                         this.entity.level().addFreshEntity(lava);
                     }
                 }

@@ -5,15 +5,13 @@ import com.Polarice3.Goety.common.items.magic.MagicFocus;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.client.render.block.GCISTER;
 import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
+import com.Polarice3.goety_cataclysm.common.items.block.NMHeadItem;
 import com.Polarice3.goety_cataclysm.common.items.revive.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.abyss.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.AmethystClusterSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.DesertCrushSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.geomancy.EarthShakeSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.DraugrSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.EliteDraugrSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.KoboletonSpell;
-import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.RoyalDraugrSpell;
+import com.Polarice3.goety_cataclysm.common.magic.spells.necromancy.*;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.AshenBreathSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.ExtinctFlameSpell;
 import com.Polarice3.goety_cataclysm.common.magic.spells.nether.FlareBombSpell;
@@ -65,6 +63,7 @@ public class GCItems {
     public static final RegistryObject<Item> CURSED_GRAVE_FOCUS = ITEMS.register("cursed_grave_focus", () -> new MagicFocus(new DraugrSpell()));
     public static final RegistryObject<Item> CURSED_CAIRN_FOCUS = ITEMS.register("cursed_cairn_focus", () -> new MagicFocus(new EliteDraugrSpell()));
     public static final RegistryObject<Item> CURSED_TOMB_FOCUS = ITEMS.register("cursed_tomb_focus", () -> new MagicFocus(new RoyalDraugrSpell()));
+    public static final RegistryObject<Item> BATTLEFIELD_FOCUS = ITEMS.register("battlefield_focus", () -> new MagicFocus(new BattlefieldSpell()));
 
     ///Nether
     public static final RegistryObject<Item> ASHEN_BREATH_FOCUS = ITEMS.register("ashen_breath_focus", () -> new MagicFocus(new AshenBreathSpell()));
@@ -95,6 +94,18 @@ public class GCItems {
     public static final RegistryObject<Item> REMNANT_SKULL = ITEMS.register("remnant_skull", GCRemnantSkull::new);
     public static final RegistryObject<Item> ENDER_GOLEM_SKULL_ITEM = ITEMS.register("ender_golem_skull",
             () -> new EnderGolemSkullItem((new Item.Properties()).rarity(Rarity.UNCOMMON).fireResistant()){
+                @Override
+                public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+                    consumer.accept(new IClientItemExtensions() {
+                        @Override
+                        public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                            return new GCISTER();
+                        }
+                    });
+                }
+            });
+    public static final RegistryObject<Item> NETHERITE_MONSTROSITY_HEAD_ITEM = ITEMS.register("netherite_monstrosity_head",
+            () -> new NMHeadItem((new Item.Properties()).rarity(Rarity.EPIC).fireResistant()){
                 @Override
                 public void initializeClient(Consumer<IClientItemExtensions> consumer) {
                     consumer.accept(new IClientItemExtensions() {

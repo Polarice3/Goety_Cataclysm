@@ -10,6 +10,10 @@
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/void_rune_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/void_staff)虚空魔杖$()承载此聚晶施法时，一次可以召唤出更多虚空符文"
     }
   ]
 }

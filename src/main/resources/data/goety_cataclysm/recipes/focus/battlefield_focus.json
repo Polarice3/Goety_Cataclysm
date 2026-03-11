@@ -1,0 +1,24 @@
+{
+  "type": "goety:ritual",
+  "ritual_type": "goety:craft",
+  "activation_item": {
+    "item": "goety:quaking_focus"
+  },
+  "craftType": "necroturgy",
+  "soulCost": 1,
+  "duration": 30,
+  "ingredients": [
+    {
+      "item": "goety:biting_focus"
+    },
+    {
+      "item": "cataclysm:cursium_upgrade_smithing_template"
+    },
+    {
+      "item": "cataclysm:soul_render"
+    }
+  ],
+  "result": {
+    "item": "goety_cataclysm:battlefield_focus"
+  }
+}

@@ -24,8 +24,18 @@
       "recipe": "goety_cataclysm:netherite_plating"
     },
     {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:netherite_monstrosity_head",
+      "text": "怪物が戦闘や指揮から離脱した場合、頭を落とします。頭を使えば、より安価な方法で怪物を蘇生させることができます。ただし、頭は元の創造主と主人を覚えており、蘇生した怪物は彼らの命令にのみ従います。"
+    },
+    {
       "type": "patchouli:text",
       "text": "ブラックストーンは、型の代わりにきらめくブラックストーン以外の変種で代用できます。レッドストーンの怪物の項目に書かれていることにもかかわらず、この怪物変種のパワーは、その対応物を上回っています。ネザライトブロック、溶岩バケツ、溶岩エネルギー電池で右クリックするか、ソウル ファイアの上に置くことで修復できます。怪物は、レッドストーン対応物と同じ召喚上限を共有します。"
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity_revive",
+      "enable_visualize": false
     }
   ]
 }

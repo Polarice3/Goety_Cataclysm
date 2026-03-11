@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/storm_staff)Cajado da Tempestade$() dispara mais lanças de relâmpago e faz com que causem dano extra com base na vida máxima do alvo."
     }
   ],
   "extra_recipe_mappings": {

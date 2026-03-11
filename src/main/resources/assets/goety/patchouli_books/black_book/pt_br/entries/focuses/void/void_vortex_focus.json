@@ -1,11 +1,11 @@
 {
-  "name": "Foco do Vórtice do Vazio",
+  "name": "Foco do Vórtice do Vácuo",
   "icon": "goety_cataclysm:void_vortex_focus",
   "category": "goety:cataclysm/focuses/void",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "O feitiço conjura um tornado feito pelo próprio vazio, sugando alvos não aliados próximos para dentro de si, antes de explodir."
+      "text": "O feitiço conjura um tornado feito pelo próprio vácuo, sugando alvos não aliados próximos para dentro de si, antes de explodir."
     },
     {
       "type": "goety:ritual",

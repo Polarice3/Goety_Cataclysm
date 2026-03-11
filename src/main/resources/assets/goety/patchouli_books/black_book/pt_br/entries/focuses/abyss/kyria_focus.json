@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/kyria_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com um $(l:crafts/staff/abyss_staff)Cajado do Abismo$() invoca mais da burguesia de uma vez."
     }
   ],
   "extra_recipe_mappings": {

@@ -61,6 +61,7 @@ public class GCEntityTypeTagsProvider extends IntrinsicHolderTagsProvider<Entity
                 .add(GCEntityType.DRAUGR_NECROMANCER.get());
         this.tag(EntityTypeTags.IMPACT_PROJECTILES)
                 .add(GCEntityType.ABYSS_ORB.get())
+                .add(GCEntityType.LAVA_BOMB.get())
                 .add(GCEntityType.IGNIS_FIREBALL.get())
                 .add(GCEntityType.IGNIS_ABYSS_FIREBALL.get())
                 .add(GCEntityType.WITHER_HOMING_MISSILE.get());

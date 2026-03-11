@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/earth_shake_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/geo_staff)地卜魔杖$()承载此聚晶施法时，一次可以召唤更多移速更快的冲击波"
     }
   ],
   "extra_recipe_mappings": {

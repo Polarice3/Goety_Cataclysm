@@ -4,7 +4,10 @@ import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.client.render.*;
 import com.Polarice3.goety_cataclysm.client.render.block.EnderGolemSkullBlockEntityRenderer;
 import com.Polarice3.goety_cataclysm.client.render.block.FabricatorRenderer;
+import com.Polarice3.goety_cataclysm.client.render.block.GCBlockLayer;
+import com.Polarice3.goety_cataclysm.client.render.block.NMHeadBlockEntityRenderer;
 import com.Polarice3.goety_cataclysm.client.render.model.DraugrNecromancerModel;
+import com.Polarice3.goety_cataclysm.client.render.model.NMHeadModel;
 import com.Polarice3.goety_cataclysm.common.blocks.entities.GCBlockEntities;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.github.L_Ender.cataclysm.client.render.entity.Phantom_Arrow_Renderer;
@@ -18,6 +21,7 @@ public class GCClientInit {
 
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(GCBlockLayer.NM_HEAD, NMHeadModel::createBodyLayer);
         event.registerLayerDefinition(GCModelLayer.DRAUGR_NECROMANCER, DraugrNecromancerModel::createBodyLayer);
     }
 
@@ -25,6 +29,7 @@ public class GCClientInit {
     public static void onRegisterRenders(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(GCBlockEntities.FABRICATOR.get(), FabricatorRenderer::new);
         event.registerBlockEntityRenderer(GCBlockEntities.ENDER_GOLEM_SKULL.get(), EnderGolemSkullBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GCBlockEntities.NETHERITE_MONSTROSITY_HEAD.get(), NMHeadBlockEntityRenderer::new);
         event.registerEntityRenderer(GCEntityType.ENDER_GOLEM.get(), EnderGolemServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.NETHERITE_MONSTROSITY.get(), NMServantRenderer::new);
         event.registerEntityRenderer(GCEntityType.DEEPLING.get(), DeeplingServantRenderer::new);
@@ -60,6 +65,7 @@ public class GCClientInit {
         event.registerEntityRenderer(GCEntityType.PHANTOM_ARROW.get(), Phantom_Arrow_Renderer::new);
         event.registerEntityRenderer(GCEntityType.IGNIS_FIREBALL.get(), IgnisFireballRenderer::new);
         event.registerEntityRenderer(GCEntityType.IGNIS_ABYSS_FIREBALL.get(), IgnisAbyssFireballRenderer::new);
+        event.registerEntityRenderer(GCEntityType.LAVA_BOMB.get(), GCLavaBombRenderer::new);
         event.registerEntityRenderer(GCEntityType.FLARE_BOMB.get(), FlareBombRenderer::new);
         event.registerEntityRenderer(GCEntityType.ABYSS_MINE.get(), AbyssMineRenderer::new);
         event.registerEntityRenderer(GCEntityType.ABYSS_BLAST_PORTAL.get(), AbyssBlastPortalRenderer::new);

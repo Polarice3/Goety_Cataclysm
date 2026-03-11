@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "这个法术复原了渊灵术士召唤深渊传送门以发射激光柱的能力"
+      "text": "这个法术还原了渊灵术士召唤深渊传送门以发射激光柱的能力"
     },
     {
       "type": "goety:ritual",

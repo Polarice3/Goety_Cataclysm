@@ -26,6 +26,16 @@
     {
       "type": "patchouli:text",
       "text": "The Blackstone can be substituted with other variants aside from Gilded Blackstone for the mold. Despite what the Redstone Monstrosity entry says, this Monstrosity variant's power surpasses its counterpart. They can be repaired by right-clicking on them with Netherite Blocks, Lava Buckets or Lava Power Cells, or by putting them above Soul Fire. The Monstrosity shares the same summon cap as its Redstone counterpart."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "goety_cataclysm:netherite_monstrosity_head",
+      "text": "Should the Monstrosity fell from battle or command, they will drop their head. The Head can be used to revive the Monstrosity in a cheaper manner. However, the Head remembers it's original creator and master and the revived Monstrosity will only follow their commands."
+    },
+    {
+      "type": "multiblock",
+      "multiblock_id": "goety_cataclysm:netherite_monstrosity_revive",
+      "enable_visualize": false
     }
   ]
 }

@@ -221,6 +221,13 @@ public class GCEntityType {
                     .setTrackingRange(20)
                     .setShouldReceiveVelocityUpdates(true));
 
+    public static final RegistryObject<EntityType<GCLavaBomb>> LAVA_BOMB = register("lava_bomb",
+            EntityType.Builder.<GCLavaBomb>of(GCLavaBomb::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .fireImmune()
+                    .setShouldReceiveVelocityUpdates(true)
+                    .setUpdateInterval(20));
+
     public static final RegistryObject<EntityType<FlareBomb>> FLARE_BOMB = register("flare_bomb",
             EntityType.Builder.<FlareBomb>of(FlareBomb::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)

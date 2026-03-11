@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/thunder_rage_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/storm_staff)风暴魔杖$()承载此聚晶施法时，发射的鸣雷槊数量会明显提升，并且鸣雷槊可以按命中目标的最大血量上限造成额外的百分比伤害"
     }
   ],
   "extra_recipe_mappings": {

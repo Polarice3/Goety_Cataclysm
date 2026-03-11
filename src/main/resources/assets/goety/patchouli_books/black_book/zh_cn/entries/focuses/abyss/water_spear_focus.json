@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "发射被称为沧波棱刺的水矛，它在命中墙面时会反弹，使用深渊魔杖承载该聚晶时则可以一次发射两发沧波棱刺"
+      "text": "发射被称为沧波棱刺的水矛，它在命中墙面时会反弹"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "goety_cataclysm:focus/water_spear_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/abyss_staff)深渊魔杖$()承载该聚晶时则可以一次发射两发沧波棱刺"
     }
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "name": "战墟聚晶",
+  "icon": "goety_cataclysm:battlefield_focus",
+  "category": "goety:cataclysm/focuses/necromancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "这个法术可以召唤在远古战争中倒下的那些战士所用的武器，潜行施法时，刺出的幻影戟会改为在施法者周围生成"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/battlefield_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/necro_staff)死灵魔杖$()承载此聚晶施法时，一次可以释放出更多行幻影戟"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:battlefield_focus": 1
+  }
+}

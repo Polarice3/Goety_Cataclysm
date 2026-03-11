@@ -10,6 +10,10 @@
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/cursed_grave_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "使用$(l:crafts/staff/necro_staff)死灵魔杖$()承载此聚晶施法时，一次可以召唤更多魂尸"
     }
   ],
   "extra_recipe_mappings": {

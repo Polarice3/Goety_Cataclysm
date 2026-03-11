@@ -1,0 +1,22 @@
+{
+  "name": "Foco do Campo de Batalha",
+  "icon": "goety_cataclysm:battlefield_focus",
+  "category": "goety:cataclysm/focuses/necromancy",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "O feitiço invoca as armas caídas dos mortos de batalhas antigas para perfurar e cortar inimigos à frente, ou ao redor quando conjurado agachado."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:focus/battlefield_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Conjurar com $(l:crafts/staff/necro_staff)Cajado Necro$() adiciona mais fileiras de alabardas fantasmais."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "goety_cataclysm:battlefield_focus": 1
+  }
+}

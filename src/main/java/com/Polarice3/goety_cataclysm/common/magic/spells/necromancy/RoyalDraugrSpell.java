@@ -2,11 +2,14 @@ package com.Polarice3.goety_cataclysm.common.magic.spells.necromancy;
 
 import com.Polarice3.Goety.api.magic.SpellType;
 import com.Polarice3.Goety.client.particles.ModParticleTypes;
-import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.common.magic.SummonSpell;
-import com.Polarice3.Goety.utils.*;
+import com.Polarice3.Goety.init.ModSounds;
+import com.Polarice3.Goety.utils.BlockFinder;
+import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.ServerParticleUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.RoyalDraugrServant;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
@@ -18,8 +21,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
@@ -121,20 +122,17 @@ public class RoyalDraugrSpell extends SummonSpell {
                     MobUtil.moveDownToGround(summonedentity);
                     summonedentity.setPersistenceRequired();
                     summonedentity.setLimitedLife(MobUtil.getSummonLifespan(worldIn) * duration);
-                    if (potency > 0) {
-                        int boost = Mth.clamp(potency - 1, 0, 10);
-                        summonedentity.addEffect(new MobEffectInstance(GoetyEffects.BUFF.get(), EffectsUtil.infiniteEffect(), boost, false, false));
-                    }
                     summonedentity.finalizeSpawn(worldIn, worldIn.getCurrentDifficultyAt(caster.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
                     summonedentity.setYHeadRot(caster.getYHeadRot());
                     summonedentity.setYRot(caster.getYRot());
+                    this.buffSummon(caster, summonedentity, potency);
                     this.SummonSap(caster, summonedentity);
                     this.setTarget(caster, summonedentity);
                     if (worldIn.addFreshEntity(summonedentity)) {
                         worldIn.sendParticles(ModParticleTypes.LICH.get(), summonedentity.getX(), summonedentity.getY(), summonedentity.getZ(), 1, 0, 0, 0, 0.0F);
                         ServerParticleUtil.summonPowerfulUndeadParticles(worldIn, summonedentity);
-                        worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), GoetySounds.SOUL_EXPLODE.get(), this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
-                        worldIn.playSound(null, caster.getX(), caster.getY(), caster.getZ(), SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
+                        this.playSound(worldIn, summonedentity, ModSounds.SOUL_EXPLODE.get(), 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
+                        this.playSound(worldIn, summonedentity, SoundEvents.ENDERMAN_TELEPORT, 0.25F + (worldIn.random.nextFloat() / 2.0F), 1.0F);
                     }
                     this.summonAdvancement(caster, summonedentity);
                 }
@@ -154,14 +152,11 @@ public class RoyalDraugrSpell extends SummonSpell {
                     summonedentity.setLimitedLife(MobUtil.getSummonLifespan(worldIn) * duration);
                     summonedentity.setPersistenceRequired();
                     summonedentity.finalizeSpawn(worldIn, caster.level().getCurrentDifficultyAt(caster.blockPosition()), MobSpawnType.MOB_SUMMONED,null,null);
-                    if (potency > 0){
-                        int boost = Mth.clamp(potency - 1, 0, 10);
-                        summonedentity.addEffect(new MobEffectInstance(GoetyEffects.BUFF.get(), EffectsUtil.infiniteEffect(), boost, false, false));
-                    }
+                    this.buffSummon(caster, summonedentity, potency);
                     this.SummonSap(caster, summonedentity);
                     this.setTarget(caster, summonedentity);
                     if (worldIn.addFreshEntity(summonedentity)) {
-                        this.summonParticles(worldIn, caster, staff, summonedentity);
+                        this.uponSummon(worldIn, caster, staff, summonedentity);
                     }
                     this.summonAdvancement(caster, summonedentity);
                 }

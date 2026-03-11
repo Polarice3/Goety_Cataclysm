@@ -5,11 +5,15 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The spell shoots a spear of lightning that leaves a small storm cloud, that damages enemies standing on them, where they hit. Casting with an Storm Staff shoots two spears instead."
+      "text": "The spell shoots a spear of lightning that leaves a small storm cloud, that damages enemies standing on them, where they hit."
     },
     {
       "type": "goety:ritual",
       "recipe": "goety_cataclysm:focus/lightning_spear_focus"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casting with $(l:crafts/staff/storm_staff)Storm Staff$() shoots two spears instead."
     }
   ],
   "extra_recipe_mappings": {

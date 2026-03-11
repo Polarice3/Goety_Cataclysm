@@ -1,5 +1,6 @@
 package com.Polarice3.goety_cataclysm.compat.patchouli;
 
+import com.Polarice3.Goety.common.blocks.ModBlocks;
 import com.Polarice3.Goety.compat.ICompatable;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.blocks.CataclysmBlocks;
@@ -25,6 +26,7 @@ public class GCPatchouliIntegration implements ICompatable {
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("ender_golem_revive"), ENDER_GOLEM_REVIVE.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("prowler"), PROWLER.get());
         PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("netherite_monstrosity"), NETHERITE_MONSTROSITY.get());
+        PatchouliAPI.get().registerMultiblock(GoetyCataclysm.location("netherite_monstrosity_revive"), NETHERITE_MONSTROSITY_REVIVE.get());
     }
 
     public static final Supplier<IMultiblock> CORALSSUS = Suppliers.memoize(() -> {
@@ -272,6 +274,48 @@ public class GCPatchouliIntegration implements ICompatable {
                 'C', redstoneCore,
                 'S', stoneMold,
                 '0', stoneMold
+        );
+    });
+
+    public static final Supplier<IMultiblock> NETHERITE_MONSTROSITY_REVIVE = Suppliers.memoize(() -> {
+        IStateMatcher redstoneBlocks = PatchouliAPI.get().predicateMatcher(Blocks.REDSTONE_BLOCK,
+                state -> state.is(Tags.Blocks.STORAGE_BLOCKS_REDSTONE));
+        IStateMatcher netheritePlating = PatchouliAPI.get().predicateMatcher(GCBlocks.NETHERITE_PLATING.get(),
+                state -> state.is(GCBlocks.NETHERITE_PLATING.get()));
+        IStateMatcher gilded = PatchouliAPI.get().predicateMatcher(Blocks.GILDED_BLACKSTONE,
+                state -> state.is(Blocks.GILDED_BLACKSTONE));
+        IStateMatcher bricks = PatchouliAPI.get().predicateMatcher(Blocks.NETHER_BRICKS,
+                state -> state.is(Blocks.NETHER_BRICKS));
+        IStateMatcher gold = PatchouliAPI.get().predicateMatcher(Blocks.GOLD_BLOCK,
+                state -> state.is(Tags.Blocks.STORAGE_BLOCKS_GOLD));
+        IStateMatcher reinforced = PatchouliAPI.get().predicateMatcher(ModBlocks.REINFORCED_REDSTONE_BLOCK.get(),
+                state -> state.is(ModBlocks.REINFORCED_REDSTONE_BLOCK.get()));
+        return PatchouliAPI.get().makeMultiblock(
+                new String[][] {
+                        {
+                                "___H___"
+                        },
+                        {
+                                "NGB#BGN"
+                        },
+                        {
+                                "GB#R#BG"
+                        },
+                        {
+                                "_GB#BG_"
+                        },
+                        {
+                                "_GO0OG_"
+                        }
+                },
+                'H', GCBlocks.NETHERITE_MONSTROSITY_HEAD_BLOCK.get(),
+                '#', redstoneBlocks,
+                'R', reinforced,
+                'G', gilded,
+                'B', bricks,
+                'O', gold,
+                'N', netheritePlating,
+                '0', netheritePlating
         );
     });
 

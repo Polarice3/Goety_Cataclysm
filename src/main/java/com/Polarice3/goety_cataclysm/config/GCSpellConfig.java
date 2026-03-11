@@ -10,6 +10,8 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> WaterAttackWet;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> AbyssalMinesCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> AbyssalMinesDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> AbyssalMinesCoolDown;
@@ -101,6 +103,10 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> RoyalDraugrSummonDown;
     public static final ForgeConfigSpec.ConfigValue<Integer> RoyalDraugrLimit;
 
+    public static final ForgeConfigSpec.ConfigValue<Integer> BattlefieldCost;
+    public static final ForgeConfigSpec.ConfigValue<Integer> BattlefieldCoolDown;
+    public static final ForgeConfigSpec.ConfigValue<Double> BattlefieldDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeCost;
     public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeDuration;
     public static final ForgeConfigSpec.ConfigValue<Integer> EarthShakeCoolDown;
@@ -178,6 +184,10 @@ public class GCSpellConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> WadjetLimit;
 
     static {
+        BUILDER.push("General");
+        WaterAttackWet = BUILDER.comment("How many ticks water attacks, ie. drench, gives Wet effect, set to 0 to disable, Default: 100")
+                .defineInRange("waterAttackWet", 100, 0, Integer.MAX_VALUE);
+        BUILDER.pop();
         BUILDER.push("Spells");
             BUILDER.push("Abyssal Mines Spell");
             AbyssalMinesCost = BUILDER.comment("Abyssal Mines Spell Cost, Default: 16")
@@ -360,6 +370,14 @@ public class GCSpellConfig {
                     .defineInRange("royalDraugrSummonDown", 300, 0, 72000);
             RoyalDraugrLimit = BUILDER.comment("Number of Royal Draugr Servants that can a player can have, Default: 16")
                     .defineInRange("royalDraugrLimit", 16, 1, Integer.MAX_VALUE);
+            BUILDER.pop();
+            BUILDER.push("Battlefield Spell");
+            BattlefieldCost = BUILDER.comment("Battlefield Spell Cost, Default: 48")
+                    .defineInRange("battlefieldCost", 128, 0, Integer.MAX_VALUE);
+            BattlefieldCoolDown = BUILDER.comment("Battlefield Spell Cooldown, Default: 250")
+                    .defineInRange("battlefieldCoolDown", 250, 0, Integer.MAX_VALUE);
+            BattlefieldDamage = BUILDER.comment("Battlefield Spell Damage, Default: 10.0")
+                    .defineInRange("battlefieldDamage", 10.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Earth Shake Spell");
             EarthShakeCost = BUILDER.comment("Earth Shake Spell Cost, Default: 48")
