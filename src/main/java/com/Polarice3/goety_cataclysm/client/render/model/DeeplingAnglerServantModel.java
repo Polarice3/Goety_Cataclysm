@@ -210,7 +210,7 @@ public class DeeplingAnglerServantModel extends AdvancedEntityModel<DeeplingAngl
 
         this.faceTarget(netHeadYaw, headPitch, 1, head);
 
-        float partialTick = Minecraft.getInstance().getFrameTime();
+        float partialTick = Minecraft.getInstance().getPartialTick();
         float swim = entity.getSwimAmount(partialTick);
         float walkSpeed = 1F;
         float walkDegree = 1F;

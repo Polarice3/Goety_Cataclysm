@@ -121,13 +121,8 @@ public class IgnisFireball extends AbstractIgnisFireball{
 
                 }
             } else {
-                flag = entity.hurt(this.damageSources().magic(), 6.0F + this.getExtraDamage());
+                flag = entity.hurt(this.damageSources().magic(), 5.0F + this.getExtraDamage());
             }
-
-            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 1.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
-            explosion.explode();
-            explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
-            this.discard();
 
             if (flag && entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance effectinstance1 = livingEntity.getEffect(ModEffect.EFFECTBLAZING_BRAND.get());
@@ -145,6 +140,10 @@ public class IgnisFireball extends AbstractIgnisFireball{
 
             }
 
+            IgnisExplosion explosion = new IgnisExplosion(this.level(), this, null, null, this.getX(), this.getY(), this.getZ(), 1.0F, GCSpellConfig.ExtinctFlameGriefing.get(), Explosion.BlockInteraction.KEEP);
+            explosion.explode();
+            explosion.finalizeExplosion(this.isSoul() ? 2 : 1, 0.35);
+            this.discard();
         }
     }
 
@@ -160,12 +159,7 @@ public class IgnisFireball extends AbstractIgnisFireball{
 
     @Override
     protected void onHit(HitResult ray) {
-        HitResult.Type raytraceresult$type = ray.getType();
-        if (raytraceresult$type == HitResult.Type.ENTITY) {
-            this.onHitEntity((EntityHitResult) ray);
-        } else if (raytraceresult$type == HitResult.Type.BLOCK) {
-            this.onHitBlock((BlockHitResult) ray);
-        }
+        super.onHit(ray);
     }
 
     public boolean isPickable() {

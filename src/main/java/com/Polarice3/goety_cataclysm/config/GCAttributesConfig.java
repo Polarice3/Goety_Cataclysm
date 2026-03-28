@@ -224,8 +224,8 @@ public class GCAttributesConfig {
                             .defineInRange("watcherArmor", 5.0, 0.0, Double.MAX_VALUE);
                     WatcherMeleeDamage = BUILDER.comment("How much damage Watcher Servants melee attack deals, Default: 5.0")
                             .defineInRange("watcherMeleeDamage", 5.0, 1.0, Double.MAX_VALUE);
-                    WatcherRangeDamage = BUILDER.comment("How much damage Watcher Servants range attack deals, Default: 5.0")
-                            .defineInRange("watcherRangeDamage", 5.0, 1.0, Double.MAX_VALUE);
+                    WatcherRangeDamage = BUILDER.comment("How much damage Watcher Servants range attack deals, Default: 7.0")
+                            .defineInRange("watcherRangeDamage", 7.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
                     BUILDER.push("Prowler Servant");
                     ProwlerHealth = BUILDER.comment("How much Max Health Prowler Servants have, Default: 160.0")
@@ -234,8 +234,8 @@ public class GCAttributesConfig {
                             .defineInRange("prowlerArmor", 10.0, 0.0, Double.MAX_VALUE);
                     ProwlerMeleeDamage = BUILDER.comment("How much damage Prowler Servants melee attack deals, Default: 14.0")
                             .defineInRange("prowlerMeleeDamage", 14.0, 1.0, Double.MAX_VALUE);
-                    ProwlerMissileDamage = BUILDER.comment("How much damage Prowler Servants missiles deals, Default: 3.0")
-                            .defineInRange("prowlerMissileDamage", 3.0, 1.0, Double.MAX_VALUE);
+                    ProwlerMissileDamage = BUILDER.comment("How much damage Prowler Servants missiles deals, Default: 5.0")
+                            .defineInRange("prowlerMissileDamage", 5.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
                 BUILDER.pop();
                 BUILDER.push("Desert");
@@ -338,8 +338,8 @@ public class GCAttributesConfig {
                             .defineInRange("cindariaArmor", 0.0, 0.0, Double.MAX_VALUE);
                     CindariaMeleeDamage = BUILDER.comment("How much damage Cindaria Servants melee attack deals, Default: 7.0")
                             .defineInRange("cindariaMeleeDamage", 7.0, 1.0, Double.MAX_VALUE);
-                    CindariaRangeDamage = BUILDER.comment("How much damage Cindaria Servants water spears deals, Default: 8.0")
-                            .defineInRange("cindariaRangeDamage", 8.0, 1.0, Double.MAX_VALUE);
+                    CindariaRangeDamage = BUILDER.comment("How much damage Cindaria Servants water spears deals, Default: 7.0")
+                            .defineInRange("cindariaRangeDamage", 7.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
                     BUILDER.push("Clawdian Servant");
                     ClawdianHealth = BUILDER.comment("How much Max Health Clawdian Servants have, Default: 225.0")

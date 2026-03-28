@@ -84,8 +84,7 @@ public class LightningSpearSpell extends Spell {
                 double d1 = caster.getY() + caster.getBbHeight() * 0.7F;
                 double d2 = caster.getZ() + f1 * math;
 
-                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vector3d, worldIn, damage + potency);
-                lightning.accelerationPower = 0.15D + velocity;
+                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vector3d, worldIn, damage + potency, (0.15D * 10) + velocity);
                 lightning.setYRot(yRot);
                 lightning.setXRot(xRot);
                 lightning.setPosRaw(d0,
@@ -97,13 +96,12 @@ public class LightningSpearSpell extends Spell {
                 worldIn.addFreshEntity(lightning);
             }
         } else {
-            Lightning_Spear_Entity lightningSpear = new Lightning_Spear_Entity(caster, vector3d, worldIn, damage + potency);
+            Lightning_Spear_Entity lightningSpear = new Lightning_Spear_Entity(caster, vector3d, worldIn, damage + potency, (0.2D * 10) + velocity);
             lightningSpear.setYRot(yRot);
             lightningSpear.setXRot(xRot);
             lightningSpear.setPosRaw(caster.getX() + vector3d.x / 2,
                     caster.getEyeY() - 0.2,
                     caster.getZ() + vector3d.z / 2);
-            lightningSpear.accelerationPower = 0.2D + velocity;
             lightningSpear.setAreaDamage(areaDamage + potency);
             lightningSpear.setAreaRadius((float) radius);
             worldIn.addFreshEntity(lightningSpear);

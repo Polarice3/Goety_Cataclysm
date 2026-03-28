@@ -444,8 +444,8 @@ public class GCSpellConfig {
                     .defineInRange("sandstormTime", 55, 0, 72000);
             SandstormCoolDown = BUILDER.comment("Sandstorm Spell Cooldown, Default: 500")
                     .defineInRange("sandstormCoolDown", 500, 0, Integer.MAX_VALUE);
-            SandstormDamage = BUILDER.comment("Sandstorm Spell Damage, Default: 5.0")
-                    .defineInRange("sandstormDamage", 5.0, 0, Double.MAX_VALUE);
+            SandstormDamage = BUILDER.comment("Sandstorm Spell Damage, Default: 7.0")
+                    .defineInRange("sandstormDamage", 7.0, 0, Double.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("Storm Serpent Spell");
             StormSerpentCost = BUILDER.comment("Storm Serpent Spell Cost, Default: 128")

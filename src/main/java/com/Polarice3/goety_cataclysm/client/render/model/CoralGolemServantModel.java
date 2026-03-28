@@ -240,7 +240,7 @@ public class CoralGolemServantModel extends AdvancedEntityModel<CoralGolemServan
         this.animate(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         float walkSpeed = 0.5F;
         float walkDegree = 0.5F;
-        float partialTick = Minecraft.getInstance().getFrameTime();
+        float partialTick = Minecraft.getInstance().getPartialTick();
         float swim = entityIn.getSwimAmount(partialTick);
         float swimSpeed = 0.25F;
         float swimDegree = 0.5F;

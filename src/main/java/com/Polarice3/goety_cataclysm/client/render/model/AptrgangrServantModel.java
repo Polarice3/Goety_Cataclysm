@@ -3,7 +3,6 @@ package com.Polarice3.goety_cataclysm.client.render.model;
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.draugr.AptrgangrServant;
 import com.github.L_Ender.cataclysm.client.animation.Aptrgangr_Animation;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 
@@ -193,14 +192,7 @@ public class AptrgangrServantModel extends HierarchicalModel<AptrgangrServant> {
 		this.hold.translateAndRotate(matrixStack);
 	}
 
-
-
 	public ModelPart root() {
 		return this.root;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

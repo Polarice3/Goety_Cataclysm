@@ -4,9 +4,9 @@ import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.util.GCDamageSource;
 import com.github.L_Ender.cataclysm.blocks.EMP_Block;
-import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.LightningParticleOptions;
 import com.github.L_Ender.cataclysm.client.tool.ControlledAnimation;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.init.ModBlocks;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModTag;
@@ -168,7 +168,7 @@ public class DeathLaserBeam extends Entity {
                     }
                     if (this.getFire()) {
                         BlockPos blockpos1 = BlockPos.containing(this.collidePosX, this.collidePosY, this.collidePosZ);
-                        if (CMConfig.HarbingerLightFire) {
+                        if (CMCommonConfig.Harbinger.ignoreMobGriefing) {
                             if (this.level().isEmptyBlock(blockpos1)) {
                                 this.level().setBlockAndUpdate(blockpos1, BaseFireBlock.getState(this.level(), blockpos1));
                             }
@@ -214,7 +214,7 @@ public class DeathLaserBeam extends Entity {
             float motionY = this.random.nextFloat() * 0.8F;
             float motionX = velocity * Mth.cos(yaw);
             float motionZ = velocity * Mth.sin(yaw);
-            this.level().addParticle((new LightningParticle.OrbData(255, 26,  0)), collidePosX, collidePosY + 0.1, collidePosZ, motionX, motionY, motionZ);
+            this.level().addParticle((new LightningParticleOptions(255, 26,  0)), collidePosX, collidePosY + 0.1, collidePosZ, motionX, motionY, motionZ);
         }
     }
 

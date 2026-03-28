@@ -6,8 +6,7 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.github.L_Ender.cataclysm.client.particle.LightTrailParticle;
-import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.LightningParticleOptions;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.core.particles.ParticleTypes;
@@ -195,16 +194,7 @@ public class AbyssOrb extends Projectile {
                 f = 0.8F;
             }
             this.level().addParticle(ParticleTypes.REVERSE_PORTAL, this.getX() - vec3.x, this.getY() - vec3.y + 0.15D, this.getZ() - vec3.z, 0.0D, 0.0D, 0.0D);
-            this.level().addParticle((new LightningParticle.OrbData(102, 26, 204)), d0 - vec3.x * 0.5D + this.random.nextDouble() * 0.6D - 0.3D, d1 - vec3.y * 0.5D, d2 - vec3.z * 0.5D + this.random.nextDouble() * 0.6D - 0.3D, vec3.x, vec3.y, vec3.z);
-            double dx = getX() + 1.5F * (random.nextFloat() - 0.5F);
-            double dy = getY() + 1.5F * (random.nextFloat() - 0.5F);
-            double dz = getZ() + 1.5F * (random.nextFloat() - 0.5F);
-            float r = 102/255F;
-            float g = 26/255F;
-            float b = 204/255F;
-
-            this.level().addParticle((new LightTrailParticle.OrbData(r, g, b,0.1F,this.getBbHeight()/2,this.getId())),  dx, dy, dz, 0, 0, 0);
-
+            this.level().addParticle(new LightningParticleOptions(102, 26, 204), d0 - vec3.x * 0.5 + this.random.nextDouble() * 0.6 - 0.3, d1 - vec3.y * 0.5, d2 - vec3.z * 0.5 + this.random.nextDouble() * 0.6 - 0.3, vec3.x, vec3.y, vec3.z);
             this.setDeltaMovement(vec3.add(this.xPower, this.yPower, this.zPower).scale((double)f));
             this.setPos(d0, d1, d2);
         } else {

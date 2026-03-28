@@ -6,8 +6,8 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.client.particle.RingParticle;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.CMEntityMoveHelper;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
@@ -15,7 +15,6 @@ import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Amethyst_Cluster_Projectile_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.EarthQuake_Entity;
 import com.github.L_Ender.cataclysm.init.ModEntities;
-import com.github.L_Ender.cataclysm.init.ModSounds;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import com.github.L_Ender.lionfishapi.server.animation.IAnimatedEntity;
 import net.minecraft.ChatFormatting;
@@ -161,38 +160,32 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
             if (this.getAnimationTick() == 36) {
                 this.Attackparticle(1.8F, -1.5F);
                 this.EarthQuakeSummon(1.8F, -1.5F);
-                this.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.EXPLOSION.get(), 1.0f, 1F + this.getRandom().nextFloat() * 0.1F);
                 ScreenShake_Entity.ScreenShake(this.level(), this.position(), 15.0F, 0.1F, 0, 20);
             }
 
             if (this.getAnimationTick() == 56) {
                 this.Attackparticle(1.7F, 1.3F);
                 this.EarthQuakeSummon(1.7F, 1.3F);
-                this.playSound(SoundEvents.GENERIC_EXPLODE, 1.0F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.EXPLOSION.get(), 1.0f, 1F + this.getRandom().nextFloat() * 0.1F);
                 ScreenShake_Entity.ScreenShake(this.level(), this.position(), 15.0F, 0.1F, 0, 20);
             }
         }
 
         if (this.getAnimation() == CRAB_BURROW) {
-            int l;
-            for(l = 1; l <= 10; l += 3) {
-                if (this.getAnimationTick() == l) {
-                    this.BurrowSound();
-                    this.BurrowParticle(0.6F, 0.0F, 2.0F);
-                }
+            if (this.getAnimationTick() == 1 || this.getAnimationTick() == 4 || this.getAnimationTick() == 7 || this.getAnimationTick() == 10) {
+                BurrowSound();
+                BurrowParticle(0.6f,0.0f,2.0f);
             }
-
-            for(l = 39; l <= 48; l += 3) {
-                if (this.getAnimationTick() == l) {
-                    this.BurrowParticle(0.6F, 0.0F, 2.0F);
-                    this.BurrowSound();
-                }
+            if (this.getAnimationTick() == 39 || this.getAnimationTick() == 42 || this.getAnimationTick() == 45|| this.getAnimationTick() == 48) {
+                BurrowParticle(0.6f, 0.0f, 2.0f);
+                BurrowSound();
             }
         }
 
         if (this.getAnimation() == CRAB_BITE) {
             if (this.getAnimationTick() == 14) {
-                this.playSound((SoundEvent) ModSounds.CRAB_BITE.get(), 1.0F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.CRAB_BITE.get(), 1.0F, 1.0F + this.getRandom().nextFloat() * 0.1F);
             }
 
             if (this.getAnimationTick() == 17) {
@@ -244,7 +237,7 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
                 double extraX = 1.0 * Mth.sin((float) (Math.PI + angle));
                 double extraY = 0.3F;
                 double extraZ = 1.0 * Mth.cos(angle);
-                int hitX = Mth.floor(getX() + vec * vecX + extraX);
+                int hitX = Mth.floor(getX() + vec * vecX+ extraX);
                 int hitY = Mth.floor(getY());
                 int hitZ = Mth.floor(getZ() + vec * vecZ + extraZ);
                 BlockPos hit = new BlockPos(hitX, hitY, hitZ);
@@ -253,7 +246,7 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
                     this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
                 }
             }
-            this.level().addParticle(new RingParticle.RingData(0f, (float) Math.PI / 2f, 25, 1f, 1f, 1f, 1f, 25f, false, RingParticle.EnumRingBehavior.GROW_THEN_SHRINK), getX() + vec * vecX + f * math, getY() + 0.3f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
+            this.level().addParticle(new RingParticleOptions(0f, (float) Math.PI / 2f, 25, 255, 255, 255, 1f, 25f, false, 2), getX() + vec * vecX + f * math, getY() + 0.3f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
         }
     }
 
@@ -264,8 +257,8 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
                 double DeltaMovementY = getRandom().nextGaussian() * 0.1D;
                 double DeltaMovementZ = getRandom().nextGaussian() * 0.07D;
                 float angle = (0.01745329251F * this.yBodyRot) + i1;
-                float f = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
-                float f1 = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
+                float f = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)) ;
+                float f1 = Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)) ;
                 double extraX = size * Mth.sin((float) (Math.PI + angle));
                 double extraY = 0.3F;
                 double extraZ = size * Mth.cos(angle);
@@ -278,9 +271,7 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
                 int hitZ = Mth.floor(getZ() + vec * vecZ + extraZ);
                 BlockPos hit = new BlockPos(hitX, hitY, hitZ);
                 BlockState block = level().getBlockState(hit.below());
-                if (block.getRenderShape() != RenderShape.INVISIBLE) {
-                    this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
-                }
+                this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
             }
         }
     }
@@ -309,7 +300,7 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
         float angle = 360.0F / quakeCount;
         for (int i = 0; i < quakeCount; i++) {
             EarthQuake_Entity peq = new EarthQuake_Entity(this.level(), this);
-            peq.setDamage((float) CMConfig.AmethystCrabEarthQuakeDamage);
+            peq.setDamage((float) CMCommonConfig.AmethystCrab.EarthQuakeDamage);
             peq.shootFromRotation(this, 0, angle * i, 0.0F, 0.25F, 0.0F);
             peq.setPos(this.getX() + vec * vecX + f * math, this.getY(), getZ() + vec * vecZ + f1 * math);
             this.level().addFreshEntity(peq);
@@ -532,7 +523,7 @@ public class ZombieAmethystCrab extends LLibraryBossSummon {
                     double vy = 0 + entity.random.nextFloat() * 0.3F;
                     double vz = Mth.sin(throwAngle);
                     double v3 = Mth.sqrt((float) (vx * vx + vz * vz));
-                    Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), entity.level(), entity,(float)CMConfig.AmethystClusterdamage);
+                    Amethyst_Cluster_Projectile_Entity projectile = new Amethyst_Cluster_Projectile_Entity(ModEntities.AMETHYST_CLUSTER_PROJECTILE.get(), entity.level(), entity,(float)CMCommonConfig.AmethystCrab.AmethystClusterDamage);
 
                     projectile.moveTo(sx, sy, sz, i * 11.25F, entity.getXRot());
                     float speed = 0.8F;

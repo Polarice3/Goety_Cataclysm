@@ -272,7 +272,7 @@ public class CoralGolemServant extends LLibrarySummon implements ISemiAquatic {
 
     private void EarthQuake(float grow, int damage) {
         ScreenShake_Entity.ScreenShake(this.level(), this.position(), 10.0F, 0.15F, 0, 20);
-        this.playSound(SoundEvents.GENERIC_EXPLODE, 0.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+        this.playSound(CataclysmSounds.EXPLOSION.get(), 0.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
             if (!MobUtil.areAllies(this, entity) && entity != this) {

@@ -11,47 +11,90 @@ import net.minecraft.world.level.Level;
 
 public class IABossSummon extends InternalAnimationSummon{
     private int reducedDamageTicks;
+    private float damageBucket = 0.0f;
 
     public IABossSummon(EntityType<? extends Summoned> entity, Level world) {
         super(entity, world);
     }
 
-    public boolean hurt(DamageSource source, float damage) {
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
         if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return super.hurt(source, damage);
-        } else {
-            damage = Math.min(this.DamageCap(), damage);
-            if (this.ReducedDamage(source) && this.reducedDamageTicks > 0) {
-                float reductionFactor = 1.0F - (float)this.reducedDamageTicks / (float)this.DamageTime();
-                damage *= reductionFactor;
-            }
-
-            boolean flag = super.hurt(source, damage);
-            if (this.ReducedDamage(source) && flag) {
-                this.reducedDamageTicks = this.DamageTime();
-            }
-
-            return flag;
+            return super.hurt(source, amount);
+        } else{
+            amount = Math.min(DamageCap(), amount);
         }
+
+        double distSqr = calculateRange(source);
+
+        if (distSqr != -1) {
+            double limit = this.RangeLimit();
+            double maxLimit = limit * 1.5;
+
+            double limitSqr = limit * limit;
+            double maxLimitSqr = maxLimit * maxLimit;
+
+            if (distSqr >= maxLimitSqr) {
+                return false;
+            }
+
+            if (distSqr > limitSqr) {
+                double distance = Math.sqrt(distSqr);
+
+                float multiplier = (float) ((maxLimit - distance) / (maxLimit - limit));
+
+                amount *= multiplier;
+
+                if (amount <= 0) return false;
+            }
+        }
+
+        if (!source.is(ModTag.BYPASSES_HURT_TIME)) {
+
+            float projectedBucket = damageBucket + amount;
+            float limit = this.DamageCap();
+
+            if (projectedBucket > limit) {
+                float roomLeft = limit - damageBucket;
+
+                if (roomLeft > 0) {
+                    amount = roomLeft;
+                    damageBucket = limit;
+                } else {
+                    amount = 0.1F;
+                }
+            } else {
+                damageBucket += amount;
+            }
+        }
+        boolean flag = super.hurt(source, amount);
+
+        return flag;
     }
 
-    public boolean ReducedDamage(DamageSource damageSource) {
-        return !damageSource.is(ModTag.BYPASSES_HURT_TIME) && this.DamageTime() > 0;
-    }
 
     public float DamageCap() {
         return Float.MAX_VALUE;
     }
 
-    public int DamageTime() {
-        return 0;
+    public float DpsCap() {
+        return Float.MAX_VALUE;
+    }
+
+    public double RangeLimit() {
+        return Double.MAX_VALUE;
     }
 
     public void tick() {
         super.tick();
         if (!this.level().isClientSide()) {
-            if (this.reducedDamageTicks > 0) {
-                --this.reducedDamageTicks;
+            if (!this.isNoAi()) {
+                if (this.damageBucket > 0) {
+                    this.damageBucket -= (this.DpsCap() / 20.0f);
+                    if (this.damageBucket < 0) {
+                        this.damageBucket = 0;
+                    }
+                }
             }
         }
 

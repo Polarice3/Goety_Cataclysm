@@ -9,7 +9,7 @@ import com.Polarice3.goety_cataclysm.common.items.block.EnderGolemSkullItem;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.AI.CmAttackGoal;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
@@ -109,12 +109,12 @@ public class EnderGolemServant extends LLibraryBossSummon {
         MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.EnderGolemDamage.get());
     }
 
-    protected int decreaseAirSupply(int air) {
-        return air;
+    public double RangeLimit() {
+        return CMCommonConfig.EnderGolem.rangeCap;
     }
 
-    public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
-        return false;
+    protected int decreaseAirSupply(int air) {
+        return air;
     }
 
     private static Animation getRandomAttack(RandomSource rand) {
@@ -130,22 +130,22 @@ public class EnderGolemServant extends LLibraryBossSummon {
         return 15;
     }
 
+    @Override
     public boolean hurt(DamageSource source, float damage) {
-        if ((this.getAnimation() == VOID_RUNE_ATTACK || !this.getIsAwaken()) && (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) || !source.is(DamageTypes.MAGIC))) {
-            damage = (float)((double)damage * 0.5D);
-        }
-
-        double range = this.calculateRange(source);
-        if (range > CMConfig.EndergolemLongRangelimit * CMConfig.EndergolemLongRangelimit && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            return false;
-        } else {
-            Entity entity = source.getDirectEntity();
-            if (entity instanceof AbstractGolem) {
-                damage = (float)((double)damage * 0.5D);
+        if (this.getAnimation() == VOID_RUNE_ATTACK
+                || !this.getIsAwaken()) {
+            if(source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)|| !source.is(DamageTypes.MAGIC)) {
+                damage *= 0.5;
             }
-
-            return super.hurt(source, damage);
         }
+        double range = calculateRange(source);
+
+        Entity entity = source.getDirectEntity();
+        if (entity instanceof AbstractGolem) {
+            damage *= 0.5;
+        }
+
+        return super.hurt(source, damage);
     }
 
     protected void defineSynchedData() {
@@ -277,7 +277,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
     }
 
     private void EarthQuake(float grow, int damage) {
-        this.playSound(SoundEvents.GENERIC_EXPLODE, 1.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+        this.playSound(CataclysmSounds.EXPLOSION.get(), 1.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(grow))) {
             if (!MobUtil.areAllies(this, entity)) {
@@ -341,7 +341,7 @@ public class EnderGolemServant extends LLibraryBossSummon {
         } while(blockpos.getY() >= Mth.floor(minY) - 1);
 
         if (flag) {
-            this.level().addFreshEntity(new Void_Rune_Entity(this.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (float)CMConfig.Voidrunedamage, this));
+            this.level().addFreshEntity(new Void_Rune_Entity(this.level(), x, (double)blockpos.getY() + d0, z, rotation, delay, (float)CMCommonConfig.EnderGolem.VoidRuneDamage, this));
         }
 
     }

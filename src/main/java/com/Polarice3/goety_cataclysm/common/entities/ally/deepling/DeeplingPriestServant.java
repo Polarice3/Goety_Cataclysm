@@ -39,7 +39,7 @@ public class DeeplingPriestServant extends AbstractDeeplingServant{
     public static final Animation DEEPLING_BLIND = Animation.create(57);
     private int lightcooldown = 200;
     public static final int LIGHT_COOLDOWN = 200;
-    private static final EntityDimensions SWIMMING_SIZE = new EntityDimensions(1.15f, 0.6F, false);
+    private static final EntityDimensions SWIMMING_SIZE = EntityDimensions.fixed(1.15f, 0.6F);
 
     public DeeplingPriestServant(EntityType<? extends AbstractDeeplingServant> entity, Level world) {
         super(entity, world);
@@ -157,10 +157,6 @@ public class DeeplingPriestServant extends AbstractDeeplingServant{
             }
 
         }
-    }
-
-    protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-        return sizeIn.height * 0.9F;
     }
 
     public EntityDimensions getSwimmingSize() {

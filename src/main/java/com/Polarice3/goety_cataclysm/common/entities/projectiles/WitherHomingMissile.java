@@ -6,11 +6,9 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -41,53 +39,40 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class WitherHomingMissile extends Projectile {
-    private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(WitherHomingMissile.class, EntityDataSerializers.FLOAT);
-    public double xPower;
-    public double yPower;
-    public double zPower;
+    public double accelerationPower;
     @Nullable
     private Entity finalTarget;
     @Nullable
     private UUID targetId;
+    private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(WitherHomingMissile.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> FUSE = SynchedEntityData.defineId(WitherHomingMissile.class, EntityDataSerializers.INT);
 
-    public WitherHomingMissile(EntityType<? extends WitherHomingMissile> p_36833_, Level p_36834_) {
-        super(p_36833_, p_36834_);
+    private Vec3[] trailPositions = new Vec3[64];
+    private int trailPointer = -1;
+
+    public WitherHomingMissile(EntityType<? extends WitherHomingMissile> type, Level level) {
+        super(type, level);
+        this.accelerationPower = 0.1;
     }
 
-    public WitherHomingMissile(Level worldIn, LivingEntity entity) {
-        this(GCEntityType.WITHER_HOMING_MISSILE.get(), worldIn);
-        this.setOwner(entity);
-    }
-
-    public WitherHomingMissile(EntityType<? extends WitherHomingMissile> p_36817_, double p_36818_, double p_36819_, double p_36820_, double p_36821_, double p_36822_, double p_36823_, Level p_36824_) {
-        this(p_36817_, p_36824_);
-        this.moveTo(p_36818_, p_36819_, p_36820_, this.getYRot(), this.getXRot());
+    public WitherHomingMissile(EntityType<? extends WitherHomingMissile> type, double getX, double gety, double getz, Vec3 vec3, Level level) {
+        this(type, level);
+        this.moveTo(getX, gety, getz, this.getYRot(), this.getXRot());
         this.reapplyPosition();
-        double d0 = Math.sqrt(p_36821_ * p_36821_ + p_36822_ * p_36822_ + p_36823_ * p_36823_);
-        if (d0 != 0.0D) {
-            this.xPower = p_36821_ / d0 * 0.1D;
-            this.yPower = p_36822_ / d0 * 0.1D;
-            this.zPower = p_36823_ / d0 * 0.1D;
-        }
+        this.assignDirectionalMovement(vec3, this.accelerationPower);
+
     }
 
-    public WitherHomingMissile(LivingEntity p_36827_, double p_36828_, double p_36829_, double p_36830_, Level p_36831_, LivingEntity finalTarget) {
-        this(GCEntityType.WITHER_HOMING_MISSILE.get(), p_36827_.getX(), p_36827_.getY(), p_36827_.getZ(), p_36828_, p_36829_, p_36830_, p_36831_);
+    public WitherHomingMissile(LivingEntity p_36827_, Vec3 vec3, Level p_36831_,float damage,LivingEntity target) {
+        this(GCEntityType.WITHER_HOMING_MISSILE.get(), p_36827_.getX(), p_36827_.getY(), p_36827_.getZ(), vec3, p_36831_);
         this.setOwner(p_36827_);
-        this.finalTarget = finalTarget;
+        this.setDamage(damage);
         this.setRot(p_36827_.getYRot(), p_36827_.getXRot());
-    }
-
-    public WitherHomingMissile(Level worldIn, LivingEntity entity, LivingEntity finalTarget) {
-        this(GCEntityType.WITHER_HOMING_MISSILE.get(), worldIn);
-        this.setOwner(entity);
-        this.finalTarget = finalTarget;
+        this.setFuse(80);
+        this.finalTarget = target;
     }
 
     @Override
@@ -96,7 +81,24 @@ public class WitherHomingMissile extends Projectile {
     }
 
     protected void defineSynchedData() {
-        this.entityData.define(DAMAGE, (float) CMConfig.WitherHomingMissiledamage);
+        this.entityData.define(DAMAGE, 0.0F);
+        this.entityData.define(FUSE, 80);
+    }
+
+    public float getDamage() {
+        return (Float)this.entityData.get(DAMAGE);
+    }
+
+    public void setDamage(float damage) {
+        this.entityData.set(DAMAGE, damage);
+    }
+
+    public void setFuse(int life) {
+        this.entityData.set(FUSE, life);
+    }
+
+    public int getFuse() {
+        return (Integer)this.entityData.get(FUSE);
     }
 
     public boolean shouldRenderAtSqrDistance(double p_36837_) {
@@ -115,32 +117,21 @@ public class WitherHomingMissile extends Projectile {
             p_37357_.putUUID("Target", this.finalTarget.getUUID());
         }
         p_37357_.putFloat("damage", this.getDamage());
-        p_37357_.put("power", this.newDoubleList(new double[]{this.xPower, this.yPower, this.zPower}));
+        p_37357_.putDouble("acceleration_power", this.accelerationPower);
+        p_37357_.putShort("fuse", (short)this.getFuse());
     }
 
     public void readAdditionalSaveData(CompoundTag p_37353_) {
         super.readAdditionalSaveData(p_37353_);
+        this.setFuse(p_37353_.getShort("fuse"));
         if (p_37353_.hasUUID("Target")) {
             this.targetId = p_37353_.getUUID("Target");
         }
-        if (p_37353_.contains("power", 9)) {
-            ListTag listtag = p_37353_.getList("power", 6);
-            if (listtag.size() == 3) {
-                this.xPower = listtag.getDouble(0);
-                this.yPower = listtag.getDouble(1);
-                this.zPower = listtag.getDouble(2);
-            }
+
+        if (p_37353_.contains("acceleration_power", 6)) {
+            this.accelerationPower = p_37353_.getDouble("acceleration_power");
         }
         this.setDamage(p_37353_.getFloat("damage"));
-
-    }
-
-    public float getDamage() {
-        return this.entityData.get(DAMAGE);
-    }
-
-    public void setDamage(float damage) {
-        this.entityData.set(DAMAGE, damage);
     }
 
     public void tick() {
@@ -158,7 +149,7 @@ public class WitherHomingMissile extends Projectile {
             double d0 = this.getX() + vec3.x;
             double d1 = this.getY() + vec3.y;
             double d2 = this.getZ() + vec3.z;
-            ProjectileUtil.rotateTowardsMovement(this, 0.2F);
+            ProjectileUtil.rotateTowardsMovement(this, 1.0F);
             float f = this.getInertia();
             if (this.isInWater()) {
                 for(int i = 0; i < 4; ++i) {
@@ -168,11 +159,13 @@ public class WitherHomingMissile extends Projectile {
                 f = 0.8F;
             }
             this.level().addParticle(ParticleTypes.SMOKE, this.getX() - vec3.x, this.getY() - vec3.y + 0.15D, this.getZ() - vec3.z, 0.0D, 0.0D, 0.0D);
-            this.setDeltaMovement(vec3.add(this.xPower, this.yPower, this.zPower).scale((double)f));
+            this.setDeltaMovement(vec3.add(vec3.normalize().scale(this.accelerationPower)).scale((double)f));
             this.setPos(d0, d1, d2);
         } else {
             this.discard();
         }
+        int f = this.getFuse() - 1;
+        this.setFuse(f);
         if (this.level() instanceof ServerLevel serverLevel) {
             if (this.finalTarget == null && this.targetId != null) {
                 this.finalTarget = serverLevel.getEntity(this.targetId);
@@ -201,27 +194,44 @@ public class WitherHomingMissile extends Projectile {
                     this.targetId = livingEntity.getUUID();
                 }
             }
-
+            LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
             if (this.finalTarget == null || !this.finalTarget.isAlive() || (this.finalTarget instanceof Player && this.finalTarget.isSpectator())) {
-                this.yPower = -0.175;
+                ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
+                this.discard();
             } else {
-                double d = this.distanceToSqr(this.finalTarget);
-                double dx = this.finalTarget.getX() - this.getX();
-                double dy = this.finalTarget.getY() + this.finalTarget.getBbHeight() * 1.2F - this.getY();
-                double dz = this.finalTarget.getZ() - this.getZ();
-                double d13 = 3;
-                dx /= d;
-                dy /= d;
-                dz /= d;
-                this.xPower += dx * d13;
-                this.yPower += dy * d13;
-                this.zPower += dz * d13;
-                this.xPower = (double) Mth.clamp((float) this.xPower, -0.175, 0.175);
-                this.yPower = (double) Mth.clamp((float) this.yPower, -0.175, 0.175);
-                this.zPower = (double) Mth.clamp((float) this.zPower, -0.175, 0.175);
+                Vec3 target = new Vec3(finalTarget.getX(),finalTarget.getY(0.5),finalTarget.getZ());
+                Vec3 currentVelocity = this.getDeltaMovement();
+                Vec3 toTarget = target.subtract(this.position());
+                double distance = toTarget.length();
+
+                if (distance > 0.1) {
+                    Vec3 desiredDirection = toTarget.normalize();
+
+                    double homingStrength = Mth.clamp((distance - 1.0) / 10.0, 0.1, 1.0);
+
+                    Vec3 newDirection = currentVelocity.normalize().scale(1.0 - homingStrength)
+                            .add(desiredDirection.scale(homingStrength))
+                            .normalize()
+                            .scale(currentVelocity.length());
+
+                    this.assignDirectionalMovement(newDirection, this.getInertia());
+                }
+            }
+
+            if (f <= 0) {
+                ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
+                this.discard();
             }
         }
 
+        Vec3 trailAt = this.position().add(0, this.getBbHeight() / 2F, 0);
+        if (trailPointer == -1) {
+            Arrays.fill(trailPositions, trailAt);
+        }
+        if (++this.trailPointer == this.trailPositions.length) {
+            this.trailPointer = 0;
+        }
+        this.trailPositions[this.trailPointer] = trailAt;
     }
 
 
@@ -245,14 +255,16 @@ public class WitherHomingMissile extends Projectile {
             }
 
             if (flag && entity instanceof LivingEntity livingEntity) {
-                int i = 5;
+                int i = 0;
                 if (this.level().getDifficulty() == Difficulty.NORMAL) {
                     i = 10;
                 } else if (this.level().getDifficulty() == Difficulty.HARD) {
                     i = 15;
                 }
 
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 5 * i, 0), this.getEffectSource());
+                if (i > 0) {
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * i, 1), this.getEffectSource());
+                }
             }
             LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
             ExplosionUtil.lootExplode(this.level(), this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
@@ -324,26 +336,52 @@ public class WitherHomingMissile extends Projectile {
         return 1.0F;
     }
 
+    public Vec3 getTrailPosition(int pointer, float partialTick) {
+        if (this.isRemoved()) {
+            partialTick = 1.0F;
+        }
+
+        int i = this.trailPointer - pointer & 63;
+        int j = this.trailPointer - pointer - 1 & 63;
+        Vec3 d0 = this.trailPositions[j];
+        Vec3 d1 = this.trailPositions[i].subtract(d0);
+        return d0.add(d1.scale((double)partialTick));
+    }
+
+    public boolean hasTrail() {
+        return this.trailPointer != -1;
+    }
+
+    @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         Entity entity = this.getOwner();
         int i = entity == null ? 0 : entity.getId();
-        return new ClientboundAddEntityPacket(this.getId(), this.getUUID(), this.getX(), this.getY(), this.getZ(), this.getXRot(), this.getYRot(), this.getType(), i, new Vec3(this.xPower, this.yPower, this.zPower), 0.0D);
+
+        return new ClientboundAddEntityPacket(
+                this.getId(),
+                this.getUUID(),
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                this.getXRot(),
+                this.getYRot(),
+                this.getType(),
+                i,
+                this.getDeltaMovement(),
+                0.0D
+        );
     }
 
-    public void recreateFromPacket(ClientboundAddEntityPacket p_150128_) {
-        super.recreateFromPacket(p_150128_);
-        double d0 = p_150128_.getXa();
-        double d1 = p_150128_.getYa();
-        double d2 = p_150128_.getZa();
-        double d3 = Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-        if (d3 != 0.0D) {
-            this.xPower = d0 / d3 * 0.1D;
-            this.yPower = d1 / d3 * 0.1D;
-            this.zPower = d2 / d3 * 0.1D;
-        }
-
+    public void recreateFromPacket(ClientboundAddEntityPacket packet) {
+        super.recreateFromPacket(packet);
+        Vec3 vec3 = new Vec3(packet.getXa(), packet.getYa(), packet.getZa());
+        this.setDeltaMovement(vec3);
+        this.xRotO = this.getXRot();
+        this.yRotO = this.getYRot();
     }
-    protected boolean shouldBurn() {
-        return false;
+
+    private void assignDirectionalMovement(Vec3 movement, double accelerationPower) {
+        this.setDeltaMovement(movement.normalize().scale(accelerationPower));
+        this.hasImpulse = true;
     }
 }

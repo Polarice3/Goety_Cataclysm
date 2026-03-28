@@ -42,7 +42,7 @@ public class DeeplingBruteServant extends AbstractDeeplingServant{
     public static final Animation DEEPLING_BRUTE_MELEE = Animation.create(20);
     private int SpinAttackTicks;
     private static final EntityDataAccessor<Boolean> SPIN_ATTACK = SynchedEntityData.defineId(DeeplingBruteServant.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDimensions SWIMMING_SIZE = new EntityDimensions(1.3f, 0.7F, false);
+    private static final EntityDimensions SWIMMING_SIZE = EntityDimensions.fixed(1.3f, 0.7F);
 
     public DeeplingBruteServant(EntityType<? extends AbstractDeeplingServant> entity, Level world) {
         super(entity, world);
@@ -211,10 +211,6 @@ public class DeeplingBruteServant extends AbstractDeeplingServant{
             this.setSpinAttack(false);
         }
 
-    }
-
-    protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-        return sizeIn.height * 0.9F;
     }
 
     public AABB getSwimmingBox() {

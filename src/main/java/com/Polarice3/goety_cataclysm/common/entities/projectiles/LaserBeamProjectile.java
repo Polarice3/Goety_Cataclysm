@@ -13,22 +13,24 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class LaserBeamProjectile extends Laser_Beam_Entity {
+
     public LaserBeamProjectile(EntityType<? extends Laser_Beam_Entity> type, Level level) {
         super(type, level);
     }
 
-    public LaserBeamProjectile(EntityType<? extends Laser_Beam_Entity> type, double getX, double gety, double getz, double p_36821_, double p_36822_, double p_36823_, Level level) {
-        super(type, getX, gety, getz, p_36821_, p_36822_, p_36823_, level);
+    public LaserBeamProjectile(EntityType<? extends Laser_Beam_Entity> type, double getX, double gety, double getz, Vec3 vec, Level level) {
+        super(type, getX, gety, getz, vec, level);
     }
 
-    public LaserBeamProjectile(LivingEntity p_36827_, double p_36828_, double p_36829_, double p_36830_, Level p_36831_, float damage) {
-        super(p_36827_, p_36828_, p_36829_, p_36830_, p_36831_, damage);
+    public LaserBeamProjectile(LivingEntity p_36827_, Vec3 vec3, Level p_36831_, float damage) {
+        super(p_36827_, vec3, p_36831_, damage);
     }
 
-    public LaserBeamProjectile(EntityType<? extends Laser_Beam_Entity> type, LivingEntity p_36827_, double getX, double gety, double getz, double p_36821_, double p_36822_, double p_36823_, float damage, Level level) {
-        super(type, p_36827_, getX, gety, getz, p_36821_, p_36822_, p_36823_, damage, level);
+    public LaserBeamProjectile(EntityType<? extends Laser_Beam_Entity> type, LivingEntity p_36827_, double getX, double gety, double getz, Vec3 vec3, float damage, Level level) {
+        super(type, p_36827_, getX, gety, getz, vec3, damage, level);
     }
 
     protected Component getTypeName() {

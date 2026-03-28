@@ -52,6 +52,11 @@ public class BattlefieldSpell extends Spell {
     }
 
     @Override
+    public int castDuration(LivingEntity caster, ItemStack staff) {
+        return 60;
+    }
+
+    @Override
     public int defaultSpellCooldown() {
         return GCSpellConfig.BattlefieldCoolDown.get();
     }

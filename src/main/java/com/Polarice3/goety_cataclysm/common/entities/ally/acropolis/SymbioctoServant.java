@@ -143,11 +143,12 @@ public class SymbioctoServant extends Summoned implements RangedAttackMob {
 
     public void updateSwimming() {
         if (!this.level().isClientSide) {
-            if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
+            boolean inWaterAI = this.isEffectiveAi() && this.isInWater() && this.wantsToSwim();
+            if (inWaterAI && !(this.moveControl instanceof SymbioctoSwimControl)) {
                 this.navigation = this.waterNavigation;
                 this.moveControl = new SymbioctoSwimControl(this, 4.0F);
                 this.setSwimming(true);
-            } else {
+            } else if (!inWaterAI && (this.moveControl instanceof SymbioctoSwimControl)) {
                 this.navigation = this.groundNavigation;
                 this.moveControl = new MoveControl(this);
                 this.setSwimming(false);

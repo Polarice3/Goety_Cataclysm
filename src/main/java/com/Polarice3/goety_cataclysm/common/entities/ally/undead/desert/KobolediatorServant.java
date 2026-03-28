@@ -16,14 +16,13 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.client.particle.RingParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModParticle;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,11 +30,14 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -44,6 +46,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -54,6 +57,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
@@ -63,6 +67,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.Tags;
 
+import javax.annotation.Nullable;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -92,6 +98,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
 
     private int charge_cooldown = 0;
     public static final int CHARGE_COOLDOWN = 160;
+    private static final EntityDataAccessor<Boolean> AWAKEN = SynchedEntityData.defineId(KobolediatorServant.class, EntityDataSerializers.BOOLEAN);
 
     public KobolediatorServant(EntityType<? extends Summoned> entity, Level world) {
         super(entity, world);
@@ -105,9 +112,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
         this.goalSelector.addGoal(5, new WanderGoal<>(this, 1.0F, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(2, new InternalSummonMoveGoal(this,false,1.0D));
-
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, SWORD_1, 0, 50, 15, 12){
+        this.goalSelector.addGoal(3, new InternalSummonMoveGoal(this,false,1.0D));
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, SWORD_1, 0, 50, 15, 12){
             @Override
             public boolean canUse() {
                 return super.canUse() && KobolediatorServant.this.getRandom().nextFloat() * 100.0F < 16f && KobolediatorServant.this.earthquake_cooldown <= 0;
@@ -118,17 +124,17 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 KobolediatorServant.this.earthquake_cooldown = EARTHQUAKE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, SWORD_2, 0, 100, 64, 8));
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, SWORD_2, 0, 100, 64, 8));
 
         //chargePrepare
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, CHARGE_PREPARE, CHARGE, 40, 30, 15) {
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, CHARGE_PREPARE, CHARGE, 40, 30, 15) {
             @Override
             public boolean canUse() {
                 return super.canUse() && KobolediatorServant.this.getRandom().nextFloat() * 100.0F < 9f && KobolediatorServant.this.charge_cooldown <= 0;
             }
         });
 
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, CHARGE, CHARGE, CHARGE_END, 30, 0){
+        this.goalSelector.addGoal(2, new InternalSummonStateGoal(this, CHARGE, CHARGE, CHARGE_END, 30, 0){
             @Override
             public void tick() {
                 if(this.entity.onGround()){
@@ -139,7 +145,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 }
             }
         });
-        this.goalSelector.addGoal(0, new InternalSummonAttackGoal(this, CHARGE, CHARGE_END, 0, 40, 40, 5) {
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, CHARGE, CHARGE_END, 0, 40, 40, 5) {
 
             @Override
             public void stop() {
@@ -147,22 +153,16 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 KobolediatorServant.this.charge_cooldown = CHARGE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, CHARGE_END, CHARGE_END, 0, 40, 40) {
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, CHARGE_END, CHARGE_END, 0, 40, 40) {
             @Override
             public void stop() {
                 super.stop();
                 KobolediatorServant.this.charge_cooldown = CHARGE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, SLEEP, SLEEP, 0, 0, 0){
-            @Override
-            public void tick() {
-                this.entity.setDeltaMovement(0, this.entity.getDeltaMovement().y, 0);
-            }
-        });
-
-        this.goalSelector.addGoal(0, new InternalSummonAttackGoal(this, SLEEP, AWAKE, 0, 70, 0, 18));
-        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, BLOCK, BLOCK, 0, 18, 0, false));
+        this.goalSelector.addGoal(0, new KobolediatorDoNothingGoal());
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, AWAKE, AWAKE, 0, 70, 0));
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,9,9,0,18,0,false));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -285,16 +285,39 @@ public class KobolediatorServant extends InternalAnimationSummon {
         }
     }
 
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(AWAKEN, true);
+    }
+
+    public void setAwaken(boolean necklace) {
+        if(necklace){
+            this.heal(this.getMaxHealth());
+        }
+        this.entityData.set(AWAKEN, necklace);
+    }
+
+
+    public boolean getAwaken() {
+        return this.entityData.get(AWAKEN);
+    }
+
     public boolean isSleep() {
-        return this.getAttackState() == SLEEP || this.getAttackState() == AWAKE;
+        return !this.getAwaken() || this.getAttackState() == 2;
     }
 
     public void setSleep(boolean sleep) {
-        this.setAttackState(sleep ? SLEEP : 0);
+        this.setAttackState(sleep ? 1 : 0);
     }
 
     public boolean canBeSeenAsEnemy() {
         return !this.isSleep() && super.canBeSeenAsEnemy();
+    }
+
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_29678_, DifficultyInstance p_29679_, MobSpawnType p_29680_, @Nullable SpawnGroupData p_29681_, @Nullable CompoundTag p_29682_) {
+        this.setSleep(false);
+        return super.finalizeSpawn(p_29678_, p_29679_, p_29680_, p_29681_, p_29682_);
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
@@ -363,7 +386,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
             FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
             flyingItem.setOwner(this.getTrueOwner());
             flyingItem.setItem(itemStack);
-            flyingItem.setParticle(ModParticle.SANDSTORM.get());
+            flyingItem.setParticle(ParticleTypes.ENCHANT);
             flyingItem.setSecondsCool(30);
             this.level().addFreshEntity(flyingItem);
         }
@@ -377,18 +400,18 @@ public class KobolediatorServant extends InternalAnimationSummon {
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("is_Sleep", this.isSleep());
+        compound.putBoolean("Awaken", getAwaken());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setSleep(compound.getBoolean("is_Sleep"));
+        setAwaken(compound.getBoolean("Awaken"));
     }
 
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0, this.tickCount);
+            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0 && this.getAwaken(), this.tickCount);
         }
         if (earthquake_cooldown > 0) {
             earthquake_cooldown--;
@@ -409,19 +432,39 @@ public class KobolediatorServant extends InternalAnimationSummon {
 
         if (this.getAttackState() == SWORD_1) {
             if (this.attackTicks == 20) {
-                this.AreaAttack(10.0f,6.0F,60,1,120);
+                AreaAttack(10.0f,6.0F,60,1,120);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.1f, 0, 20);
-                this.MakeParticle(0.5f, 9.0f, 1.2f);
+                MakeParticle(0.5f, 9.0f, 1.2f);
             }
-            for (int l = 19; l <= 28; l = l + 2) {
-                if (this.attackTicks == l) {
-                    int d = l - 17;
-                    int d2 = l - 16;
-                    float ds = (float) (d + d2) / 2;
-                    this.StompDamage(0.25f, d, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
-                    this.StompDamage(0.25f, d2, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
-                    this.StompSound(ds,-0.2F);
-                }
+            if (this.attackTicks == 19) {
+                StompDamage(0.25f, 2, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompDamage(0.25f, 3, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompSound(2.5F,-0.2F);
+
+            }
+            if (this.attackTicks == 21) {
+                StompDamage(0.25f, 4, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompDamage(0.25f, 5, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompSound(4.5F,-0.2F);
+
+            }
+            if (this.attackTicks == 23) {
+                StompDamage(0.25f, 5, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompDamage(0.25f, 6, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompSound(5.5F,-0.2F);
+
+            }
+            if (this.attackTicks == 25) {
+                StompDamage(0.25f, 7, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompDamage(0.25f, 8, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompSound(7.5F,-0.2F);
+
+            }
+            if (this.attackTicks == 27) {
+                StompDamage(0.25f, 9, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompDamage(0.25f, 10, 5,1.05F, 2.0f, -0.2f, 0, 1.0f);
+                StompSound(9.5F,-0.2F);
+
             }
         }
 
@@ -505,8 +548,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
                     this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
                 }
             }
-            this.level().addParticle(new RingParticle.RingData(0f, (float)Math.PI/2f, 30, 1.0f, 1.0F,  1.0F, 1.0f, 20f, false, RingParticle.EnumRingBehavior.GROW_THEN_SHRINK), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
-
+            this.level().addParticle(new RingParticleOptions(0f, (float)Math.PI/2f, 30, 255, 255,  255, 1.0f, 20f, false, 2), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
         }
     }
 
@@ -564,21 +606,35 @@ public class KobolediatorServant extends InternalAnimationSummon {
         }
     }
 
-    private void StompDamage(float spreadarc, int distance, int height, float mxy, float vec,float math, int shieldbreakticks, float damage) {
-        double perpFacing = this.yBodyRot * (Math.PI / 180);
-        double facingAngle = perpFacing + Math.PI / 2;
+    private void StompDamage(float spreadarc, int distance, int height, float mxy, float vec, float math, int shieldbreakticks, float damage) {
+        double bodyRotRad = this.yBodyRot * (Math.PI / 180.0);
+        double cosBodyRot = Math.cos(bodyRotRad);
+        double sinBodyRot = Math.sin(bodyRotRad);
+
+        double facingAngle = bodyRotRad + Math.PI / 2.0;
+
+        double commonOffsetX = vec * -sinBodyRot + cosBodyRot * math;
+        double commonOffsetZ = vec * cosBodyRot + sinBodyRot * math;
+
+        double baseX = this.getX() + commonOffsetX;
+        double baseZ = this.getZ() + commonOffsetZ;
+
         int hitY = Mth.floor(this.getBoundingBox().minY - 0.5);
         double spread = Math.PI * spreadarc;
         int arcLen = Mth.ceil(distance * spread);
-        float f = Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)) ;
-        float f1 = Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)) ;
+
+        float factor = 1.0F - (float)distance / 12.0F;
+
         for (int i = 0; i < arcLen; i++) {
-            double theta = (i / (arcLen - 1.0) - 0.5) * spread + facingAngle;
+            double thetaRatio = (arcLen > 1) ? (double) i / (double) (arcLen - 1) : 0.5;
+            double theta = (thetaRatio - 0.5) * spread + facingAngle;
+
             double vx = Math.cos(theta);
             double vz = Math.sin(theta);
-            double px = this.getX() + vx * distance + vec * Math.cos((yBodyRot + 90) * Math.PI / 180) + f * math;
-            double pz = this.getZ() + vz * distance + vec * Math.sin((yBodyRot + 90) * Math.PI / 180  + f1 * math);
-            float factor = 1 - distance / (float) 12;
+
+            double px = baseX + vx * distance;
+            double pz = baseZ + vz * distance;
+
             int hitX = Mth.floor(px);
             int hitZ = Mth.floor(pz);
             BlockPos pos = new BlockPos(hitX, hitY + height, hitZ);
@@ -596,8 +652,10 @@ public class KobolediatorServant extends InternalAnimationSummon {
             if (block.getRenderShape() != RenderShape.MODEL) {
                 block = Blocks.AIR.defaultBlockState();
             }
-            this.spawnBlocks(hitX,hitY + height ,hitZ, (int) (this.getY() - height),block, px, pz, mxy, vx, vz, factor, shieldbreakticks, damage);
 
+            if (!this.level().isClientSide) {
+                this.spawnBlocks(hitX, hitY + height, hitZ, (int) (this.getY() - height), block, px, pz, mxy, vx, vz, factor, shieldbreakticks, damage);
+            }
         }
     }
 
@@ -716,5 +774,36 @@ public class KobolediatorServant extends InternalAnimationSummon {
             }
         }
         return InteractionResult.PASS;
+    }
+
+    class KobolediatorDoNothingGoal extends Goal {
+        public KobolediatorDoNothingGoal() {
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = KobolediatorServant.this.getTarget();
+            return !KobolediatorServant.this.getAwaken() && !(target != null &&  target.isAlive() && KobolediatorServant.this.distanceToSqr(target) < 255 && KobolediatorServant.this.getSensing().hasLineOfSight(target));
+        }
+
+        @Override
+        public void tick() {
+            KobolediatorServant.this.setDeltaMovement(0,KobolediatorServant.this.getDeltaMovement().y,0);
+        }
+
+        @Override
+        public void stop() {
+            KobolediatorServant.this.setAwaken(true);
+            KobolediatorServant.this.setAttackState(2);
+        }
+
+        @Override
+        public boolean isInterruptable() {
+            return false;
+        }
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 }

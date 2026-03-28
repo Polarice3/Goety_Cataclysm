@@ -14,7 +14,7 @@ import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Ashen_Breath_Entity;
@@ -421,7 +421,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
             mouthPos = mouthPos.yRot((float) Math.toRadians(-getYRot() - 90));
             mouthPos = mouthPos.add(position());
             mouthPos = mouthPos.add(new Vec3(0, 0, 0).xRot((float) Math.toRadians(-getXRot())).yRot((float) Math.toRadians(-yHeadRot)));
-            Ashen_Breath_Entity breath = new Ashen_Breath_Entity(ModEntities.ASHEN_BREATH.get(), IgnitedRevenantServant.this.level(), (float) CMConfig.Ashenbreathdamage,IgnitedRevenantServant.this);
+            Ashen_Breath_Entity breath = new Ashen_Breath_Entity(ModEntities.ASHEN_BREATH.get(), IgnitedRevenantServant.this.level(), (float) CMCommonConfig.IgnitedRevenant.AshenbreathDamage,IgnitedRevenantServant.this);
             if (IgnitedRevenantServant.this.getAnimationTick() == 27) {
                 breath.absMoveTo(mouthPos.x, mouthPos.y, mouthPos.z, IgnitedRevenantServant.this.yHeadRot, IgnitedRevenantServant.this.getXRot());
                 IgnitedRevenantServant.this.level().addFreshEntity(breath);
@@ -495,7 +495,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
     }
 
     private void launchbone1() {
-        this.playSound(SoundEvents.TRIDENT_THROW, 1F, 0.75f);
+        this.playSound(SoundEvents.DROWNED_SHOOT, 1F, 0.75f);
         for (int i = 0; i < 8; i++) {
             float yawRadians = (float) (Math.toRadians(90 + this.getYRot()));
             float throwAngle = yawRadians + i * Mth.PI / 4F;
@@ -519,7 +519,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
     }
 
     private void launchbone2() {
-        this.playSound(SoundEvents.TRIDENT_THROW, 1F, 0.75f);
+        this.playSound(SoundEvents.DROWNED_SHOOT, 1F, 0.75f);
         for (int i = 0; i < 6; i++) {
             float yawRadians = (float) (Math.toRadians(90 + this.getYRot()));
             float throwAngle = yawRadians +  i * Mth.PI / 3F;
@@ -543,7 +543,7 @@ public class IgnitedRevenantServant extends LLibraryBossSummon {
     }
 
     private void launchbone3() {
-        this.playSound(SoundEvents.TRIDENT_THROW, 1F, 0.75f);
+        this.playSound(SoundEvents.DROWNED_SHOOT, 1F, 0.75f);
         for (int i = 0; i < 10; i++) {
             float yawRadians = (float) (Math.toRadians(90 + this.getYRot()));
             float throwAngle = yawRadians + i * Mth.PI / 5F;

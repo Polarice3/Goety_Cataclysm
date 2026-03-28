@@ -5,7 +5,7 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.github.L_Ender.cataclysm.client.particle.LightningParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.LightningParticleOptions;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.nbt.CompoundTag;
@@ -139,7 +139,7 @@ public class AbyssMine extends Entity {
                     double d3 = (this.random.nextGaussian() * 0.3D);
                     double d4 = (this.random.nextGaussian() * 0.3D);
                     double d5 = (this.random.nextGaussian() * 0.3D);
-                    this.level().addParticle(new LightningParticle.OrbData(102, 26, 204), d0, d1, d2, d3, d4, d5);
+                    this.level().addParticle(new LightningParticleOptions(102, 26, 204), d0, d1, d2, d3, d4, d5);
                 }
 
                 if (this.lifeTicks == 14) {

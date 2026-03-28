@@ -87,25 +87,22 @@ public class WaterSpearSpell extends Spell {
 
                 Vec3 vec3 = new Vec3(x, vector3d.y, z).normalize();
 
-                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, worldIn, damage + potency);
-                water.accelerationPower = 0.2D;
+                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, worldIn, damage + potency, (0.2D * 10) + velocity);
                 water.setYRot(yRot);
                 water.setXRot(xRot);
                 water.setPosRaw(caster.getX() + (vector3d.x / 2) * math,
                         caster.getEyeY() - 0.2,
                         caster.getZ() + (vector3d.z / 2) * math);
-                water.accelerationPower += velocity;
                 water.setTotalBounces(8 + potency);
                 worldIn.addFreshEntity(water);
             }
         } else {
-            Water_Spear_Entity waterSpear = new Water_Spear_Entity(caster, vector3d, worldIn, damage + potency);
+            Water_Spear_Entity waterSpear = new Water_Spear_Entity(caster, vector3d, worldIn, damage + potency, (0.1D * 10) + velocity);
             waterSpear.setYRot(yRot);
             waterSpear.setXRot(xRot);
             waterSpear.setPosRaw(caster.getX() + vector3d.x / 2,
                     caster.getEyeY() - 0.2,
                     caster.getZ() + vector3d.z / 2);
-            waterSpear.accelerationPower += velocity;
             waterSpear.setTotalBounces(10 + potency);
             worldIn.addFreshEntity(waterSpear);
         }

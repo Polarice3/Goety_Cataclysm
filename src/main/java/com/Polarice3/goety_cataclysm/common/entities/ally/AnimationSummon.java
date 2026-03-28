@@ -18,7 +18,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -98,41 +97,39 @@ public class AnimationSummon extends Summoned {
 
     }
 
+    @Override
     public void die(DamageSource cause) {
-        if (!ForgeHooks.onLivingDeath(this, cause)) {
-            if (!this.dead) {
-                Entity entity = cause.getEntity();
-                LivingEntity livingentity = this.getKillCredit();
-                if (this.deathScore >= 0 && livingentity != null) {
-                    livingentity.awardKillScore(this, this.deathScore, cause);
-                }
-
-                if (this.isSleeping()) {
-                    this.stopSleeping();
-                }
-
-                this.dead = true;
-                this.getCombatTracker().recheckStatus();
-                if (this.level() instanceof ServerLevel && (entity == null || entity.killedEntity((ServerLevel)this.level(), this))) {
-                    this.gameEvent(GameEvent.ENTITY_DIE);
-                    this.createWitherRose(livingentity);
-                    this.AfterDefeatBoss(livingentity);
-                    if (!this.dropAfterDeathAnim) {
-                        this.dropAllDeathLoot(cause);
-                    }
-                }
-
-                this.killDataCause = cause;
-                this.killDataRecentlyHit = this.lastHurtByPlayerTime;
-                this.killDataAttackingPlayer = this.lastHurtByPlayer;
-                this.level().broadcastEntityEvent(this, (byte)3);
-                this.setPose(Pose.DYING);
-                if (!this.level().isClientSide && this.hasCustomName() && this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getTrueOwner() instanceof ServerPlayer) {
-                    this.getTrueOwner().sendSystemMessage(this.getCombatTracker().getDeathMessage());
-                }
+        if (net.minecraftforge.common.ForgeHooks.onLivingDeath(this, cause)) return;
+        if (!this.isRemoved() && !this.dead) {
+            Entity entity = cause.getEntity();
+            LivingEntity livingentity = this.getKillCredit();
+            if (this.deathScore >= 0 && livingentity != null) {
+                livingentity.awardKillScore(this, this.deathScore, cause);
             }
 
+            if (this.isSleeping()) {
+                this.stopSleeping();
+            }
+
+            this.dead = true;
+            this.getCombatTracker().recheckStatus();
+            if (this.level() instanceof ServerLevel serverlevel) {
+                if (entity == null || entity.killedEntity(serverlevel, this)) {
+                    this.gameEvent(GameEvent.ENTITY_DIE);
+                    this.dropAllDeathLoot(cause);
+                    this.createWitherRose(livingentity);
+                    this.AfterDefeatBoss(livingentity);
+                }
+
+                this.level().broadcastEntityEvent(this, (byte)3);
+            }
+
+            this.setPose(Pose.DYING);
+            if (!this.level().isClientSide && this.hasCustomName() && this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES) && this.getTrueOwner() instanceof ServerPlayer) {
+                this.getTrueOwner().sendSystemMessage(this.getCombatTracker().getDeathMessage());
+            }
         }
+
     }
 
     protected void AfterDefeatBoss(@Nullable LivingEntity p_21269_) {

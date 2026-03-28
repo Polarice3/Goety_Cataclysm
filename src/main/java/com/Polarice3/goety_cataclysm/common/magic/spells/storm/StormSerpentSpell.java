@@ -7,13 +7,12 @@ import com.Polarice3.Goety.common.magic.SpellStat;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.StormSerpent;
-import com.Polarice3.goety_cataclysm.common.network.GCNetwork;
-import com.Polarice3.goety_cataclysm.common.network.server.SRingParticlePacket;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.client.particle.Gathering_Water_Particle;
-import com.github.L_Ender.cataclysm.client.particle.RoarParticle;
-import com.github.L_Ender.cataclysm.client.particle.StormParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.GatheringWaterParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.RoarParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.StormParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -78,11 +77,11 @@ public class StormSerpentSpell extends Spell {
                 double p0 = caster.getX();
                 double p1 = caster.getY() + 0.1;
                 double p2 = caster.getZ();
-                worldIn.sendParticles(new Gathering_Water_Particle.GatheringData(r, g, b), p0 + (caster.getRandom().nextFloat() - 0.5F) * 12, p1 + (caster.getRandom().nextFloat() - 0.5F) * 2, p2 + (caster.getRandom().nextFloat() - 0.5F) * 12, 0, p0, p1, p2, 0.5F);
+                worldIn.sendParticles(new GatheringWaterParticleOptions(r, g, b), p0 + (caster.getRandom().nextFloat() - 0.5F) * 12, p1 + (caster.getRandom().nextFloat() - 0.5F) * 2, p2 + (caster.getRandom().nextFloat() - 0.5F) * 12, 0, p0, p1, p2, 0.5F);
             }
         }
         if (castTime == 30) {
-            GCNetwork.sentToTrackingEntityAndPlayer(caster, new SRingParticlePacket(0.0F, (float) Math.PI / 2.0F, 30, 94, 150, 226, 1.0F, 65, false, 1, caster.getX(), caster.getY() + 0.02f, caster.getZ()));
+            worldIn.sendParticles(new RingParticleOptions(0f, (float) Math.PI / 2f, 30, 94, 150, 226, 1.0f, 65, false, 0), caster.getX(), caster.getY() + 0.02f, caster.getZ(), 1, 0, 0, 0, 0);
         }
 
         if (castTime < 40 && castTime > 30) {
@@ -90,9 +89,9 @@ public class StormSerpentSpell extends Spell {
             float g = 241 / 255F;
             float b = 215 / 255F;
 
-            worldIn.sendParticles((new StormParticle.OrbData(99/255F, 194/255F, 224/255F, 6f + caster.getRandom().nextFloat() * 0.25f, 1.5F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
-            worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 4f + caster.getRandom().nextFloat() * 1.2f, 1.0F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
-            worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 2f + caster.getRandom().nextFloat() * 0.7f, 0.35F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(99/255F, 194/255F, 224/255F, 6f + caster.getRandom().nextFloat() * 0.25f, 1.5F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(r, g, b, 4f + caster.getRandom().nextFloat() * 1.2f, 1.0F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(r, g, b, 2f + caster.getRandom().nextFloat() * 0.7f, 0.35F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
         }
         if (castTime == 30) {
             this.playSound(worldIn, caster, CataclysmSounds.SCYLLA_ROAR.get(), 0.6F, 1.0f);
@@ -160,7 +159,7 @@ public class StormSerpentSpell extends Spell {
             double vecX = Math.cos(theta);
             double vecZ = Math.sin(theta);
 
-            serverLevel.sendParticles(new RoarParticle.RoarData(duration, r, g, b, a, start,inc,end), caster.getX() + vec * vecX + f * math, caster.getY() + y, caster.getZ() + vec * vecZ + f1 * math, 1, 0, 0, 0, 0);
+            serverLevel.sendParticles(new RoarParticleOptions(duration, r, g, b, a, start,inc,end), caster.getX() + vec * vecX + f * math, caster.getY() + y, caster.getZ() + vec * vecZ + f1 * math, 1, 0, 0, 0, 0);
         }
     }
 

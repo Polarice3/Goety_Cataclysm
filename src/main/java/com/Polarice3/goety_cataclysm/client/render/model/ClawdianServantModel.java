@@ -123,7 +123,7 @@ public class ClawdianServantModel<T extends Entity> extends HierarchicalModel<T>
             this.animate(servant.getAnimationState("claw_punch"), Clawdian_Animation.CLAW_PUNCH, ageInTicks, 1.0F);
             this.animate(servant.getAnimationState("grab_and_throw"), Clawdian_Animation.GRAB_AND_THROW, ageInTicks, 1.0F);
             this.animate(servant.getAnimationState("backstep"), Clawdian_Animation.BACKSTEP, ageInTicks, 1.0F);
-            float partialTick = Minecraft.getInstance().getFrameTime();
+            float partialTick = Minecraft.getInstance().getPartialTick();
 
             articulateLegs(servant.legSolver, partialTick);
         }

@@ -66,6 +66,7 @@ public class DeathLaserBeamRenderer extends EntityRenderer<DeathLaserBeam> {
         }
         VertexConsumer ivertexbuilder = bufferIn.getBuffer(CMRenderTypes.getGlowingEffect(getTextureLocation(solarBeam)));
 
+
         renderBeam(length, 180f / (float) Math.PI * yaw, 180f / (float) Math.PI * pitch, frame, matrixStackIn, ivertexbuilder, packedLightIn);
 
         matrixStackIn.pushPose();
@@ -89,37 +90,30 @@ public class DeathLaserBeamRenderer extends EntityRenderer<DeathLaserBeam> {
         drawVertex(matrix4f, matrix3f, builder, START_RADIUS, -START_RADIUS, 0, maxU, minV, 1, packedLightIn);
     }
 
-    private void renderStart(int frame, PoseStack matrixStackIn, VertexConsumer builder, int packedLightIn) {
-        if (clearerView) {
-            return;
-        }
-        matrixStackIn.pushPose();
-        Quaternionf quat = this.entityRenderDispatcher.cameraOrientation();
-        matrixStackIn.mulPose(quat);
-        renderFlatQuad(frame, matrixStackIn, builder, packedLightIn);
-        matrixStackIn.popPose();
-    }
-
     private void renderLighting(float frame, PoseStack poseStack,DeathLaserBeam entity, MultiBufferSource buffer) {
         double x = Mth.lerp(frame, entity.xOld, entity.getX());
         double y = Mth.lerp(frame, entity.yOld, entity.getY());
         double z = Mth.lerp(frame, entity.zOld, entity.getZ());
 
+        double x2 = Mth.lerp(frame, entity.prevCollidePosX, entity.collidePosX);
+        double y2 = Mth.lerp(frame, entity.prevCollidePosY, entity.collidePosY);
+        double z2 = Mth.lerp(frame, entity.prevCollidePosZ, entity.collidePosZ);
+
         float f1 = 0.0F;
 
-        if (entity.isActivated()) {
+        if (entity.tickCount > 20) {
             poseStack.pushPose();
 
             poseStack.translate(-x, -y, -z);
             LightningBoltData.BoltRenderInfo RedboltData = new LightningBoltData.BoltRenderInfo(0.5F, 0.15F, 0.25F, 0.25F, new Vector4f((float) 255 / 255, (float) 26 / 255, (float) 0 / 255, 0.9F), 0.86F);
-            LightningBoltData bolt1 = new LightningBoltData(RedboltData, new Vec3(x, y, z), new Vec3(entity.collidePosX, entity.collidePosY, entity.collidePosZ), 5)
+            LightningBoltData bolt1 = new LightningBoltData(RedboltData, new Vec3(x, y, z), new Vec3(x2, y2, z2), 5)
                     .size(0.1f)
                     .lifespan(1)
                     .spawn(LightningBoltData.SpawnFunction.NO_DELAY)
                     .fade(LightningBoltData.FadeFunction.NONE);
 
             LightningBoltData.BoltRenderInfo YellowboltData = new LightningBoltData.BoltRenderInfo(0.5F, 0.1F, 0.25F, 0.15F, new Vector4f((float) 249 / 255, (float) 194 / 255, (float) 43 / 255, 0.7F), 0.86F);
-            LightningBoltData bolt2 = new LightningBoltData(YellowboltData, new Vec3(x, y, z), new Vec3(entity.collidePosX, entity.collidePosY, entity.collidePosZ), 5)
+            LightningBoltData bolt2 = new LightningBoltData(YellowboltData, new Vec3(x, y, z),  new Vec3(x2, y2, z2), 5)
                     .size(0.07f)
                     .lifespan(1)
                     .spawn(LightningBoltData.SpawnFunction.NO_DELAY)
@@ -145,6 +139,17 @@ public class DeathLaserBeamRenderer extends EntityRenderer<DeathLaserBeam> {
             lightningRenderMap.put(uuid, new LightningRender());
         }
         return lightningRenderMap.get(uuid);
+    }
+
+    private void renderStart(int frame, PoseStack matrixStackIn, VertexConsumer builder, int packedLightIn) {
+        if (clearerView) {
+            return;
+        }
+        matrixStackIn.pushPose();
+        Quaternionf quat = this.entityRenderDispatcher.cameraOrientation();
+        matrixStackIn.mulPose(quat);
+        renderFlatQuad(frame, matrixStackIn, builder, packedLightIn);
+        matrixStackIn.popPose();
     }
 
     private void renderEnd(int frame, Direction side, PoseStack matrixStackIn, VertexConsumer builder, int packedLightIn) {

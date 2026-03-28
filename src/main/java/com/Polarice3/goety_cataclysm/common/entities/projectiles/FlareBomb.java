@@ -5,7 +5,6 @@ import com.Polarice3.Goety.common.entities.projectiles.SpellThrowableProjectile;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
-import com.github.L_Ender.cataclysm.client.particle.LightTrailParticle;
 import com.github.L_Ender.cataclysm.entity.projectile.Flame_Jet_Entity;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModParticle;
@@ -14,7 +13,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -28,11 +26,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 
 public class FlareBomb extends SpellThrowableProjectile {
     public double prevDeltaMovementX, prevDeltaMovementY, prevDeltaMovementZ;
+    private Vec3[] trailPositions = new Vec3[64];
+    private int trailPointer = -1;
 
     public FlareBomb(EntityType<? extends FlareBomb> type, Level world) {
         super(type, world);
@@ -157,18 +158,33 @@ public class FlareBomb extends SpellThrowableProjectile {
         this.prevDeltaMovementY = this.getDeltaMovement().y;
         this.prevDeltaMovementZ = this.getDeltaMovement().z;
 
-        this.setYRot(-((float) Mth.atan2(this.getDeltaMovement().x, this.getDeltaMovement().z)) * (180F / (float)Math.PI)) ;
+        this.setYRot(-((float)Mth.atan2(this.getDeltaMovement().x, this.getDeltaMovement().z)) * 57.295776F);
+        Vec3 trailAt = this.position().add(0.0, (double)(this.getBbHeight() / 2.0F), 0.0);
+        if (this.trailPointer == -1) {
+            Vec3 backAt = trailAt;
 
-        if (this.level() instanceof ServerLevel serverLevel){
-            double dx = getX() + 1.5F * (random.nextFloat() - 0.5F);
-            double dy = getY() + 1.5F * (random.nextFloat() - 0.5F);
-            double dz = getZ() + 1.5F * (random.nextFloat() - 0.5F);
-            float ran = 0.04f;
-            float r = 195/255F + random.nextFloat() * ran * 1.5F;
-            float g = 95/255F + random.nextFloat() * ran;
-            float b = 3/255F + random.nextFloat() * ran;
-            serverLevel.sendParticles((new LightTrailParticle.OrbData(r, g, b,0.1F,this.getBbHeight()/2,this.getId())),  dx, dy, dz, 1, 0, 0, 0, 0);
+            for(int i = 0; i < this.trailPositions.length; ++i) {
+                this.trailPositions[i] = backAt;
+            }
         }
+
+        if (++this.trailPointer == this.trailPositions.length) {
+            this.trailPointer = 0;
+        }
+
+        this.trailPositions[this.trailPointer] = trailAt;
+    }
+
+    public Vec3 getTrailPosition(int pointer, float partialTick) {
+        if (this.isRemoved()) {
+            partialTick = 1.0F;
+        }
+
+        int i = this.trailPointer - pointer & 63;
+        int j = this.trailPointer - pointer - 1 & 63;
+        Vec3 d0 = this.trailPositions[j];
+        Vec3 d1 = this.trailPositions[i].subtract(d0);
+        return d0.add(d1.scale((double)partialTick));
     }
 
     public void handleEntityEvent(byte id) {
@@ -177,6 +193,10 @@ public class FlareBomb extends SpellThrowableProjectile {
             this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F, false);
             this.level().addParticle(ModParticle.FLARE_EXPLODE.get(), this.getX(), this.getY(), this.getZ(), this.random.nextGaussian() * 0.05D, 0.005D, this.random.nextGaussian() * 0.05D);
         }
+    }
+
+    public boolean hasTrail() {
+        return this.trailPointer != -1;
     }
 
     protected boolean canHitEntity(Entity pEntity) {

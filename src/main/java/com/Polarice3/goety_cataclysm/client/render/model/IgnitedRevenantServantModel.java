@@ -405,7 +405,7 @@ public class IgnitedRevenantServantModel extends AdvancedEntityModel<IgnitedReve
         this.shield4.rotationPointY += Mth.cos(ageInTicks * 0.1F);
         this.shield2.rotationPointY -= Mth.cos(ageInTicks * 0.1F);
         this.shield3.rotationPointY -= Mth.cos(ageInTicks * 0.1F);
-        float partialTick = Minecraft.getInstance().getFrameTime();
+        float partialTick = Minecraft.getInstance().getPartialTick();
         float angerProgress = entityIn.prevangerProgress + (entityIn.angerProgress - entityIn.prevangerProgress) * partialTick;
 
         progressRotationPrev(root,angerProgress,(float)Math.toRadians(12.5F), 0, 0, 5f);

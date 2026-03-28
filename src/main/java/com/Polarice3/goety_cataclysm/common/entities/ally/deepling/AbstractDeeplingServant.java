@@ -24,6 +24,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
@@ -135,20 +136,21 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
         }
 
         boolean flag1 = this.canInFluidType(this.getEyeInFluidType());
-
-        if(flag1){
-            if(this.level().noCollision(this, this.getSwimmingBox())) {
-                if (!this.getDeeplingSwim()) {
-                    setDeeplingSwim(true);
+        if (this.level().isClientSide) {
+            if (flag1) {
+                if (this.level().noCollision(this, this.getSwimmingBox())) {
+                    if (!this.getDeeplingSwim()) {
+                        setDeeplingSwim(true);
+                    }
+                    refreshDimensions();
                 }
-                refreshDimensions();
-            }
-        }else{
-            if(this.level().noCollision(this, this.getNormalBox())) {
-                if (this.getDeeplingSwim()) {
-                    setDeeplingSwim(false);
+            } else {
+                if (this.level().noCollision(this, this.getNormalBox())) {
+                    if (this.getDeeplingSwim()) {
+                        setDeeplingSwim(false);
+                    }
+                    refreshDimensions();
                 }
-                refreshDimensions();
             }
         }
 
@@ -177,6 +179,23 @@ public class AbstractDeeplingServant extends LLibrarySummon implements ISemiAqua
             this.navigation = new SemiAquaticPathNavigator(this, level());
             this.isLandNavigator = false;
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float damage) {
+        if (source.is(DamageTypes.HOT_FLOOR) ) {
+            return false;
+        }
+
+        return super.hurt(source, damage);
+    }
+
+    public void onInsideBubbleColumn(boolean p_20322_) {
+
+    }
+
+    public void onAboveBubbleCol(boolean p_20313_) {
+
     }
 
     public AABB getSwimmingBox() {

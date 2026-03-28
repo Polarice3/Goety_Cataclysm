@@ -38,7 +38,6 @@ public class AttackSummonMoveGoal extends Goal {
         }
 
         this.Boss_monster.setAggressive(false);
-        this.Boss_monster.getNavigation().stop();
     }
 
     public boolean canContinueToUse() {

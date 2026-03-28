@@ -124,7 +124,7 @@ public class GCEvents {
                 owner = wave.getOwner();
             } else if (proj instanceof Flame_Jet_Entity flameJet) {
                 owner = flameJet.getCaster();
-            } else if (proj instanceof Boltstrike_Entity boltstrike) {
+            } else if (proj instanceof Bolt_strike_Entity boltstrike) {
                 owner = boltstrike.getCaster();
             } else if (proj instanceof Axe_Blade_Entity axeBlade) {
                 owner = axeBlade.getOwner();

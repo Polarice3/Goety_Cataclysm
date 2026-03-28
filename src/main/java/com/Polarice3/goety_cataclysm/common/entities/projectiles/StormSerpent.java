@@ -2,8 +2,8 @@ package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.github.L_Ender.cataclysm.client.particle.CircleLightningParticle;
-import com.github.L_Ender.cataclysm.client.particle.Not_Spin_TrailParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.CircleLightningParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.NotSpinTrailParticleOptions;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.init.ModEffect;
 import com.github.L_Ender.cataclysm.init.ModEntities;
@@ -191,13 +191,13 @@ public class StormSerpent extends Entity {
                         double extraY = d1+ 0.3F + random.nextFloat() * 2F;
                         double extraZ = d2 + velocity * 0.4F * Mth.cos(angle);
 
-                        this.level().addParticle(new Not_Spin_TrailParticle.NSTData(113/255F, 194/255F, 240/255F,0.05F,0.75F,0.5F, 0,60 + random.nextInt(40)), d0, d1, d2, extraX, extraY, extraZ);
+                        this.level().addParticle(new NotSpinTrailParticleOptions(113/255F, 194/255F, 240/255F,0.05F,0.75F,0.5F, 0,60 + random.nextInt(40)), d0, d1, d2, extraX, extraY, extraZ);
                     }
                 }
 
                 if (this.lifeTicks > 12 && this.lifeTicks < 18) {
                     for (int i = 0; i < 5; i++) {
-                        this.level().addParticle((new CircleLightningParticle.CircleData(113,194,240)), this.getX(), this.getY() + 0.1, this.getZ(),   this.getX() + (random.nextFloat() - 0.5F) * 7, this.getY() + 0.1,  this.getZ() + (random.nextFloat() - 0.5F) * 7);
+                        this.level().addParticle((new CircleLightningParticleOptions(0.1F, 113, 194, 240)), this.getX(), this.getY() + 0.1, this.getZ(),   this.getX() + (random.nextFloat() - 0.5F) * 7, this.getY() + 0.1,  this.getZ() + (random.nextFloat() - 0.5F) * 7);
                     }
                 }
 
@@ -220,7 +220,7 @@ public class StormSerpent extends Entity {
                         double extraY = d1+ 0.3F + random.nextFloat() * 1.2F;
                         double extraZ = d2 + velocity * 0.6F * Mth.cos(angle);
 
-                        this.level().addParticle(new Not_Spin_TrailParticle.NSTData(113/255F, 194/255F, 240/255F,0.05F,0.75F,0.5F, 0,80 + random.nextInt(40)), d0, d1, d2, extraX, extraY, extraZ);
+                        this.level().addParticle(new NotSpinTrailParticleOptions(113/255F, 194/255F, 240/255F,0.05F,0.75F,0.5F, 0,80 + random.nextInt(40)), d0, d1, d2, extraX, extraY, extraZ);
                     }
                 }
 
@@ -230,7 +230,7 @@ public class StormSerpent extends Entity {
                         double vecX = Math.cos(theta) * 8;
                         double vecZ = Math.sin(theta) * 8;
 
-                        this.level().addParticle((new CircleLightningParticle.CircleData(113,194,240)), this.getX() +vecX, this.getY() + 0.1, this.getZ()+vecZ,this.getX() + vecX + (random.nextFloat() - 0.5F) * 7, this.getY() + 0.1,  this.getZ() + vecZ + (random.nextFloat() - 0.5F) * 7);
+                        this.level().addParticle((new CircleLightningParticleOptions(0.1F, 113, 194, 240)), this.getX() +vecX, this.getY() + 0.1, this.getZ()+vecZ,this.getX() + vecX + (random.nextFloat() - 0.5F) * 7, this.getY() + 0.1,  this.getZ() + vecZ + (random.nextFloat() - 0.5F) * 7);
                     }
                 }
             }

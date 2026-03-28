@@ -15,7 +15,7 @@ public class GCCreativeTab {
 
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register(GoetyCataclysm.MOD_ID, () -> CreativeModeTab.builder()
             .withTabsBefore(ModCreativeTab.SERVANT_TAB.getId())
-            .icon(() -> GCItems.ABYSSAL_BEAM_FOCUS.get().getDefaultInstance())
+            .icon(() -> GCItems.IGNITED_HELM.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.goety_cataclysm"))
             .displayItems((parameters, output) -> {
                 GCItems.ITEMS.getEntries().forEach(i -> {

@@ -36,7 +36,7 @@ import java.util.function.Predicate;
 public class DeeplingServant extends AbstractDeeplingServant{
     public static final Animation DEEPLING_TRIDENT_THROW = Animation.create(40);
     public static final Animation DEEPLING_MELEE = Animation.create(20);
-    private static final EntityDimensions SWIMMING_SIZE = new EntityDimensions(1.15f, 0.6f, false);
+    private static final EntityDimensions SWIMMING_SIZE = EntityDimensions.fixed(1.15f, 0.6f);
 
     public DeeplingServant(EntityType<? extends AbstractDeeplingServant> entity, Level world) {
         super(entity, world);
@@ -142,10 +142,6 @@ public class DeeplingServant extends AbstractDeeplingServant{
                 }
             }
         }
-    }
-
-    protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-        return sizeIn.height * 0.9F;
     }
 
     public EntityDimensions getSwimmingSize() {

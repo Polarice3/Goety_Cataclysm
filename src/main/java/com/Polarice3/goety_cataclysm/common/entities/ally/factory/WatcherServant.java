@@ -131,7 +131,7 @@ public class WatcherServant extends LLibrarySummon {
                     double d5 = target.getZ() - d2;
 
                     Vec3 vec3 = new Vec3(d3, d4, d5);
-                    LaserBeamProjectile laserBeam = new LaserBeamProjectile(this, d3, d4, d5, this.level(), GCAttributesConfig.WatcherRangeDamage.get().floatValue());
+                    LaserBeamProjectile laserBeam = new LaserBeamProjectile(this, vec3, this.level(), GCAttributesConfig.WatcherRangeDamage.get().floatValue());
                     float yRot = (float) (Mth.atan2(vec3.z, vec3.x) * (180F / Math.PI)) + 90F;
                     float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
                     laserBeam.setYRot(yRot);

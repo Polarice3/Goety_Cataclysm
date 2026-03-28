@@ -18,7 +18,7 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
@@ -49,6 +49,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 
 import java.util.EnumSet;
@@ -171,11 +172,31 @@ public class ProwlerServant extends InternalAnimationSummon {
         if (source.is(CMDamageTypes.EMP) && this.getAttackState() != STUNNED) {
             this.setAttackState(STUNNED);
         }
-        double range = calculateRange(source);
-        if (range > CMConfig.ProwlerLongRangelimit * CMConfig.ProwlerLongRangelimit) {
-            return false;
-        }
+        double distSqr = calculateRange(source);
 
+        if (distSqr != -1) {
+            double limit = CMCommonConfig.Prowler.rangeCap;
+            double maxLimit = limit * 1.5;
+
+            double limitSqr = limit * limit;
+            double maxLimitSqr = maxLimit * maxLimit;
+
+            if (distSqr >= maxLimitSqr) {
+                return false;
+            }
+
+            if (distSqr > limitSqr) {
+                double distance = Math.sqrt(distSqr);
+
+                float multiplier = (float) ((maxLimit - distance) / (maxLimit - limit));
+
+                damage *= multiplier;
+
+                if (damage <= 0) {
+                    return false;
+                }
+            }
+        }
         return super.hurt(source, damage);
     }
 
@@ -412,11 +433,14 @@ public class ProwlerServant extends InternalAnimationSummon {
         double d0 = this.getX() + 0.5f * vecX + f * math;
         double d1 = this.getY() + y;
         double d2 = this.getZ() + 0.5f * vecZ + f1 * math;
-
-        WitherHomingMissile missile = new WitherHomingMissile(this.level(), this,target);
-        missile.setPosRaw(d0, d1, d2);
-        missile.setDamage(GCAttributesConfig.ProwlerMissileDamage.get().floatValue());
-        this.level().addFreshEntity(missile);
+        double d3 = target.getX() - d0;
+        double d4 = target.getY() - d1;
+        double d5 = target.getZ() - d2;
+        Vec3 vec3 = new Vec3(d3, d4, d5);
+        WitherHomingMissile laserBeam = new WitherHomingMissile(this, vec3.normalize(),this.level(),
+                (float) CMCommonConfig.Prowler.HomingMissiledamage,target);
+        laserBeam.setPosRaw(d0, d1, d2);
+        this.level().addFreshEntity(laserBeam);
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {

@@ -9,7 +9,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 
 public abstract class OwnedCMPart<T extends LivingEntity & IOwned> extends Cm_Part_Entity<T> {
     public OwnedCMPart(T parent) {
@@ -23,10 +22,6 @@ public abstract class OwnedCMPart<T extends LivingEntity & IOwned> extends Cm_Pa
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
 
-    }
-
-    public MobType getMobType() {
-        return MobType.WATER;
     }
 
     public boolean isPickable() {

@@ -23,17 +23,13 @@ public class WitherHomingMissileModel extends AdvancedEntityModel<WitherHomingMi
         root.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, 3.5F, 2.0F, 2.0F, 1.0F, 0.1F, false);
     }
 
-
-    @Override
     public Iterable<AdvancedModelBox> getAllParts() {
-        return ImmutableList.of(root);
+        return ImmutableList.of(this.root);
     }
 
-    @Override
     public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(root);
+        return ImmutableList.of(this.root);
     }
-
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {
         AdvancedModelBox.rotateAngleX = x;

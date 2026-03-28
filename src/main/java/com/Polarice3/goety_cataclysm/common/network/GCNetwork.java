@@ -1,7 +1,6 @@
 package com.Polarice3.goety_cataclysm.common.network;
 
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
-import com.Polarice3.goety_cataclysm.common.network.server.SRingParticlePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -22,7 +21,6 @@ public class GCNetwork {
 
     public static void init() {
         INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(GoetyCataclysm.MOD_ID, "channel"), () -> "1.0", s -> true, s -> true);
-        INSTANCE.registerMessage(nextID(), SRingParticlePacket.class, SRingParticlePacket::encode, SRingParticlePacket::decode, SRingParticlePacket::consume);
     }
 
     public static <MSG> void sendTo(Player player, MSG msg) {

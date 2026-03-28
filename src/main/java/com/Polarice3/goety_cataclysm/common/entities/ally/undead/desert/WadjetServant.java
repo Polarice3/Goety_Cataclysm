@@ -15,17 +15,17 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
 import com.github.L_Ender.cataclysm.entity.projectile.Ancient_Desert_Stele_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Sandstorm_Projectile;
 import com.github.L_Ender.cataclysm.init.ModEffect;
-import com.github.L_Ender.cataclysm.init.ModParticle;
 import com.github.L_Ender.lionfishapi.client.model.tools.DynamicChain;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -79,7 +79,8 @@ public class WadjetServant extends InternalAnimationSummon {
     public AnimationState magicAnimationState = new AnimationState();
     public AnimationState deathAnimationState = new AnimationState();
     public AnimationState blockAnimationState = new AnimationState();
-    public static final EntityDataAccessor<Boolean> STAB = SynchedEntityData.defineId(WadjetServant .class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> AWAKEN = SynchedEntityData.defineId(WadjetServant.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> STAB = SynchedEntityData.defineId(WadjetServant.class, EntityDataSerializers.BOOLEAN);
     public static int SLEEP = 1;
     public static int AWAKE = 2;
     public static int SPEAR_CHARGE = 3;
@@ -108,11 +109,12 @@ public class WadjetServant extends InternalAnimationSummon {
 
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(0, new WadjetDoNothingGoal());
         this.goalSelector.addGoal(2, new InternalSummonMoveGoal(this, false, 1.0));
         this.goalSelector.addGoal(5, new WanderGoal<>(this, 1.0, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(1, new ChargeAttackGoal(this, 0, SPEAR_CHARGE, 0, 45, 15, 20, 5.5F, 16.0F));
+        this.goalSelector.addGoal(1, new ChargeAttackGoal(this,0,SPEAR_CHARGE,0,45,15,20,5.5F,16));
         this.goalSelector.addGoal(1, new MagicAttackGoal(this, 0, MAGIC, 0, 35, 15, 3.5F, 12.0F));
         this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, STAB_SWING, 0, 60, 60, 5.0F) {
             public boolean canUse() {
@@ -139,6 +141,7 @@ public class WadjetServant extends InternalAnimationSummon {
                 this.entity.setDeltaMovement(0.0, this.entity.getDeltaMovement().y, 0.0);
             }
         });
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, AWAKE, AWAKE, 0, 70,0));
         this.goalSelector.addGoal(0, new InternalSummonAttackGoal(this, SLEEP, AWAKE, 0, 70, 0, 18.0F));
         this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, 8, BLOCK, 0, 20, 0, false));
     }
@@ -204,6 +207,21 @@ public class WadjetServant extends InternalAnimationSummon {
         }
     }
 
+    @Override
+    public void handleDamageEvent(DamageSource damageSource) {
+        this.invulnerableTime = 20;
+        this.hurtDuration = 10;
+        this.hurtTime = this.hurtDuration;
+        SoundEvent soundevent = this.getHurtSound(damageSource);
+        if (soundevent != null) {
+            this.playSound(soundevent, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+        }
+
+        this.hurt(this.damageSources().generic(), 0.0F);
+        this.lastDamageSource = damageSource;
+        this.lastDamageStamp = this.level().getGameTime();
+    }
+
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
         boolean flag = false;
         if (!this.isNoAi() && damageSourceIn.is(DamageTypeTags.IS_PROJECTILE) && !flag && (this.getAttackState() == 0 || this.getAttackState() == 8)) {
@@ -252,10 +270,11 @@ public class WadjetServant extends InternalAnimationSummon {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(STAB, false);
+        this.entityData.define(AWAKEN, true);
     }
 
     public boolean isSleep() {
-        return this.getAttackState() == SLEEP || this.getAttackState() == AWAKE;
+        return this.getAwaken() || this.getAttackState() == 2;
     }
 
     public void setSleep(boolean sleep) {
@@ -268,6 +287,21 @@ public class WadjetServant extends InternalAnimationSummon {
 
     public boolean getStab() {
         return this.entityData.get(STAB);
+    }
+
+    public void setAwaken(boolean necklace) {
+        if (necklace){
+            this.heal(this.getMaxHealth());
+        }
+        this.entityData.set(AWAKEN, necklace);
+    }
+
+    public boolean getAwaken() {
+        return this.entityData.get(AWAKEN);
+    }
+
+    public boolean canBeSeenAsEnemy() {
+        return !this.isSleep() && super.canBeSeenAsEnemy();
     }
 
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
@@ -332,7 +366,7 @@ public class WadjetServant extends InternalAnimationSummon {
             FlyingItem flyingItem = new FlyingItem(ModEntityType.FLYING_ITEM.get(), this.level(), this.getX(), this.getY(), this.getZ());
             flyingItem.setOwner(this.getTrueOwner());
             flyingItem.setItem(itemStack);
-            flyingItem.setParticle(ModParticle.SANDSTORM.get());
+            flyingItem.setParticle(ParticleTypes.ENCHANT);
             flyingItem.setSecondsCool(30);
             this.level().addFreshEntity(flyingItem);
         }
@@ -346,18 +380,18 @@ public class WadjetServant extends InternalAnimationSummon {
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("is_Sleep", this.isSleep());
+        compound.putBoolean("Awaken", getAwaken());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setSleep(compound.getBoolean("is_Sleep"));
+        setAwaken(compound.getBoolean("Awaken"));
     }
 
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0, this.tickCount);
+            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0 && this.getAwaken(), this.tickCount);
         }
 
         this.prevAttackProgress = this.AttackProgress;
@@ -521,171 +555,151 @@ public class WadjetServant extends InternalAnimationSummon {
         return InteractionResult.PASS;
     }
 
-    static class ChargeAttackGoal extends Goal {
-        protected final WadjetServant entity;
-        private final int getAttackState;
-        private final int attackstate;
-        private final int attackendstate;
-        private final int attackMaxtick;
-        private final int attackseetick;
-        private final int attackshottick;
-        private final float attackminrange;
-        private final float attackrange;
-
-        public ChargeAttackGoal(WadjetServant entity, int getAttackState, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, int attackshottick, float attackminrange, float attackrange) {
-            this.entity = entity;
-            this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
-            this.getAttackState = getAttackState;
-            this.attackstate = attackstate;
-            this.attackendstate = attackendstate;
-            this.attackMaxtick = attackMaxtick;
-            this.attackseetick = attackseetick;
-            this.attackshottick = attackshottick;
-            this.attackminrange = attackminrange;
-            this.attackrange = attackrange;
+    class WadjetDoNothingGoal extends Goal {
+        public WadjetDoNothingGoal() {
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.JUMP, Goal.Flag.LOOK));
         }
 
+        @Override
         public boolean canUse() {
-            LivingEntity target = this.entity.getTarget();
-            return target != null && this.entity.distanceTo(target) > this.attackminrange && target.isAlive() && this.entity.distanceTo(target) < this.attackrange && this.entity.getAttackState() == this.getAttackState && this.entity.getRandom().nextFloat() * 100.0F < 16.0F && this.entity.charge_cooldown <= 0;
+            LivingEntity target = WadjetServant.this.getTarget();
+            return !WadjetServant.this.getAwaken() && !(target != null &&  target.isAlive() && WadjetServant.this.distanceToSqr(target) < 50 && WadjetServant.this.getSensing().hasLineOfSight(target));
         }
 
-        public void start() {
-            this.entity.setAttackState(this.attackstate);
+        @Override
+        public void tick() {
+            WadjetServant.this.setDeltaMovement(0,WadjetServant.this.getDeltaMovement().y,0);
         }
 
+        @Override
         public void stop() {
-            this.entity.setAttackState(this.attackendstate);
-            this.entity.charge_cooldown = 160;
+            WadjetServant.this.setAwaken(true);
+            WadjetServant.this.setAttackState(2);
         }
 
-        public boolean canContinueToUse() {
-            return this.entity.attackTicks < this.attackMaxtick;
+        @Override
+        public boolean isInterruptable() {
+            return false;
         }
-
         public boolean requiresUpdateEveryTick() {
             return true;
-        }
-
-        public void tick() {
-            LivingEntity target = this.entity.getTarget();
-            if (this.entity.attackTicks < this.attackseetick && target != null) {
-                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                this.entity.setYRot(this.entity.yBodyRot);
-            } else {
-                this.entity.setYRot(this.entity.yRotO);
-            }
-
-            if (this.entity.attackTicks == this.attackseetick) {
-                float f1 = (float)Math.cos(Math.toRadians((double)(this.entity.getYRot() + 90.0F)));
-                float f2 = (float)Math.sin(Math.toRadians((double)(this.entity.getYRot() + 90.0F)));
-                if (target != null) {
-                    float r = this.entity.distanceTo(target);
-                    r = Mth.clamp(r, 0.0F, 4.0F);
-                    this.entity.push((double)f1 * 0.3 * (double)r, 0.0, (double)f2 * 0.3 * (double)r);
-                } else {
-                    this.entity.push((double)f1 * 2.0, 0.0, (double)f2 * 2.0);
-                }
-            }
-
-            if (this.entity.attackTicks == this.attackshottick && target != null) {
-                double d1 = 5.0;
-                Vec3 vec3 = this.entity.getViewVector(1.0F);
-                double d2 = target.getX() - (this.entity.getX() + vec3.x * d1);
-                double d3 = target.getY(0.5) - this.entity.getY(0.15);
-                double d4 = target.getZ() - (this.entity.getZ() + vec3.z * d1);
-                Sandstorm_Projectile largefireball = new Sandstorm_Projectile(this.entity, d2, d3, d4, this.entity.level(), 6.0F);
-                largefireball.setState(1);
-                largefireball.setPos(this.entity.getX() + vec3.x * d1, this.entity.getY(0.15), largefireball.getZ() + vec3.z * d1);
-                this.entity.level().addFreshEntity(largefireball);
-            }
-
         }
     }
 
-    static class MagicAttackGoal extends Goal {
+    static class ChargeAttackGoal extends InternalSummonAttackGoal {
         protected final WadjetServant entity;
-        private final int getAttackState;
-        private final int attackstate;
-        private final int attackendstate;
-        private final int attackMaxtick;
-        private final int attackseetick;
-        private final float attackminrange;
-        private final float attackrange;
 
-        public MagicAttackGoal(WadjetServant entity, int getAttackState, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackminrange, float attackrange) {
+        private final int attackshottick;
+        private final float attackminrange;
+
+
+        public ChargeAttackGoal(WadjetServant entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, int attackshottick,float attackminrange,int attackrange) {
+            super(entity, getattackstate, attackstate, attackendstate, attackMaxtick, attackseetick, attackrange);
             this.entity = entity;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
-            this.getAttackState = getAttackState;
-            this.attackstate = attackstate;
-            this.attackendstate = attackendstate;
-            this.attackMaxtick = attackMaxtick;
-            this.attackseetick = attackseetick;
+            this.attackshottick = attackshottick;
             this.attackminrange = attackminrange;
-            this.attackrange = attackrange;
         }
 
+
+
+        @Override
         public boolean canUse() {
-            LivingEntity target = this.entity.getTarget();
-            return target != null && this.entity.distanceTo(target) > this.attackminrange && target.isAlive() && this.entity.distanceTo(target) < this.attackrange && this.entity.getAttackState() == this.getAttackState && this.entity.getRandom().nextFloat() * 100.0F < 24.0F && this.entity.magic_cooldown <= 0;
+            LivingEntity target = entity.getTarget();
+            return target != null && this.entity.distanceTo(target) > attackminrange && super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < 16f && this.entity.charge_cooldown <= 0;
         }
 
-        public void start() {
-            this.entity.setAttackState(this.attackstate);
-            LivingEntity target = this.entity.getTarget();
-            if (target != null) {
-                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-            }
 
-        }
-
+        @Override
         public void stop() {
-            this.entity.setAttackState(this.attackendstate);
-            this.entity.attackCooldown = 0;
-            this.entity.magic_cooldown = 160;
+            super.stop();
+            this.entity.charge_cooldown = CHARGE_COOLDOWN;
         }
 
-        public boolean canContinueToUse() {
-            return this.entity.attackTicks < this.attackMaxtick;
+
+        public void tick() {
+            LivingEntity target = entity.getTarget();
+            super.tick();
+            if (entity.attackTicks == attackseetick) {
+                float f1 = (float) Math.cos(Math.toRadians(entity.yBodyRot + 90));
+                float f2 = (float) Math.sin(Math.toRadians(entity.yBodyRot + 90));
+                if(target != null) {
+                    float r = entity.distanceTo(target);
+                    r = Mth.clamp(r, 0, 4);
+                    entity.push(f1 * 0.3 * r, 0, f2 * 0.3 * r);
+                }else{
+                    entity.push(f1 * 2.0, 0, f2 * 2.0);
+                }
+            }
+            if (entity.attackTicks == attackshottick) {
+                if (target != null) {
+                    double d1 = 5.0D;
+                    Vec3 vec3 = entity.getViewVector(1.0F);
+                    double d2 = target.getX() - (entity.getX() + vec3.x * d1);
+                    double d3 = target.getY(0.5D) - entity.getY(0.15D);
+                    double d4 = target.getZ() - (entity.getZ() + vec3.z * d1);
+                    Sandstorm_Projectile largefireball = new Sandstorm_Projectile(entity, d2, d3, d4, entity.level(),6);
+                    largefireball.setState(1);
+                    largefireball.setPos(entity.getX() + vec3.x * d1, entity.getY(0.15D), largefireball.getZ() + vec3.z * d1);
+                    entity.level().addFreshEntity(largefireball);
+                }
+            }
+        }
+    }
+
+    static class MagicAttackGoal extends InternalSummonAttackGoal {
+        protected final WadjetServant entity;
+
+        private final float attackminrange;
+
+        public MagicAttackGoal(WadjetServant entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick,float attackminrange, float attackrange) {
+            super(entity, getattackstate, attackstate, attackendstate, attackMaxtick, attackseetick, attackrange);
+            this.entity = entity;
+            this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
+            this.attackminrange = attackminrange;
         }
 
-        public boolean requiresUpdateEveryTick() {
-            return true;
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = entity.getTarget();
+            return target != null && this.entity.distanceTo(target) > attackminrange && super.canUse() && this.entity.getRandom().nextFloat() * 100.0F < 24f && this.entity.magic_cooldown <= 0;
+        }
+
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.entity.magic_cooldown = MAGIC_COOLDOWN;
         }
 
         public void tick() {
-            LivingEntity target = this.entity.getTarget();
+            LivingEntity target = entity.getTarget();
             if (target != null) {
-                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                if (this.entity.attackTicks == this.attackseetick) {
+                entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                if (entity.attackTicks == attackseetick) {
                     double d1 = target.getY();
-                    float f = (float)Mth.atan2(target.getZ() - this.entity.getZ(), target.getX() - this.entity.getX());
+                    float f = (float) Mth.atan2(target.getZ() - this.entity.getZ(), target.getX() - this.entity.getX());
 
-                    int k;
-                    float f6;
-                    for(k = 0; k < 8; ++k) {
-                        f6 = f + (float)k * 3.1415927F * 2.0F / 8.0F + 1.2566371F;
-                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 4.5, this.entity.getZ() + (double)Mth.sin(f6) * 4.5, d1, f6, 3);
+                    for(int k = 0; k < 8; ++k) {
+                        float f2 = f + (float)k * (float)Math.PI * 2.0F / 8.0F + ((float) Math.PI * 2F / 5F);
+                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f2) * 4.5D, this.entity.getZ() + (double)Mth.sin(f2) * 4.5D, d1, f2, 3);
                     }
-
-                    for(k = 0; k < 13; ++k) {
-                        f6 = f + (float)k * 3.1415927F * 2.0F / 13.0F + 0.62831855F;
-                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 6.5, this.entity.getZ() + (double)Mth.sin(f6) * 6.5, d1, f6, 10);
+                    for (int k = 0; k < 13; ++k) {
+                        float f3 = f + (float) k * (float) Math.PI * 2.0F / 13.0F + ((float) Math.PI * 2F / 10F);
+                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f3) * 6.5D, this.entity.getZ() + (double)Mth.sin(f3) * 6.5D, d1, f3, 10);
                     }
-
-                    for(k = 0; k < 16; ++k) {
-                        f6 = f + (float)k * 3.1415927F * 2.0F / 16.0F + 0.31415927F;
-                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 8.5, this.entity.getZ() + (double)Mth.sin(f6) * 8.5, d1, f6, 15);
+                    for (int k = 0; k < 16; ++k) {
+                        float f4 = f + (float) k * (float) Math.PI * 2.0F / 16.0F + ((float) Math.PI * 2F / 20F);
+                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f4) * 8.5D, this.entity.getZ() + (double)Mth.sin(f4) * 8.5D, d1, f4, 15);
                     }
-
-                    for(k = 0; k < 19; ++k) {
-                        f6 = f + (float)k * 3.1415927F * 2.0F / 19.0F + 0.15707964F;
-                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 10.5, this.entity.getZ() + (double)Mth.sin(f6) * 10.5, d1, f6, 20);
+                    for (int k = 0; k < 19; ++k) {
+                        float f5 = f + (float) k * (float) Math.PI * 2.0F / 19.0F + ((float) Math.PI * 2F / 40F);
+                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f5) * 10.5D, this.entity.getZ() + (double)Mth.sin(f5) * 10.5D, d1, f5, 20);
                     }
-
-                    for(k = 0; k < 24; ++k) {
-                        f6 = f + (float)k * 3.1415927F * 2.0F / 24.0F + 0.07853982F;
-                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 12.5, this.entity.getZ() + (double)Mth.sin(f6) * 12.5, d1, f6, 30);
+                    for (int k = 0; k < 24; ++k) {
+                        float f6 = f + (float) k * (float) Math.PI * 2.0F / 24.0F + ((float) Math.PI * 2F / 80F);
+                        this.spawnSpikeLine(this.entity.getX() + (double)Mth.cos(f6) * 12.5D, this.entity.getZ() + (double)Mth.sin(f6) * 12.5D, d1, f6, 30);
                     }
                 }
             }
@@ -694,27 +708,27 @@ public class WadjetServant extends InternalAnimationSummon {
 
         private void spawnSpikeLine(double posX, double posZ, double posY, float rotation, int delay) {
             BlockPos blockpos = BlockPos.containing(posX, posY, posZ);
-            double d0 = 0.0;
-
+            double d0 = 0.0D;
             do {
                 BlockPos blockpos1 = blockpos.above();
-                BlockState blockstate = this.entity.level().getBlockState(blockpos1);
-                if (blockstate.isFaceSturdy(this.entity.level(), blockpos1, Direction.DOWN)) {
-                    if (!this.entity.level().isEmptyBlock(blockpos)) {
-                        BlockState blockstate1 = this.entity.level().getBlockState(blockpos);
-                        VoxelShape voxelshape = blockstate1.getCollisionShape(this.entity.level(), blockpos);
+                BlockState blockstate = entity.level().getBlockState(blockpos1);
+                if (blockstate.isFaceSturdy(entity.level(), blockpos1, Direction.DOWN)) {
+                    if (!entity.level().isEmptyBlock(blockpos)) {
+                        BlockState blockstate1 = entity.level().getBlockState(blockpos);
+                        VoxelShape voxelshape = blockstate1.getCollisionShape(entity.level(), blockpos);
                         if (!voxelshape.isEmpty()) {
                             d0 = voxelshape.max(Direction.Axis.Y);
                         }
                     }
+
                     break;
                 }
 
                 blockpos = blockpos.above();
-            } while(blockpos.getY() < Math.min(this.entity.level().getMaxBuildHeight(), this.entity.getBlockY() + 12));
-
-            this.entity.level().addFreshEntity(new Ancient_Desert_Stele_Entity(this.entity.level(), posX, (double)blockpos.getY() + d0 - 3.0, posZ, rotation, delay, (float)CMConfig.AncientDesertSteledamage, this.entity));
+            } while (blockpos.getY() < Math.min(entity.level().getMaxBuildHeight(), entity.getBlockY() + 12));
+            this.entity.level().addFreshEntity(new Ancient_Desert_Stele_Entity(this.entity.level(), posX, (double)blockpos.getY() + d0 -3, posZ, rotation, delay, (float)CMCommonConfig.Wadjet.AncientDesertSteledamage, this.entity));
         }
+
     }
 
 }

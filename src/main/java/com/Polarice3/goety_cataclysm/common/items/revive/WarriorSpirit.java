@@ -10,8 +10,8 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.Koboledi
 import com.Polarice3.goety_cataclysm.common.entities.ally.undead.desert.KoboletonServant;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.entity.AnimationMonster.Koboleton_Entity;
-import com.github.L_Ender.cataclysm.init.ModParticle;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -51,7 +51,7 @@ public class WarriorSpirit extends ReviveServantItem {
                     servant.spawnAnim();
                     if (level instanceof ServerLevel serverLevel) {
                         for(int i = 0; i < 8; ++i) {
-                            ServerParticleUtil.addParticlesAroundSelf(serverLevel, ModParticle.SANDSTORM.get(), servant);
+                            ServerParticleUtil.addParticlesAroundSelf(serverLevel, ParticleTypes.ENCHANT, servant);
                         }
                     }
 

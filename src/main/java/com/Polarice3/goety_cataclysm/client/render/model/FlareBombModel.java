@@ -1,8 +1,6 @@
 package com.Polarice3.goety_cataclysm.client.render.model;
 
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.FlareBomb;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.phys.Vec3;
@@ -20,6 +18,7 @@ public class FlareBombModel extends HierarchicalModel<FlareBomb> {
 
     public void setupAnim(FlareBomb entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         float delta = ageInTicks - (float)entity.tickCount;
+        this.root().getAllParts().forEach(ModelPart::resetPose);
         Vec3 prevV = new Vec3(entity.prevDeltaMovementX, entity.prevDeltaMovementY, entity.prevDeltaMovementZ);
         Vec3 dv = prevV.add(entity.getDeltaMovement().subtract(prevV).scale((double)delta));
         double d = Math.sqrt(dv.x * dv.x + dv.y * dv.y + dv.z * dv.z);
@@ -40,9 +39,5 @@ public class FlareBombModel extends HierarchicalModel<FlareBomb> {
 
     public ModelPart root() {
         return this.root;
-    }
-
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

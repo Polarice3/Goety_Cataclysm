@@ -135,13 +135,15 @@ public class CindariaServant extends InternalAnimationSummon {
 
     }
 
+    @Override
     public void updateSwimming() {
         if (!this.level().isClientSide) {
-            if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
+            boolean inWaterAI = this.isEffectiveAi() && this.isInWater() && this.wantsToSwim();
+            if (inWaterAI && !(this.moveControl instanceof CindariaSwimControl)) {
                 this.navigation = this.waterNavigation;
-                this.moveControl = new CindariaSwimControl(this, 4.0F);
+                this.moveControl = new CindariaSwimControl(this, 4.0f);
                 this.setSwimming(true);
-            } else {
+            } else if (!inWaterAI && (this.moveControl instanceof CindariaSwimControl)) {
                 this.navigation = this.groundNavigation;
                 this.moveControl = new MoveControl(this);
                 this.setSwimming(false);
@@ -266,8 +268,7 @@ public class CindariaServant extends InternalAnimationSummon {
     }
 
     public boolean canBeAffected(MobEffectInstance p_34192_) {
-        return p_34192_.getEffect() != ModEffect.EFFECTABYSSAL_CURSE.get() && super.canBeAffected(p_34192_);
-    }
+        return p_34192_.getEffect() != ModEffect.EFFECTSTUN.get() && p_34192_.getEffect() != ModEffect.EFFECTABYSSAL_CURSE.get() && super.canBeAffected(p_34192_);    }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
@@ -380,76 +381,49 @@ public class CindariaServant extends InternalAnimationSummon {
         }
     }
 
-    static class MagicAttackGoal extends Goal {
+    static class MagicAttackGoal extends InternalSummonAttackGoal {
         protected final CindariaServant entity;
-        private final int getAttackState;
-        private final int attackstate;
-        private final int attackendstate;
-        private final int attackMaxtick;
-        private final int attackseetick;
         private final float attackminrange;
-        private final float attackrange;
 
-        public MagicAttackGoal(CindariaServant entity, int getAttackState, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackminrange, float attackrange) {
+        public MagicAttackGoal(CindariaServant entity, int getattackstate, int attackstate, int attackendstate, int attackMaxtick, int attackseetick, float attackminrange, float attackrange) {
+            super(entity,getattackstate,attackstate,attackendstate,attackMaxtick,attackseetick,attackrange);
             this.entity = entity;
             this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
-            this.getAttackState = getAttackState;
-            this.attackstate = attackstate;
-            this.attackendstate = attackendstate;
-            this.attackMaxtick = attackMaxtick;
-            this.attackseetick = attackseetick;
             this.attackminrange = attackminrange;
-            this.attackrange = attackrange;
         }
 
+        @Override
         public boolean canUse() {
-            LivingEntity target = this.entity.getTarget();
-            return target != null && this.entity.distanceTo(target) > this.attackminrange && target.isAlive() && this.entity.distanceTo(target) < this.attackrange && this.entity.getAttackState() == this.getAttackState && this.entity.magic_cooldown <= 0;
-        }
-
-        public void start() {
-            this.entity.setAttackState(this.attackstate);
-        }
-
-        public void stop() {
-            this.entity.setAttackState(this.attackendstate);
-        }
-
-        public boolean canContinueToUse() {
-            return this.entity.attackTicks < this.attackMaxtick;
-        }
-
-        public boolean requiresUpdateEveryTick() {
-            return true;
+            LivingEntity target = entity.getTarget();
+            return target != null && super.canUse() && this.entity.distanceTo(target) > attackminrange && target.isAlive() && this.entity.magic_cooldown <= 0;
         }
 
         public void tick() {
-            LivingEntity target = this.entity.getTarget();
-            if (this.entity.attackTicks < this.attackseetick && target != null) {
-                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                this.entity.lookAt(target, 30.0F, 30.0F);
-            } else {
-                this.entity.setYRot(this.entity.yRotO);
-            }
+            LivingEntity target = entity.getTarget();
+            super.tick();
+            if (entity.attackTicks == attackseetick) {
+                if (target != null) {
+                    double d0 = entity.getX();
+                    double d1 = entity.getY() + entity.getBbHeight() * 0.5F;
+                    double d2 = entity.getZ();
+                    double d3 = target.getX() - d0;
+                    double d4 = target.getY() - d1;
+                    double d5 = target.getZ() - d2;
+                    Vec3 vec3 = new Vec3(d3, d4, d5).normalize();
+                    Water_Spear_Entity waterSpear = new Water_Spear_Entity(entity, vec3,entity.level(),7,1D);
 
-            if (this.entity.attackTicks == this.attackseetick && target != null) {
-                double d0 = this.entity.getX();
-                double d1 = this.entity.getY() + (double)(this.entity.getBbHeight() * 0.5F);
-                double d2 = this.entity.getZ();
-                double d3 = target.getX() - d0;
-                double d4 = target.getY() - d1;
-                double d5 = target.getZ() - d2;
-                Vec3 vec3 = (new Vec3(d3, d4, d5)).normalize();
-                Water_Spear_Entity waterSpear = new Water_Spear_Entity(this.entity, vec3, this.entity.level(), GCAttributesConfig.CindariaRangeDamage.get().floatValue());
-                float yRot = (float)(Mth.atan2(vec3.z, vec3.x) * 57.29577951308232) + 90.0F;
-                float xRot = (float)(-(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * 57.29577951308232));
-                waterSpear.setYRot(yRot);
-                waterSpear.setXRot(xRot);
-                waterSpear.setPosRaw(d0, d1, d2);
-                waterSpear.setTotalBounces(10);
-                this.entity.level().addFreshEntity(waterSpear);
-            }
+                    float yRot = (float) (Mth.atan2(vec3.z, vec3.x) * (180F / Math.PI)) + 90F;
 
+                    float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
+
+                    waterSpear.setYRot(yRot);
+                    waterSpear.setXRot(xRot);
+                    waterSpear.setPosRaw(d0, d1, d2);
+                    waterSpear.setTotalBounces(10);
+
+                    entity.level().addFreshEntity(waterSpear);
+                }
+            }
         }
     }
 

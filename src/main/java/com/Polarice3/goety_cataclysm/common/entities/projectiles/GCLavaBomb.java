@@ -5,7 +5,6 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
-import com.github.L_Ender.cataclysm.config.CMConfig;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -74,7 +73,7 @@ public class GCLavaBomb extends ThrowableProjectile {
         if (!this.getGround() && !this.level().isClientSide && !MobUtil.areAllies(result.getEntity(), shooter != null ? shooter : this)) {
             this.playSound(SoundEvents.GENERIC_BURN, 1.5F, 0.75F);
             LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(shooter) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-            ExplosionUtil.lootExplode(this.level(), shooter, this.getX(), this.getY(), this.getZ(), (float) CMConfig.Lavabombradius, false, Explosion.BlockInteraction.KEEP, lootMode);
+            ExplosionUtil.lootExplode(this.level(), shooter, this.getX(), this.getY(), this.getZ(), 2.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
             if (GCMobsConfig.NetheriteMonstrositySpawnLava.get()) {
                 this.doTerrainEffects();
                 this.setGround(true);
@@ -91,7 +90,7 @@ public class GCLavaBomb extends ThrowableProjectile {
         if (!this.level().isClientSide() && !this.getGround()) {
             this.playSound(SoundEvents.GENERIC_BURN, 1.5F, 0.75F);
             LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(shooter) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-            ExplosionUtil.lootExplode(this.level(), shooter, this.getX(), this.getY(), this.getZ(), (float) CMConfig.Lavabombradius, false, Explosion.BlockInteraction.KEEP, lootMode);
+            ExplosionUtil.lootExplode(this.level(), shooter, this.getX(), this.getY(), this.getZ(), 2.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
             if (GCMobsConfig.NetheriteMonstrositySpawnLava.get()) {
                 this.doTerrainEffects();
                 this.setGround(true);

@@ -27,6 +27,10 @@ public class NMServantModel extends HierarchicalModel<NetheriteMonstrosityServan
             this.animateWalk(Netherite_Monstrosity_Animation.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
         }
 
+        if (!entity.getIsAwaken()) {
+            this.applyStatic(Netherite_Monstrosity_Animation.SLEEP);
+        }
+
         this.animate(entity.getAnimationState("idle"), Netherite_Monstrosity_Animation.IDLE, ageInTicks, 1.0F);
 
         this.animate(entity.getAnimationState("smash"), Netherite_Monstrosity_Animation.SMASH, ageInTicks, 1.0F);
@@ -42,8 +46,8 @@ public class NMServantModel extends HierarchicalModel<NetheriteMonstrosityServan
     }
 
     private void animateHeadLookTarget(float yRot, float xRot) {
-        this.head.xRot += xRot * ((float) Math.PI / 180F);
-        this.head.yRot += yRot * ((float) Math.PI / 180F);
+        this.head.xRot = xRot * ((float) Math.PI / 180F);
+        this.head.yRot = yRot * ((float) Math.PI / 180F);
     }
 
     public ModelPart root() {

@@ -39,7 +39,7 @@ import java.util.function.Predicate;
 public class DeeplingAnglerServant extends AbstractDeeplingServant {
     public static final Animation DEEPLING_MELEE = Animation.create(20);
     public static final Animation DEEPLING_HUG = Animation.create(20);
-    private static final EntityDimensions SWIMMING_SIZE = new EntityDimensions(1.225f, 0.65F, false);
+    private static final EntityDimensions SWIMMING_SIZE = EntityDimensions.fixed(1.225f, 0.65F);
     private int hugcooldown = 100;
     public int noLionfish = GCMobsConfig.DeeplingAnglerCatchTime.get();
     public static final int HUG_COOLDOWN = 100;
@@ -205,10 +205,6 @@ public class DeeplingAnglerServant extends AbstractDeeplingServant {
             }
 
         }
-    }
-
-    protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-        return sizeIn.height * 0.9F;
     }
 
     public EntityDimensions getSwimmingSize() {

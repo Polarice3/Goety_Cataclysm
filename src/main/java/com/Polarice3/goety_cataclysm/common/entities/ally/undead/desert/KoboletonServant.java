@@ -8,7 +8,7 @@ import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.projectile.Poison_Dart_Entity;
 import com.github.L_Ender.cataclysm.init.ModTag;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
@@ -173,7 +173,7 @@ public class KoboletonServant extends AnimationSummon2 {
                             ItemStack offhand = target.getOffhandItem();
                             ItemStack mainhand = target.getMainHandItem();
                             boolean hasGloves = !CuriosFinder.findCurio(target, CataclysmItems.STICKY_GLOVES.get()).isEmpty();
-                            if (target instanceof Player && this.random.nextFloat() * 100.0F <= CMConfig.CauseKoboletontoDropItemInHandPercent) {
+                            if(this.random.nextFloat() * 100.0F <= (float) CMCommonConfig.Koboleton.CauseKoboletontoDropItemInHandPercent) {
                                 if (hasGloves) {
                                     if (!offhand.isEmpty()) {
                                         if (!offhand.is(ModTag.STICKY_ITEM)) {

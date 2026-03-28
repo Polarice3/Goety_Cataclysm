@@ -5,7 +5,7 @@ import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
-import com.github.L_Ender.cataclysm.client.particle.StormParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.Rising_Trail_Options;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -82,17 +82,12 @@ public class VoidVortex extends Entity {
         }
 
         if(Math.min(this.tickCount, this.getLifespan()) >= 16){
-            if(this.level().isClientSide) {
+            if(level().isClientSide) {
                 float r = 0.4F;
                 float g = 0.1f;
                 float b = 0.8f;
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,2.5F + random.nextFloat() * 0.9f,5 + random.nextFloat() * 0.9f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,2.25f + random.nextFloat() * 0.6f,4.25F + random.nextFloat() * 0.6f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,2f + random.nextFloat() * 0.45f,3.5F + random.nextFloat() * 0.45f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,1.5f + random.nextFloat() * 0.25f,2.75F + random.nextFloat() * 0.45f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,1.25f + random.nextFloat() * 0.25f,2.0F + random.nextFloat() * 0.45f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,1.0f + random.nextFloat() * 0.25f,1.25F + random.nextFloat() * 0.45f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
-                this.level().addParticle((new StormParticle.OrbData(r, g, b,0.75f + random.nextFloat() * 0.25f,0.5F + random.nextFloat() * 0.45f,this.getId())), this.getX(), this.getY(), this.getZ() , 0, 0, 0);
+
+                this.level().addParticle((new Rising_Trail_Options(r, g, b,2.5f + random.nextFloat() * 0.25f,0.08F)), this.getX(), this.getY() +5, this.getZ() , 0, -0.3, 0);
             }
 
             float radius = 3.0F;

@@ -8,7 +8,7 @@ import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.lionfishapi.server.animation.Animation;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -37,7 +37,7 @@ public class DeeplingWarlockServant extends AbstractDeeplingServant{
     public static final Animation DEEPLING_MAGIC = Animation.create(90);
     private int lightcooldown = 200;
     public static final int LIGHT_COOLDOWN = 400;
-    private static final EntityDimensions SWIMMING_SIZE = new EntityDimensions(1.15f, 0.6F, false);
+    private static final EntityDimensions SWIMMING_SIZE = EntityDimensions.fixed(1.15f, 0.6F);
 
     public DeeplingWarlockServant(EntityType<? extends AbstractDeeplingServant> entity, Level world) {
         super(entity, world);
@@ -126,10 +126,6 @@ public class DeeplingWarlockServant extends AbstractDeeplingServant{
         }
     }
 
-    protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-        return sizeIn.height * 0.9F;
-    }
-
     public EntityDimensions getSwimmingSize() {
         return SWIMMING_SIZE;
     }
@@ -209,7 +205,7 @@ public class DeeplingWarlockServant extends AbstractDeeplingServant{
                     double sx = this.warlock.getX();
                     double sy = this.warlock.getY();
                     double sz = this.warlock.getZ();
-                    AbyssMark fireball = new AbyssMark(this.warlock.level(), sx,sy,sz,80,(float) CMConfig.AbyssBlastdamage,(float)CMConfig.AbyssBlastHpdamage,this.warlock.getUUID(),target);
+                    AbyssMark fireball = new AbyssMark(this.warlock.level(), sx,sy,sz,80,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float) CMCommonConfig.Leviathan.AbyssBlastHpDamage,this.warlock.getUUID(),target);
                     this.warlock.level().addFreshEntity(fireball);
                 }
 

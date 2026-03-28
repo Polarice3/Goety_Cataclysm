@@ -21,17 +21,33 @@ public class AttackSummonAnimationGoal1<T extends LLibrarySummon & IAnimatedEnti
     public void tick() {
         LivingEntity target = this.entity.getTarget();
         if (this.see) {
-            if (this.entity.getAnimationTick() < this.look1 && target != null) {
-                this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                this.entity.lookAt(target, 30.0F, 30.0F);
-            } else {
-                this.entity.setYRot(this.entity.yRotO);
+            if(target !=null){
+                boolean flag = entity.getAnimationTick() < look1;
+                if(flag){
+                    entity.getLookControl().setLookAt(target,  30.0F, 30.0F);
+                    entity.lookAt(target, 30.0F, 30.0F);
+                }else{
+                    entity.getLookControl().setLookAt(target,0F, 30.0F);
+                    entity.setYRot(entity.yRotO);
+                }
+
+            }else{
+                entity.setYRot(entity.yRotO);
             }
-        } else if (this.entity.getAnimationTick() > this.look1 && target != null) {
-            this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-            this.entity.lookAt(target, 30.0F, 30.0F);
         } else {
-            this.entity.setYRot(this.entity.yRotO);
+            if(target !=null){
+                boolean flag = entity.getAnimationTick() > look1;
+                if(flag){
+                    entity.getLookControl().setLookAt(target,  30.0F, 30.0F);
+                    entity.lookAt(target, 30.0F, 30.0F);
+                }else{
+                    entity.getLookControl().setLookAt(target,0F, 30.0F);
+                    entity.setYRot(entity.yRotO);
+                }
+
+            }else{
+                entity.setYRot(entity.yRotO);
+            }
         }
 
         this.entity.setDeltaMovement(0.0, this.entity.getDeltaMovement().y, 0.0);

@@ -11,7 +11,7 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
-import com.github.L_Ender.cataclysm.client.particle.RingParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
 import com.github.L_Ender.cataclysm.entity.AI.MobAILeaveWater;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
@@ -31,7 +31,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
@@ -39,6 +38,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -359,6 +359,23 @@ public class CoralssusServant extends InternalAnimationSummon implements Variant
         }
     }
 
+    @Override
+    public boolean hurt(DamageSource source, float damage) {
+        if (source.is(DamageTypes.HOT_FLOOR) ) {
+            return false;
+        }
+
+        return super.hurt(source, damage);
+    }
+
+    public void onInsideBubbleColumn(boolean p_20322_) {
+
+    }
+
+    public void onAboveBubbleCol(boolean p_20313_) {
+
+    }
+
     public void travel(Vec3 p_32394_) {
         if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
             this.moveRelative(0.01F, p_32394_);
@@ -467,7 +484,7 @@ public class CoralssusServant extends InternalAnimationSummon implements Variant
 
     private void EarthQuake(float grow, int damage, int shieldbreakticks) {
         ScreenShake_Entity.ScreenShake(this.level(), this.position(), 10.0F, 0.15F, 0, 20);
-        this.playSound(SoundEvents.GENERIC_EXPLODE, 0.5F, 1.0F + this.getRandom().nextFloat() * 0.1F);
+        this.playSound(CataclysmSounds.EXPLOSION.get(), 0.5f, 1F + this.getRandom().nextFloat() * 0.1F);
 
         for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate((double) grow))) {
             if (!MobUtil.areAllies(this, entity)) {
@@ -516,7 +533,7 @@ public class CoralssusServant extends InternalAnimationSummon implements Variant
                     this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
                 }
             }
-            this.level().addParticle(new RingParticle.RingData(0f, (float)Math.PI/2f, 30, 1.0f, 1.0F,  1.0F, 1.0f, 20f, false, RingParticle.EnumRingBehavior.GROW_THEN_SHRINK), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
+            this.level().addParticle(new RingParticleOptions(0f, (float)Math.PI/2f, 30, 255, 255,  255, 1.0f, 20f, false, 2), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
         }
 
     }
@@ -573,12 +590,12 @@ public class CoralssusServant extends InternalAnimationSummon implements Variant
         this.entityData.set(CORALSSUS_SWIM, swim);
     }
 
-    public boolean isPushedByFluid() {
-        return !this.isSwimming();
-    }
-
     public boolean canBreatheUnderwater() {
         return true;
+    }
+
+    public boolean isPushedByFluid() {
+        return !this.isSwimming();
     }
 
     public boolean shouldEnterWater() {

@@ -215,33 +215,32 @@ public class WadjetServantModel extends AdvancedEntityModel<WadjetServant> {
         this.tailDynamic = new AdvancedModelBox[this.tailOriginal.length];
     }
 
-    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        this.everything.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        if (this.tail != null) {
-            this.tail.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha, this.tailDynamic);
-        }
-
-        for (AdvancedModelBox modelBox : this.tailOriginal) {
-            modelBox.showModel = false;
-        }
+    public void animate(WadjetServant entity, float f, float f1, float f2, float f3, float f4) {
+        tail = entity.dc;
+        this.resetToDefaultPose();
 
     }
 
-    public void animate(WadjetServant entity, float f, float f1, float f2, float f3, float f4) {
-        this.tail = entity.dc;
-        this.resetToDefaultPose();
+    @Override
+    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        this.everything.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        if (tail != null) tail.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha, tailDynamic);
+        for (AdvancedModelBox AdvancedModelBox : tailOriginal) {
+            AdvancedModelBox.showModel = false;
+        }
     }
 
     public void setupAnim(WadjetServant entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.animate(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        animate(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch);
         float swimSpeed = 0.1F;
         float swimDegree = 0.5F;
-        float partialTick = Minecraft.getInstance().getFrameTime();
+        float partialTick = Minecraft.getInstance().getPartialTick();
         float attackProgress = entity.getAttackProgress(partialTick);
         float attackAmount = attackProgress * limbSwingAmount * 1.5F;
+
         this.animateHeadLookTarget(netHeadYaw, headPitch);
         this.animateWalk(Wadjet_Animation.WALK, limbSwing, limbSwingAmount, 1.0F, 1.0F);
-        this.progressRotationPrev(this.upper_body1, attackAmount, (float)Math.toRadians(23.159099578857422), 0.0F, 0.0F, 10.0F);
+        progressRotationPrev(upper_body1,attackAmount,(float)Math.toRadians(23.1591F), 0, 0, 10F);
         this.animate(entity.getAnimationState("idle"), Wadjet_Animation.IDLE, ageInTicks, 1.0F);
         this.animate(entity.getAnimationState("sleep"), Wadjet_Animation.SLEEP, ageInTicks, 1.0F);
         this.animate(entity.getAnimationState("awake"), Wadjet_Animation.AWAKE, ageInTicks, 1.0F);
@@ -251,9 +250,14 @@ public class WadjetServantModel extends AdvancedEntityModel<WadjetServant> {
         this.animate(entity.getAnimationState("doubleswing"), Wadjet_Animation.DOUBLE_SWING, ageInTicks, 1.0F);
         this.animate(entity.getAnimationState("stabnswing"), Wadjet_Animation.STAB_N_SWING, ageInTicks, 1.0F);
         this.animate(entity.getAnimationState("block"), Wadjet_Animation.BLOCK, ageInTicks, 1.0F);
-        this.chainSwing(this.tailOriginal, swimSpeed * 4.0F, swimDegree * 1.0F, -3.0, limbSwing, limbSwingAmount);
-        this.chainSwing(this.tailOriginal, swimSpeed * 0.6F, swimDegree * 0.15F, -3.0, ageInTicks, 1.0F);
-        entity.dc.updateChain(Minecraft.getInstance().getFrameTime(), this.tailOriginal, this.tailDynamic, 0.4F, 1.5F, 1.8F, 0.87F, 20, true);
+        this.chainSwing(tailOriginal, swimSpeed * 4F, swimDegree * 1F, -3, limbSwing,limbSwingAmount);
+        this.chainSwing(tailOriginal, swimSpeed * 0.6F, swimDegree * 0.15F, -3, ageInTicks,1.0F);
+        entity.dc.updateChain(Minecraft.getInstance().getPartialTick(), tailOriginal, tailDynamic, 0.4f, 1.5f, 1.8f, 0.87f, 20, true);
+
+
+        if (!entity.getAwaken()) {
+            this.applyStatic(Wadjet_Animation.SLEEP);
+        }
     }
 
     private void animateHeadLookTarget(float yRot, float xRot) {

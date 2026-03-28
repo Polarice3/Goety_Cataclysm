@@ -9,8 +9,8 @@ import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.Polarice3.goety_cataclysm.init.GoetySounds;
-import com.github.L_Ender.cataclysm.client.particle.CircleLightningParticle;
-import com.github.L_Ender.cataclysm.client.particle.StormParticle;
+import com.github.L_Ender.cataclysm.client.particle.Options.CircleLightningParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.StormParticleOptions;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Lightning_Spear_Entity;
 import com.github.L_Ender.cataclysm.entity.projectile.Water_Spear_Entity;
@@ -101,9 +101,9 @@ public class ThunderRageSpell extends Spell {
             float r = 143 / 255F;
             float g = 241 / 255F;
             float b = 215 / 255F;
-            worldIn.sendParticles((new StormParticle.OrbData(99 / 255F, 194 / 255F, 224 / 255F, 6.0F + caster.getRandom().nextFloat() * 0.25f, 1.5F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
-            worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 4.0F + caster.getRandom().nextFloat() * 1.2F, 1.0F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
-            worldIn.sendParticles((new StormParticle.OrbData(r, g, b, 2.0F + caster.getRandom().nextFloat() * 0.7F, 0.35F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(99 / 255F, 194 / 255F, 224 / 255F, 6.0F + caster.getRandom().nextFloat() * 0.25f, 1.5F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(r, g, b, 4.0F + caster.getRandom().nextFloat() * 1.2F, 1.0F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
+            worldIn.sendParticles((new StormParticleOptions(r, g, b, 2.0F + caster.getRandom().nextFloat() * 0.7F, 0.35F + caster.getRandom().nextFloat() * 0.45f, caster.getId())), caster.getX(), caster.getY(), caster.getZ(), 1, 0, 0, 0, 0);
         }
         if (castTime < 140 && castTime > 55) {
             Nimbo(worldIn, caster, 0.2F, 0.2F, 5, height + 0.5D ,5,2);
@@ -151,8 +151,7 @@ public class ThunderRageSpell extends Spell {
                 float xRot = (float) -(Mth.atan2(vec3.y, Math.sqrt(vec3.x * vec3.x + vec3.z * vec3.z)) * (180F / Math.PI));
 
                 float waterDamage = GCSpellConfig.WaterSpearDamage.get().floatValue() * WandUtil.damageMultiply();
-                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, caster.level(), waterDamage + potency);
-                water.accelerationPower += velocity;
+                Water_Spear_Entity water = new Water_Spear_Entity(caster, vec3, caster.level(), waterDamage + potency, (0.1D * 10) + velocity);
                 water.setYRot(yRot);
                 water.setXRot(xRot);
                 water.setPosRaw(d0, d1, d2);
@@ -161,8 +160,7 @@ public class ThunderRageSpell extends Spell {
                 worldIn.addFreshEntity(water);
 
                 float lightningDamage = GCSpellConfig.LightningSpearDamage.get().floatValue() * WandUtil.damageMultiply();
-                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vec3, caster.level(), lightningDamage + potency);
-                lightning.accelerationPower += velocity;
+                Lightning_Spear_Entity lightning = new Lightning_Spear_Entity(caster, vec3, caster.level(), lightningDamage + potency, (0.1D * 10) + velocity);
                 lightning.setYRot(yRot);
                 lightning.setXRot(xRot);
                 lightning.setPosRaw(d0, d1, d2);
@@ -196,7 +194,7 @@ public class ThunderRageSpell extends Spell {
             double posY = radius * Math.cos(phi);
             double posZ = radius * Math.sin(phi) * Math.sin(theta2);
 
-            worldIn.sendParticles(new CircleLightningParticle.CircleData(143, 241, 215), d0 + posX, d1 + posY, d2 + posZ, 0, d0, d1, d2, 1.0F);
+            worldIn.sendParticles(new CircleLightningParticleOptions(0.1F, 143, 241, 215), d0 + posX, d1 + posY, d2 + posZ, 0, d0, d1, d2, 1.0F);
         }
     }
 

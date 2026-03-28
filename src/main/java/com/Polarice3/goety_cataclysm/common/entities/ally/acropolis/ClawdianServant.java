@@ -14,13 +14,14 @@ import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.Cataclysm;
-import com.github.L_Ender.cataclysm.client.particle.Not_Spin_TrailParticle;
-import com.github.L_Ender.cataclysm.client.particle.RingParticle;
-import com.github.L_Ender.cataclysm.config.CMConfig;
+import com.github.L_Ender.cataclysm.client.particle.Options.NotSpinTrailParticleOptions;
+import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
+import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.AcropolisMonsters.ClawdianMoveController;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Wave_Entity;
+import com.github.L_Ender.cataclysm.entity.etc.FowardMoveController;
 import com.github.L_Ender.cataclysm.entity.etc.IHoldEntity;
 import com.github.L_Ender.cataclysm.entity.etc.SmartBodyHelper2;
 import com.github.L_Ender.cataclysm.entity.etc.path.CMPathNavigateGround;
@@ -118,6 +119,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
     public ClawdianServant(EntityType<? extends Summoned> entity, Level world) {
         super(entity, world);
         this.setMaxUpStep(2.5F);
+        this.moveControl = new ClawdianMoveController(this);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
@@ -129,7 +131,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         super.registerGoals();
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(3, new InternalSummonMoveGoal(this, false, 1.0));
+        this.goalSelector.addGoal(3, new InternalSummonMoveGoal(this, true, 1.0));
         this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, CLAW_PUNCH, 0, 47, 19, 3.3F) {
             public boolean canUse() {
                 return super.canUse() && ClawdianServant.this.getRandom().nextFloat() * 100.0F < 35.0F;
@@ -151,27 +153,21 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
             @Override
             public void tick() {
                 LivingEntity target = entity.getTarget();
-                if (entity.attackTicks < attackseetick && target != null) {
-                    entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
-                    entity.lookAt(target, 2.0F, 30.0F);
+                if (target != null) {
+                    boolean flag = entity.attackTicks < attackseetick;
+                    if (flag) {
+                        entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
+                        entity.lookAt(target, 2.0F, 30.0F);
+                    } else {
+                        entity.getLookControl().setLookAt(target, 0F, 30.0F);
+                        entity.setYRot(entity.yRotO);
+                    }
                 } else {
                     entity.setYRot(entity.yRotO);
                 }
 
-                BlockPos currentPos = entity.blockPosition();
-                float yaw = entity.getYRot() * ((float) Math.PI / 180F);
-                float dx = -Mth.sin(yaw) * 2;
-                float dz = Mth.cos(yaw) * 2;
-
-                BlockPos targetPos = currentPos.offset((int) dx, 0, (int) dz);
-                if(this.entity.onGround()) {
-                    if (!isDangerousFallZone(entity, targetPos)) {
-                        Vec3 motion = entity.getDeltaMovement();
-                        Vec3 push = new Vec3(-Mth.sin(yaw), motion.y, Mth.cos(yaw)).scale(0.5D).add(motion.scale(0.5D));
-                        entity.setDeltaMovement(push.x, motion.y, push.z);
-                    }else{
-                        entity.setDeltaMovement(0, entity.getDeltaMovement().y, 0);
-                    }
+                if (this.entity.getMoveControl() instanceof ClawdianMoveController onyxMoveController) {
+                    onyxMoveController.forward(1F, 2.0F);
                 }
             }
         });
@@ -188,11 +184,17 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
             public void tick() {
                 LivingEntity target = this.entity.getTarget();
-                if (this.entity.attackTicks < this.attackseetick && target != null) {
-                    this.entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
-                    this.entity.lookAt(target, 30.0F, 30.0F);
+                if (target != null) {
+                    boolean flag = entity.attackTicks < attackseetick;
+                    if (flag) {
+                        entity.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                        entity.lookAt(target, 30.0F, 30.0F);
+                    } else {
+                        entity.getLookControl().setLookAt(target, 0F, 30.0F);
+                        entity.setYRot(entity.yRotO);
+                    }
                 } else {
-                    this.entity.setYRot(this.entity.yRotO);
+                    entity.setYRot(entity.yRotO);
                 }
 
             }
@@ -220,11 +222,17 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
             public void tick() {
                 LivingEntity target = this.entity.getTarget();
-                if (this.entity.attackTicks < this.attackseetick && target != null) {
-                    this.entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
-                    this.entity.lookAt(target, 2.0F, 30.0F);
+                if (target != null) {
+                    boolean flag = entity.attackTicks < attackseetick;
+                    if (flag) {
+                        entity.getLookControl().setLookAt(target, 2.0F, 30.0F);
+                        entity.lookAt(target, 2.0F, 30.0F);
+                    } else {
+                        entity.getLookControl().setLookAt(target, 0F, 30.0F);
+                        entity.setYRot(entity.yRotO);
+                    }
                 } else {
-                    this.entity.setYRot(this.entity.yRotO);
+                    entity.setYRot(entity.yRotO);
                 }
 
                 if (this.entity.attackTicks < 24) {
@@ -342,11 +350,12 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
     public void updateSwimming() {
         if (!this.level().isClientSide) {
-            if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
+            boolean inWaterAI = this.isEffectiveAi() && this.isInWater() && this.wantsToSwim();
+            if (inWaterAI && !(this.moveControl instanceof ClawdianSwimControl)) {
                 this.navigation = this.waterNavigation;
-                this.moveControl = new ClawdianSwimControl(this, 6.0F);
+                this.moveControl = new ClawdianSwimControl(this, 4.0F);
                 this.setSwimming(true);
-            } else {
+            } else if (!inWaterAI && (this.moveControl instanceof ClawdianSwimControl)) {
                 this.navigation = this.groundNavigation;
                 this.moveControl = new ClawdianMoveController(this);
                 this.setSwimming(false);
@@ -380,7 +389,17 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return CataclysmSounds.KOBOLEDIATOR_HURT.get();
+        return CataclysmSounds.CLAWDIAN_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return CataclysmSounds.CLAWDIAN_DEATH.get();
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return CataclysmSounds.CLAWDIAN_IDLE.get();
     }
 
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
@@ -400,6 +419,10 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
     protected int decreaseAirSupply(int air) {
         return air;
+    }
+
+    public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
+        return false;
     }
 
     public AnimationState getAnimationState(String input) {
@@ -588,7 +611,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
             if (this.attackTicks == 22) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.2f, 0, 20);
                 this.playSound(CataclysmSounds.STRONGSWING.get(), 2.0f, 0.75F + this.getRandom().nextFloat() * 0.1F);
-                this.playSound(SoundEvents.GENERIC_EXPLODE, 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.EXPLOSION.get(), 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
                 AreaAttack(8.5f,8.5f,50,1,140,false,2.25);
                 MakeParticle(2f, 7.3f, 0.35f);
             }
@@ -611,7 +634,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
             if (this.attackTicks == 50) {
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 15, 0.2f, 0, 20);
                 this.playSound(CataclysmSounds.STRONGSWING.get(), 2.0f, 0.75F + this.getRandom().nextFloat() * 0.1F);
-                this.playSound(SoundEvents.GENERIC_EXPLODE, 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.EXPLOSION.get(), 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
                 AreaAttack(8.5f,8.5f,50,1.15F,160,false,2.25);
                 MakeParticle(2f, 7.3f, 0.35f);
             }
@@ -624,7 +647,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         }
         if (this.getAttackState() == CHARGE_LOOP) {
             if (!this.level().isClientSide) {
-                if (CMConfig.KobolediatorBlockBreaking) {
+                if (CMCommonConfig.Clawdian.ignoreMobGriefing) {
                     ChargeBlockBreaking();
                 } else {
                     if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
@@ -657,7 +680,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 AreaAttack(3.5f, 3.5f, 120, 1.35F, 200, false,2.25);
                 MakeParticle(2f, 0.9f, 0.0f);
                 ScreenShake_Entity.ScreenShake(level(), this.position(), 30, 0.25f, 0, 20);
-                this.playSound(SoundEvents.GENERIC_EXPLODE, 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
+                this.playSound(CataclysmSounds.EXPLOSION.get(), 2.0f, 0.95F + this.getRandom().nextFloat() * 0.1F);
 
                 double theta = (yBodyRot) * (Math.PI / 180);
 
@@ -700,20 +723,21 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                         double extraX = spawnX + dx * (1 + random.nextDouble() /2);
                         double extraY = spawnY + 0.9d + random.nextDouble() * 0.5;
                         double extraZ = spawnZ + dz * (1 + random.nextDouble()/2);
-                        this.level().addParticle(new Not_Spin_TrailParticle.NSTData(113 / 255F, 194 / 255F, 240 / 255F, 0.05F, 0.5F + random.nextFloat() * 0.3F, 0.4F + random.nextFloat() * 0.2F, 0, 120), spawnX, spawnY, spawnZ, extraX, extraY, extraZ);
+                        this.level().addParticle(new NotSpinTrailParticleOptions(113 / 255F, 194 / 255F, 240 / 255F, 0.05F, 0.5F + random.nextFloat() * 0.3F, 0.4F + random.nextFloat() * 0.2F, 0, 120), spawnX, spawnY, spawnZ, extraX, extraY, extraZ);
 
                     }
                 }
 
             }
 
-            for (int l = 26; l <= 28; l = l + 2) {
-                if (this.attackTicks == l) {
-                    int d = l - 24;
-                    int d2 = l - 25;
-                    BlockSmashDamage(0.6F, d, 2.5F, 2F, 160, 1.0F, 0.15f);
-                    BlockSmashDamage(0.6F, d2, 2.5F, 2F, 160, 1.0F, 0.15f);
-                }
+            if (this.attackTicks == 26) {
+                BlockSmashDamage(0.6F, 1, 2.5F, 2F, 160, 1.0F, 0.15f);
+                BlockSmashDamage(0.6F, 2, 2.5F, 2F, 160, 1.0F, 0.15f);
+            }
+
+            if (this.attackTicks == 28) {
+                BlockSmashDamage(0.6F, 3, 2.5F, 2F, 160, 1.0F, 0.15f);
+                BlockSmashDamage(0.6F, 4, 2.5F, 2F, 160, 1.0F, 0.15f);
             }
 
             if (this.attackTicks == 31) {
@@ -791,61 +815,70 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                     this.level().addParticle(new BlockParticleOption(ModParticle.DUST_PILLAR.get(), block), getX() + vec * vecX + extraX + f * math, this.getY() + extraY, getZ() + vec * vecZ + extraZ + f1 * math, DeltaMovementX, DeltaMovementY, DeltaMovementZ);
                 }
             }
-            this.level().addParticle(new RingParticle.RingData(0f, (float)Math.PI/2f, 30, 1F, 1F,  1F, 1.0f, 20f, false, RingParticle.EnumRingBehavior.CONSTANT), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
-
+            this.level().addParticle(new RingParticleOptions(0f, (float)Math.PI/2f, 30, 255, 255,  255, 1.0f, 20f, false, 2), getX() + vec * vecX + f * math, getY() + 0.2f, getZ() + vec * vecZ + f1 * math, 0, 0, 0);
         }
     }
 
     private void BlockSmashDamage(float spreadarc, int distance, float mxy, float vec, int shieldbreakticks, float damage, float airborne) {
-        double perpFacing = this.yBodyRot * (Math.PI / 180);
-        double facingAngle = perpFacing + Math.PI / 2;
+        double bodyRotRad = this.yBodyRot * (Math.PI / 180.0);
+        double cosBodyRot = Math.cos(bodyRotRad);
+        double sinBodyRot = Math.sin(bodyRotRad);
+        double facingAngle = bodyRotRad + Math.PI / 2.0;
+        double commonOffsetX = vec * -sinBodyRot;
+        double commonOffsetZ = vec * cosBodyRot;
+        double baseX = this.getX() + commonOffsetX;
+        double baseZ = this.getZ() + commonOffsetZ;
         int hitY = Mth.floor(this.getBoundingBox().minY - 0.5);
-        double spread = Math.PI * spreadarc;
-        int arcLen = Mth.ceil(distance * spread);
         double minY = this.getY() - 1;
         double maxY = this.getY() + mxy;
-        for (int i = 0; i < arcLen; i++) {
-            double theta = (i / (arcLen - 1.0) - 0.5) * spread + facingAngle;
-            double vx = Math.cos(theta);
-            double vz = Math.sin(theta);
-            double px = this.getX() + vx * distance + vec * Math.cos((yBodyRot + 90) * Math.PI / 180);
-            double pz = this.getZ() + vz * distance + vec * Math.sin((yBodyRot + 90) * Math.PI / 180);
-            int hitX = Mth.floor(px);
-            int hitZ = Mth.floor(pz);
-            BlockPos pos = new BlockPos(hitX, hitY, hitZ);
-            BlockState block = level().getBlockState(pos);
+        double spread = Math.PI * spreadarc;
+        int arcLen = Mth.ceil(distance * spread);
+        if (!this.level().isClientSide) {
+            DamageSource damagesource = this.getServantAttack();
+            for (int i = 0; i < arcLen; i++) {
+                double thetaRatio = (arcLen > 1) ? (double) i / (double) (arcLen - 1) : 0.5;
+                double theta = (thetaRatio - 0.5) * spread + facingAngle;
 
-            int maxDepth = 256;
-            for (int depthCount = 0; depthCount < maxDepth; depthCount++) {
-                if (block.getRenderShape() == RenderShape.MODEL) {
-                    break;
+                double vx = Math.cos(theta);
+                double vz = Math.sin(theta);
+
+                double px = baseX + vx * distance;
+                double pz = baseZ + vz * distance;
+
+                int hitX = Mth.floor(px);
+                int hitZ = Mth.floor(pz);
+                BlockPos pos = new BlockPos(hitX, hitY, hitZ);
+                BlockState block = this.level().getBlockState(pos);
+
+                int maxDepth = 256;
+                for (int depthCount = 0; depthCount < maxDepth; depthCount++) {
+                    if (block.getRenderShape() == RenderShape.MODEL) {
+                        break;
+                    }
+                    pos = pos.below();
+                    block = this.level().getBlockState(pos);
                 }
-                pos = pos.below();
-                block = level().getBlockState(pos);
-            }
 
-            if (block.getRenderShape() != RenderShape.MODEL) {
-                block = Blocks.AIR.defaultBlockState();
-            }
-            if (!this.level().isClientSide) {
-                Cm_Falling_Block_Entity fallingBlockEntity = new Cm_Falling_Block_Entity(level(), hitX + 0.5D, hitY + 1.0D, hitZ + 0.5D, block, 10);
-                fallingBlockEntity.push(0, 0.2D + getRandom().nextGaussian() * 0.15D, 0);
-                level().addFreshEntity(fallingBlockEntity);
+                if (block.getRenderShape() != RenderShape.MODEL) {
+                    block = Blocks.AIR.defaultBlockState();
+                }
+
+                Cm_Falling_Block_Entity fallingBlockEntity = new Cm_Falling_Block_Entity(this.level(), hitX + 0.5D, hitY + 1.0D, hitZ + 0.5D, block, 10);
+                fallingBlockEntity.push(0, 0.2D + this.getRandom().nextGaussian() * 0.15D, 0);
+                this.level().addFreshEntity(fallingBlockEntity);
 
                 AABB selection = new AABB(px - 0.5, minY, pz - 0.5, px + 0.5, maxY, pz + 0.5);
-                List<LivingEntity> hit = level().getEntitiesOfClass(LivingEntity.class, selection);
+                List<LivingEntity> hit = this.level().getEntitiesOfClass(LivingEntity.class, selection);
                 for (LivingEntity entity : hit) {
                     if (!MobUtil.areAllies(this, entity)) {
-                        DamageSource damagesource = this.getServantAttack();
                         boolean flag = entity.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entity.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entity, shieldbreakticks);
                         }
 
                         if (flag) {
-                            entity.setDeltaMovement(entity.getDeltaMovement().add(0.0D, airborne + level().random.nextDouble() * 0.15, 0.0D));
+                            entity.setDeltaMovement(entity.getDeltaMovement().add(0.0D, airborne + this.level().random.nextDouble() * 0.15, 0.0D));
                         }
-
                     }
                 }
             }
@@ -854,6 +887,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
     private void AreaAttack(float range, float height, float arc, float damage, int shieldbreakticks,boolean knockback,double xz) {
         List<LivingEntity> entitiesHit = this.getEntityLivingBaseNearby(range, height, range, range);
+        DamageSource damagesource = this.getServantAttack();
         if (!this.level().isClientSide) {
             for (LivingEntity entityHit : entitiesHit) {
                 float entityHitAngle = (float) ((Math.atan2(entityHit.getZ() - this.getZ(), entityHit.getX() - this.getX()) * (180 / Math.PI) - 90) % 360);
@@ -868,7 +902,6 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!MobUtil.areAllies(this, entityHit)) {
-                        DamageSource damagesource = this.getServantAttack();
                         boolean hurt = entityHit.hurt(damagesource, (float) (this.getAttributeValue(Attributes.ATTACK_DAMAGE) * damage));
                         if (entityHit.isDamageSourceBlocked(damagesource) && shieldbreakticks > 0) {
                             disableShield(entityHit, shieldbreakticks);
@@ -888,6 +921,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
 
     private void HoldAttack(float range, float height, float arc, float damage, int shieldbreakticks) {
         List<LivingEntity> entitiesHit = this.getEntityLivingBaseNearby(range, height, range, range);
+        DamageSource damagesource = this.getServantAttack();
         if (!this.level().isClientSide) {
             for (LivingEntity entityHit : entitiesHit) {
                 float entityHitAngle = (float) ((Math.atan2(entityHit.getZ() - this.getZ(), entityHit.getX() - this.getX()) * (180 / Math.PI) - 90) % 360);
@@ -902,7 +936,6 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                 float entityHitDistance = (float) Math.sqrt((entityHit.getZ() - this.getZ()) * (entityHit.getZ() - this.getZ()) + (entityHit.getX() - this.getX()) * (entityHit.getX() - this.getX()));
                 if (entityHitDistance <= range && (entityRelativeAngle <= arc / 2 && entityRelativeAngle >= -arc / 2) || (entityRelativeAngle >= 360 - arc / 2 || entityRelativeAngle <= -360 + arc / 2)) {
                     if (!MobUtil.areAllies(this, entityHit)) {
-                        DamageSource damagesource = this.damageSources().mobAttack(this);
                         if (!entityHit.getType().is(ModTag.IGNIS_CANT_POKE) && entityHit.isAlive() && this.getPassengers().isEmpty()) {
                             if (entityHit.isShiftKeyDown()) {
                                 entityHit.setShiftKeyDown(false);
@@ -1064,9 +1097,15 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         @Override
         public void tick() {
             LivingEntity target = entity.getTarget();
-            if (entity.attackTicks > attackseetick && target != null) {
-                entity.getLookControl().setLookAt(target, 30.0F, 90.0F);
-                entity.lookAt(target, 30.0F, 90.0F);
+            if (target !=null) {
+                boolean flag = entity.attackTicks > attackseetick;
+                if (flag) {
+                    entity.getLookControl().setLookAt(target,  30.0F, 30.0F);
+                    entity.lookAt(target, 30.0F, 30.0F);
+                } else {
+                    entity.getLookControl().setLookAt(target,0F, 30.0F);
+                    entity.setYRot(entity.yRotO);
+                }
             } else {
                 entity.setYRot(entity.yRotO);
             }
@@ -1188,7 +1227,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         }
     }
 
-    static class ClawdianSwimControl extends ClawdianMoveController {
+    static class ClawdianSwimControl extends FowardMoveController {
         private final ClawdianServant drowned;
         private final float speedMulti;
 
@@ -1208,7 +1247,7 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
                     this.drowned.setDeltaMovement(this.drowned.getDeltaMovement().add(0.0D, 0.002D, 0.0D));
                 }
 
-                if (this.operation != Operation.MOVE_TO || this.drowned.getNavigation().isDone()) {
+                if (this.operation != FowardOperation.MOVE_TO || this.drowned.getNavigation().isDone()) {
                     this.drowned.setSpeed(0.0F);
                     return;
                 }

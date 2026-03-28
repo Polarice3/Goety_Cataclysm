@@ -5,7 +5,6 @@ import com.Polarice3.Goety.common.effects.GoetyEffects;
 import com.Polarice3.Goety.common.entities.ally.Summoned;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.ModDamageSource;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
@@ -144,11 +143,12 @@ public class UrchinkinServant extends Summoned {
 
     public void updateSwimming() {
         if (!this.level().isClientSide) {
-            if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
+            boolean inWaterAI = this.isEffectiveAi() && this.isInWater() && this.wantsToSwim();
+            if (inWaterAI && !(this.moveControl instanceof UrchinkinSwimControl)) {
                 this.navigation = this.waterNavigation;
                 this.moveControl = new UrchinkinSwimControl(this, 4.0F);
                 this.setSwimming(true);
-            } else {
+            } else if (!inWaterAI && (this.moveControl instanceof UrchinkinSwimControl)) {
                 this.navigation = this.groundNavigation;
                 this.moveControl = new MoveControl(this);
                 this.setSwimming(false);
@@ -252,7 +252,7 @@ public class UrchinkinServant extends Summoned {
             if (this.attackTicks > 13 && this.attackTicks < 30 && !this.level().isClientSide) {
                 for (LivingEntity livingentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox())) {
                     if (!MobUtil.areAllies(this, livingentity)) {
-                        boolean flag = livingentity.hurt(this.getTrueOwner() != null ? ModDamageSource.summonAttack(this, this.getTrueOwner()) : this.damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                        boolean flag = livingentity.hurt(this.getServantAttack(), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
                         if (flag && !this.level().isClientSide) {
                             MobEffect mobEffect = MobEffects.POISON;
                             if (this.getTrueOwner() != null) {

@@ -1,7 +1,6 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
-import com.Polarice3.Goety.utils.MobUtil;
-import com.Polarice3.Goety.utils.WandUtil;
+import com.Polarice3.Goety.utils.*;
 import com.Polarice3.goety_cataclysm.common.entities.GCEntityType;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.github.L_Ender.cataclysm.init.ModEffect;
@@ -202,6 +201,11 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
         if (hitresult$type == HitResult.Type.ENTITY) {
             this.onHitEntity((EntityHitResult)ray);
             this.level().gameEvent(GameEvent.PROJECTILE_LAND, ray.getLocation(), GameEvent.Context.of(this, (BlockState)null));
+            if (!this.level().isClientSide) {
+                LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(this.getOwner()) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
+                ExplosionUtil.lootExplode(this.level(), this.getOwner(), this.getX(), this.getY(), this.getZ(), 1.0F, false, Explosion.BlockInteraction.KEEP, lootMode);
+                this.discard();
+            }
         } else if (hitresult$type == HitResult.Type.BLOCK) {
             BlockHitResult blockhitresult = (BlockHitResult)ray;
             this.onHitBlock(blockhitresult);
@@ -231,6 +235,14 @@ public class IgnisAbyssFireball extends AbstractIgnisFireball{
 
     public void setTotalBounces(int bounces) {
         this.entityData.set(BOUNCES, bounces);
+    }
+
+    public boolean isPickable() {
+        return true;
+    }
+
+    public float getPickRadius() {
+        return 1.0F;
     }
 
     @Override
