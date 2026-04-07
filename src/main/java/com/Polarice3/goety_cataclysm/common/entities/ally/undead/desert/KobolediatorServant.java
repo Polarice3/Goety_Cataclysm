@@ -84,6 +84,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
     public AnimationState chargeendAnimationState = new AnimationState();
     public AnimationState blockAnimationState = new AnimationState();
     public AnimationState deathAnimationState = new AnimationState();
+    public static final int IDLE = 0;
     public static final int SLEEP = 1;
     public static final int AWAKE = 2;
     public static final int SWORD_1 = 3;
@@ -113,7 +114,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(3, new InternalSummonMoveGoal(this,false,1.0D));
-        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, SWORD_1, 0, 50, 15, 12){
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, IDLE, SWORD_1, 0, 50, 15, 12){
             @Override
             public boolean canUse() {
                 return super.canUse() && KobolediatorServant.this.getRandom().nextFloat() * 100.0F < 16f && KobolediatorServant.this.earthquake_cooldown <= 0;
@@ -124,10 +125,10 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 KobolediatorServant.this.earthquake_cooldown = EARTHQUAKE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, SWORD_2, 0, 100, 64, 8));
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, IDLE, SWORD_2, 0, 100, 64, 8));
 
         //chargePrepare
-        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, 0, CHARGE_PREPARE, CHARGE, 40, 30, 15) {
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, IDLE, CHARGE_PREPARE, CHARGE, 40, 30, 15) {
             @Override
             public boolean canUse() {
                 return super.canUse() && KobolediatorServant.this.getRandom().nextFloat() * 100.0F < 9f && KobolediatorServant.this.charge_cooldown <= 0;
@@ -145,7 +146,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 }
             }
         });
-        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, CHARGE, CHARGE_END, 0, 40, 40, 5) {
+        this.goalSelector.addGoal(2, new InternalSummonAttackGoal(this, CHARGE, CHARGE_END, IDLE, 40, 40, 5) {
 
             @Override
             public void stop() {
@@ -153,7 +154,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 KobolediatorServant.this.charge_cooldown = CHARGE_COOLDOWN;
             }
         });
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, CHARGE_END, CHARGE_END, 0, 40, 40) {
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, CHARGE_END, CHARGE_END, IDLE, 40, 40) {
             @Override
             public void stop() {
                 super.stop();
@@ -161,8 +162,8 @@ public class KobolediatorServant extends InternalAnimationSummon {
             }
         });
         this.goalSelector.addGoal(0, new KobolediatorDoNothingGoal());
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, AWAKE, AWAKE, 0, 70, 0));
-        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,9,9,0,18,0,false));
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, AWAKE, AWAKE, IDLE, 70, 0));
+        this.goalSelector.addGoal(1, new InternalSummonStateGoal(this,BLOCK,BLOCK,IDLE,18,0,false));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -224,7 +225,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
                 entity.setYRot(entity.getYRot() + f);
                 entity.hurtMarked = true;
             }
-            if (this.getAttackState() == 0) {
+            if (this.getAttackState() == IDLE) {
                 this.setAttackState(BLOCK);
                 this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 2);
             }
@@ -304,11 +305,11 @@ public class KobolediatorServant extends InternalAnimationSummon {
     }
 
     public boolean isSleep() {
-        return !this.getAwaken() || this.getAttackState() == 2;
+        return !this.getAwaken() || this.getAttackState() == SLEEP;
     }
 
     public void setSleep(boolean sleep) {
-        this.setAttackState(sleep ? 1 : 0);
+        this.setAttackState(sleep ? SLEEP : IDLE);
     }
 
     public boolean canBeSeenAsEnemy() {
@@ -411,7 +412,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0 && this.getAwaken(), this.tickCount);
+            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == IDLE && this.getAwaken(), this.tickCount);
         }
         if (earthquake_cooldown > 0) {
             earthquake_cooldown--;

@@ -2,7 +2,7 @@ package com.Polarice3.goety_cataclysm.common.magic.spells.necromancy;
 
 import com.Polarice3.Goety.api.items.magic.IWand;
 import com.Polarice3.Goety.api.magic.SpellType;
-import com.Polarice3.Goety.client.particles.GatherTrailParticle;
+import com.Polarice3.Goety.client.particles.GatherTrailParticleOption;
 import com.Polarice3.Goety.common.enchantments.ModEnchantments;
 import com.Polarice3.Goety.common.magic.Spell;
 import com.Polarice3.Goety.common.magic.SpellStat;
@@ -82,7 +82,7 @@ public class BattlefieldSpell extends Spell {
                     ModNetwork.sentToTrackingEntityAndPlayer(player, new SStaffParticlePacket(player.getId(), stack.getItem() instanceof IWand wand ? wand.getWandVisualHeight(serverLevel, player, stack) : 0.8F, range, color, caster.getUsedItemHand() == InteractionHand.OFF_HAND));
                 }
             } else {
-                ServerParticleUtil.gatheringParticles(new GatherTrailParticle.Option(new ColorUtil(color), caster.position().add(0, 2, 0)), caster, serverLevel, range);
+                ServerParticleUtil.gatheringParticles(new GatherTrailParticleOption(new ColorUtil(color), caster.position().add(0, 2, 0)), caster, serverLevel, range);
             }
         }
     }

@@ -346,7 +346,7 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
     }
 
     public boolean isSleep() {
-        return this.getAttackState() == 1 || this.getAttackState() == 2 || !this.getNecklace();
+        return this.getAttackState() == SLEEP || this.getAttackState() == AWAKEN || !this.getNecklace();
     }
 
     public void setNecklace(boolean necklace) {

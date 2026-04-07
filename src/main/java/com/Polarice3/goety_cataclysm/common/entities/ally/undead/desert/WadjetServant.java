@@ -81,6 +81,7 @@ public class WadjetServant extends InternalAnimationSummon {
     public AnimationState blockAnimationState = new AnimationState();
     private static final EntityDataAccessor<Boolean> AWAKEN = SynchedEntityData.defineId(WadjetServant.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> STAB = SynchedEntityData.defineId(WadjetServant.class, EntityDataSerializers.BOOLEAN);
+    public static int IDLE = 0;
     public static int SLEEP = 1;
     public static int AWAKE = 2;
     public static int SPEAR_CHARGE = 3;
@@ -114,9 +115,9 @@ public class WadjetServant extends InternalAnimationSummon {
         this.goalSelector.addGoal(5, new WanderGoal<>(this, 1.0, 80));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(1, new ChargeAttackGoal(this,0,SPEAR_CHARGE,0,45,15,20,5.5F,16));
-        this.goalSelector.addGoal(1, new MagicAttackGoal(this, 0, MAGIC, 0, 35, 15, 3.5F, 12.0F));
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, STAB_SWING, 0, 60, 60, 5.0F) {
+        this.goalSelector.addGoal(1, new ChargeAttackGoal(this,IDLE,SPEAR_CHARGE,0,45,15,20,5.5F,16));
+        this.goalSelector.addGoal(1, new MagicAttackGoal(this, IDLE, MAGIC, 0, 35, 15, 3.5F, 12.0F));
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, IDLE, STAB_SWING, 0, 60, 60, 5.0F) {
             public boolean canUse() {
                 return super.canUse() && WadjetServant.this.getStab();
             }
@@ -126,7 +127,7 @@ public class WadjetServant extends InternalAnimationSummon {
                 WadjetServant.this.setStab(WadjetServant.this.random.nextBoolean());
             }
         });
-        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, 0, DOUBLE_SWING, 0, 55, 55, 5.0F) {
+        this.goalSelector.addGoal(1, new InternalSummonAttackGoal(this, IDLE, DOUBLE_SWING, 0, 55, 55, 5.0F) {
             public boolean canUse() {
                 return super.canUse() && !WadjetServant.this.getStab();
             }
@@ -143,7 +144,7 @@ public class WadjetServant extends InternalAnimationSummon {
         });
         this.goalSelector.addGoal(1, new InternalSummonStateGoal(this, AWAKE, AWAKE, 0, 70,0));
         this.goalSelector.addGoal(0, new InternalSummonAttackGoal(this, SLEEP, AWAKE, 0, 70, 0, 18.0F));
-        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, 8, BLOCK, 0, 20, 0, false));
+        this.goalSelector.addGoal(0, new InternalSummonStateGoal(this, BLOCK, BLOCK, 0, 20, 0, false));
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -182,29 +183,29 @@ public class WadjetServant extends InternalAnimationSummon {
         return GCSpellConfig.WadjetLimit.get();
     }
 
+    @Override
     public boolean hurt(DamageSource source, float damage) {
         Entity entity = source.getDirectEntity();
         if (entity instanceof Poison_Dart_Entity) {
             return false;
-        } else if (this.isSleep() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        }
+        if (this.isSleep() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
-        } else if (this.canBlockDamageSource(source)) {
-            if (entity instanceof AbstractArrow) {
+        }
+        if (this.canBlockDamageSource(source)) {
+            if(entity instanceof AbstractArrow) {
                 float f = 170.0F + this.random.nextFloat() * 80.0F;
                 entity.setDeltaMovement(entity.getDeltaMovement().scale(1.0));
                 entity.setYRot(entity.getYRot() + f);
                 entity.hurtMarked = true;
             }
-
-            if (this.getAttackState() == 0) {
-                this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 2.0F);
+            if (this.getAttackState() == IDLE) {
+                this.playSound(SoundEvents.ANVIL_LAND, 1.0F, 2);
                 this.setAttackState(BLOCK);
             }
-
             return false;
-        } else {
-            return super.hurt(source, damage);
         }
+        return super.hurt(source, damage);
     }
 
     @Override
@@ -224,7 +225,7 @@ public class WadjetServant extends InternalAnimationSummon {
 
     private boolean canBlockDamageSource(DamageSource damageSourceIn) {
         boolean flag = false;
-        if (!this.isNoAi() && damageSourceIn.is(DamageTypeTags.IS_PROJECTILE) && !flag && (this.getAttackState() == 0 || this.getAttackState() == 8)) {
+        if (!this.isNoAi() && damageSourceIn.is(DamageTypeTags.IS_PROJECTILE) && !flag && (this.getAttackState() == 0 || this.getAttackState() == BLOCK)) {
             Vec3 vector3d2 = damageSourceIn.getSourcePosition();
             if (vector3d2 != null) {
                 Vec3 vector3d = this.getViewVector(1.0F);
@@ -274,11 +275,11 @@ public class WadjetServant extends InternalAnimationSummon {
     }
 
     public boolean isSleep() {
-        return this.getAwaken() || this.getAttackState() == 2;
+        return !this.getAwaken() || this.getAttackState() == SLEEP;
     }
 
     public void setSleep(boolean sleep) {
-        this.setAttackState(sleep ? SLEEP : 0);
+        this.setAttackState(sleep ? SLEEP : IDLE);
     }
 
     public void setStab(boolean stab) {
@@ -290,9 +291,6 @@ public class WadjetServant extends InternalAnimationSummon {
     }
 
     public void setAwaken(boolean necklace) {
-        if (necklace){
-            this.heal(this.getMaxHealth());
-        }
         this.entityData.set(AWAKEN, necklace);
     }
 
@@ -307,43 +305,41 @@ public class WadjetServant extends InternalAnimationSummon {
     public void onSyncedDataUpdated(EntityDataAccessor<?> p_21104_) {
         if (ATTACK_STATE.equals(p_21104_)) {
             switch (this.getAttackState()) {
-                case 0:
-                    this.stopAllAnimationStates();
-                    break;
-                case 1:
+                case 0 -> this.stopAllAnimationStates();
+                case 1 -> {
                     this.stopAllAnimationStates();
                     this.sleepAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     this.stopAllAnimationStates();
                     this.awakeAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     this.stopAllAnimationStates();
                     this.spearchargeAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     this.stopAllAnimationStates();
                     this.magicAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     this.stopAllAnimationStates();
                     this.stabnswingAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 6:
+                }
+                case 6 -> {
                     this.stopAllAnimationStates();
                     this.doublswingAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 7:
+                }
+                case 7 -> {
                     this.stopAllAnimationStates();
                     this.deathAnimationState.startIfStopped(this.tickCount);
-                    break;
-                case 8:
+                }
+                case 8 -> {
                     this.stopAllAnimationStates();
                     this.blockAnimationState.startIfStopped(this.tickCount);
+                }
             }
         }
-
         super.onSyncedDataUpdated(p_21104_);
     }
 
@@ -380,7 +376,7 @@ public class WadjetServant extends InternalAnimationSummon {
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("Awaken", getAwaken());
+        compound.putBoolean("Awaken", this.getAwaken());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
@@ -391,7 +387,7 @@ public class WadjetServant extends InternalAnimationSummon {
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == 0 && this.getAwaken(), this.tickCount);
+            this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.getAttackState() == IDLE && this.getAwaken(), this.tickCount);
         }
 
         this.prevAttackProgress = this.AttackProgress;
@@ -415,7 +411,7 @@ public class WadjetServant extends InternalAnimationSummon {
 
     public void aiStep() {
         super.aiStep();
-        if (this.getAttackState() == 3) {
+        if (this.getAttackState() == SPEAR_CHARGE) {
             if (this.attackTicks == 18) {
                 this.playSound(CataclysmSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
             }
@@ -425,11 +421,11 @@ public class WadjetServant extends InternalAnimationSummon {
             }
         }
 
-        if (this.getAttackState() == 4 && this.attackTicks == 15) {
+        if (this.getAttackState() == MAGIC && this.attackTicks == 15) {
             this.playSound(SoundEvents.EVOKER_PREPARE_ATTACK, 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
         }
 
-        if (this.getAttackState() == 5) {
+        if (this.getAttackState() == STAB_SWING) {
             if (this.attackTicks == 14) {
                 this.playSound(CataclysmSounds.IGNIS_POKE.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(8.0F, 6.0F, 45.0F, 1.0F, 90, false);
@@ -441,7 +437,7 @@ public class WadjetServant extends InternalAnimationSummon {
             }
         }
 
-        if (this.getAttackState() == 6) {
+        if (this.getAttackState() == DOUBLE_SWING) {
             if (this.attackTicks == 14) {
                 this.playSound(CataclysmSounds.SWING.get(), 1.0F, 1.25F + this.getRandom().nextFloat() * 0.1F);
                 this.AreaAttack(6.0F, 4.0F, 220.0F, 1.0F, 60, true);
@@ -574,7 +570,7 @@ public class WadjetServant extends InternalAnimationSummon {
         @Override
         public void stop() {
             WadjetServant.this.setAwaken(true);
-            WadjetServant.this.setAttackState(2);
+            WadjetServant.this.setAttackState(AWAKE);
         }
 
         @Override

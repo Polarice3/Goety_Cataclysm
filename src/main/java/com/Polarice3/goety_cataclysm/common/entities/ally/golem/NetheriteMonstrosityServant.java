@@ -487,7 +487,6 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("Intro", this.intro);
         compound.putBoolean("is_Berserk", this.isInBerserk());
         compound.putBoolean("is_Awaken", this.getIsAwaken());
         compound.putInt("Magazine", this.getMagazine());
@@ -496,9 +495,6 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        if (compound.contains("Intro")) {
-            this.intro = compound.getBoolean("Intro");
-        }
         if (compound.contains("is_Berserk")) {
             this.setIsInBerserk(compound.getBoolean("is_Berserk"));
         }
@@ -573,7 +569,7 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         if (this.flare_shoot_cooldown > 0) {
             this.flare_shoot_cooldown--;
         }
-        if (this.wakeUp > 0 && !this.intro){
+        if (this.wakeUp > 0){
             --this.wakeUp;
         }
 
@@ -1625,9 +1621,13 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
 
         @Override
         public boolean canUse() {
+            if (NetheriteMonstrosityServant.this.wakeUp <= 0) {
+                return false;
+            }
             LivingEntity target = NetheriteMonstrosityServant.this.getTarget();
             return !NetheriteMonstrosityServant.this.getIsAwaken() && !(target != null &&  target.isAlive() && NetheriteMonstrosityServant.this.distanceToSqr(target) < 255 && NetheriteMonstrosityServant.this.getSensing().hasLineOfSight(target));
         }
+
         @Override
         public void tick() {
             NetheriteMonstrosityServant.this.setDeltaMovement(0,NetheriteMonstrosityServant.this.getDeltaMovement().y,0);
@@ -1636,7 +1636,7 @@ public class NetheriteMonstrosityServant extends IABossSummon implements PlayerR
         @Override
         public void stop() {
             NetheriteMonstrosityServant.this.setIsAwaken(true);
-            NetheriteMonstrosityServant.this.setAttackState(2);
+            NetheriteMonstrosityServant.this.setAttackState(AWAKEN);
         }
 
         @Override
