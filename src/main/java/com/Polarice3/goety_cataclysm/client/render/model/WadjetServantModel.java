@@ -275,8 +275,8 @@ public class WadjetServantModel extends AdvancedEntityModel<WadjetServant> {
         AdvancedModelBox.rotateAngleZ = z;
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.everything);
+    public BasicModelPart root() {
+        return this.everything;
     }
 
     public Iterable<AdvancedModelBox> getAllParts() {

@@ -87,9 +87,8 @@ public class DeeplingServantModel extends AdvancedEntityModel<DeeplingServant> {
         this.updateDefaultPose();
     }
 
-    @Override
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     @Override

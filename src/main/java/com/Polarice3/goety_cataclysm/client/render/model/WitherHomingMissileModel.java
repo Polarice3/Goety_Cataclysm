@@ -27,8 +27,8 @@ public class WitherHomingMissileModel extends AdvancedEntityModel<WitherHomingMi
         return ImmutableList.of(this.root);
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {

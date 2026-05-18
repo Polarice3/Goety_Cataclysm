@@ -351,9 +351,8 @@ public class ZombieAmethystCrabModel extends AdvancedEntityModel<ZombieAmethystC
 				under_claw);
 	}
 
-	@Override
-	public Iterable<BasicModelPart> parts() {
-		return ImmutableList.of(root);
+	public BasicModelPart root() {
+		return this.root;
 	}
 
 	public void animate(ZombieAmethystCrab entity, float f, float f1, float f2, float f3, float f4) {

@@ -137,8 +137,8 @@ public class LionfishServantModel extends AdvancedEntityModel<LionfishServant> {
         return ImmutableList.of(this.root, this.body, this.tail, this.tail2, this.l_fin, this.left_long_fin, this.right_long_fin, this.upper_jaw, this.jaw, this.head, this.r_fin);
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {

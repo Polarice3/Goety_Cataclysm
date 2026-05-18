@@ -448,9 +448,8 @@ public class IgnitedRevenantServantModel extends AdvancedEntityModel<IgnitedReve
                 center);
     }
 
-    @Override
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {

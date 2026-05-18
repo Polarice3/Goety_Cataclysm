@@ -37,8 +37,8 @@ public class AbyssBlastPortalModel extends AdvancedEntityModel<AbyssBlastPortal>
         this.updateDefaultPose();
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public Iterable<AdvancedModelBox> getAllParts() {

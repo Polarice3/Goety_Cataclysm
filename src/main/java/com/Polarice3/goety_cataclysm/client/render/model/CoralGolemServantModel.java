@@ -269,8 +269,8 @@ public class CoralGolemServantModel extends AdvancedEntityModel<CoralGolemServan
         return ImmutableList.of(this.root, this.lower_body, this.upper_body, this.helmet, this.chest, this.table_coral, this.blue_table_coral, this.red_table_coral, this.right_arm, this.right_fist, this.right_coral, this.left_arm, new AdvancedModelBox[]{this.left_fist, this.left_coral, this.coral_shoulder, this.head, this.right_leg, this.left_leg});
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {

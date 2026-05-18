@@ -206,8 +206,8 @@ public class CoralssusServantModel extends AdvancedEntityModel<CoralssusServant>
         AdvancedModelBox.rotateAngleZ = z;
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public Iterable<AdvancedModelBox> getAllParts() {

@@ -101,9 +101,8 @@ public class DeeplingBruteServantModel extends AdvancedEntityModel<DeeplingBrute
         this.updateDefaultPose();
     }
 
-    @Override
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     @Override

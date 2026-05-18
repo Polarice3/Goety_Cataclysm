@@ -322,8 +322,8 @@ public class EnderGolemServantModel extends AdvancedEntityModel<EnderGolemServan
         return ImmutableList.of(this.root, this.left_arm, this.right_arm, this.left_arm2, this.right_arm2, this.left_finger, this.right_finger, this.left_leg, this.right_leg, this.head, this.lowerbody, this.upperbody, new AdvancedModelBox[]{this.voidstone});
     }
 
-    public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.root);
+    public BasicModelPart root() {
+        return this.root;
     }
 
     public void setRotationAngle(AdvancedModelBox AdvancedModelBox, float x, float y, float z) {
