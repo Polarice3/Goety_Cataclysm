@@ -12,21 +12,21 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.LLibraryBossSummon;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SimpleSummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.SummonAnimationGoal;
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.Water3DWanderGoal;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssBlast;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssMine;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssOrb;
+import com.Polarice3.goety_cataclysm.common.entities.projectiles.PortalAbyssBlast;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssBlastPortal;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssPortal;
+import com.Polarice3.goety_cataclysm.common.entities.util.DimensionalRift;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.Options.RoarParticleOptions;
 import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.AI.EntityAINearestTarget3D;
 import com.github.L_Ender.cataclysm.entity.AI.MobAIFindWater;
-import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.Abyss_Blast_Entity;
-import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.Dimensional_Rift_Entity;
-import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.Portal_Abyss_Blast_Entity;
-import com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.The_Leviathan.The_Leviathan_Tongue_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
 import com.github.L_Ender.cataclysm.entity.etc.ISemiAquatic;
@@ -43,7 +43,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -314,13 +313,15 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
 
     public boolean hurt(DamageSource source, float damage) {
         Entity entity = source.getDirectEntity();
-        if (entity instanceof Abyss_Blast_Entity || entity instanceof Portal_Abyss_Blast_Entity) {
+        if (entity instanceof AbyssBlast || entity instanceof PortalAbyssBlast) {
             return false;
         }
-        if (this.destroyBlocksTick <= 0) {
-            this.destroyBlocksTick = 20;
+        if (GCMobsConfig.LeviathanGriefing.get()) {
+            if (this.destroyBlocksTick <= 0) {
+                this.destroyBlocksTick = 20;
+            }
         }
-        double range = calculateRange(source);
+        /*double range = calculateRange(source);
 
         boolean flag1 = this.canInFluidType(this.getEyeInFluidType());
         if (!flag1) {
@@ -330,7 +331,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 }
                 return false;
             }
-        }
+        }*/
 
         if ((this.getAnimation() == LEVIATHAN_PHASE2) && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
@@ -416,9 +417,9 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             switchNavigator(true);
         }
         Entity weapon = getTongue();
-        if (weapon instanceof The_Leviathan_Tongue_Entity magneticWeapon) {
+        if (weapon instanceof LeviathanTongue magneticWeapon) {
             this.entityData.set(TONGUE_ID, magneticWeapon.getId());
-            magneticWeapon.setControllerUUID(this.getUUID());
+            magneticWeapon.setOwner(this);
         }
 
         if (this.getFirstPassenger() != null && this.getTrueOwner() != null && this.getFirstPassenger() == this.getTrueOwner()) {
@@ -510,22 +511,14 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 if (this.destroyBlocksTick > 0) {
                     --this.destroyBlocksTick;
                     if (this.destroyBlocksTick == 0){
-                        if(CMCommonConfig.Leviathan.ignoreMobGriefing){
-                            blockbreak(0.5D,0.5D,0.5D);
-                        } else {
-                            if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
-                                blockbreak(0.5D,0.5D,0.5D);
-                            }
+                        if (GCMobsConfig.LeviathanGriefing.get()) {
+                            this.blockbreak(0.5D,0.5D,0.5D);
                         }
                     }
                 }
-                if (mode ==AttackMode.MELEE) {
-                    if(CMCommonConfig.Leviathan.ignoreMobGriefing){
-                        blockbreak2();
-                    } else {
-                        if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
-                            blockbreak2();
-                        }
+                if (this.mode ==AttackMode.MELEE) {
+                    if (GCMobsConfig.LeviathanGriefing.get()) {
+                        this.blockbreak2();
                     }
                 }
             }
@@ -761,7 +754,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 this.level().playSound((Player) null, this, SoundEvents.WITHER_BREAK_BLOCK, this.getSoundSource(), 2.0f, 1.1f);
                 ScreenShake_Entity.ScreenShake(this.level(), this.position(), 30, 0.1f, 10, 10);
                 for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(15))) {
-                    if (entity instanceof Dimensional_Rift_Entity rift) {
+                    if (entity instanceof DimensionalRift rift) {
                         if (rift.getStage() < 4) {
                             rift.setStage(rift.getStage() + 1);
                         }
@@ -773,7 +766,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 this.level().playSound((Player) null, this, SoundEvents.WITHER_BREAK_BLOCK, this.getSoundSource(), 3.0f, 1.2f);
                 ScreenShake_Entity.ScreenShake(this.level(), this.position(), 30, 0.15f, 10, 10);
                 for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(15))) {
-                    if (entity instanceof Dimensional_Rift_Entity rift) {
+                    if (entity instanceof DimensionalRift rift) {
                         if (rift.getStage() < 4) {
                             rift.setStage(rift.getStage() + 1);
                         }
@@ -785,7 +778,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 this.level().playSound((Player) null, this, SoundEvents.WITHER_BREAK_BLOCK, this.getSoundSource(), 3.0f, 1.3f);
                 ScreenShake_Entity.ScreenShake(this.level(), this.position(), 30, 0.2f, 10, 10);
                 for (Entity entity : this.level().getEntities(this, this.getBoundingBox().inflate(15))) {
-                    if (entity instanceof Dimensional_Rift_Entity rift) {
+                    if (entity instanceof DimensionalRift rift) {
                         if (rift.getStage() < 4) {
                             rift.setStage(rift.getStage() + 1);
                         }
@@ -1630,11 +1623,11 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 if (target != null) {
                     if (entity.getTongue() == null) {
                         if (!entity.level().isClientSide) {
-                            The_Leviathan_Tongue_Entity segment = ModEntities.THE_LEVIATHAN_TONGUE.get().create(this.entity.level());
+                            LeviathanTongue segment = GCEntityType.LEVIATHAN_TONGUE.get().create(this.entity.level());
                             if (segment != null) {
                                 segment.copyPosition(this.entity);
                                 segment.setPos(entity.getTonguePosition());
-                                segment.setControllerUUID(entity.getUUID());
+                                segment.setOwner(entity);
                                 segment.setMaxDuration(120);
                                 entity.setTongueUUID(segment.getUUID());
                                 this.entity.level().addFreshEntity(segment);
@@ -1646,7 +1639,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             if (this.entity.getAnimationTick() > 25 && this.entity.getAnimationTick() <= 145) {
                 if (target != null && target.isAlive()) {
                     if (this.entity.distanceTo(target) < 8.5F) {
-                        if (weapon instanceof The_Leviathan_Tongue_Entity magneticWeapon) {
+                        if (weapon instanceof LeviathanTongue magneticWeapon) {
                             if(magneticWeapon.getComingBack()) {
                                 magneticWeapon.remove(RemovalReason.DISCARDED);
                             }
@@ -1658,7 +1651,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             }
 
             if (this.entity.getAnimationTick() > 155) {
-                if (weapon instanceof The_Leviathan_Tongue_Entity magneticWeapon) {
+                if (weapon instanceof LeviathanTongue magneticWeapon) {
                     magneticWeapon.remove(RemovalReason.DISCARDED);
                 }
             }
@@ -1809,7 +1802,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             float dir = 90.0f;
             if(this.entity.getAnimationTick() == 64) {
                 if(!entity.level().isClientSide) {
-                    Abyss_Blast_Entity DeathBeam = new Abyss_Blast_Entity(ModEntities.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 80, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
+                    AbyssBlast DeathBeam = new AbyssBlast(GCEntityType.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 80, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
                     entity.level().addFreshEntity(DeathBeam);
                 }
             }
@@ -1857,7 +1850,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             float dir = 90.0f;
             if(this.entity.getAnimationTick() == 64 || this.entity.getAnimationTick() == 109 || this.entity.getAnimationTick() == 154) {
                 if(!entity.level().isClientSide) {
-                    Abyss_Blast_Entity DeathBeam = new Abyss_Blast_Entity(ModEntities.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 28, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
+                    AbyssBlast DeathBeam = new AbyssBlast(GCEntityType.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 28, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
                     entity.level().addFreshEntity(DeathBeam);
                 }
             }
@@ -2179,12 +2172,12 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
 
         public void tick() {
             if (entity.getAnimationTick() == 24) {
-                if (!entity.level().isClientSide ) {
+                if (!entity.level().isClientSide) {
                     double theta = (entity.yBodyRot) * (Math.PI / 180);
                     theta += Math.PI / 2;
                     double vecX = Math.cos(theta);
                     double vecZ = Math.sin(theta);
-                    Dimensional_Rift_Entity portal = new Dimensional_Rift_Entity(entity.level(),
+                    DimensionalRift portal = new DimensionalRift(entity.level(),
                             entity.getX() + vecX * 12F,
                             entity.getEyeY(),
                             entity.getZ() + vecZ * 12F, entity);
@@ -2196,17 +2189,17 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                 }
 
             }
-            Dimensional_Rift_Entity rift = getClosestDimensionalRift();
+            DimensionalRift rift = getClosestDimensionalRift();
             if(rift !=null){
                 entity.getLookControl().setLookAt(rift, 30, 90);
             }
         }
 
-        private Dimensional_Rift_Entity getClosestDimensionalRift(){
-            List<Dimensional_Rift_Entity> list = entity.level().getEntitiesOfClass(Dimensional_Rift_Entity.class, entity.getBoundingBox().inflate(15, 15, 15));
-            Dimensional_Rift_Entity closest = null;
+        private DimensionalRift getClosestDimensionalRift(){
+            List<DimensionalRift> list = entity.level().getEntitiesOfClass(DimensionalRift.class, entity.getBoundingBox().inflate(15, 15, 15), dimensionalRift -> dimensionalRift.getOwner() == this.entity);
+            DimensionalRift closest = null;
             if(!list.isEmpty()){
-                for(Dimensional_Rift_Entity entity : list){
+                for(DimensionalRift entity : list){
                     if((closest == null || closest.distanceTo(entity) > entity.distanceTo(entity))){
                         closest = entity;
                     }
@@ -2305,7 +2298,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             float dir = 90.0f;
             if(this.entity.getAnimationTick() == 64) {
                 if(!entity.level().isClientSide) {
-                    Abyss_Blast_Entity DeathBeam = new Abyss_Blast_Entity(ModEntities.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 80, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
+                    AbyssBlast DeathBeam = new AbyssBlast(GCEntityType.ABYSS_BLAST.get(), entity.level(), entity, entity.getX(), entity.getY(), entity.getZ(), (float) ((entity.yHeadRot + dir) * Math.PI / 180), (float) (-entity.getXRot() * Math.PI / 180), 80, dir,(float)CMCommonConfig.Leviathan.AbyssBlastDamage,(float)CMCommonConfig.Leviathan.AbyssBlastHpDamage);
                     entity.level().addFreshEntity(DeathBeam);
                 }
             }
@@ -2449,7 +2442,7 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             clockwise = this.mob.random.nextBoolean();
             this.target = this.mob.getTarget();
             if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
-                this.mob.setTarget((LivingEntity)null);
+                this.mob.setTarget(null);
             }
 
             this.mob.getNavigation().stop();

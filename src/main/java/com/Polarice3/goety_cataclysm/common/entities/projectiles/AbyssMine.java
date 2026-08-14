@@ -1,5 +1,6 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
+import com.Polarice3.Goety.common.entities.projectiles.SpellEntity;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.ExplosionUtil;
 import com.Polarice3.Goety.utils.LootingExplosion;
@@ -27,7 +28,7 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class AbyssMine extends Entity {
+public class AbyssMine extends SpellEntity {
     private static final EntityDataAccessor<Boolean> ACTIVATE = SynchedEntityData.defineId(AbyssMine.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(AbyssMine.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(AbyssMine.class, EntityDataSerializers.FLOAT);
@@ -35,8 +36,6 @@ public class AbyssMine extends Entity {
     private boolean sentSpikeEvent;
     private int lifeTicks = 800;
     private boolean clientSideAttackStarted;
-    private LivingEntity caster;
-    private UUID casterUuid;
     public float activateProgress;
     public float prevactivateProgress;
     public int time;
@@ -49,12 +48,13 @@ public class AbyssMine extends Entity {
         this(GCEntityType.ABYSS_MINE.get(), worldIn);
         this.warmupDelayTicks = p_i47276_9_;
 
-        this.setCaster(casterIn);
+        this.setOwner(casterIn);
         this.setYRot(p_i47276_8_ * (180F / (float)Math.PI));
         this.setPos(x, y, z);
     }
 
     protected void defineSynchedData() {
+        super.defineSynchedData();
         this.entityData.define(ACTIVATE, false);
         this.entityData.define(DAMAGE, 0.0F);
         this.entityData.define(RADIUS, 1.0F);
@@ -80,41 +80,19 @@ public class AbyssMine extends Entity {
         entityData.set(RADIUS, damage);
     }
 
-    public void setCaster(@Nullable LivingEntity p_190549_1_) {
-        this.caster = p_190549_1_;
-        this.casterUuid = p_190549_1_ == null ? null : p_190549_1_.getUUID();
-    }
-
-    @Nullable
-    public LivingEntity getCaster() {
-        if (this.caster == null && this.casterUuid != null && this.level() instanceof ServerLevel serverLevel) {
-            Entity entity = serverLevel.getEntity(this.casterUuid);
-            if (entity instanceof LivingEntity livingEntity) {
-                this.caster = livingEntity;
-            }
-        }
-
-        return this.caster;
-    }
-
-    protected void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
         this.warmupDelayTicks = compound.getInt("Warmup");
-        if (compound.hasUUID("Owner")) {
-            this.casterUuid = compound.getUUID("Owner");
-        }
         if (compound.contains("Radius")) {
             this.setRadius(compound.getFloat("Radius"));
         }
 
     }
 
-    protected void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.putInt("Warmup", this.warmupDelayTicks);
-        if (this.casterUuid != null) {
-            compound.putUUID("Owner", this.casterUuid);
-        }
         compound.putFloat("Radius", this.getRadius());
-
     }
 
     public void tick() {
@@ -153,7 +131,7 @@ public class AbyssMine extends Entity {
                 }
             }
             if (this.warmupDelayTicks < -20) {
-                for(LivingEntity livingentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2D, 0.0D, 0.2D))) {
+                for(LivingEntity livingentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2D, 0.0D, 0.2D), livingEntity -> this.getOwner() == null || !MobUtil.areAllies(this.getOwner(), livingEntity))) {
                     this.explode(livingentity);
                 }
             }
@@ -181,12 +159,12 @@ public class AbyssMine extends Entity {
     }
 
     protected void explode(LivingEntity livingentity) {
-        LivingEntity Caster = this.getCaster();
+        LivingEntity caster = this.getOwner();
         if(livingentity.isAlive()) {
-            if (Caster != null) {
-                LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(Caster) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
-                if (!MobUtil.areAllies(Caster, livingentity) && livingentity.isAlive()) {
-                    ExplosionUtil.lootExplode(this.level(), Caster, this.getX(), this.getY(0.0625D), this.getZ(), this.getRadius(), false, Explosion.BlockInteraction.KEEP, lootMode);
+            if (caster != null) {
+                LootingExplosion.Mode lootMode = CuriosFinder.hasWanting(caster) ? LootingExplosion.Mode.LOOT : LootingExplosion.Mode.REGULAR;
+                if (!MobUtil.areAllies(caster, livingentity) && livingentity.isAlive()) {
+                    ExplosionUtil.lootExplode(this.level(), caster, this.getX(), this.getY(0.0625D), this.getZ(), this.getRadius(), false, Explosion.BlockInteraction.KEEP, lootMode);
                     livingentity.addEffect(new MobEffectInstance(ModEffect.EFFECTABYSSAL_FEAR.get(), 200, 0));
                     this.discard();
                 }

@@ -48,7 +48,7 @@ public class AbyssPortal extends Entity {
     }
 
     public AbyssPortal(PlayMessages.SpawnEntity spawnEntity, Level level) {
-        this(ModEntities.ABYSS_PORTAL.get(), level);
+        this(GCEntityType.ABYSS_PORTAL.get(), level);
     }
 
     protected Component getTypeName() {

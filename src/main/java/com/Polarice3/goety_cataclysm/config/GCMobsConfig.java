@@ -27,6 +27,7 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
     public static final ForgeConfigSpec.ConfigValue<Boolean> AncientRemnantGriefing;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> LeviathanGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrositySpawnLava;
     public static final ForgeConfigSpec.ConfigValue<Boolean> ProwlerCore;
@@ -54,6 +55,8 @@ public class GCMobsConfig {
                     .define("coralssusMoistness", true);
             SymbioctoBreath = BUILDER.comment("Whether Symbioctos provide water breathing to ridden entity, Default: true")
                     .define("symbioctoBreath", true);
+            LeviathanGriefing = BUILDER.comment("Whether Leviathan, owned by players, breaks blocks if mob griefing is enabled, Default: false")
+                    .define("leviathanGriefing", false);
             BUILDER.pop();
             BUILDER.push("Nether Servants");
             IgnitedRevenantHelm = BUILDER.comment("Whether owned Ignited Revenants drop Ignited Helms, Default: true")

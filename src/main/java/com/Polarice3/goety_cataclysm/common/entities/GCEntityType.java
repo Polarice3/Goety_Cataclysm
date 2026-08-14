@@ -4,6 +4,7 @@ import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.common.entities.ally.acropolis.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.*;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan.LeviathanServant;
+import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan.LeviathanTongue;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.WatcherServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.CoralGolemServant;
@@ -23,6 +24,7 @@ import com.Polarice3.goety_cataclysm.common.entities.projectiles.*;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssBlastPortal;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssMark;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssPortal;
+import com.Polarice3.goety_cataclysm.common.entities.util.DimensionalRift;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -259,6 +261,13 @@ public class GCEntityType {
                     .clientTrackingRange(4)
                     .updateInterval(10));
 
+    public static final RegistryObject<EntityType<DimensionalRift>> DIMENSIONAL_RIFT = register("dimensional_rift",
+            EntityType.Builder.<DimensionalRift>of(DimensionalRift::new, MobCategory.MISC)
+            .sized(2.0F, 2.0F)
+            .fireImmune()
+            .clientTrackingRange(10)
+            .updateInterval(Integer.MAX_VALUE));
+
     public static final RegistryObject<EntityType<AbyssOrb>> ABYSS_ORB = register("abyss_orb",
             EntityType.Builder.<AbyssOrb>of(AbyssOrb::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
@@ -282,6 +291,10 @@ public class GCEntityType {
                     .clientTrackingRange(10)
                     .updateInterval(Integer.MAX_VALUE));
 
+    public static final RegistryObject<EntityType<LeviathanTongue>> LEVIATHAN_TONGUE = register("leviathan_tongue",
+            EntityType.Builder.of(LeviathanTongue::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F));
+
     public static final RegistryObject<EntityType<StormSerpent>> STORM_SERPENT = register("storm_serpent",
             EntityType.Builder.<StormSerpent>of(StormSerpent::new, MobCategory.MISC)
                     .sized(2.0F, 9.0F)
@@ -291,6 +304,11 @@ public class GCEntityType {
 
     public static final RegistryObject<EntityType<DeathLaserBeam>> DEATH_LASER_BEAM = register("death_laser_beam",
             EntityType.Builder.<DeathLaserBeam>of(DeathLaserBeam::new, MobCategory.MISC)
+                    .sized(0.1F, 0.1F)
+                    .fireImmune());
+
+    public static final RegistryObject<EntityType<AbyssBlast>> ABYSS_BLAST = register("abyss_blast",
+            EntityType.Builder.<AbyssBlast>of(AbyssBlast::new, MobCategory.MISC)
                     .sized(0.1F, 0.1F)
                     .fireImmune());
 
