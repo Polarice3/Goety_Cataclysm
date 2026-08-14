@@ -117,9 +117,9 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:5493390")
 
     //Compat
-    implementation fg.deobf("maven.modrinth:goety:2.5.53.1")
+    implementation fg.deobf("maven.modrinth:goety:2.5.56.3")
     implementation fg.deobf("curse.maven:lionfish-api-1001614:8095554")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:8095632")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:8246047")
 
     //Testing Only
     runtimeOnly fg.deobf("curse.maven:yeetus-635427:4680832")
@@ -130,6 +130,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:kiwi-303657:4688568")
     runtimeOnly fg.deobf("curse.maven:framework-549225:5180972")
     runtimeOnly fg.deobf("curse.maven:configured-457570:5180900")
+    runtimeOnly fg.deobf("curse.maven:free-cam-557076:4643128")
 }
 
 tasks.withType(ProcessResources).configureEach {

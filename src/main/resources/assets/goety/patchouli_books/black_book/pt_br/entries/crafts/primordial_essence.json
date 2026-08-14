@@ -1,0 +1,15 @@
+{
+  "name": "Essências do Primordial",
+  "icon": "goety_cataclysm:primordial_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Através das catástrofes, você descobriu uma essência que representa o poder e a antiguidade através da combinação de vários ingredientes antigos. Quem sabe o que se pode fazer com tal poder..."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:primordial_essence"
+    }
+  ]
+}

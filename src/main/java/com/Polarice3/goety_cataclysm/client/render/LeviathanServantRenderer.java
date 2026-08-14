@@ -1,8 +1,10 @@
 package com.Polarice3.goety_cataclysm.client.render;
 
+import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.client.render.model.LeviathanServantModel;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan.LeviathanServant;
 import com.Polarice3.goety_cataclysm.common.entities.ally.deepling.leviathan.LeviathanServantPart;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.client.model.entity.The_Leviathan_Tongue_End_Model;
 import com.github.L_Ender.cataclysm.client.model.entity.The_Leviathan_Tongue_Model;
@@ -28,8 +30,10 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class LeviathanServantRenderer extends MobRenderer<LeviathanServant, LeviathanServantModel> {
-    private static final ResourceLocation LEVIATHAN_TEXTURES = new ResourceLocation(Cataclysm.MODID,"textures/entity/leviathan/the_leviathan.png");
-    private static final ResourceLocation BURNING_LEVIATHAN_TEXTURES = new ResourceLocation(Cataclysm.MODID,"textures/entity/leviathan/the_burning_leviathan.png");
+    private static final ResourceLocation ORIGINAL = new ResourceLocation(Cataclysm.MODID,"textures/entity/leviathan/the_leviathan.png");
+    private static final ResourceLocation BURNING_ORIGINAL = new ResourceLocation(Cataclysm.MODID,"textures/entity/leviathan/the_burning_leviathan.png");
+    private static final ResourceLocation LEVIATHAN_TEXTURES = GoetyCataclysm.location("textures/entity/servants/leviathan_servant.png");
+    private static final ResourceLocation BURNING_LEVIATHAN_TEXTURES = GoetyCataclysm.location("textures/entity/servants/burning_leviathan_servant.png");
     private static final ResourceLocation LEVIATHAN_TEXTURE_EYES = new ResourceLocation(Cataclysm.MODID,"textures/entity/leviathan/the_leviathan_eye.png");
     private final RandomSource rnd = RandomSource.create();
     private static final The_Leviathan_Tongue_Model TONGUE_MODEL = new The_Leviathan_Tongue_Model();
@@ -43,9 +47,18 @@ public class LeviathanServantRenderer extends MobRenderer<LeviathanServant, Levi
 
     @Override
     public ResourceLocation getTextureLocation(LeviathanServant entity) {
-        return  entity.getMeltDown() ? BURNING_LEVIATHAN_TEXTURES : LEVIATHAN_TEXTURES;
+        if (GCMobsConfig.LeviathanServantTexture.get()) {
+            return entity.getMeltDown() ? BURNING_LEVIATHAN_TEXTURES : LEVIATHAN_TEXTURES;
+        }
+        return entity.getMeltDown() ? BURNING_ORIGINAL : ORIGINAL;
     }
 
+    public ResourceLocation getBaseTextureLocation(LeviathanServant entity) {
+        if (GCMobsConfig.LeviathanServantTexture.get()) {
+            return LEVIATHAN_TEXTURES;
+        }
+        return ORIGINAL;
+    }
 
     public boolean shouldRender(LeviathanServant livingentity, Frustum camera, double camX, double camY, double camZ) {
         if (super.shouldRender(livingentity, camera, camX, camY, camZ)) {
@@ -99,7 +112,7 @@ public class LeviathanServantRenderer extends MobRenderer<LeviathanServant, Levi
             Vec3 currentNeckButt = fromVec;
             VertexConsumer neckConsumer;
 
-            neckConsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(LEVIATHAN_TEXTURES));
+            neckConsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getBaseTextureLocation(entity)));
 
 
             double remainingDistance = toVec.distanceTo(fromVec);
@@ -117,7 +130,7 @@ public class LeviathanServantRenderer extends MobRenderer<LeviathanServant, Levi
 
             VertexConsumer clawConsumer;
 
-            clawConsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(LEVIATHAN_TEXTURES));
+            clawConsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getBaseTextureLocation(entity)));
 
             matrixStackIn.pushPose();
             matrixStackIn.translate(toVec.x, toVec.y, toVec.z);

@@ -47,6 +47,10 @@ public class GCAttributesConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> CoralssusArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> CoralssusDamage;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> LeviathanHealth;
+    public static final ForgeConfigSpec.ConfigValue<Double> LeviathanArmor;
+    public static final ForgeConfigSpec.ConfigValue<Double> LeviathanDamage;
+
     public static final ForgeConfigSpec.ConfigValue<Double> WatcherHealth;
     public static final ForgeConfigSpec.ConfigValue<Double> WatcherArmor;
     public static final ForgeConfigSpec.ConfigValue<Double> WatcherMeleeDamage;
@@ -214,6 +218,14 @@ public class GCAttributesConfig {
                             .defineInRange("coralssusArmor", 5.0, 0.0, Double.MAX_VALUE);
                     CoralssusDamage = BUILDER.comment("How much damage Coralssus Servants melee attack deals, Default: 10.0")
                             .defineInRange("coralssusDamage", 10.0, 1.0, Double.MAX_VALUE);
+                    BUILDER.pop();
+                    BUILDER.push("Leviathan Servant");
+                    LeviathanHealth = BUILDER.comment("How much Max Health Leviathan Servants have, Default: 400.0")
+                            .defineInRange("leviathanHealth", 400.0, 1.0, Double.MAX_VALUE);
+                    LeviathanArmor = BUILDER.comment("How much natural Armor Leviathan Servants have, Default: 10.0")
+                            .defineInRange("leviathanArmor", 10.0, 0.0, Double.MAX_VALUE);
+                    LeviathanDamage = BUILDER.comment("How much damage Leviathan Servants melee attack deals, Default: 15.0")
+                            .defineInRange("leviathanDamage", 15.0, 1.0, Double.MAX_VALUE);
                     BUILDER.pop();
                 BUILDER.pop();
                 BUILDER.push("Factory");

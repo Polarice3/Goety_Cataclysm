@@ -148,7 +148,6 @@ public class AncientRemnantServant extends IABossSummon implements IAutoRideable
 
     public AncientRemnantServant(EntityType<? extends Summoned> entity, Level world) {
         super(entity, world);
-        this.xpReward = 500;
         this.setMaxUpStep(1.5F);
         this.setPathfindingMalus(BlockPathTypes.UNPASSABLE_RAIL, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);

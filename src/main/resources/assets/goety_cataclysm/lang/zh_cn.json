@@ -137,7 +137,6 @@
   "item.goety_cataclysm.ancient_remnant_spawn_egg": "远古遗魂仆从刷怪蛋",
   "advancements.goety_cataclysm.convert_ancient_remnant.title": "吾王万岁！",
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "把现世遗魂转化为远古遗魂",
-  "block.goety_cataclysm.ancient_plating": "镀层远古金属块",
   "item.goety_cataclysm.amethyst_cluster_focus": "紫晶簇聚晶",
   "item.goety_cataclysm.amethyst_cluster_focus.info": "在施法者周围发射紫水晶簇",
   "entity.goety_cataclysm.draugr_necromancer": "魂尸死灵法师",
@@ -161,5 +160,10 @@
   "item.goety_cataclysm.sunken_tribune_focus.info": "召唤渊灵术士或渊灵祭司仆从，潜行施法会把仆从传送到施法者的位置",
   "item.goety_cataclysm.kakourgos_focus.info": "召唤小海胆仆从，潜行施法会把仆从传送到施法者的位置",
   "item.goety_cataclysm.kyria_focus.info": "召唤水母莉亚仆从，潜行施法会把仆从传送到施法者的位置",
-  "item.goety_cataclysm.polemistis_focus.info": "召唤章鱼共生体与它骑着的溺尸宿主仆从，潜行施法会把仆从传送到施法者的位置"
+  "item.goety_cataclysm.polemistis_focus.info": "召唤章鱼共生体与它骑着的溺尸宿主仆从，潜行施法会把仆从传送到施法者的位置",
+  "entity.goety_cataclysm.leviathan": "利维坦",
+  "item.goety_cataclysm.leviathan_spawn_egg": "利维坦仆从",
+  "item.goety_cataclysm.primordial_essence": "元初精华",
+  "advancements.goety_cataclysm.convert_leviathan.title": "苍海之惧",
+  "advancements.goety_cataclysm.convert_leviathan.description": "让幼年利维坦成长一只真正的利维坦"
 }

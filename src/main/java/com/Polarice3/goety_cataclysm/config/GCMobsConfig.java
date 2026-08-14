@@ -16,6 +16,9 @@ public class GCMobsConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Integer> DeeplingAnglerCatchTime;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> LeviathanServantTexture;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityServantTexture;
+
     public static final ForgeConfigSpec.ConfigValue<Boolean> BlazeIgnitedHelm;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> DeeplingMoistness;
@@ -31,6 +34,16 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> WadjetSpirit;
 
     static {
+        BUILDER.push("Textures");
+            BUILDER.push("Leviathan Servants");
+            LeviathanServantTexture = BUILDER.comment("If Leviathan Servants have custom textures, Default: true")
+                    .define("leviathanServantTexture", true);
+            BUILDER.pop();
+            BUILDER.push("Netherite Monstrosity Servants");
+            NetheriteMonstrosityServantTexture = BUILDER.comment("If Netherite Monstrosity Servants have custom textures, Default: true")
+                    .define("netheriteMonstrosityServantTexture", true);
+            BUILDER.pop();
+        BUILDER.pop();
         BUILDER.push("Servants");
             BUILDER.push("Abyss Servants");
             DeeplingAnglerCatchTime = BUILDER.comment("How long until a Deepling Angler Servant will catch another Lionfish if they don't have one already attached, Default: 12000")

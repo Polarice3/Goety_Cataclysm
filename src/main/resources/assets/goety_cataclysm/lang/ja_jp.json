@@ -147,7 +147,6 @@
   "item.goety_cataclysm.ancient_remnant_spawn_egg": "古の魔獣の骸の従者のスポーンエッグ",
   "advancements.goety_cataclysm.convert_ancient_remnant.title": "君主万歳！",
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "現代の魔獣の骸を古の魔獣の骸に変異させる。",
-  "block.goety_cataclysm.ancient_plating": "古代のメッキ",
   "item.goety_cataclysm.amethyst_cluster_focus": "アメジストクラスターのフォーカス",
   "item.goety_cataclysm.amethyst_cluster_focus.info": "術者の周囲にアメジストクラスターを発射します。",
   "entity.goety_cataclysm.draugr_necromancer": "ドラウグルネクロマンサー",
@@ -162,5 +161,10 @@
   "block.goety_cataclysm.netherite_monstrosity_head": "ネザライトの怪物の頭",
   "block.goety_cataclysm.wall_netherite_monstrosity_head": "ネザライトの怪物の頭",
   "item.goety_cataclysm.battlefield_focus": "バトルフィールドのフォーカス",
-  "item.goety_cataclysm.battlefield_focus.info": "術者の周りにファントムハルバードを召喚します。"
+  "item.goety_cataclysm.battlefield_focus.info": "術者の周りにファントムハルバードを召喚します。",
+  "entity.goety_cataclysm.leviathan": "リヴァイアサンの従者",
+  "item.goety_cataclysm.leviathan_spawn_egg": "リヴァイアサンの従者のスポーンエッグ",
+  "item.goety_cataclysm.primordial_essence": "原始のエッセンス",
+  "advancements.goety_cataclysm.convert_leviathan.title": "海の恐怖",
+  "advancements.goety_cataclysm.convert_leviathan.description": "ベビーリヴァイアサンを成体のリヴァイアサンに成長させる。"
 }

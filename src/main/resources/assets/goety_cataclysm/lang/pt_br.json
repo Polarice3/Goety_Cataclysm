@@ -140,7 +140,6 @@
   "item.goety_cataclysm.urchinkin_servant_spawn_egg": "Ovo de Servo Ouriçinho",
   "advancements.goety_cataclysm.convert_ancient_remnant.title": "Longa vida ao Monarca!",
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "Converter um Mini-Fóssil em um Fóssil Ancestral.",
-  "block.goety_cataclysm.ancient_plating": "Revestimento antigo",
   "item.goety_cataclysm.amethyst_cluster_focus": "Foco de Aglomerado de Ametista",
   "item.goety_cataclysm.amethyst_cluster_focus.info": "Dispara Aglomerados de Ametista ao redor do conjurador.",
   "entity.goety_cataclysm.draugr_necromancer": "Necromante Draugr",
@@ -165,5 +164,10 @@
   "block.goety_cataclysm.netherite_monstrosity_head": "Cabeça da Monstruosidade de Netherita",
   "block.goety_cataclysm.wall_netherite_monstrosity_head": "Cabeça da Monstruosidade de Netherita",
   "item.goety_cataclysm.battlefield_focus": "Foco do Campo de Batalha",
-  "item.goety_cataclysm.battlefield_focus.info": "Invoca Alabardas Fantasmais ao redor do conjurador."
+  "item.goety_cataclysm.battlefield_focus.info": "Invoca Alabardas Fantasmais ao redor do conjurador.",
+  "entity.goety_cataclysm.leviathan": "O Leviatã",
+  "item.goety_cataclysm.leviathan_spawn_egg": "Ovo de Servo Leviatã",
+  "item.goety_cataclysm.primordial_essence": "Essência Primordial",
+  "advancements.goety_cataclysm.convert_leviathan.title": "O Terror do Oceano",
+  "advancements.goety_cataclysm.convert_leviathan.description": "Converta um Bebê Leviatã em um Leviatã adulto."
 }

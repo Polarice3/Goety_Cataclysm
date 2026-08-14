@@ -9,11 +9,12 @@ import com.Polarice3.Goety.init.ModTags;
 import com.Polarice3.Goety.utils.CuriosFinder;
 import com.Polarice3.Goety.utils.MobUtil;
 import com.Polarice3.Goety.utils.ModDamageSource;
-import com.Polarice3.Goety.utils.NoKnockBackDamageSource;
 import com.Polarice3.goety_cataclysm.GoetyCataclysm;
+import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
 import com.Polarice3.goety_cataclysm.common.blocks.GoetyBlocks;
 import com.Polarice3.goety_cataclysm.common.entities.ally.OwnedCMPart;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
+import com.Polarice3.goety_cataclysm.common.items.GCItems;
 import com.Polarice3.goety_cataclysm.common.items.GoetyItems;
 import com.Polarice3.goety_cataclysm.common.magic.construct.NetheriteMonstrosityMold;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
@@ -45,10 +46,26 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import org.apache.commons.lang3.ArrayUtils;
 
 @Mod.EventBusSubscriber(modid = GoetyCataclysm.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GCEvents {
+
+    @SubscribeEvent
+    public static void onMissingMappings(MissingMappingsEvent event) {
+        event.getAllMappings(ForgeRegistries.Keys.ITEMS).forEach(missingMapping -> {
+            if (missingMapping.getKey().toString().equals("goety_cataclysm:ancient_plating")) {
+                missingMapping.remap(GCItems.ESSENCE_OF_THE_PRIMORDIAL.get());
+            }
+        });
+        event.getAllMappings(ForgeRegistries.Keys.BLOCKS).forEach(missingMapping -> {
+            if (missingMapping.getKey().toString().equals("goety_cataclysm:ancient_plating")) {
+                missingMapping.remap(GCBlocks.NETHERITE_PLATING.get());
+            }
+        });
+    }
 
     @SubscribeEvent
     public static void worldLoad(LevelEvent.Load event) {
@@ -202,9 +219,6 @@ public class GCEvents {
         LivingEntity killed = event.getEntity();
         Entity killer = event.getSource().getEntity();
         Level world = killed.getCommandSenderWorld();
-        if (event.getSource() instanceof NoKnockBackDamageSource noKnockBackDamageSource){
-            killer = noKnockBackDamageSource.getOwner();
-        }
         if (killer instanceof Player player){
             if (world.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)){
                 Entity entity = event.getSource().getDirectEntity();

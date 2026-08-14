@@ -66,6 +66,7 @@ public class DeathLaserSpell extends Spell {
 
         DeathLaserBeam DeathBeam = new DeathLaserBeam(GCEntityType.DEATH_LASER_BEAM.get(), worldIn, caster, caster.getX(), caster.getEyeY() - 0.2D, caster.getZ(), (float) ((caster.yHeadRot + 90) * Math.PI / 180), (float) (-caster.getXRot() * Math.PI / 180), 28 + MathHelper.secondsToTicks(duration), damage + potency, GCSpellConfig.DeathLaserHPDamage.get().floatValue());
         DeathBeam.setImmediate(true);
+        DeathBeam.setStorm(this.rightStaff(staff));
         worldIn.addFreshEntity(DeathBeam);
         this.playSound(worldIn, caster, CataclysmSounds.DEATH_LASER.get());
         ScreenShake_Entity.ScreenShake(worldIn, caster.position(), 20, 0.2f, 0, 10);

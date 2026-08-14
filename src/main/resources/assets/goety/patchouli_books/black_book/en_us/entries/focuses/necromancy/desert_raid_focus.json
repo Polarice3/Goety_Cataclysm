@@ -13,7 +13,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Casting with $(l:crafts/staff/necro_staff)Necro Staff$() summons more Draugrs at once."
+      "text": "Casting with $(l:crafts/staff/necro_staff)Necro Staff$() summons more Koboletons at once."
     }
   ],
   "extra_recipe_mappings": {

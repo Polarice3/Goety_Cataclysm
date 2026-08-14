@@ -255,7 +255,6 @@ public class KobolediatorServant extends InternalAnimationSummon {
         return air;
     }
 
-
     public boolean causeFallDamage(float p_148711_, float p_148712_, DamageSource p_148713_) {
         return false;
     }
@@ -293,9 +292,6 @@ public class KobolediatorServant extends InternalAnimationSummon {
     }
 
     public void setAwaken(boolean necklace) {
-        if(necklace){
-            this.heal(this.getMaxHealth());
-        }
         this.entityData.set(AWAKEN, necklace);
     }
 
@@ -796,7 +792,7 @@ public class KobolediatorServant extends InternalAnimationSummon {
         @Override
         public void stop() {
             KobolediatorServant.this.setAwaken(true);
-            KobolediatorServant.this.setAttackState(2);
+            KobolediatorServant.this.setAttackState(AWAKE);
         }
 
         @Override

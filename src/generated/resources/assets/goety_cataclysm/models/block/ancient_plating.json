@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "goety_cataclysm:block/ancient_plating"
-  }
-}

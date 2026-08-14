@@ -1,8 +1,10 @@
 package com.Polarice3.goety_cataclysm.client.render;
 
+import com.Polarice3.goety_cataclysm.GoetyCataclysm;
 import com.Polarice3.goety_cataclysm.client.render.model.NMServantModel;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NMPart;
 import com.Polarice3.goety_cataclysm.common.entities.ally.golem.NetheriteMonstrosityServant;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.client.model.CMModelLayers;
 import com.github.L_Ender.cataclysm.client.render.CMRenderTypes;
@@ -25,6 +27,7 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
         super(renderManagerIn, new NMServantModel(renderManagerIn.bakeLayer(CMModelLayers.NETHERITE_MONSTROSITY_MODEL)), 2.5F);
         this.addLayer(new Netherite_Monstrosity_Layer(this));
         this.addLayer(new Netherite_Monstrosity_Layer2(this));
+        this.addLayer(new Netherite_MonstrosityBandsLayer(this));
         this.addLayer(new Netherite_Monstrosity_Flare(this));
     }
 
@@ -110,6 +113,21 @@ public class NMServantRenderer extends MobRenderer<NetheriteMonstrosityServant, 
             RenderType eyes2 = CMRenderTypes.CMEyes(NETHERITE_MONSTROSITY_OUTER);
             VertexConsumer VertexConsumer2 = bufferIn.getBuffer(eyes2);
             this.getParentModel().renderToBuffer(matrixStackIn, VertexConsumer2, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0.4F);
+        }
+    }
+
+    public static class Netherite_MonstrosityBandsLayer extends RenderLayer<NetheriteMonstrosityServant, NMServantModel> {
+        private static final ResourceLocation TEXTURES = GoetyCataclysm.location("textures/entity/servants/monstrosity/monstrosity_bands.png");
+
+        public Netherite_MonstrosityBandsLayer(NMServantRenderer p_i50919_1_) {
+            super(p_i50919_1_);
+        }
+
+        @Override
+        public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, NetheriteMonstrosityServant entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            if (!entitylivingbaseIn.isHostile() && GCMobsConfig.NetheriteMonstrosityServantTexture.get()) {
+                renderColoredCutoutModel(this.getParentModel(), TEXTURES, matrixStackIn, bufferIn, packedLightIn, entitylivingbaseIn, 1.0F, 1.0F, 1.0F);
+            }
         }
     }
 }

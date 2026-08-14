@@ -3,6 +3,8 @@
   "advancements.goety_cataclysm.root.description": "Of Goety and Cataclysm",
   "advancements.goety_cataclysm.convert_ancient_remnant.title": "Long Live the Monarch!",
   "advancements.goety_cataclysm.convert_ancient_remnant.description": "Convert a Modern Remnant to an Ancient Remnant.",
+  "advancements.goety_cataclysm.convert_leviathan.title": "Terror of the Ocean",
+  "advancements.goety_cataclysm.convert_leviathan.description": "Convert a Baby Leviathan to a fully grown Leviathan.",
   "advancements.goety_cataclysm.convert_kobolediator.title": "Are You Not Entertained?",
   "advancements.goety_cataclysm.convert_kobolediator.description": "Convert a Koboleton to a Kobolediator.",
   "advancements.goety_cataclysm.convert_wadjet.title": "Curse of the Nile!",
@@ -22,7 +24,6 @@
   "advancements.goety_cataclysm.summon_prowler.title": "On the Prowl",
   "advancements.goety_cataclysm.summon_prowler.description": "Summon a Prowler.",
 
-  "block.goety_cataclysm.ancient_plating": "Ancient Plating",
   "block.goety_cataclysm.ender_golem_skull": "Ender Golem Skull",
   "block.goety_cataclysm.fabricator": "Mechanical Fabricator",
   "block.goety_cataclysm.mechanized_iron_block": "Mechanized Iron Block",
@@ -66,6 +67,7 @@
   "entity.goety_cataclysm.zombie_amethyst_crab": "Zombie Amethyst Crab",
 
   "item.goety_cataclysm.abyss_essence": "Essence of the Abyss",
+  "item.goety_cataclysm.primordial_essence": "Essence of the Primordial",
 
   "item.goety_cataclysm.arcane_spirit": "Arcane Spirit",
   "item.goety_cataclysm.ignited_helm": "Ignited Helm",
@@ -154,6 +156,7 @@
   "item.goety_cataclysm.ignited_revenant_spawn_egg": "Ignited Revenant Servant Spawn Egg",
   "item.goety_cataclysm.koboleton_servant_spawn_egg": "Koboleton Servant Spawn Egg",
   "item.goety_cataclysm.kobolediator_spawn_egg": "Kobolediator Servant Spawn Egg",
+  "item.goety_cataclysm.leviathan_spawn_egg": "Leviathan Servant Spawn Egg",
   "item.goety_cataclysm.lionfish_servant_spawn_egg": "Lionfish Servant Spawn Egg",
   "item.goety_cataclysm.netherite_monstrosity_spawn_egg": "Netherite Monstrosity Servant Spawn Egg",
   "item.goety_cataclysm.royal_draugr_servant_spawn_egg": "Royal Draugr Servant Spawn Egg",

@@ -1,0 +1,26 @@
+{
+  "name": "Leviathan",
+  "icon": "cataclysm:abyssal_egg",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "With the Aging Cream and the Essences of the Primordial, you're able to grow your Baby Leviathan into it's more powerful and deadly adult form."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_baby_leviathan_to_leviathan_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:leviathan",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The interdimensional predator can be healed by feeding it fishes, and can passively heal if their owner dons an Abyss Robe."
+    }
+  ]
+}

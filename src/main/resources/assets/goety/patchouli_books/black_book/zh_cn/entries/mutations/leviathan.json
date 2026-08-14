@@ -1,0 +1,26 @@
+{
+  "name": "利维坦",
+  "icon": "cataclysm:abyssal_egg",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "使用衰老面霜和元初精华，你可以给幼年利维坦来一场能够让它更强大、更致命的成年礼"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_baby_leviathan_to_leviathan_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:leviathan",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "你可以手持鱼类右键这头多维掠食者来治疗它，当主人穿戴深渊长袍时，利维坦也会随时间自动恢复生命值"
+    }
+  ]
+}

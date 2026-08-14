@@ -1,0 +1,26 @@
+{
+  "name": "Leviatã",
+  "icon": "cataclysm:abyssal_egg",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Com o Creme de Envelhecimento e as Essências Primordiais, você é capaz de fazer seu Bebê Leviatã crescer para sua forma adulta mais poderosa e mortal."
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_baby_leviathan_to_leviathan_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:leviathan",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "O predador interdimensional pode ser curado alimentando-o com peixes, e pode se curar passivamente se seu dono vestir uma Túnica do Abismo."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Essences of the Primordial",
+  "icon": "goety_cataclysm:primordial_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Through the cataclysms, you've discovered an essence that represents might and age through the combination of several ancient ingredients. Who knows what one can do with such power..."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:primordial_essence"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "原始のエッセンス",
+  "icon": "goety_cataclysm:primordial_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "数多の激変を経て、あなたはいくつかの太古の素材を組み合わせることで、力と悠久の時を体現するエッセンスを見出しました。その力で何ができるのか、それは誰にも分かりません……。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:primordial_essence"
+    }
+  ]
+}

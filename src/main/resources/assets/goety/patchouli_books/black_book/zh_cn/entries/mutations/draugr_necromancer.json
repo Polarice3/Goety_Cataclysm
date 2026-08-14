@@ -28,6 +28,6 @@
     }
   ],
   "extra_recipe_mappings": {
-    "goety:soul_jar_draugr": 4
+    "goety_cataclysm:soul_jar_draugr": 4
   }
 }

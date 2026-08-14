@@ -1,0 +1,15 @@
+{
+  "name": "元初精华",
+  "icon": "goety_cataclysm:primordial_essence",
+  "category": "goety:cataclysm/crafts",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "透过灾变，你发现了一种能够展现“古老”力量的精华，同样的，它需要用一些古老的东西来合成，天知道一个人可以用这种力量做什么......"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "goety_cataclysm:primordial_essence"
+    }
+  ]
+}

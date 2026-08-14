@@ -88,7 +88,6 @@ public class GCEntityType {
             EntityType.Builder.of(LeviathanServant::new, MobCategory.MONSTER)
                     .sized(4.5F, 3.0F)
                     .fireImmune()
-                    .noSummon() //WIP
                     .clientTrackingRange(8)
                     .setShouldReceiveVelocityUpdates(true));
 

@@ -16,6 +16,7 @@ import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssMine;
 import com.Polarice3.goety_cataclysm.common.entities.projectiles.AbyssOrb;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssBlastPortal;
 import com.Polarice3.goety_cataclysm.common.entities.util.AbyssPortal;
+import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.client.particle.Options.RoarParticleOptions;
@@ -232,17 +233,24 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
 
     @Override
     public int getSummonLimit(LivingEntity owner) {
-        return GCSpellConfig.AncientRemnantLimit.get();
+        return GCSpellConfig.LeviathanLimit.get();
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 400.0D)
+                .add(Attributes.MAX_HEALTH, GCAttributesConfig.LeviathanHealth.get())
                 .add(Attributes.FOLLOW_RANGE, 64.0D)
-                .add(Attributes.ARMOR, 10.0D)
-                .add(Attributes.ATTACK_DAMAGE, 15.0D)
+                .add(Attributes.ARMOR, GCAttributesConfig.LeviathanArmor.get())
+                .add(Attributes.ATTACK_DAMAGE, GCAttributesConfig.LeviathanDamage.get())
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.15);
+    }
+
+    @Override
+    public void setConfigurableAttributes() {
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.MAX_HEALTH), GCAttributesConfig.LeviathanHealth.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ARMOR), GCAttributesConfig.LeviathanArmor.get());
+        MobUtil.setBaseAttributes(this.getAttribute(Attributes.ATTACK_DAMAGE), GCAttributesConfig.LeviathanDamage.get());
     }
 
     protected PathNavigation createNavigation(Level worldIn) {

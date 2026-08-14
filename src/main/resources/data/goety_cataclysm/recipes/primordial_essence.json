@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cataclysm:ancient_metal_block"
+    },
+    {
+      "item": "goety_cataclysm:netherite_plating"
+    },
+    {
+      "item": "minecraft:sniffer_egg"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    }
+  ],
+  "result":
+  {
+    "item": "goety_cataclysm:primordial_essence",
+    "count": 1
+  }
+}

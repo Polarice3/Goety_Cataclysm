@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "拥有一些强大的材料和魔法后，你就能让现世遗魂“返祖”，让它成为与祖辈一样的强大战力"
+      "text": "拥有衰老面霜与元初精华后，你就能让现世遗魂“返祖”，让它成为与祖辈一样的强大战力"
     },
     {
       "type": "goety:ritual",
@@ -17,10 +17,6 @@
       "type": "patchouli:entity",
       "entity": "goety_cataclysm:ancient_remnant",
       "scale": 0.5
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "goety_cataclysm:ancient_plating"
     },
     {
       "type": "patchouli:text",

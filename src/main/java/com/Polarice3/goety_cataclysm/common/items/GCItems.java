@@ -85,6 +85,7 @@ public class GCItems {
 
     //Items
     public static final RegistryObject<Item> ESSENCE_OF_THE_ABYSS = ITEMS.register("abyss_essence", ItemBase::new);
+    public static final RegistryObject<Item> ESSENCE_OF_THE_PRIMORDIAL = ITEMS.register("primordial_essence", ItemBase::new);
     public static final RegistryObject<Item> IGNITED_HELM = ITEMS.register("ignited_helm", IgnitedHelm::new);
     public static final RegistryObject<Item> IGNITED_SOUL = ITEMS.register("ignited_soul", IgnitedSoul::new);
     public static final RegistryObject<Item> MECHANIZED_CORE = ITEMS.register("mechanized_core", MechanizedCore::new);

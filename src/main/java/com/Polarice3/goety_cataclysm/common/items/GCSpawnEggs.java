@@ -50,6 +50,9 @@ public class GCSpawnEggs {
     public static final RegistryObject<ServantSpawnEggItem> CORALSSUS_SPAWN_EGG = ITEMS.register("coralssus_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.CORALSSUS, 0x5f7cb4, 0xac2020, egg()));
 
+    public static final RegistryObject<ServantSpawnEggItem> LEVIATHAN_SPAWN_EGG = ITEMS.register("leviathan_spawn_egg",
+            () -> new ServantSpawnEggItem(GCEntityType.LEVIATHAN, 0x6500ff, 0x150e1b, egg()));
+
     public static final RegistryObject<ServantSpawnEggItem> IGNITED_REVENANT_SPAWN_EGG = ITEMS.register("ignited_revenant_spawn_egg",
             () -> new ServantSpawnEggItem(GCEntityType.IGNITED_REVENANT, 0x271c1d, 0xfffc94, egg()));
 

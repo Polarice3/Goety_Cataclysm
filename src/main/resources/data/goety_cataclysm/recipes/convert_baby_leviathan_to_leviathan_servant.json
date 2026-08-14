@@ -4,36 +4,36 @@
   "activation_item": {
     "item": "goety:aging_cream"
   },
-  "craftType": "necroturgy",
+  "craftType": "deep",
   "entity_to_convert": {
-    "tag": "goety_cataclysm:modern_remnants",
-    "display_name": "entity.cataclysm.modern_remnant"
+    "tag": "goety_cataclysm:baby_leviathan",
+    "display_name": "entity.cataclysm.the_baby_leviathan"
   },
-  "entity_to_convert_into": "goety_cataclysm:ancient_remnant",
+  "entity_to_convert_into": "goety_cataclysm:leviathan",
   "soulCost": 10,
   "duration": 10,
   "research": "terminus",
   "ingredients": [
     {
-      "item": "cataclysm:sandstorm_in_a_bottle"
+      "item": "cataclysm:tidal_claws"
     },
     {
       "item": "goety_cataclysm:primordial_essence"
     },
     {
-      "item": "cataclysm:bone_reptile_helmet"
+      "item": "goety_cataclysm:abyss_essence"
     },
     {
       "item": "goety_cataclysm:primordial_essence"
     },
     {
-      "item": "cataclysm:bone_reptile_chestplate"
+      "item": "goety_cataclysm:abyss_essence"
     },
     {
       "item": "goety_cataclysm:primordial_essence"
     },
     {
-      "item": "cataclysm:necklace_of_the_desert"
+      "item": "cataclysm:abyssal_sacrifice"
     },
     {
       "item": "goety_cataclysm:primordial_essence"

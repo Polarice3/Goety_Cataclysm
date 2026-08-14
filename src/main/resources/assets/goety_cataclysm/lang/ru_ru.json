@@ -22,7 +22,6 @@
   "advancements.goety_cataclysm.summon_prowler.title": "Проводы",
   "advancements.goety_cataclysm.summon_prowler.description": "Призовите провожатого.",
 
-  "block.goety_cataclysm.ancient_plating": "Древнее покрытие",
   "block.goety_cataclysm.ender_golem_skull": "Череп Эндер-голема",
   "block.goety_cataclysm.fabricator": "Механический Фабрикатор",
   "block.goety_cataclysm.mechanized_iron_block": "Блок механизированного железа",
@@ -158,5 +157,14 @@
   "item.goety_cataclysm.draugr_necromancer_spawn_egg": "Яйцо призыва драугра некроманта",
   "item.goety_cataclysm.draugr_necromancer_servant_spawn_egg": "Яйцо призыва драугра некроманта-прислужника",
   "entity.goety_cataclysm.zombie_amethyst_crab": "Зомби аметистовый краб",
-  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "Яйцо призыва зомби аметистового краба"
+  "item.goety_cataclysm.zombie_amethyst_crab_spawn_egg": "Яйцо призыва зомби аметистового краба",
+  "block.goety_cataclysm.netherite_monstrosity_head": "Netherite Monstrosity Head",
+  "block.goety_cataclysm.wall_netherite_monstrosity_head": "Netherite Monstrosity Head",
+  "entity.goety_cataclysm.leviathan": "The Leviathan",
+  "item.goety_cataclysm.primordial_essence": "Essence of the Primordial",
+  "item.goety_cataclysm.battlefield_focus": "Battlefield Focus",
+  "item.goety_cataclysm.battlefield_focus.info": "Summons Phantom Halberds around the caster.",
+  "item.goety_cataclysm.earth_shake_focus": "Earth Shake Focus",
+  "item.goety_cataclysm.earth_shake_focus.info": "Shoots quakes around the caster that damages enemies hit by them.",
+  "item.goety_cataclysm.leviathan_spawn_egg": "Leviathan Servant Spawn Egg"
 }

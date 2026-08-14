@@ -1,0 +1,26 @@
+{
+  "name": "リヴァイアサン",
+  "icon": "cataclysm:abyssal_egg",
+  "category": "goety:cataclysm/mutations",
+  "advancement": "goety:goety/read_terminus_scroll",
+  "secret": true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "エイジングクリームと原始のエッセンスを使えば、ベビーリヴァイアサンを、より強力で恐るべき成体へと成長させることができます。"
+    },
+    {
+      "type": "goety:ritual",
+      "recipe": "goety_cataclysm:convert_baby_leviathan_to_leviathan_servant"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "goety_cataclysm:leviathan",
+      "scale": 0.5
+    },
+    {
+      "type": "patchouli:text",
+      "text": "その次元間捕食者は、魚を与えることで回復させることができます。また、飼い主が深淵のローブを着用していれば、自動的に回復します。"
+    }
+  ]
+}

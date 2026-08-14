@@ -1,6 +1,9 @@
 package com.Polarice3.goety_cataclysm.common.entities.projectiles;
 
+import com.Polarice3.Goety.common.effects.GoetyEffects;
+import com.Polarice3.Goety.utils.MathHelper;
 import com.Polarice3.Goety.utils.MobUtil;
+import com.Polarice3.Goety.utils.WandUtil;
 import com.Polarice3.goety_cataclysm.common.entities.ally.factory.ProwlerServant;
 import com.Polarice3.goety_cataclysm.util.GCDamageSource;
 import com.github.L_Ender.cataclysm.blocks.EMP_Block;
@@ -20,6 +23,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,6 +62,7 @@ public class DeathLaserBeam extends Entity {
     private static final EntityDataAccessor<Integer> HEAD = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FIRE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IMMEDIATE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> STORM = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> HPDAMAGE = SynchedEntityData.defineId(DeathLaserBeam.class, EntityDataSerializers.FLOAT);
 
@@ -193,6 +198,20 @@ public class DeathLaserBeam extends Entity {
                                     target.setSecondsOnFire(5);
                                 }
                             }
+                            if (this.isStorm()) {
+                                float chance = 0.25F;
+                                float chainDamage = this.getDamage() / 2.0F;
+                                if (this.level().isThundering() && this.level().isRainingAt(target.blockPosition())) {
+                                    chance += 0.25F;
+                                    chainDamage = this.getDamage();
+                                }
+                                if (flag) {
+                                    if (this.level().getRandom().nextFloat() <= chance) {
+                                        target.addEffect(new MobEffectInstance(GoetyEffects.SPASMS.get(), MathHelper.secondsToTicks(5)));
+                                    }
+                                    WandUtil.chainLightning(target, this.caster, 4.0F, chainDamage);
+                                }
+                            }
                         }
                     }
                 }
@@ -227,6 +246,7 @@ public class DeathLaserBeam extends Entity {
         this.entityData.define(HEAD, 0);
         this.entityData.define(FIRE, false);
         this.entityData.define(IMMEDIATE, false);
+        this.entityData.define(STORM, false);
         this.entityData.define(DAMAGE, 0F);
         this.entityData.define(HPDAMAGE, 0F);
     }
@@ -301,6 +321,14 @@ public class DeathLaserBeam extends Entity {
 
     public void setImmediate(boolean immediate) {
         this.entityData.set(IMMEDIATE, immediate);
+    }
+
+    public boolean isStorm() {
+        return this.entityData.get(STORM);
+    }
+
+    public void setStorm(boolean storm) {
+        this.entityData.set(STORM, storm);
     }
 
     @Override

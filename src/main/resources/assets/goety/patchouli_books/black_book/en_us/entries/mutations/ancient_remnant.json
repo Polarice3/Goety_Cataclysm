@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "With some powerful materials and magic, you're able to turn the Modern Remnant into a force that's just as strong as its progenitor."
+      "text": "With the Aging Cream and the Essences of the Primordial, you're able to turn the Modern Remnant into a force that's just as strong as its progenitor."
     },
     {
       "type": "goety:ritual",
@@ -17,10 +17,6 @@
       "type": "patchouli:entity",
       "entity": "goety_cataclysm:ancient_remnant",
       "scale": 0.5
-    },
-    {
-      "type": "patchouli:crafting",
-      "recipe": "goety_cataclysm:ancient_plating"
     },
     {
       "type": "patchouli:text",
