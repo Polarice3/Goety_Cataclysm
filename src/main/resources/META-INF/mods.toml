@@ -33,6 +33,6 @@ side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="cataclysm"
 mandatory=true
-versionRange="[2.65,)"
+versionRange="[3.31,)"
 ordering="NONE"
 side="BOTH"
