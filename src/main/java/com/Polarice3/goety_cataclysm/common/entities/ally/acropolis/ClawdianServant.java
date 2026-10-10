@@ -11,12 +11,12 @@ import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonMoveG
 import com.Polarice3.goety_cataclysm.common.entities.ally.ai.InternalSummonStateGoal;
 import com.Polarice3.goety_cataclysm.common.items.CataclysmItems;
 import com.Polarice3.goety_cataclysm.config.GCAttributesConfig;
+import com.Polarice3.goety_cataclysm.config.GCMobsConfig;
 import com.Polarice3.goety_cataclysm.config.GCSpellConfig;
 import com.Polarice3.goety_cataclysm.init.CataclysmSounds;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.client.particle.Options.NotSpinTrailParticleOptions;
 import com.github.L_Ender.cataclysm.client.particle.Options.RingParticleOptions;
-import com.github.L_Ender.cataclysm.config.CMCommonConfig;
 import com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.AcropolisMonsters.ClawdianMoveController;
 import com.github.L_Ender.cataclysm.entity.effect.Cm_Falling_Block_Entity;
 import com.github.L_Ender.cataclysm.entity.effect.ScreenShake_Entity;
@@ -647,11 +647,9 @@ public class ClawdianServant extends InternalAnimationSummon implements IHoldEnt
         }
         if (this.getAttackState() == CHARGE_LOOP) {
             if (!this.level().isClientSide) {
-                if (CMCommonConfig.Clawdian.ignoreMobGriefing) {
-                    ChargeBlockBreaking();
-                } else {
+                if (GCMobsConfig.ClawdianGriefing.get()) {
                     if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
-                        ChargeBlockBreaking();
+                        this.ChargeBlockBreaking();
                     }
                 }
 

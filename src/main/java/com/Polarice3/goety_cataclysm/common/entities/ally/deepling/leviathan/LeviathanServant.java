@@ -317,8 +317,10 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
             return false;
         }
         if (GCMobsConfig.LeviathanGriefing.get()) {
-            if (this.destroyBlocksTick <= 0) {
-                this.destroyBlocksTick = 20;
+            if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
+                if (this.destroyBlocksTick <= 0) {
+                    this.destroyBlocksTick = 20;
+                }
             }
         }
         /*double range = calculateRange(source);
@@ -512,13 +514,17 @@ public class LeviathanServant extends LLibraryBossSummon implements ISemiAquatic
                     --this.destroyBlocksTick;
                     if (this.destroyBlocksTick == 0){
                         if (GCMobsConfig.LeviathanGriefing.get()) {
-                            this.blockbreak(0.5D,0.5D,0.5D);
+                            if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
+                                this.blockbreak(0.5D,0.5D,0.5D);
+                            }
                         }
                     }
                 }
                 if (this.mode ==AttackMode.MELEE) {
                     if (GCMobsConfig.LeviathanGriefing.get()) {
-                        this.blockbreak2();
+                        if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
+                            this.blockbreak2();
+                        }
                     }
                 }
             }

@@ -27,12 +27,12 @@ side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="goety"
 mandatory=true
-versionRange="[2.5.33.0,)"
+versionRange="[2.5.58.4,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="cataclysm"
 mandatory=true
-versionRange="[2.65,)"
+versionRange="[3.31,)"
 ordering="NONE"
 side="BOTH"

@@ -484,15 +484,13 @@ public class KobolediatorServant extends InternalAnimationSummon {
             }
         }
         if (this.getAttackState() == CHARGE) {
-            /*if (!this.level().isClientSide) {
-                if(CMConfig.KobolediatorBlockBreaking) {
-                    ChargeBlockBreaking();
-                }else{
+            if (!this.level().isClientSide) {
+                if(GCMobsConfig.KobolediatorGriefing.get()) {
                     if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), this)) {
                         ChargeBlockBreaking();
                     }
                 }
-            }*/
+            }
             if (this.tickCount % 4 == 0) {
                 for (LivingEntity Lentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5D))) {
                     if (!MobUtil.areAllies(this, Lentity)) {

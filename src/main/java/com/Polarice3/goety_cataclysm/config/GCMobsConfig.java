@@ -25,8 +25,10 @@ public class GCMobsConfig {
     public static final ForgeConfigSpec.ConfigValue<Boolean> CoralssusMoistness;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedRevenantHelm;
     public static final ForgeConfigSpec.ConfigValue<Boolean> IgnitedBerserkerSoul;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> KobolediatorSpirit;
     public static final ForgeConfigSpec.ConfigValue<Boolean> AncientRemnantGriefing;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ClawdianGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> LeviathanGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrosityGriefing;
     public static final ForgeConfigSpec.ConfigValue<Boolean> NetheriteMonstrositySpawnLava;
@@ -55,6 +57,8 @@ public class GCMobsConfig {
                     .define("coralssusMoistness", true);
             SymbioctoBreath = BUILDER.comment("Whether Symbioctos provide water breathing to ridden entity, Default: true")
                     .define("symbioctoBreath", true);
+            ClawdianGriefing = BUILDER.comment("Whether Clawdians, owned by players, breaks blocks if mob griefing is enabled, Default: false")
+                    .define("clawdianGriefing", false);
             LeviathanGriefing = BUILDER.comment("Whether Leviathan, owned by players, breaks blocks if mob griefing is enabled, Default: false")
                     .define("leviathanGriefing", false);
             BUILDER.pop();
@@ -70,6 +74,8 @@ public class GCMobsConfig {
             NetheriteMonstrositySpawnLava = BUILDER.comment("Whether Netherite Monstrosity servants spawn lava, Default: true")
                     .define("netheriteMonstrositySpawnLava", true);
             BUILDER.pop();
+        KobolediatorGriefing = BUILDER.comment("Whether Kobolediator, owned by players, breaks blocks if mob griefing is enabled, Default: false")
+                .define("kobolediatorGriefing", false);
         KobolediatorSpirit = BUILDER.comment("Whether owned Kobolediators drop Warrior Spirits, Default: true")
                 .define("kobolediatorSpirit", true);
         AncientRemnantGriefing = BUILDER.comment("Whether Ancient Remnant, owned by players, breaks blocks if mob griefing is enabled, Default: false")

@@ -61,7 +61,9 @@ public class LeviathanTongue extends SpellEntity {
 
         if (!this.level().isClientSide) {
             if (GCMobsConfig.LeviathanGriefing.get()) {
-                blockbreak(0.25d,0.25d,0.25d);
+                if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level(), controller)) {
+                    blockbreak(0.25d, 0.25d, 0.25d);
+                }
             }
         }
 

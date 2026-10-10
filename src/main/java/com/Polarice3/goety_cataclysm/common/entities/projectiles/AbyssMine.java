@@ -16,17 +16,12 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-
-import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class AbyssMine extends SpellEntity {
     private static final EntityDataAccessor<Boolean> ACTIVATE = SynchedEntityData.defineId(AbyssMine.class, EntityDataSerializers.BOOLEAN);
