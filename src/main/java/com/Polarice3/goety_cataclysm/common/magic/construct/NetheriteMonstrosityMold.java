@@ -2,6 +2,7 @@ package com.Polarice3.goety_cataclysm.common.magic.construct;
 
 import com.Polarice3.Goety.api.magic.IMold;
 import com.Polarice3.Goety.common.research.ResearchList;
+import com.Polarice3.Goety.config.MobsConfig;
 import com.Polarice3.Goety.config.SpellConfig;
 import com.Polarice3.Goety.utils.SEHelper;
 import com.Polarice3.goety_cataclysm.common.blocks.GCBlocks;
@@ -546,38 +547,42 @@ public class NetheriteMonstrosityMold implements IMold {
                 }
             }
         }
-        return count < SpellConfig.RedstoneMonstrosityPlayerLimit.get() && global < SpellConfig.RedstoneMonstrosityGlobalLimit.get();
+        return count < SpellConfig.MonstrosityPlayerLimit.get() && global < SpellConfig.MonstrosityGlobalLimit.get();
     }
 
     @Override
     public boolean spawnServant(Player player, ItemStack stack, Level level, BlockPos blockPos){
         if (!level.isClientSide) {
-            if (level.getBlockState(blockPos).is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get())) {
-                if (checkBlocks(level, blockPos)) {
-                    if (SEHelper.hasResearch(player, ResearchList.TERMINUS)) {
-                        if (conditionsMet(level, player)) {
-                            NetheriteMonstrosityServant monstrosity = GCEntityType.NETHERITE_MONSTROSITY.get().create(level);
-                            if (monstrosity != null) {
-                                monstrosity.setTrueOwner(player);
-                                monstrosity.finalizeSpawn((ServerLevelAccessor) level, level.getCurrentDifficultyAt(monstrosity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
-                                monstrosity.moveTo((double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.05D, (double) blockPos.getZ() + 0.5D, 0.0F, 0.0F);
-                                if (level.addFreshEntity(monstrosity)) {
-                                    removeBlocks(level, blockPos);
-                                    stack.shrink(1);
-                                    if (player instanceof ServerPlayer serverPlayer) {
-                                        CriteriaTriggers.SUMMONED_ENTITY.trigger(serverPlayer, monstrosity);
+            if (level.getBlockState(blockPos).is(GoetyBlocks.MONSTROUS_CORE.get())) {
+                if (SEHelper.getSoulsAmount(player, MobsConfig.MonstrositySoulCost.get())) {
+                    if (checkBlocks(level, blockPos)) {
+                        if (SEHelper.hasResearch(player, ResearchList.TERMINUS)) {
+                            if (conditionsMet(level, player)) {
+                                NetheriteMonstrosityServant monstrosity = GCEntityType.NETHERITE_MONSTROSITY.get().create(level);
+                                if (monstrosity != null) {
+                                    monstrosity.setTrueOwner(player);
+                                    monstrosity.finalizeSpawn((ServerLevelAccessor) level, level.getCurrentDifficultyAt(monstrosity.blockPosition()), MobSpawnType.MOB_SUMMONED, null, null);
+                                    monstrosity.moveTo((double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.05D, (double) blockPos.getZ() + 0.5D, 0.0F, 0.0F);
+                                    if (level.addFreshEntity(monstrosity)) {
+                                        removeBlocks(level, blockPos);
+                                        stack.shrink(1);
+                                        if (player instanceof ServerPlayer serverPlayer) {
+                                            CriteriaTriggers.SUMMONED_ENTITY.trigger(serverPlayer, monstrosity);
+                                        }
+                                        return true;
                                     }
-                                    return true;
                                 }
+                            } else {
+                                player.displayClientMessage(Component.translatable("info.goety.summon.limit"), true);
                             }
                         } else {
-                            player.displayClientMessage(Component.translatable("info.goety.summon.limit"), true);
+                            player.displayClientMessage(Component.translatable("info.goety.research.fail"), true);
                         }
                     } else {
-                        player.displayClientMessage(Component.translatable("info.goety.research.fail"), true);
+                        player.displayClientMessage(Component.translatable("info.goety.block.fail"), true);
                     }
                 } else {
-                    player.displayClientMessage(Component.translatable("info.goety.block.fail"), true);
+                    player.displayClientMessage(Component.translatable("info.goety.soul.cost.fail", MobsConfig.MonstrositySoulCost.get()), true);
                 }
             }
         }
@@ -629,7 +634,7 @@ public class NetheriteMonstrosityMold implements IMold {
                 }
             }
             BlockPos blockPos2 = blockPos.offset(CORE);
-            if (level.getBlockState(blockPos2).is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get())) {
+            if (level.getBlockState(blockPos2).is(GoetyBlocks.MONSTROUS_CORE.get())) {
                 level.levelEvent(2001, blockPos2, Block.getId(level.getBlockState(blockPos2)));
                 level.setBlockAndUpdate(blockPos2, Blocks.AIR.defaultBlockState());
             }

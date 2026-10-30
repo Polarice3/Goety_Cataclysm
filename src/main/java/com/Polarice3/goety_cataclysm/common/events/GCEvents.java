@@ -99,7 +99,7 @@ public class GCEvents {
     public static void UseOnBlock(PlayerInteractEvent.RightClickBlock event) {
         if (event.getItemStack().is(CataclysmItems.INFERNAL_FORGE.get())){
             BlockState blockState = event.getLevel().getBlockState(event.getPos());
-            if (blockState.is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get())){
+            if (blockState.is(GoetyBlocks.MONSTROUS_CORE.get())){
                 if (new NetheriteMonstrosityMold().spawnServant(event.getEntity(), event.getItemStack(), event.getLevel(), event.getPos())){
                     event.getItemStack().shrink(1);
                     event.getEntity().swing(event.getHand());

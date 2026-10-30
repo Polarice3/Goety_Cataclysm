@@ -27,7 +27,7 @@ side="BOTH"
 [[dependencies.goety_cataclysm]]
 modId="goety"
 mandatory=true
-versionRange="[2.5.58.4,)"
+versionRange="[2.5.60.0,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.goety_cataclysm]]

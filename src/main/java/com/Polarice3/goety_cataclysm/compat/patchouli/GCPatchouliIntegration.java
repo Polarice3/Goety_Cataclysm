@@ -217,8 +217,8 @@ public class GCPatchouliIntegration implements ICompatable {
                 state -> state.is(Tags.Blocks.STORAGE_BLOCKS_GOLD));
         IStateMatcher redstone = PatchouliAPI.get().predicateMatcher(Blocks.REDSTONE_BLOCK,
                 state -> state.is(Tags.Blocks.STORAGE_BLOCKS_REDSTONE));
-        IStateMatcher redstoneCore = PatchouliAPI.get().predicateMatcher(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get(),
-                state -> state.is(GoetyBlocks.REINFORCED_REDSTONE_BLOCK.get()));
+        IStateMatcher core = PatchouliAPI.get().predicateMatcher(GoetyBlocks.MONSTROUS_CORE.get(),
+                state -> state.is(GoetyBlocks.MONSTROUS_CORE.get()));
         IStateMatcher netherBricks = PatchouliAPI.get().predicateMatcher(Blocks.NETHER_BRICKS,
                 state -> state.is(Blocks.NETHER_BRICKS));
         IStateMatcher netherite = PatchouliAPI.get().predicateMatcher(GCBlocks.NETHERITE_PLATING.get(),
@@ -271,7 +271,7 @@ public class GCPatchouliIntegration implements ICompatable {
                 'I', gilded,
                 'G', goldMold,
                 'R', redstone,
-                'C', redstoneCore,
+                'C', core,
                 'S', stoneMold,
                 '0', stoneMold
         );
@@ -288,8 +288,8 @@ public class GCPatchouliIntegration implements ICompatable {
                 state -> state.is(Blocks.NETHER_BRICKS));
         IStateMatcher gold = PatchouliAPI.get().predicateMatcher(Blocks.GOLD_BLOCK,
                 state -> state.is(Tags.Blocks.STORAGE_BLOCKS_GOLD));
-        IStateMatcher reinforced = PatchouliAPI.get().predicateMatcher(ModBlocks.REINFORCED_REDSTONE_BLOCK.get(),
-                state -> state.is(ModBlocks.REINFORCED_REDSTONE_BLOCK.get()));
+        IStateMatcher core = PatchouliAPI.get().predicateMatcher(ModBlocks.MONSTROUS_CORE.get(),
+                state -> state.is(ModBlocks.MONSTROUS_CORE.get()));
         return PatchouliAPI.get().makeMultiblock(
                 new String[][] {
                         {
@@ -310,7 +310,7 @@ public class GCPatchouliIntegration implements ICompatable {
                 },
                 'H', GCBlocks.NETHERITE_MONSTROSITY_HEAD_BLOCK.get(),
                 '#', redstoneBlocks,
-                'R', reinforced,
+                'R', core,
                 'G', gilded,
                 'B', bricks,
                 'O', gold,
